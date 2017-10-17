@@ -99,3 +99,9 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# Microsoft Visual Studio project
+MVS_python/
+
+# scratch code
+python/devtests.py
