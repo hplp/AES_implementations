@@ -1,6 +1,6 @@
 from AEStables import *
 
-def KeyExpansion(inputKey):
+def KeyExpansion(inputKey, rounds):
 	def KeyExpansionCore(in4, i):
 		# RotWord rotates left
 		t = in4[0]
@@ -18,25 +18,22 @@ def KeyExpansion(inputKey):
 		# return KeyExpansionCore
 		return in4
 
-	# declare expandedKeys and copy the inputKey at its beginning
-	expandedKeys=[0]*176
+	# Declare expandedKeys and copy the inputKey at its beginning
+	expandedKeys=[0]*((rounds+1)*16)
 	for i in range(16): expandedKeys[i] = inputKey[i]
-
 	# Variables
 	bytesGenerated = 16 # already generated 16 bytes
 	rconIteration = 1
 	temp=[0]*4
-
-	while(bytesGenerated < 176):
+	# Generate expanded keys 
+	while(bytesGenerated < (rounds+1)*16):
 		# Read previously generated last 4 bytes
 		for i in range(4):
 			temp[i] = expandedKeys[i + bytesGenerated - 4]
-
 		# Perform the core once for each 16 byte key
 		if(bytesGenerated % 16 == 0):
 			temp = KeyExpansionCore(temp, rconIteration)
 			rconIteration = rconIteration + 1
-
 		# XOR temp with [bytesGenerated-16] and store in expandedKeys
 		for i in range(4):
 			expandedKeys[bytesGenerated] = expandedKeys[bytesGenerated - 16] ^ temp[i]
@@ -148,7 +145,7 @@ def AddRoundKey(state, roundKey):
 	for i in range(16): state[i] = state[i] ^ roundKey[i]
 	return state
 
-def AES_Encrypt(message, expandedKey):
+def AES_Encrypt(message, expandedKey, rounds):
 	state=[0]*16
 	# Convert chars to HEX (INT) using ASCII
 	for i in range(16): state[i] = ord(message[i])
@@ -157,32 +154,31 @@ def AES_Encrypt(message, expandedKey):
 	state = AddRoundKey(state, expandedKey[0:16])
 
 	# Rounds
-	numberOfRounds = 9
-	for i in range(numberOfRounds):
+	for i in range(rounds-1):
 		state = SubBytes(state)
 		state = ShiftRows(state)
 		state = MixColumns(state)
-		state = AddRoundKey(state, expandedKey[16*(i+1):16*(i+1)+16])
+		state = AddRoundKey(state, expandedKey[16*(i+1):16*(i+2)])
 
 	# Final Round
 	state = SubBytes(state)
 	state = ShiftRows(state)
-	state = AddRoundKey(state, expandedKey[160:176])
+	state = AddRoundKey(state, expandedKey[16*rounds:16*(rounds+1)])
 
+	# Return encrypted result
 	return state
 
-def AES_Decrypt(encrypted_message, expandedKey):
+def AES_Decrypt(encrypted_message, expandedKey, rounds):
 	state=encrypted_message
 
 	# Whitening
-	state = AddRoundKey(state, expandedKey[160:176])
+	state = AddRoundKey(state, expandedKey[16*rounds:16*(rounds+1)])
 
 	# Rounds
-	numberOfRounds = 9
-	for i in range(numberOfRounds):
+	for i in range(rounds-1):
 		state = InvShiftRows(state)
 		state = InvSubBytes(state)
-		state = AddRoundKey(state, expandedKey[16*(numberOfRounds-i):16*(numberOfRounds+1-i)])
+		state = AddRoundKey(state, expandedKey[16*(rounds-i-1):16*(rounds-i)])
 		state = InvMixColumns(state)
 		
 	# Final Round
@@ -190,4 +186,5 @@ def AES_Decrypt(encrypted_message, expandedKey):
 	state = InvSubBytes(state)
 	state = AddRoundKey(state, expandedKey[0:16])
 
+	# Return decrypted result
 	return state
