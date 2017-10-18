@@ -104,15 +104,7 @@ ENV/
 MVS_python/
 cpp/.vs/
 cpp/Debug/
-cpp/cpp/Debug/
-cpp/cpp.sln
-
-cpp/cpp/ReadMe.txt
-cpp/cpp/cpp.vcxproj
-cpp/cpp/cpp.vcxproj.filters
-cpp/cpp/stdafx.cpp
-cpp/cpp/stdafx.h
-cpp/cpp/targetver.h
+cpp/cpp/
 
 # scratch code
 python/devtests.py
