@@ -105,6 +105,7 @@ MVS_python/
 cpp/.vs/
 cpp/Debug/
 cpp/cpp/
+cpp/cpp.sln
 
 # scratch code
 python/devtests.py
