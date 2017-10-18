@@ -20,9 +20,9 @@ def KeyExpansion(inputKey, rounds):
 
 	# Declare expandedKeys and copy the inputKey at its beginning
 	expandedKeys=[0]*((rounds+1)*16)
-	for i in range(16): expandedKeys[i] = inputKey[i]
+	for i in range((rounds-6)*4): expandedKeys[i] = inputKey[i]
 	# Variables
-	bytesGenerated = 16 # already generated 16 bytes
+	bytesGenerated = (rounds-6)*4
 	rconIteration = 1
 	temp=[0]*4
 	# Generate expanded keys 
