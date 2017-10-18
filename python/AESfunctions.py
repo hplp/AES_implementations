@@ -145,6 +145,7 @@ def AddRoundKey(state, roundKey):
 	for i in range(16): state[i] = state[i] ^ roundKey[i]
 	return state
 
+# Cipher
 def AES_Encrypt(message, expandedKey, rounds):
 	state=[0]*16
 	# Convert chars to HEX (INT) using ASCII
@@ -168,6 +169,7 @@ def AES_Encrypt(message, expandedKey, rounds):
 	# Return encrypted result
 	return state
 
+# Inverse Cipher
 def AES_Decrypt(encrypted_message, expandedKey, rounds):
 	state=encrypted_message
 
