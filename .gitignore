@@ -102,10 +102,7 @@ ENV/
 
 # Microsoft Visual Studio project
 MVS_python/
-cpp/.vs/
-cpp/Debug/
-cpp/cpp/
-cpp/cpp.sln
+MVS_cpp/
 
 # scratch code
 python/devtests.py
