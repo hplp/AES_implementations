@@ -102,6 +102,17 @@ ENV/
 
 # Microsoft Visual Studio project
 MVS_python/
+cpp/.vs/
+cpp/Debug/
+cpp/cpp/Debug/
+cpp/cpp.sln
+
+cpp/cpp/ReadMe.txt
+cpp/cpp/cpp.vcxproj
+cpp/cpp/cpp.vcxproj.filters
+cpp/cpp/stdafx.cpp
+cpp/cpp/stdafx.h
+cpp/cpp/targetver.h
 
 # scratch code
 python/devtests.py
