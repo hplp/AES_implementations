@@ -1,4 +1,2 @@
-void KeyExpansion();
-void InitialRound();
-
-void AES_Encrypt();
+void KeyExpansion(unsigned char* );
+void AES_Encrypt(unsigned char* , unsigned char* );

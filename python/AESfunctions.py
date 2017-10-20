@@ -46,7 +46,7 @@ def SubBytes(state):
 	return state
 
 def InvSubBytes(state):
-	for i in range(16): state[i] = rs_box[state[i]]
+	for i in range(16): state[i] = inverted_s_box[state[i]]
 	return state
 
 def ShiftRows(state):
@@ -155,18 +155,15 @@ def AES_Encrypt(message, expandedKey, rounds):
 	state = AddRoundKey(state, expandedKey[0:16])
 
 	# Rounds
-	for i in range(rounds-1):
+	for i in range(rounds):
 		state = SubBytes(state)
 		state = ShiftRows(state)
-		state = MixColumns(state)
+		# Skip MixColumns in final round
+		if(i != (rounds-1)):
+			state = MixColumns(state)
 		state = AddRoundKey(state, expandedKey[16*(i+1):16*(i+2)])
 
-	# Final Round
-	state = SubBytes(state)
-	state = ShiftRows(state)
-	state = AddRoundKey(state, expandedKey[16*rounds:16*(rounds+1)])
-
-	# Return encrypted result
+	# Return encrypted result (ciphertext)
 	return state
 
 # Inverse Cipher
@@ -177,16 +174,13 @@ def AES_Decrypt(encrypted_message, expandedKey, rounds):
 	state = AddRoundKey(state, expandedKey[16*rounds:16*(rounds+1)])
 
 	# Rounds
-	for i in range(rounds-1):
+	for i in range(rounds):
 		state = InvShiftRows(state)
 		state = InvSubBytes(state)
 		state = AddRoundKey(state, expandedKey[16*(rounds-i-1):16*(rounds-i)])
-		state = InvMixColumns(state)
+		# Skip InvMixColumns in final round
+		if(i != (rounds-1)):
+			state = InvMixColumns(state)
 		
-	# Final Round
-	state = InvShiftRows(state)
-	state = InvSubBytes(state)
-	state = AddRoundKey(state, expandedKey[0:16])
-
-	# Return decrypted result
+	# Return decrypted result (plaintext)
 	return state
