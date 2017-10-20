@@ -104,7 +104,6 @@ ENV/
 MVS_Python/
 cpp/.vs/
 cpp/Debug/
-cpp/cpp.vcxproj.filters
 
 # scratch code
 python/devtests.py

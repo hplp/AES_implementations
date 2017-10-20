@@ -143,9 +143,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="AESfunctions.h" />
     <ClInclude Include="AEStables.h" />
     <ClInclude Include="stdafx.h" />
