@@ -46,6 +46,15 @@ int main()
     for (int i = 0; i < 16; i++) { printf("%x ", ciphertext[i]); }
     cout << endl;
 
+    // decrypt
+    unsigned char decrypted_plaintext[16];
+    AES_Decrypt(ciphertext, expandedKey, decrypted_plaintext);
+    cout << "decrypted_plaintext = ";
+    for (int i = 0; i < 16; i++) { printf("%c ", decrypted_plaintext[i]); }
+    cout << " <=> ";
+    for (int i = 0; i < 16; i++) { printf("%x ", decrypted_plaintext[i]); }
+    cout << endl;
+
     delete[] key;
     delete[] expandedKey;
     cout << endl;

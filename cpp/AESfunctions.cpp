@@ -189,7 +189,7 @@ void AES_Encrypt(unsigned char* plaintext, unsigned char* expandedKey, unsigned 
     int rounds = 10;
 
     // Whitening
-    AddRoundKey(state, expandedKey);
+    AddRoundKey(state, expandedKey + (16 * 0));
 
     for (int i = 0; i < rounds; i++)
     {
@@ -211,14 +211,15 @@ void AES_Decrypt(unsigned char* ciphertext, unsigned char* expandedKey, unsigned
     unsigned char state[16];
     for (int i = 0; i < 16; i++) { state[i] = ciphertext[i]; }
 
-    int rounds = 1;
-    AddRoundKey(state, expandedKey);
+    int rounds = 10;
+    AddRoundKey(state, expandedKey + (16 * rounds));
 
     for (int i = 0; i < rounds; i++)
     {
         InvShiftRows(state);
         InvSubBytes(state);
-        AddRoundKey(state, expandedKey);
+        AddRoundKey(state, expandedKey + (16 * (rounds - i - 1)));
+        printf("%d %d \n", i, 16 * (rounds - i - 1));
         if (i != (rounds - 1)) { MixColumns(state); }
     }
 
