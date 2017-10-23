@@ -5,26 +5,39 @@
 void KeyExpansionCore(unsigned char* in4, unsigned char i)
 {
     // RotWord rotates left
-    unsigned char t = in4[0];
-    in4[0] = in4[1];
-    in4[1] = in4[2];
-    in4[2] = in4[3];
-    in4[3] = t;
-    unsigned int* q = (unsigned int*)in4;
-    *q = (*q >> 8) | ((*q & 0xff) << 24);
     // SubWord substitutes with S - Box value
-    in4[0] = s_box[in4[0]];
-    in4[1] = s_box[in4[1]];
-    in4[2] = s_box[in4[2]];
-    in4[3] = s_box[in4[3]];
+    unsigned char t = in4[0];
+    in4[0] = s_box[in4[1]];
+    in4[1] = s_box[in4[2]];
+    in4[2] = s_box[in4[3]];
+    in4[3] = s_box[t];
     // RCon (round constant) 1st byte XOR rcon
     in4[0] = in4[0] ^ rcon[i];
 }
 
-void KeyExpansion(unsigned char* key, unsigned char* expandedKey)
+void KeyExpansion(unsigned char* inputKey, unsigned char* expandedKey)
 {
+    // Copy the inputKey at the beginning of expandedKey
+    for (int i = 0; i < 16; i++) { expandedKey[i] = inputKey[i]; }
+    
+    // Variables
+    int bytesGenerated = 16;
+    int rconIteration = 1;
+    unsigned char temp[4];
 
-    expandedKey = key;
+    // Generate expanded keys
+    while(bytesGenerated < 176)
+    {
+        // Read previously generated last 4 bytes (last word)
+        for (int i = 0; i < 4; i++) { temp[i] = expandedKey[i + bytesGenerated - 4]; }
+        // Perform KeyExpansionCore once for each 16 byte key
+        if (bytesGenerated % 16 == 0) { KeyExpansionCore(temp, rconIteration++); }
+        // XOR temp with [bytesGenerated-16] and store in expandedKeys
+        for (unsigned char a = 0; a < 4; a++) {
+            expandedKey[bytesGenerated] = expandedKey[bytesGenerated - 16] ^ temp[a];
+            bytesGenerated++;
+        }
+    }
 }
 
 
@@ -167,46 +180,63 @@ void AddRoundKey(unsigned char* state, unsigned char* roundKey)
 
 
 // Cipher
-void AES_Encrypt(unsigned char* plaintext, unsigned char* expandedKey)
+void AES_Encrypt(unsigned char* plaintext, unsigned char* expandedKey, unsigned char* ciphertext)
 {
-    // copy plaintext into state
+    // Copy plaintext into state
     unsigned char state[16];
     for (int i = 0; i < 16; i++) { state[i] = plaintext[i]; }
 
-    int rounds = 1;
+    int rounds = 10;
+
+    // Whitening
     AddRoundKey(state, expandedKey);
 
     for (int i = 0; i < rounds; i++)
     {
         SubBytes(state);
         ShiftRows(state);
-        if (i != (rounds - 1)) {
-            MixColumns(state);
-        }
-        AddRoundKey(state, expandedKey);
-
+        if (i != (rounds - 1)) { MixColumns(state); }
+        AddRoundKey(state, expandedKey + (16 * (i + 1)));
     }
+
+    // Copy state to ciphertext
+    for (int i = 0; i < 16; i++) { ciphertext[i] = state[i]; }
 }
 
 
 // Inverse Cipher
-void AES_Decrypt(unsigned char* plaintext, unsigned char* expandedKey)
+void AES_Decrypt(unsigned char* ciphertext, unsigned char* expandedKey, unsigned char* plaintext)
 {
-    // copy plaintext into state
+    // copy ciphertext into state
     unsigned char state[16];
-    for (int i = 0; i < 16; i++) { state[i] = plaintext[i]; }
+    for (int i = 0; i < 16; i++) { state[i] = ciphertext[i]; }
 
     int rounds = 1;
     AddRoundKey(state, expandedKey);
 
     for (int i = 0; i < rounds; i++)
     {
-        SubBytes(state);
-        ShiftRows(state);
-        if (i != (rounds - 1)) {
-            MixColumns(state);
-        }
+        InvShiftRows(state);
+        InvSubBytes(state);
         AddRoundKey(state, expandedKey);
-
+        if (i != (rounds - 1)) { MixColumns(state); }
     }
+
+    // Copy state to plaintext
+    for (int i = 0; i < 16; i++) { plaintext[i] = state[i]; }
 }
+
+/*
+
+Scratch area:
+
+// RotWord rotates left
+//unsigned int* q = (unsigned int*)in4;
+//*q = (*q >> 8) | ((*q & 0xff) << 24);
+// SubWord substitutes with S - Box value
+//in4[0] = s_box[in4[0]];
+//in4[1] = s_box[in4[1]];
+//in4[2] = s_box[in4[2]];
+//in4[3] = s_box[in4[3]];
+
+*/

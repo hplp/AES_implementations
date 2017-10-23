@@ -6,16 +6,17 @@ def KeyExpansion(inputKey, rounds):
 
 	def KeyExpansionCore(in4, i):
 		# RotWord rotates left
-		t = in4[0]
-		in4[0] = in4[1]
-		in4[1] = in4[2]
-		in4[2] = in4[3]
-		in4[3] = t
 		# SubWord substitutes with S-Box value
-		in4[0] = s_box[in4[0]]
-		in4[1] = s_box[in4[1]]
-		in4[2] = s_box[in4[2]]
-		in4[3] = s_box[in4[3]]
+		t = in4[0]
+		in4[0] = s_box[in4[1]]
+		in4[1] = s_box[in4[2]]
+		in4[2] = s_box[in4[3]]
+		in4[3] = s_box[t]
+		# SubWord substitutes with S-Box value
+		#in4[0] = s_box[in4[0]]
+		#in4[1] = s_box[in4[1]]
+		#in4[2] = s_box[in4[2]]
+		#in4[3] = s_box[in4[3]]
 		# RCon (round constant) 1st byte XOR rcon
 		in4[0] = in4[0] ^ rcon[i]
 		# return KeyExpansionCore
@@ -30,12 +31,12 @@ def KeyExpansion(inputKey, rounds):
 	rconIteration = 1
 	temp=[0]*4
 	
-	# Generate expanded keys 
+	# Generate expanded keys
 	while(bytesGenerated < (rounds+1)*16):
 		# Read previously generated last 4 bytes
 		for i in range(4):
 			temp[i] = expandedKeys[i + bytesGenerated - 4]
-		# Perform the core once for each 16 byte key
+		# Perform KeyExpansionCore once for each 16 byte key
 		if(bytesGenerated % 16 == 0):
 			temp = KeyExpansionCore(temp, rconIteration)
 			rconIteration = rconIteration + 1
