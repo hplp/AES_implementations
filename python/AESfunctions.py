@@ -1,6 +1,9 @@
+# https://en.wikipedia.org/wiki/Advanced_Encryption_Standard
+
 from AEStables import *
 
 def KeyExpansion(inputKey, rounds):
+
 	def KeyExpansionCore(in4, i):
 		# RotWord rotates left
 		t = in4[0]
@@ -21,10 +24,12 @@ def KeyExpansion(inputKey, rounds):
 	# Declare expandedKeys and copy the inputKey at its beginning
 	expandedKeys=[0]*((rounds+1)*16)
 	for i in range((rounds-6)*4): expandedKeys[i] = inputKey[i]
+	
 	# Variables
 	bytesGenerated = (rounds-6)*4
 	rconIteration = 1
 	temp=[0]*4
+	
 	# Generate expanded keys 
 	while(bytesGenerated < (rounds+1)*16):
 		# Read previously generated last 4 bytes
@@ -41,6 +46,7 @@ def KeyExpansion(inputKey, rounds):
 	#print(len(expandedKeys),expandedKeys)
 	return expandedKeys
 
+
 def SubBytes(state):
 	for i in range(16): state[i] = s_box[state[i]]
 	return state
@@ -48,6 +54,7 @@ def SubBytes(state):
 def InvSubBytes(state):
 	for i in range(16): state[i] = inverted_s_box[state[i]]
 	return state
+
 
 def ShiftRows(state):
 	tmp_state=[0]*16
@@ -95,6 +102,7 @@ def InvShiftRows(state):
 	tmp_state[15] = state[3]
 	return tmp_state
 
+
 def MixColumns(state):
 	tmp_state=[0]*16
 	tmp_state[0] = mul02[state[0]] ^ mul03[state[1]] ^ state[2] ^ state[3]
@@ -141,9 +149,11 @@ def InvMixColumns(state):
 	tmp_state[15] = mul11[state[12]] ^ mul13[state[13]] ^ mul09[state[14]] ^ mul14[state[15]]
 	return tmp_state
 
+
 def AddRoundKey(state, roundKey):
 	for i in range(16): state[i] = state[i] ^ roundKey[i]
 	return state
+
 
 # Cipher
 def AES_Encrypt(message, expandedKey, rounds):
@@ -165,6 +175,7 @@ def AES_Encrypt(message, expandedKey, rounds):
 
 	# Return encrypted result (ciphertext)
 	return state
+
 
 # Inverse Cipher
 def AES_Decrypt(encrypted_message, expandedKey, rounds):
