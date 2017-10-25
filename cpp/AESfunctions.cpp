@@ -203,6 +203,24 @@ void AES_Encrypt(unsigned char* plaintext, unsigned char* expandedKey, unsigned 
     for (int i = 0; i < 16; i++) { ciphertext[i] = state[i]; }
 }
 
+void printThisRoundKey(int r, unsigned char* RK)
+{
+    printf("round %d key: ", r);
+    for (int i = 0; i < 16; i++)
+    {
+        printf("%X ", RK[i]);
+    }
+    printf("\n");
+}
+
+void printState(unsigned char* state)
+{
+    for (int i = 0; i < 16; i++)
+    {
+        printf("%d ", state[i]);
+    }
+    printf(" state \n");
+}
 
 // Inverse Cipher
 void AES_Decrypt(unsigned char* ciphertext, unsigned char* expandedKey, unsigned char* plaintext)
@@ -213,14 +231,18 @@ void AES_Decrypt(unsigned char* ciphertext, unsigned char* expandedKey, unsigned
 
     int rounds = 10;
     AddRoundKey(state, expandedKey + (16 * rounds));
+    printThisRoundKey(0, expandedKey + (16 * rounds));
+    printState(state);
 
     for (int i = 0; i < rounds; i++)
     {
         InvShiftRows(state);
         InvSubBytes(state);
+        
         AddRoundKey(state, expandedKey + (16 * (rounds - i - 1)));
-        printf("%d %d \n", i, 16 * (rounds - i - 1));
-        if (i != (rounds - 1)) { MixColumns(state); }
+        printThisRoundKey(i+1, expandedKey + (16 * (rounds - i - 1)));
+
+        if (i != (rounds - 1)) { InvMixColumns(state); printState(state); }
     }
 
     // Copy state to plaintext

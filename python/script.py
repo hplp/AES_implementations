@@ -14,15 +14,16 @@ rows = 4
 CipherKeyLenghth = Nk * rows
 Nr = max(Nb, Nk) + 6
 
+
 # create a dummy test cipher key
 key=[0]*CipherKeyLenghth
 for i in range(CipherKeyLenghth): key[i] = i
-
+# expand key
 expandedKey=KeyExpansion(key, Nr)
 print("expandedKey: ",len(expandedKey),expandedKey)
 
 
-# test input data (plaintext)
+# create a test input data (plaintext)
 message = "The quick brown fox jumps over the lazy dog."
 print("message: ",len(message),message)
 

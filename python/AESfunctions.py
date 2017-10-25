@@ -177,7 +177,6 @@ def AES_Encrypt(message, expandedKey, rounds):
 	# Return encrypted result (ciphertext)
 	return state
 
-
 # Inverse Cipher
 def AES_Decrypt(encrypted_message, expandedKey, rounds):
 	state=encrypted_message
@@ -193,6 +192,6 @@ def AES_Decrypt(encrypted_message, expandedKey, rounds):
 		# Skip InvMixColumns in final round
 		if(i != (rounds-1)):
 			state = InvMixColumns(state)
-		
+
 	# Return decrypted result (plaintext)
 	return state
