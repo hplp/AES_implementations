@@ -3,37 +3,43 @@ from AESfunctions import *
 # Nb = 4 columns in state (in this standard)
 Nb = 4  # columns
 
+
 # AES can use 128, 192, or 256 bit cipher keys
 #             16,  24,  or 32 byte cipher keys
-#             Nk = 4, 6 or 8 [32-bit words]
+#             Nk = 4, 6 or 8 [32-bit words] columns in cipher key
 #             Nr = max(Nb, Nk)+6 = 10, 12 or 14 rounds
-
-Nk = 4  # 4 or 6 or 8 [32-bit words] in cipher key
+Nk = 6  # 4 or 6 or 8 [32-bit words] columns in cipher key
 rows = 4
 CipherKeyLenghth = Nk * rows
 Nr = max(Nb, Nk) + 6  # = 10, 12 or 14 rounds
-
 print("AES with Nb =", Nb, "columns, Nk =", Nk, "(32-bit) words i.e. CipherKeyLenghth =",
       CipherKeyLenghth, "bytes (or", CipherKeyLenghth * 8, "bits), Nr =", Nr, "rounds \n")
 
-
-# create a dummy test cipher key
+# Create a dummy test cipher key
 key = [0] * CipherKeyLenghth
 for i in range(CipherKeyLenghth):
     key[i] = i
-# expand key
-expandedKey = KeyExpansion(key, Nr)
-print("expandedKey: ", len(expandedKey), expandedKey, "\n")
+#key = [0x2b, 0x7e, 0x15, 0x16, 0x28, 0xae, 0xd2, 0xa6, 0xab, 0xf7, 0x15, 0x88, 0x09, 0xcf, 0x4f, 0x3c]
+key = [0x8e, 0x73, 0xb0, 0xf7, 0xda, 0x0e, 0x64, 0x52, 0xc8, 0x10, 0xf3, 0x2b,
+       0x80, 0x90, 0x79, 0xe5, 0x62, 0xf8, 0xea, 0xd2, 0x52, 0x2c, 0x6b, 0x7b]
+print("key: ", len(key), key)
 
 
-# create a test input data (plaintext)
+# Expand key
+expandedKey = KeyExpansion(key, Nk)
+print("expkey: ", len(expandedKey), expandedKey, "\n")
+
+
+# Create a test input data (plaintext)
 message = "The quick brown fox jumps over the lazy dog."
 print("message: ", len(message), message)
 
-# pad message with spaces to be integer chunks of 16 bytes
+
+# Pad message with spaces to be integer chunks of 16 bytes
 if len(message) % 16:
     message = message.ljust(len(message) + 16 - len(message) % 16, chr(0))
 print("padded: ", len(message), message, "\n")
+
 
 # message_list=[0]*len(message)
 # Convert chars to INT using ASCII
@@ -50,13 +56,16 @@ while(message):
     message = message[16:]
     index = index + 16
 print("encrypted: ", len(encrypted_message), encrypted_message)
+#encrypted_message_chr = "".join(chr(i) for i in encrypted_message)
+#print("ecr chars: ", len(encrypted_message_chr), encrypted_message_chr)
+
 
 encrypted_message_hex = [0] * len(encrypted_message)
 index = 0
 for v in encrypted_message:
     encrypted_message_hex[index] = hex(v)
     index = index + 1
-print("Encr HEX: ", len(encrypted_message_hex), encrypted_message_hex, "\n")
+print("encrp HEX: ", len(encrypted_message_hex), encrypted_message_hex, "\n")
 
 
 # Plaintext
@@ -69,11 +78,12 @@ while(encrypted_message):
     index = index + 16
 print("decrypted: ", len(decrypted_message), decrypted_message)
 
+
 rec_message = "".join(chr(i) for i in decrypted_message)
-print("decrypted chars: ", len(rec_message), rec_message)
+print("dcr chars: ", len(rec_message), rec_message)
 
 
-# scratch area
+# Scratch area
 
 # if CipherKeyLenghth == 16:
 # 	key = [0x00, 0x01, 0x02, 0x03,

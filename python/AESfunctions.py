@@ -1,9 +1,13 @@
 # https://en.wikipedia.org/wiki/Advanced_Encryption_Standard
 
 from AEStables import *
+Nb = 4  # columns
+rows = 4
+stt_lng = Nb * rows  # state length
 
 
-def KeyExpansion(inputKey, rounds):
+def KeyExpansion(inputKey, Nk):
+    Nr = max(Nb, Nk) + 6  # = 10, 12 or 14 rounds
 
     def KeyExpansionCore(in4, i):
         # RotWord rotates left
@@ -20,51 +24,51 @@ def KeyExpansion(inputKey, rounds):
         #in4[3] = s_box[in4[3]]
         # RCon (round constant) 1st byte XOR rcon
         in4[0] = in4[0] ^ rcon[i]
-        # return KeyExpansionCore
+        # Return KeyExpansionCore
         return in4
 
-    # Declare expandedKeys and copy the inputKey at its beginning
-    expandedKeys = [0] * ((rounds + 1) * 16)
-    for i in range((rounds - 6) * 4):
+    # Declare expandedKeys
+    expandedKeys = [0] * ((Nr + 1) * stt_lng)
+    # Copy the inputKey at its beginning
+    for i in range(Nk * rows):
         expandedKeys[i] = inputKey[i]
 
     # Variables
-    bytesGenerated = (rounds - 6) * 4
-    rconIteration = 1
-    temp = [0] * 4
+    byGen = Nk * rows
+    rconIdx = 1
+    temp = [0] * rows
 
     # Generate expanded keys
-    while(bytesGenerated < (rounds + 1) * 16):
+    while(byGen < Nb * (Nr + 1) * rows):
         # Read previously generated last 4 bytes
-        for i in range(4):
-            temp[i] = expandedKeys[i + bytesGenerated - 4]
+        for i in range(rows):
+            temp[i] = expandedKeys[byGen - rows + i]
         # Perform KeyExpansionCore once for each 16 byte key
-        if(bytesGenerated % 16 == 0):
-            temp = KeyExpansionCore(temp, rconIteration)
-            rconIteration = rconIteration + 1
-        # XOR temp with [bytesGenerated-16] and store in expandedKeys
-        for i in range(4):
-            expandedKeys[bytesGenerated] = expandedKeys[
-                bytesGenerated - 16] ^ temp[i]
-            bytesGenerated = bytesGenerated + 1
-    # print(len(expandedKeys),expandedKeys)
+        if(byGen % (Nk * rows) == 0):
+            temp = KeyExpansionCore(temp, rconIdx)
+            rconIdx = rconIdx + 1
+        # XOR temp with [byGen-(Nk * rows)] and store in expandedKeys
+        for i in range(rows):
+            expandedKeys[byGen] = expandedKeys[byGen - Nk * rows] ^ temp[i]
+            print(hex(expandedKeys[byGen]))
+            byGen = byGen + 1
     return expandedKeys
 
 
 def SubBytes(state):
-    for i in range(16):
+    for i in range(stt_lng):
         state[i] = s_box[state[i]]
     return state
 
 
 def InvSubBytes(state):
-    for i in range(16):
+    for i in range(stt_lng):
         state[i] = inverted_s_box[state[i]]
     return state
 
 
 def ShiftRows(state):
-    tmp_state = [0] * 16
+    tmp_state = [0] * stt_lng
     tmp_state[0] = state[0]
     tmp_state[1] = state[5]
     tmp_state[2] = state[10]
@@ -88,7 +92,7 @@ def ShiftRows(state):
 
 
 def InvShiftRows(state):
-    tmp_state = [0] * 16
+    tmp_state = [0] * stt_lng
     tmp_state[0] = state[0]
     tmp_state[1] = state[13]
     tmp_state[2] = state[10]
@@ -112,7 +116,7 @@ def InvShiftRows(state):
 
 
 def MixColumns(state):
-    tmp_state = [0] * 16
+    tmp_state = [0] * stt_lng
     tmp_state[0] = mul02[state[0]] ^ mul03[state[1]] ^ state[2] ^ state[3]
     tmp_state[1] = state[0] ^ mul02[state[1]] ^ mul03[state[2]] ^ state[3]
     tmp_state[2] = state[0] ^ state[1] ^ mul02[state[2]] ^ mul03[state[3]]
@@ -136,7 +140,7 @@ def MixColumns(state):
 
 
 def InvMixColumns(state):
-    tmp_state = [0] * 16
+    tmp_state = [0] * stt_lng
     tmp_state[0] = mul14[state[0]] ^ mul11[
         state[1]] ^ mul13[state[2]] ^ mul09[state[3]]
     tmp_state[1] = mul09[state[0]] ^ mul14[
@@ -176,51 +180,48 @@ def InvMixColumns(state):
 
 
 def AddRoundKey(state, roundKey):
-    for i in range(16):
+    for i in range(stt_lng):
         state[i] = state[i] ^ roundKey[i]
     return state
 
 
-# Cipher
-def AES_Encrypt(message, expandedKey, rounds):
-    state = [0] * 16
+def AES_Encrypt(message, expandedKey, Nr):  # Cipher
+    state = [0] * stt_lng
     # Convert chars to HEX (INT) using ASCII
-    for i in range(16):
+    for i in range(stt_lng):
         state[i] = ord(message[i])
 
-    # Whitening
-    state = AddRoundKey(state, expandedKey[0:16])  # Round Key
+    # Whitening with round key
+    state = AddRoundKey(state, expandedKey[0:stt_lng])
 
     # Rounds
-    for i in range(rounds):
+    for i in range(Nr):
         state = SubBytes(state)
         state = ShiftRows(state)
         # Skip MixColumns in final round
-        if(i != (rounds - 1)):
+        if(i != (Nr - 1)):
             state = MixColumns(state)
         state = AddRoundKey(state, expandedKey[
-                            16 * (i + 1):16 * (i + 2)])  # Round Key
+                            (i + 1) * stt_lng:(i + 2) * stt_lng])
 
     # Return encrypted result (ciphertext)
     return state
 
 
-# Inverse Cipher
-def AES_Decrypt(encrypted_message, expandedKey, rounds):
+def AES_Decrypt(encrypted_message, expandedKey, Nr):  # Inverse Cipher
     state = encrypted_message
 
-    # Whitening
-    state = AddRoundKey(state, expandedKey[
-                        16 * rounds:16 * (rounds + 1)])  # Round Key
+    # Whitening with round key
+    state = AddRoundKey(state, expandedKey[Nr * stt_lng:(Nr + 1) * 16])
 
     # Rounds
-    for i in range(rounds):
+    for i in range(Nr):
         state = InvShiftRows(state)
         state = InvSubBytes(state)
         state = AddRoundKey(state, expandedKey[
-                            16 * (rounds - i - 1):16 * (rounds - i)])  # Round Key
+                            (Nr - i - 1) * stt_lng:(Nr - i) * stt_lng])
         # Skip InvMixColumns in final round
-        if(i != (rounds - 1)):
+        if(i != (Nr - 1)):
             state = InvMixColumns(state)
 
     # Return decrypted result (plaintext)

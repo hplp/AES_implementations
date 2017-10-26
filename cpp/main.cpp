@@ -9,7 +9,7 @@ using namespace std;
 int main()
 {
     int Nb = 4; // columns
-    int Nk = 4; // 4 or 6 or 8 [32-bit words] in cipher key
+    int Nk = 4; // 4 or 6 or 8 [32-bit words] columns in cipher key
     int rows = 4;
     int CipherKeyLenghth = Nk * rows; // bytes
     int Nr = max(Nb, Nk) + 6; // = 10, 12 or 14 rounds
