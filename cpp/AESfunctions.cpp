@@ -1,3 +1,5 @@
+// https://en.wikipedia.org/wiki/Advanced_Encryption_Standard
+
 #include "stdafx.h"
 #include "AESfunctions.h"
 #include "AEStables.h"
@@ -19,14 +21,14 @@ void KeyExpansion(unsigned char* inputKey, unsigned char* expandedKey)
 {
     // Copy the inputKey at the beginning of expandedKey
     for (int i = 0; i < 16; i++) { expandedKey[i] = inputKey[i]; }
-    
+
     // Variables
     int bytesGenerated = 16;
     int rconIteration = 1;
     unsigned char temp[4];
 
     // Generate expanded keys
-    while(bytesGenerated < 176)
+    while (bytesGenerated < 176)
     {
         // Read previously generated last 4 bytes (last word)
         for (int i = 0; i < 4; i++) { temp[i] = expandedKey[i + bytesGenerated - 4]; }
@@ -189,19 +191,54 @@ void AES_Encrypt(unsigned char* plaintext, unsigned char* expandedKey, unsigned 
     int rounds = 10;
 
     // Whitening
-    AddRoundKey(state, expandedKey + (16 * 0));
+    AddRoundKey(state, expandedKey + (16 * 0)); // Round Key
 
     for (int i = 0; i < rounds; i++)
     {
         SubBytes(state);
         ShiftRows(state);
         if (i != (rounds - 1)) { MixColumns(state); }
-        AddRoundKey(state, expandedKey + (16 * (i + 1)));
+        AddRoundKey(state, expandedKey + (16 * (i + 1))); // Round Key
     }
 
     // Copy state to ciphertext
     for (int i = 0; i < 16; i++) { ciphertext[i] = state[i]; }
 }
+
+// Inverse Cipher
+void AES_Decrypt(unsigned char* ciphertext, unsigned char* expandedKey, unsigned char* plaintext)
+{
+    // copy ciphertext into state
+    unsigned char state[16];
+    for (int i = 0; i < 16; i++) { state[i] = ciphertext[i]; }
+
+    int rounds = 10;
+    AddRoundKey(state, expandedKey + (16 * rounds));  // Round Key
+
+    for (int i = 0; i < rounds; i++)
+    {
+        InvShiftRows(state);
+        InvSubBytes(state);
+        AddRoundKey(state, expandedKey + (16 * (rounds - i - 1)));  // Round Key
+        if (i != (rounds - 1)) { InvMixColumns(state); }
+    }
+
+    // Copy state to plaintext
+    for (int i = 0; i < 16; i++) { plaintext[i] = state[i]; }
+}
+
+/*
+
+Scratch area:
+
+// RotWord rotates left
+unsigned int* q = (unsigned int*)in4;
+*q = (*q >> 8) | ((*q & 0xff) << 24);
+// SubWord substitutes with S - Box value
+in4[0] = s_box[in4[0]];
+in4[1] = s_box[in4[1]];
+in4[2] = s_box[in4[2]];
+in4[3] = s_box[in4[3]];
 
 void printThisRoundKey(int r, unsigned char* RK)
 {
@@ -221,45 +258,5 @@ void printState(unsigned char* state)
     }
     printf(" state \n");
 }
-
-// Inverse Cipher
-void AES_Decrypt(unsigned char* ciphertext, unsigned char* expandedKey, unsigned char* plaintext)
-{
-    // copy ciphertext into state
-    unsigned char state[16];
-    for (int i = 0; i < 16; i++) { state[i] = ciphertext[i]; }
-
-    int rounds = 10;
-    AddRoundKey(state, expandedKey + (16 * rounds));
-    printThisRoundKey(0, expandedKey + (16 * rounds));
-    printState(state);
-
-    for (int i = 0; i < rounds; i++)
-    {
-        InvShiftRows(state);
-        InvSubBytes(state);
-        
-        AddRoundKey(state, expandedKey + (16 * (rounds - i - 1)));
-        printThisRoundKey(i+1, expandedKey + (16 * (rounds - i - 1)));
-
-        if (i != (rounds - 1)) { InvMixColumns(state); printState(state); }
-    }
-
-    // Copy state to plaintext
-    for (int i = 0; i < 16; i++) { plaintext[i] = state[i]; }
-}
-
-/*
-
-Scratch area:
-
-// RotWord rotates left
-//unsigned int* q = (unsigned int*)in4;
-//*q = (*q >> 8) | ((*q & 0xff) << 24);
-// SubWord substitutes with S - Box value
-//in4[0] = s_box[in4[0]];
-//in4[1] = s_box[in4[1]];
-//in4[2] = s_box[in4[2]];
-//in4[3] = s_box[in4[3]];
 
 */

@@ -14,7 +14,9 @@ int main()
     int CipherKeyLenghth = Nk * rows; // bytes
     int Nr = max(Nb, Nk) + 6; // = 10, 12 or 14 rounds
 
-    cout << "AES with Nb = " << Nb << " columns, Nk = " << Nk << " (32-bit) words i.e. CipherKeyLenghth = " << CipherKeyLenghth << " bytes (or " << Nk * 32 << " bits), Nr = " << Nr << " rounds" << endl << endl;
+    cout << "AES with Nb = " << Nb << " columns, Nk = " << Nk << " (32-bit) words i.e. CipherKeyLenghth = "
+        << CipherKeyLenghth << " bytes (or " << CipherKeyLenghth * 8 << " bits), Nr = " << Nr << " rounds" << endl << endl;
+
 
     // create a dummy test cipher key
     unsigned char* key = new unsigned char[CipherKeyLenghth];
@@ -24,6 +26,7 @@ int main()
         printf("%X ", key[i]);
     } cout << endl << endl;
 
+
     // extend key
     unsigned char* expandedKey = new unsigned char[rows * Nb * (Nr + 1)];
     KeyExpansion(key, expandedKey);
@@ -31,7 +34,8 @@ int main()
     for (int i = 0; i < rows * Nb * (Nr + 1); i++) { printf("%X ", expandedKey[i]); }
     cout << endl << endl;
 
-    // input (ABCDEFGHIJKLMNOP)
+
+    // create a test input data (plaintext) (ABCDEFGHIJKLMNOP)
     unsigned char plaintext[16] = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', };
     cout << "plaintext = ";
     for (int i = 0; i < 16; i++) { printf("%c ", plaintext[i]); }
