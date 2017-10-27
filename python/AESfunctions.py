@@ -18,13 +18,22 @@ def KeyExpansion(inputKey, Nk):
         in4[2] = s_box[in4[3]]
         in4[3] = s_box[t]
         # SubWord substitutes with S-Box value
-        #in4[0] = s_box[in4[0]]
-        #in4[1] = s_box[in4[1]]
-        #in4[2] = s_box[in4[2]]
-        #in4[3] = s_box[in4[3]]
+        # in4[0] = s_box[in4[0]]
+        # in4[1] = s_box[in4[1]]
+        # in4[2] = s_box[in4[2]]
+        # in4[3] = s_box[in4[3]]
         # RCon (round constant) 1st byte XOR rcon
         in4[0] = in4[0] ^ rcon[i]
         # Return KeyExpansionCore
+        return in4
+
+    def SubWord(in4):
+        # SubWord substitutes with S-Box value
+        in4[0] = s_box[in4[0]]
+        in4[1] = s_box[in4[1]]
+        in4[2] = s_box[in4[2]]
+        in4[3] = s_box[in4[3]]
+        # Return SubWord
         return in4
 
     # Declare expandedKeys
@@ -47,10 +56,11 @@ def KeyExpansion(inputKey, Nk):
         if(byGen % (Nk * rows) == 0):
             temp = KeyExpansionCore(temp, rconIdx)
             rconIdx = rconIdx + 1
+        elif((Nk > 6) and (byGen % (Nk * rows) == (4 * rows))):
+            temp = SubWord(temp)
         # XOR temp with [byGen-(Nk * rows)] and store in expandedKeys
         for i in range(rows):
             expandedKeys[byGen] = expandedKeys[byGen - Nk * rows] ^ temp[i]
-            print(hex(expandedKeys[byGen]))
             byGen = byGen + 1
     return expandedKeys
 
@@ -202,7 +212,7 @@ def AES_Encrypt(message, expandedKey, Nr):  # Cipher
         if(i != (Nr - 1)):
             state = MixColumns(state)
         state = AddRoundKey(state, expandedKey[
-                            (i + 1) * stt_lng:(i + 2) * stt_lng])
+            (i + 1) * stt_lng:(i + 2) * stt_lng])
 
     # Return encrypted result (ciphertext)
     return state
@@ -219,7 +229,7 @@ def AES_Decrypt(encrypted_message, expandedKey, Nr):  # Inverse Cipher
         state = InvShiftRows(state)
         state = InvSubBytes(state)
         state = AddRoundKey(state, expandedKey[
-                            (Nr - i - 1) * stt_lng:(Nr - i) * stt_lng])
+            (Nr - i - 1) * stt_lng:(Nr - i) * stt_lng])
         # Skip InvMixColumns in final round
         if(i != (Nr - 1)):
             state = InvMixColumns(state)
