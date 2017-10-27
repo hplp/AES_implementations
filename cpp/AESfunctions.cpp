@@ -17,27 +17,44 @@ void KeyExpansionCore(unsigned char* in4, unsigned char i)
     in4[0] = in4[0] ^ rcon[i];
 }
 
-void KeyExpansion(unsigned char* inputKey, unsigned char* expandedKey)
+void SubWord(unsigned char* in4)
+{
+    // SubWord substitutes with S - Box value
+    in4[0] = s_box[in4[0]];
+    in4[1] = s_box[in4[1]];
+    in4[2] = s_box[in4[2]];
+    in4[3] = s_box[in4[3]];
+}
+
+void KeyExpansion(unsigned char* inputKey, unsigned int Nk, unsigned int Nr, unsigned char* expandedKey)
 {
     // Copy the inputKey at the beginning of expandedKey
-    for (int i = 0; i < 16; i++) { expandedKey[i] = inputKey[i]; }
+    for (unsigned int i = 0; i < stt_lng; i++) { expandedKey[i] = inputKey[i]; }
 
     // Variables
-    int bytesGenerated = 16;
-    int rconIteration = 1;
-    unsigned char temp[4];
+    unsigned int byGen = Nk * rows;
+    unsigned int rconIdx = 1;
+    unsigned char temp[rows];
 
     // Generate expanded keys
-    while (bytesGenerated < 176)
+    while (byGen < (Nr + 1) * stt_lng)
     {
         // Read previously generated last 4 bytes (last word)
-        for (int i = 0; i < 4; i++) { temp[i] = expandedKey[i + bytesGenerated - 4]; }
+        for (unsigned int i = 0; i < rows; i++) { temp[i] = expandedKey[i + byGen - rows]; }
         // Perform KeyExpansionCore once for each 16 byte key
-        if (bytesGenerated % 16 == 0) { KeyExpansionCore(temp, rconIteration++); }
+        if (byGen % (Nk * rows) == 0)
+        {
+            KeyExpansionCore(temp, rconIdx);
+            rconIdx++;
+        }
+        else if ((Nk > 6) && (byGen % (Nk * rows) == (4 * rows)))
+        {
+            SubWord(temp);
+        }
         // XOR temp with [bytesGenerated-16] and store in expandedKeys
-        for (unsigned char a = 0; a < 4; a++) {
-            expandedKey[bytesGenerated] = expandedKey[bytesGenerated - 16] ^ temp[a];
-            bytesGenerated++;
+        for (unsigned char a = 0; a < rows; a++) {
+            expandedKey[byGen] = expandedKey[byGen - Nk * rows] ^ temp[a];
+            byGen++;
         }
     }
 }
@@ -45,12 +62,12 @@ void KeyExpansion(unsigned char* inputKey, unsigned char* expandedKey)
 
 void SubBytes(unsigned char* state)
 {
-    for (int i = 0; i < 16; i++) { state[i] = s_box[state[i]]; }
+    for (unsigned int i = 0; i < 16; i++) { state[i] = s_box[state[i]]; }
 }
 
 void InvSubBytes(unsigned char* state)
 {
-    for (int i = 0; i < 16; i++) { state[i] = inverted_s_box[state[i]]; }
+    for (unsigned int i = 0; i < 16; i++) { state[i] = inverted_s_box[state[i]]; }
 }
 
 
@@ -76,7 +93,7 @@ void ShiftRows(unsigned char* state)
     tmp_state[13] = state[1];
     tmp_state[14] = state[6];
     tmp_state[15] = state[11];
-    for (int i = 0; i < 16; i++) { state[i] = tmp_state[i]; }
+    for (unsigned int i = 0; i < 16; i++) { state[i] = tmp_state[i]; }
 }
 
 void InvShiftRows(unsigned char* state)
@@ -101,7 +118,7 @@ void InvShiftRows(unsigned char* state)
     tmp_state[13] = state[9];
     tmp_state[14] = state[6];
     tmp_state[15] = state[3];
-    for (int i = 0; i < 16; i++) { state[i] = tmp_state[i]; }
+    for (unsigned int i = 0; i < 16; i++) { state[i] = tmp_state[i]; }
 }
 
 
@@ -126,7 +143,7 @@ void MixColumns(unsigned char* state) {
     tmp_state[13] = state[12] ^ mul02[state[13]] ^ mul03[state[14]] ^ state[15];
     tmp_state[14] = state[12] ^ state[13] ^ mul02[state[14]] ^ mul03[state[15]];
     tmp_state[15] = mul03[state[12]] ^ state[13] ^ state[14] ^ mul02[state[15]];
-    for (int i = 0; i < 16; i++) { state[i] = tmp_state[i]; }
+    for (unsigned int i = 0; i < 16; i++) { state[i] = tmp_state[i]; }
     /*
     tmp[0] = (unsigned char)(mul2[state[0]] ^ mul3[state[1]] ^ state[2] ^ state[3]);
     tmp[1] = (unsigned char)(state[0] ^ mul2[state[1]] ^ mul3[state[2]] ^ state[3]);
@@ -171,60 +188,57 @@ void InvMixColumns(unsigned char* state) {
     tmp_state[13] = mul09[state[12]] ^ mul14[state[13]] ^ mul11[state[14]] ^ mul13[state[15]];
     tmp_state[14] = mul13[state[12]] ^ mul09[state[13]] ^ mul14[state[14]] ^ mul11[state[15]];
     tmp_state[15] = mul11[state[12]] ^ mul13[state[13]] ^ mul09[state[14]] ^ mul14[state[15]];
-    for (int i = 0; i < 16; i++) { state[i] = tmp_state[i]; }
+    for (unsigned int i = 0; i < 16; i++) { state[i] = tmp_state[i]; }
 }
 
 
 void AddRoundKey(unsigned char* state, unsigned char* roundKey)
 {
-    for (int i = 0; i < 16; i++) { state[i] ^= roundKey[i]; }
+    for (unsigned int i = 0; i < 16; i++) { state[i] ^= roundKey[i]; }
 }
 
 
 // Cipher
-void AES_Encrypt(unsigned char* plaintext, unsigned char* expandedKey, unsigned char* ciphertext)
+void AES_Encrypt(unsigned char* plaintext, unsigned char* expandedKey, unsigned int Nr, unsigned char* ciphertext)
 {
     // Copy plaintext into state
-    unsigned char state[16];
-    for (int i = 0; i < 16; i++) { state[i] = plaintext[i]; }
-
-    int rounds = 10;
+    unsigned char state[stt_lng];
+    for (unsigned int i = 0; i < stt_lng; i++) { state[i] = plaintext[i]; }
 
     // Whitening
-    AddRoundKey(state, expandedKey + (16 * 0)); // Round Key
+    AddRoundKey(state, expandedKey + (stt_lng * 0)); // Round Key
 
-    for (int i = 0; i < rounds; i++)
+    for (unsigned int i = 0; i < Nr; i++)
     {
         SubBytes(state);
         ShiftRows(state);
-        if (i != (rounds - 1)) { MixColumns(state); }
-        AddRoundKey(state, expandedKey + (16 * (i + 1))); // Round Key
+        if (i != (Nr - 1)) { MixColumns(state); }
+        AddRoundKey(state, expandedKey + (stt_lng * (i + 1))); // Round Key
     }
 
     // Copy state to ciphertext
-    for (int i = 0; i < 16; i++) { ciphertext[i] = state[i]; }
+    for (unsigned int i = 0; i < stt_lng; i++) { ciphertext[i] = state[i]; }
 }
 
 // Inverse Cipher
-void AES_Decrypt(unsigned char* ciphertext, unsigned char* expandedKey, unsigned char* plaintext)
+void AES_Decrypt(unsigned char* ciphertext, unsigned char* expandedKey, unsigned int Nr, unsigned char* plaintext)
 {
     // copy ciphertext into state
-    unsigned char state[16];
-    for (int i = 0; i < 16; i++) { state[i] = ciphertext[i]; }
+    unsigned char state[stt_lng];
+    for (unsigned int i = 0; i < stt_lng; i++) { state[i] = ciphertext[i]; }
 
-    int rounds = 10;
-    AddRoundKey(state, expandedKey + (16 * rounds));  // Round Key
+    AddRoundKey(state, expandedKey + (stt_lng * Nr));  // Round Key
 
-    for (int i = 0; i < rounds; i++)
+    for (unsigned int i = 0; i < Nr; i++)
     {
         InvShiftRows(state);
         InvSubBytes(state);
-        AddRoundKey(state, expandedKey + (16 * (rounds - i - 1)));  // Round Key
-        if (i != (rounds - 1)) { InvMixColumns(state); }
+        AddRoundKey(state, expandedKey + (stt_lng * (Nr - i - 1)));  // Round Key
+        if (i != (Nr - 1)) { InvMixColumns(state); }
     }
 
     // Copy state to plaintext
-    for (int i = 0; i < 16; i++) { plaintext[i] = state[i]; }
+    for (unsigned int i = 0; i < stt_lng; i++) { plaintext[i] = state[i]; }
 }
 
 /*

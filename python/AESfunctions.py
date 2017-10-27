@@ -48,7 +48,7 @@ def KeyExpansion(inputKey, Nk):
     temp = [0] * rows
 
     # Generate expanded keys
-    while(byGen < Nb * (Nr + 1) * rows):
+    while(byGen < (Nr + 1) * stt_lng):
         # Read previously generated last 4 bytes
         for i in range(rows):
             temp[i] = expandedKeys[byGen - rows + i]
