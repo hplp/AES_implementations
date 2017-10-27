@@ -22,7 +22,7 @@ int main()
 
     // extend key
     unsigned char expandedKey[ExtdCipherKeyLenghth_max];
-    KeyExpansion(key, Nk, Nr, expandedKey);
+    KeyExpansion(key, Nk, expandedKey);
     cout << "expandedKey = ";
     for (unsigned int i = 0; i < (Nr + 1) * stt_lng; i++) { printf("%X ", expandedKey[i]); }
     cout << endl << endl;

@@ -13,7 +13,7 @@ const unsigned int Nr_max = max(Nb, Nk_max) + 6; // max number of rounds
 const unsigned int ExtdCipherKeyLenghth_max = (Nr_max + 1) * stt_lng; // max bytes in extended key length
 
 
-void KeyExpansion(unsigned char*, unsigned int, unsigned int, unsigned char*);
+void KeyExpansion(unsigned char*, unsigned int, unsigned char*);
 
 
 void AES_Encrypt(unsigned char*, unsigned char*, unsigned int, unsigned char*);

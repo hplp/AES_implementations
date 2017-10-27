@@ -26,8 +26,9 @@ void SubWord(unsigned char* in4)
     in4[3] = s_box[in4[3]];
 }
 
-void KeyExpansion(unsigned char* inputKey, unsigned int Nk, unsigned int Nr, unsigned char* expandedKey)
+void KeyExpansion(unsigned char* inputKey, unsigned int Nk, unsigned char* expandedKey)
 {
+    unsigned int Nr = max(Nb, Nk) + 6; // = 10, 12 or 14 rounds
     // Copy the inputKey at the beginning of expandedKey
     for (unsigned int i = 0; i < stt_lng; i++) { expandedKey[i] = inputKey[i]; }
 
