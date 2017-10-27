@@ -30,7 +30,7 @@ void KeyExpansion(unsigned char* inputKey, unsigned int Nk, unsigned char* expan
 {
     unsigned int Nr = max(Nb, Nk) + 6; // = 10, 12 or 14 rounds
     // Copy the inputKey at the beginning of expandedKey
-    for (unsigned int i = 0; i < stt_lng; i++) { expandedKey[i] = inputKey[i]; }
+    for (unsigned int i = 0; i < Nk * rows; i++) { expandedKey[i] = inputKey[i]; }
 
     // Variables
     unsigned int byGen = Nk * rows;
@@ -41,7 +41,7 @@ void KeyExpansion(unsigned char* inputKey, unsigned int Nk, unsigned char* expan
     while (byGen < (Nr + 1) * stt_lng)
     {
         // Read previously generated last 4 bytes (last word)
-        for (unsigned int i = 0; i < rows; i++) { temp[i] = expandedKey[i + byGen - rows]; }
+        for (unsigned int i = 0; i < rows; i++) { temp[i] = expandedKey[byGen - rows + i]; }
         // Perform KeyExpansionCore once for each 16 byte key
         if (byGen % (Nk * rows) == 0)
         {
@@ -53,8 +53,8 @@ void KeyExpansion(unsigned char* inputKey, unsigned int Nk, unsigned char* expan
             SubWord(temp);
         }
         // XOR temp with [bytesGenerated-16] and store in expandedKeys
-        for (unsigned char a = 0; a < rows; a++) {
-            expandedKey[byGen] = expandedKey[byGen - Nk * rows] ^ temp[a];
+        for (unsigned int i = 0; i < rows; i++) {
+            expandedKey[byGen] = expandedKey[byGen - Nk * rows] ^ temp[i];
             byGen++;
         }
     }
@@ -63,18 +63,18 @@ void KeyExpansion(unsigned char* inputKey, unsigned int Nk, unsigned char* expan
 
 void SubBytes(unsigned char* state)
 {
-    for (unsigned int i = 0; i < 16; i++) { state[i] = s_box[state[i]]; }
+    for (unsigned int i = 0; i < stt_lng; i++) { state[i] = s_box[state[i]]; }
 }
 
 void InvSubBytes(unsigned char* state)
 {
-    for (unsigned int i = 0; i < 16; i++) { state[i] = inverted_s_box[state[i]]; }
+    for (unsigned int i = 0; i < stt_lng; i++) { state[i] = inverted_s_box[state[i]]; }
 }
 
 
 void ShiftRows(unsigned char* state)
 {
-    unsigned char tmp_state[16];
+    unsigned char tmp_state[stt_lng];
     tmp_state[0] = state[0];
     tmp_state[1] = state[5];
     tmp_state[2] = state[10];
@@ -94,12 +94,12 @@ void ShiftRows(unsigned char* state)
     tmp_state[13] = state[1];
     tmp_state[14] = state[6];
     tmp_state[15] = state[11];
-    for (unsigned int i = 0; i < 16; i++) { state[i] = tmp_state[i]; }
+    for (unsigned int i = 0; i < stt_lng; i++) { state[i] = tmp_state[i]; }
 }
 
 void InvShiftRows(unsigned char* state)
 {
-    unsigned char tmp_state[16];
+    unsigned char tmp_state[stt_lng];
     tmp_state[0] = state[0];
     tmp_state[1] = state[13];
     tmp_state[2] = state[10];
@@ -119,12 +119,12 @@ void InvShiftRows(unsigned char* state)
     tmp_state[13] = state[9];
     tmp_state[14] = state[6];
     tmp_state[15] = state[3];
-    for (unsigned int i = 0; i < 16; i++) { state[i] = tmp_state[i]; }
+    for (unsigned int i = 0; i < stt_lng; i++) { state[i] = tmp_state[i]; }
 }
 
 
 void MixColumns(unsigned char* state) {
-    unsigned char tmp_state[16];
+    unsigned char tmp_state[stt_lng];
     tmp_state[0] = mul02[state[0]] ^ mul03[state[1]] ^ state[2] ^ state[3];
     tmp_state[1] = state[0] ^ mul02[state[1]] ^ mul03[state[2]] ^ state[3];
     tmp_state[2] = state[0] ^ state[1] ^ mul02[state[2]] ^ mul03[state[3]];
@@ -144,7 +144,7 @@ void MixColumns(unsigned char* state) {
     tmp_state[13] = state[12] ^ mul02[state[13]] ^ mul03[state[14]] ^ state[15];
     tmp_state[14] = state[12] ^ state[13] ^ mul02[state[14]] ^ mul03[state[15]];
     tmp_state[15] = mul03[state[12]] ^ state[13] ^ state[14] ^ mul02[state[15]];
-    for (unsigned int i = 0; i < 16; i++) { state[i] = tmp_state[i]; }
+    for (unsigned int i = 0; i < stt_lng; i++) { state[i] = tmp_state[i]; }
     /*
     tmp[0] = (unsigned char)(mul2[state[0]] ^ mul3[state[1]] ^ state[2] ^ state[3]);
     tmp[1] = (unsigned char)(state[0] ^ mul2[state[1]] ^ mul3[state[2]] ^ state[3]);
@@ -169,7 +169,7 @@ void MixColumns(unsigned char* state) {
 }
 
 void InvMixColumns(unsigned char* state) {
-    unsigned char tmp_state[16];
+    unsigned char tmp_state[stt_lng];
     tmp_state[0] = mul14[state[0]] ^ mul11[state[1]] ^ mul13[state[2]] ^ mul09[state[3]];
     tmp_state[1] = mul09[state[0]] ^ mul14[state[1]] ^ mul11[state[2]] ^ mul13[state[3]];
     tmp_state[2] = mul13[state[0]] ^ mul09[state[1]] ^ mul14[state[2]] ^ mul11[state[3]];
@@ -189,13 +189,13 @@ void InvMixColumns(unsigned char* state) {
     tmp_state[13] = mul09[state[12]] ^ mul14[state[13]] ^ mul11[state[14]] ^ mul13[state[15]];
     tmp_state[14] = mul13[state[12]] ^ mul09[state[13]] ^ mul14[state[14]] ^ mul11[state[15]];
     tmp_state[15] = mul11[state[12]] ^ mul13[state[13]] ^ mul09[state[14]] ^ mul14[state[15]];
-    for (unsigned int i = 0; i < 16; i++) { state[i] = tmp_state[i]; }
+    for (unsigned int i = 0; i < stt_lng; i++) { state[i] = tmp_state[i]; }
 }
 
 
 void AddRoundKey(unsigned char* state, unsigned char* roundKey)
 {
-    for (unsigned int i = 0; i < 16; i++) { state[i] ^= roundKey[i]; }
+    for (unsigned int i = 0; i < stt_lng; i++) { state[i] ^= roundKey[i]; }
 }
 
 
