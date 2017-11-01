@@ -1,6 +1,8 @@
 #pragma once
+
 #include <iostream>
 using namespace std;
+
 #include <algorithm>
 
 const unsigned int Nb = 4; // columns

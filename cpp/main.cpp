@@ -3,7 +3,7 @@
 
 int main()
 {
-    unsigned int Nk = 4; // 4 or 6 or 8 [32-bit words] columns in cipher key
+    unsigned int Nk = 8; // 4 or 6 or 8 [32-bit words] columns in cipher key
     unsigned int CipherKeyLenghth = Nk * rows; // bytes
     unsigned int Nr = max(Nb, Nk) + 6; // = 10, 12 or 14 rounds
     unsigned int ExtdCipherKeyLenghth = (Nr + 1) * stt_lng; // bytes in the expanded cipher key
@@ -107,5 +107,13 @@ unsigned char key[CipherKeyLenghth_max] =
     0x1f, 0x35, 0x2c, 0x07, 0x3b, 0x61, 0x08, 0xd7,
     0x2d, 0x98, 0x10, 0xa3, 0x09, 0x14, 0xdf, 0xf4
 };
+
+// Appendix B – Cipher Example
+unsigned char plaintext[stt_lng] = { 0x32, 0x43, 0xf6, 0xa8, 0x88, 0x5a, 0x30, 0x8d, 0x31, 0x31, 0x98, 0xa2, 0xe0, 0x37, 0x07, 0x34 };
+
+// C.1 AES-128 (Nk=4, Nr=10)
+// C.2 AES-192 (Nk=6, Nr=12)
+// C.3 AES-256 (Nk=8, Nr=14)
+unsigned char plaintext[stt_lng] = { 0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0x88, 0x99, 0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff };
 
 */
