@@ -202,7 +202,7 @@ def AES_Encrypt(message, expandedKey, Nr):  # Cipher
         state[i] = ord(message[i])
 
     # Whitening with round key
-    state = AddRoundKey(state, expandedKey[0:stt_lng])
+    state = AddRoundKey(state, expandedKey[0:(stt_lng)])
 
     # Rounds
     for i in range(Nr):
