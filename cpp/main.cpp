@@ -3,7 +3,7 @@
 
 int main()
 {
-    unsigned int Nk = 8; // 4 or 6 or 8 [32-bit words] columns in cipher key
+    unsigned int Nk = 4; // 4 or 6 or 8 [32-bit words] columns in cipher key
     unsigned int CipherKeyLenghth = Nk * rows; // bytes
     unsigned int Nr = max(Nb, Nk) + 6; // = 10, 12 or 14 rounds
     unsigned int ExtdCipherKeyLenghth = (Nr + 1) * stt_lng; // bytes in the expanded cipher key
@@ -42,7 +42,9 @@ int main()
     unsigned char ciphertext[stt_lng];
     AES_Encrypt(plaintext, expandedKey, Nr, ciphertext);
     cout << "ciphertext = ";
-    for (unsigned int i = 0; i < stt_lng; i++) { printf("%x ", ciphertext[i]); }
+    for (unsigned int i = 0; i < stt_lng; i++) { printf("%X ", ciphertext[i]); }
+    cout << " <=> ";
+    for (unsigned int i = 0; i < stt_lng; i++) { printf("%d ", ciphertext[i]); }
     cout << endl;
 
 
@@ -52,7 +54,7 @@ int main()
     cout << "decrypted_plaintext = ";
     for (unsigned int i = 0; i < stt_lng; i++) { printf("%c ", decrypted_plaintext[i]); }
     cout << " <=> ";
-    for (unsigned int i = 0; i < stt_lng; i++) { printf("%x ", decrypted_plaintext[i]); }
+    for (unsigned int i = 0; i < stt_lng; i++) { printf("%X ", decrypted_plaintext[i]); }
     cout << endl << endl;
 
     return 0;

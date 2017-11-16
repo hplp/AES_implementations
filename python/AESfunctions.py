@@ -222,7 +222,7 @@ def AES_Decrypt(encrypted_message, expandedKey, Nr):  # Inverse Cipher
     state = encrypted_message
 
     # Whitening with round key
-    state = AddRoundKey(state, expandedKey[Nr * stt_lng:(Nr + 1) * 16])
+    state = AddRoundKey(state, expandedKey[Nr * stt_lng:(Nr + 1) * stt_lng])
 
     # Rounds
     for i in range(Nr):

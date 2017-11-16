@@ -8,7 +8,7 @@ Nb = 4  # columns
 #             16,  24,  or 32 byte cipher keys
 #             Nk = 4, 6 or 8 [32-bit words] columns in cipher key
 #             Nr = max(Nb, Nk)+6 = 10, 12 or 14 rounds
-Nk = 8  # 4 or 6 or 8 [32-bit words] columns in cipher key
+Nk = 4  # 4 or 6 or 8 [32-bit words] columns in cipher key
 rows = 4
 CipherKeyLenghth = Nk * rows
 Nr = max(Nb, Nk) + 6  # = 10, 12 or 14 rounds
@@ -36,12 +36,6 @@ print("message: ", len(message), message)
 if len(message) % 16:
     message = message.ljust(len(message) + 16 - len(message) % 16, chr(0))
 print("padded: ", len(message), message, "\n")
-
-
-# message_list=[0]*len(message)
-# Convert chars to INT using ASCII
-#for i in range(len(message)): message_list[i] = ord(message[i])
-#print("ASCII vals: ",len(message_list),message_list)
 
 
 # Ciphertext
