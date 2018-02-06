@@ -5,7 +5,7 @@ int main()
 {
     unsigned int Nk = 4; // 4 or 6 or 8 [32-bit words] columns in cipher key
     unsigned int CipherKeyLenghth = Nk * rows; // bytes
-    unsigned int Nr = max(Nb, Nk) + 6; // = 10, 12 or 14 rounds
+    unsigned int Nr = (Nk > Nb) ? Nk + 6 : Nb + 6; // = 10, 12 or 14 rounds
     unsigned int ExtdCipherKeyLenghth = (Nr + 1) * stt_lng; // bytes in the expanded cipher key
 
     cout << "AES with Nb = " << Nb << " columns, Nk = " << Nk << " (32-bit) words i.e. CipherKeyLenghth = "
