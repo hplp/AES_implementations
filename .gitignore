@@ -125,14 +125,7 @@ VivadoHLS/cipher/aes_cipher/aes_cipher.directive
 VivadoHLS/cipher/aes_cipher/aes_cipher_data.json
 VivadoHLS/cipher/vivado_hls.app
 
-VivadoHLS/inverse_cipher/.apc/
-VivadoHLS/inverse_cipher/.settings/
-VivadoHLS/inverse_cipher/aes_inverse_cipher/.autopilot/
-VivadoHLS/inverse_cipher/aes_inverse_cipher/.tcls/
-VivadoHLS/inverse_cipher/aes_inverse_cipher/csim/
-VivadoHLS/inverse_cipher/aes_inverse_cipher/impl/
-VivadoHLS/inverse_cipher/aes_inverse_cipher/sim/
-VivadoHLS/inverse_cipher/aes_inverse_cipher/syn/
+
 
 # scratch code
 
