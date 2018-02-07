@@ -2,18 +2,21 @@
 #include "AEStables.h"
 
 void SubBytes(unsigned char* state) {
+#pragma HLS inline off
 	for (unsigned int i = 0; i < stt_lng; i++) {
 		state[i] = s_box[state[i]];
 	}
 }
 
 void InvSubBytes(unsigned char* state) {
+#pragma HLS inline off
 	for (unsigned int i = 0; i < stt_lng; i++) {
 		state[i] = inverted_s_box[state[i]];
 	}
 }
 
 void ShiftRows(unsigned char* state) {
+#pragma HLS inline off
 	unsigned char tmp_state[stt_lng];
 	tmp_state[0] = state[0];
 	tmp_state[1] = state[5];
@@ -40,6 +43,7 @@ void ShiftRows(unsigned char* state) {
 }
 
 void InvShiftRows(unsigned char* state) {
+#pragma HLS inline off
 	unsigned char tmp_state[stt_lng];
 	tmp_state[0] = state[0];
 	tmp_state[1] = state[13];
@@ -66,6 +70,7 @@ void InvShiftRows(unsigned char* state) {
 }
 
 void MixColumns(unsigned char* state) {
+#pragma HLS inline off
 	unsigned char tmp_state[stt_lng];
 	tmp_state[0] = mul02[state[0]] ^ mul03[state[1]] ^ state[2] ^ state[3];
 	tmp_state[1] = state[0] ^ mul02[state[1]] ^ mul03[state[2]] ^ state[3];
@@ -92,6 +97,7 @@ void MixColumns(unsigned char* state) {
 }
 
 void InvMixColumns(unsigned char* state) {
+#pragma HLS inline off
 	unsigned char tmp_state[stt_lng];
 	tmp_state[0] = mul14[state[0]] ^ mul11[state[1]] ^ mul13[state[2]]
 			^ mul09[state[3]];
@@ -134,6 +140,7 @@ void InvMixColumns(unsigned char* state) {
 }
 
 void AddRoundKey(unsigned char* state, unsigned char* roundKey) {
+#pragma HLS inline off
 	for (unsigned int i = 0; i < stt_lng; i++) {
 		state[i] ^= roundKey[i];
 	}
@@ -143,6 +150,13 @@ void AddRoundKey(unsigned char* state, unsigned char* roundKey) {
 void AES_Encrypt(unsigned char plaintext[stt_lng],
 		unsigned char expandedKey[ExtdCipherKeyLenghth_max], unsigned int Nr,
 		unsigned char ciphertext[stt_lng]) {
+
+#pragma HLS inline region // will inline the functions unless inlining is off
+#pragma HLS allocation instances=AddRoundKey limit=1 function // ensure only one instance of AddRoundKey
+#pragma HLS array_map variable=s_box instance=cipher horizontal // group cipher tables together
+#pragma HLS array_map variable=mul02 instance=cipher horizontal
+#pragma HLS array_map variable=mul03 instance=cipher horizontal
+
 	// Copy plaintext into state
 	unsigned char state[stt_lng];
 	for (unsigned int i = 0; i < stt_lng; i++) {
@@ -171,6 +185,15 @@ void AES_Encrypt(unsigned char plaintext[stt_lng],
 void AES_Decrypt(unsigned char ciphertext[stt_lng],
 		unsigned char expandedKey[ExtdCipherKeyLenghth_max], unsigned int Nr,
 		unsigned char plaintext[stt_lng]) {
+
+#pragma HLS inline region // will inline the functions unless inlining is off
+#pragma HLS allocation instances=AddRoundKey limit=1 function // ensure only one instance of AddRoundKey
+#pragma HLS array_map variable=inverted_s_box instance=inverse_cipher horizontal
+#pragma HLS array_map variable=mul09 instance=inverse_cipher horizontal // group inverse cipher tables together
+#pragma HLS array_map variable=mul11 instance=inverse_cipher horizontal
+#pragma HLS array_map variable=mul13 instance=inverse_cipher horizontal
+#pragma HLS array_map variable=mul14 instance=inverse_cipher horizontal
+
 	// copy ciphertext into state
 	unsigned char state[stt_lng];
 	for (unsigned int i = 0; i < stt_lng; i++) {
