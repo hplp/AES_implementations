@@ -105,5 +105,12 @@ MVS_Python/
 cpp/.vs/
 cpp/Debug/
 
+# PyRTL
+PyRTL/
+
+#VivadoHLS
+VivadoHLS/cipher/
+VivadoHLS/inverse_cipher/
+
 # scratch code
 
