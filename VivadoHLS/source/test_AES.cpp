@@ -2,11 +2,11 @@
 #include "AEStables.h"
 
 void AES_Encrypt(unsigned char plaintext[stt_lng],
-		unsigned char expandedKey[ExtdCipherKeyLenghth_max], unsigned int Nr,
+		unsigned char expandedKey[ExtdCipherKeyLenghth_max], unsigned short Nr,
 		unsigned char ciphertext[stt_lng]);
 
 void AES_Decrypt(unsigned char ciphertext[stt_lng],
-		unsigned char expandedKey[ExtdCipherKeyLenghth_max], unsigned int Nr,
+		unsigned char expandedKey[ExtdCipherKeyLenghth_max], unsigned short Nr,
 		unsigned char plaintext[stt_lng]);
 
 // Rijndael key schedule
@@ -54,23 +54,23 @@ void SubWord(unsigned char* in4) {
 	in4[3] = s_box[in4[3]];
 }
 
-void KeyExpansion(unsigned char* inputKey, unsigned int Nk,
+void KeyExpansion(unsigned char* inputKey, unsigned short Nk,
 		unsigned char* expandedKey) {
-	unsigned int Nr = (Nk > Nb) ? Nk + 6 : Nb + 6; // = 10, 12 or 14 rounds
+	unsigned short Nr = (Nk > Nb) ? Nk + 6 : Nb + 6; // = 10, 12 or 14 rounds
 	// Copy the inputKey at the beginning of expandedKey
-	for (unsigned int i = 0; i < Nk * rows; i++) {
+	for (unsigned short i = 0; i < Nk * rows; i++) {
 		expandedKey[i] = inputKey[i];
 	}
 
 	// Variables
-	unsigned int byGen = Nk * rows;
-	unsigned int rconIdx = 1;
+	unsigned short byGen = Nk * rows;
+	unsigned short rconIdx = 1;
 	unsigned char temp[rows];
 
 	// Generate expanded keys
 	while (byGen < (Nr + 1) * stt_lng) {
 		// Read previously generated last 4 bytes (last word)
-		for (unsigned int i = 0; i < rows; i++) {
+		for (unsigned short i = 0; i < rows; i++) {
 			temp[i] = expandedKey[byGen - rows + i];
 		}
 		// Perform KeyExpansionCore once for each 16 byte key
@@ -81,7 +81,7 @@ void KeyExpansion(unsigned char* inputKey, unsigned int Nk,
 			SubWord(temp);
 		}
 		// XOR temp with [bytesGenerated-16] and store in expandedKeys
-		for (unsigned int i = 0; i < rows; i++) {
+		for (unsigned short i = 0; i < rows; i++) {
 			expandedKey[byGen] = expandedKey[byGen - Nk * rows] ^ temp[i];
 			byGen++;
 		}
@@ -89,10 +89,13 @@ void KeyExpansion(unsigned char* inputKey, unsigned int Nk,
 }
 
 int main() {
-	unsigned int Nk = 4; // 4 or 6 or 8 [32-bit words] columns in cipher key
-	unsigned int CipherKeyLenghth = Nk * rows; // bytes
-	unsigned int Nr = max(Nb, Nk) + 6; // = 10, 12 or 14 rounds
-	unsigned int ExtdCipherKeyLenghth = (Nr + 1) * stt_lng; // bytes in the expanded cipher key
+	// These variables allow to change the AES length
+	// Nk = 4, 6 or 8 for AES 128, 192 or 256 respectively
+	// Only set Nk and the rest will compute according to the AES specification
+	unsigned short Nk = 8; // 4 or 6 or 8 [32-bit words] columns in cipher key
+	unsigned short CipherKeyLenghth = Nk * rows; // bytes
+	unsigned short Nr = max(Nb, Nk) + 6; // = 10, 12 or 14 rounds
+	unsigned short ExtdCipherKeyLenghth = (Nr + 1) * stt_lng; // bytes in the expanded cipher key
 
 	cout << "AES with Nb = " << Nb << " columns, Nk = " << Nk
 			<< " (32-bit) words i.e. CipherKeyLenghth = " << CipherKeyLenghth
@@ -102,7 +105,7 @@ int main() {
 	// create a dummy test cipher key
 	unsigned char key[CipherKeyLenghth_max];
 	cout << "key = ";
-	for (unsigned int i = 0; i < CipherKeyLenghth; i++) {
+	for (unsigned short i = 0; i < CipherKeyLenghth; i++) {
 		key[i] = (unsigned char) i;
 		printf("0x%X ", key[i]);
 	}
@@ -112,7 +115,7 @@ int main() {
 	unsigned char expandedKey[ExtdCipherKeyLenghth_max];
 	KeyExpansion(key, Nk, expandedKey);
 	cout << "expandedKey = ";
-	for (unsigned int i = 0; i < ExtdCipherKeyLenghth; i++) {
+	for (unsigned short i = 0; i < ExtdCipherKeyLenghth; i++) {
 		printf("0x%X ", expandedKey[i]);
 	}
 	cout << endl << endl;
@@ -121,11 +124,11 @@ int main() {
 	unsigned char plaintext[stt_lng] = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
 			'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P' };
 	cout << "plaintext = ";
-	for (unsigned int i = 0; i < stt_lng; i++) {
+	for (unsigned short i = 0; i < stt_lng; i++) {
 		printf("%c ", plaintext[i]);
 	}
 	cout << " <=> ";
-	for (unsigned int i = 0; i < stt_lng; i++) {
+	for (unsigned short i = 0; i < stt_lng; i++) {
 		printf("%X ", plaintext[i]);
 	}
 	cout << endl << endl;
@@ -134,11 +137,11 @@ int main() {
 	unsigned char ciphertext[stt_lng];
 	AES_Encrypt(plaintext, expandedKey, Nr, ciphertext);
 	cout << "ciphertext = ";
-	for (unsigned int i = 0; i < stt_lng; i++) {
+	for (unsigned short i = 0; i < stt_lng; i++) {
 		printf("%X ", ciphertext[i]);
 	}
 	cout << " <=> ";
-	for (unsigned int i = 0; i < stt_lng; i++) {
+	for (unsigned short i = 0; i < stt_lng; i++) {
 		printf("%d ", ciphertext[i]);
 	}
 	cout << endl;
@@ -147,11 +150,11 @@ int main() {
 	unsigned char decrypted_plaintext[stt_lng];
 	AES_Decrypt(ciphertext, expandedKey, Nr, decrypted_plaintext);
 	cout << "decrypted_plaintext = ";
-	for (unsigned int i = 0; i < stt_lng; i++) {
+	for (unsigned short i = 0; i < stt_lng; i++) {
 		printf("%c ", decrypted_plaintext[i]);
 	}
 	cout << " <=> ";
-	for (unsigned int i = 0; i < stt_lng; i++) {
+	for (unsigned short i = 0; i < stt_lng; i++) {
 		printf("%X ", decrypted_plaintext[i]);
 	}
 	cout << endl << endl;

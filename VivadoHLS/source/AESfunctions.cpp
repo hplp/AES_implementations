@@ -3,14 +3,16 @@
 
 void SubBytes(unsigned char* state) {
 #pragma HLS inline off
-	for (unsigned int i = 0; i < stt_lng; i++) {
+	for (unsigned short i = 0; i < stt_lng; i++) {
+#pragma HLS unroll
 		state[i] = s_box[state[i]];
 	}
 }
 
 void InvSubBytes(unsigned char* state) {
 #pragma HLS inline off
-	for (unsigned int i = 0; i < stt_lng; i++) {
+	for (unsigned short i = 0; i < stt_lng; i++) {
+#pragma HLS unroll
 		state[i] = inverted_s_box[state[i]];
 	}
 }
@@ -37,7 +39,7 @@ void ShiftRows(unsigned char* state) {
 	tmp_state[13] = state[1];
 	tmp_state[14] = state[6];
 	tmp_state[15] = state[11];
-	for (unsigned int i = 0; i < stt_lng; i++) {
+	for (unsigned short i = 0; i < stt_lng; i++) {
 		state[i] = tmp_state[i];
 	}
 }
@@ -64,7 +66,7 @@ void InvShiftRows(unsigned char* state) {
 	tmp_state[13] = state[9];
 	tmp_state[14] = state[6];
 	tmp_state[15] = state[3];
-	for (unsigned int i = 0; i < stt_lng; i++) {
+	for (unsigned short i = 0; i < stt_lng; i++) {
 		state[i] = tmp_state[i];
 	}
 }
@@ -91,7 +93,7 @@ void MixColumns(unsigned char* state) {
 	tmp_state[13] = state[12] ^ mul02[state[13]] ^ mul03[state[14]] ^ state[15];
 	tmp_state[14] = state[12] ^ state[13] ^ mul02[state[14]] ^ mul03[state[15]];
 	tmp_state[15] = mul03[state[12]] ^ state[13] ^ state[14] ^ mul02[state[15]];
-	for (unsigned int i = 0; i < stt_lng; i++) {
+	for (unsigned short i = 0; i < stt_lng; i++) {
 		state[i] = tmp_state[i];
 	}
 }
@@ -134,22 +136,26 @@ void InvMixColumns(unsigned char* state) {
 			^ mul11[state[15]];
 	tmp_state[15] = mul11[state[12]] ^ mul13[state[13]] ^ mul09[state[14]]
 			^ mul14[state[15]];
-	for (unsigned int i = 0; i < stt_lng; i++) {
+	for (unsigned short i = 0; i < stt_lng; i++) {
 		state[i] = tmp_state[i];
 	}
 }
 
 void AddRoundKey(unsigned char* state, unsigned char* roundKey) {
 #pragma HLS inline off
-	for (unsigned int i = 0; i < stt_lng; i++) {
+	for (unsigned short i = 0; i < stt_lng; i++) {
+#pragma HLS unroll
 		state[i] ^= roundKey[i];
 	}
 }
 
 // Cipher
 void AES_Encrypt(unsigned char plaintext[stt_lng],
-		unsigned char expandedKey[ExtdCipherKeyLenghth_max], unsigned int Nr,
+		unsigned char expandedKey[ExtdCipherKeyLenghth_max], unsigned short Nr,
 		unsigned char ciphertext[stt_lng]) {
+#pragma HLS INTERFACE axis port=plaintext
+#pragma HLS INTERFACE axis port=expandedKey
+#pragma HLS INTERFACE axis port=ciphertext
 
 #pragma HLS inline region // will inline the functions unless inlining is off
 #pragma HLS allocation instances=AddRoundKey limit=1 function // ensure only one instance of AddRoundKey
@@ -157,16 +163,18 @@ void AES_Encrypt(unsigned char plaintext[stt_lng],
 #pragma HLS array_map variable=mul02 instance=cipher horizontal
 #pragma HLS array_map variable=mul03 instance=cipher horizontal
 
-	// Copy plaintext into state
+// Copy plaintext into state
 	unsigned char state[stt_lng];
-	for (unsigned int i = 0; i < stt_lng; i++) {
+	L_copy: for (unsigned short i = 0; i < stt_lng; i++) {
+#pragma HLS pipeline
 		state[i] = plaintext[i];
 	}
 
 	// Whitening
 	AddRoundKey(state, expandedKey + (stt_lng * 0)); // Round Key
 
-	for (unsigned int i = 0; i < Nr; i++) {
+	L_rounds: for (unsigned short i = 0; i < Nr; i++) {
+//#pragma HLS pipeline
 		SubBytes(state);
 		ShiftRows(state);
 		if (i != (Nr - 1)) {
@@ -176,15 +184,19 @@ void AES_Encrypt(unsigned char plaintext[stt_lng],
 	}
 
 	// Copy state to ciphertext
-	for (unsigned int i = 0; i < stt_lng; i++) {
+	for (unsigned short i = 0; i < stt_lng; i++) {
+#pragma HLS unroll
 		ciphertext[i] = state[i];
 	}
 }
 
 // Inverse Cipher
 void AES_Decrypt(unsigned char ciphertext[stt_lng],
-		unsigned char expandedKey[ExtdCipherKeyLenghth_max], unsigned int Nr,
+		unsigned char expandedKey[ExtdCipherKeyLenghth_max], unsigned short Nr,
 		unsigned char plaintext[stt_lng]) {
+#pragma HLS INTERFACE axis port=ciphertext
+#pragma HLS INTERFACE axis port=expandedKey
+#pragma HLS INTERFACE axis port=plaintext
 
 #pragma HLS inline region // will inline the functions unless inlining is off
 #pragma HLS allocation instances=AddRoundKey limit=1 function // ensure only one instance of AddRoundKey
@@ -196,13 +208,15 @@ void AES_Decrypt(unsigned char ciphertext[stt_lng],
 
 	// copy ciphertext into state
 	unsigned char state[stt_lng];
-	for (unsigned int i = 0; i < stt_lng; i++) {
+	L_copy: for (unsigned short i = 0; i < stt_lng; i++) {
+#pragma HLS pipeline
 		state[i] = ciphertext[i];
 	}
 
 	AddRoundKey(state, expandedKey + (stt_lng * Nr));  // Round Key
 
-	for (unsigned int i = 0; i < Nr; i++) {
+	L_rounds: for (unsigned short i = 0; i < Nr; i++) {
+//#pragma HLS pipeline
 		InvShiftRows(state);
 		InvSubBytes(state);
 		AddRoundKey(state, expandedKey + (stt_lng * (Nr - i - 1))); // Round Key
@@ -212,7 +226,8 @@ void AES_Decrypt(unsigned char ciphertext[stt_lng],
 	}
 
 	// Copy state to plaintext
-	for (unsigned int i = 0; i < stt_lng; i++) {
+	for (unsigned short i = 0; i < stt_lng; i++) {
+#pragma HLS unroll
 		plaintext[i] = state[i];
 	}
 }
