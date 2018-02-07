@@ -5,9 +5,9 @@
 ############################################################
 open_project cipher
 set_top AES_Encrypt
-add_files source/AESfunctions.cpp
-add_files source/AESfunctions.h
 add_files source/AEStables.h
+add_files source/AESfunctions.h
+add_files source/AESfunctions.cpp
 add_files -tb source/test_AES.cpp
 open_solution "aes_cipher"
 set_part {xc7z020clg400-1} -tool vivado
