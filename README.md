@@ -30,3 +30,7 @@ What's a Creel? YouTube channel has some great videos on explaining and implemen
 
 Link to the AES standard
 - https://csrc.nist.gov/csrc/media/publications/fips/197/final/documents/fips-197.pdf
+
+Altera's Advanced Synthesis Cookbook includes an AES 128/256 implementation
+- https://www.altera.com/content/dam/altera-www/global/en_US/pdfs/literature/manual/stx_cookbook.pdf
+- https://www.altera.com/literature/manual/cookbook.zip
