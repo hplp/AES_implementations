@@ -10,6 +10,7 @@ Nb = 4  # columns
 #             Nr = max(Nb, Nk)+6 = 10, 12 or 14 rounds
 Nk = 4  # 4 or 6 or 8 [32-bit words] columns in cipher key
 rows = 4
+stt_lng = Nb * rows  # state length
 CipherKeyLenghth = Nk * rows
 Nr = max(Nb, Nk) + 6  # = 10, 12 or 14 rounds
 print("AES with Nb =", Nb, "columns, Nk =", Nk, "(32-bit) words i.e. CipherKeyLenghth =",
@@ -32,9 +33,9 @@ message = "The quick brown fox jumps over the lazy dog."
 print("message: ", len(message), message)
 
 
-# Pad message with spaces to be integer chunks of 16 bytes
-if len(message) % 16:
-    message = message.ljust(len(message) + 16 - len(message) % 16, chr(0))
+# Pad message with spaces to be integer chunks of stt_lng bytes
+if len(message) % stt_lng:
+    message = message.ljust(len(message) + stt_lng - len(message) % stt_lng, chr(0))
 print("padded: ", len(message), message, "\n")
 
 
@@ -43,9 +44,9 @@ encrypted_message = [0] * len(message)
 index = 0
 while(message):
     encrypted_message[index:index +
-                      16] = AES_Encrypt(message[:16], expandedKey, Nr)
-    message = message[16:]
-    index = index + 16
+                      stt_lng] = AES_Encrypt(message[:stt_lng], expandedKey, Nr)
+    message = message[stt_lng:]
+    index = index + stt_lng
 print("encrypted: ", len(encrypted_message), encrypted_message)
 #encrypted_message_chr = "".join(chr(i) for i in encrypted_message)
 #print("ecr chars: ", len(encrypted_message_chr), encrypted_message_chr)
@@ -64,9 +65,9 @@ decrypted_message = [0] * len(encrypted_message)
 index = 0
 while(encrypted_message):
     decrypted_message[index:index +
-                      16] = AES_Decrypt(encrypted_message[:16], expandedKey, Nr)
-    encrypted_message = encrypted_message[16:]
-    index = index + 16
+                      stt_lng] = AES_Decrypt(encrypted_message[:stt_lng], expandedKey, Nr)
+    encrypted_message = encrypted_message[stt_lng:]
+    index = index + stt_lng
 print("decrypted: ", len(decrypted_message), decrypted_message)
 
 
