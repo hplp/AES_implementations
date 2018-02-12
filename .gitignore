@@ -140,6 +140,20 @@ VivadoHLS/inverse_cipher/aes_inverse_cipher/sim/
 VivadoHLS/inverse_cipher/aes_inverse_cipher/syn/
 VivadoHLS/inverse_cipher/vivado_hls.app
 
+VivadoHLS/aes_full/.apc/
+VivadoHLS/aes_full/.cproject
+VivadoHLS/aes_full/.project
+VivadoHLS/aes_full/.settings/
+VivadoHLS/aes_full/.vivado_hls_log_all.xml
+VivadoHLS/aes_full/full/.autopilot/
+VivadoHLS/aes_full/full/csim/
+VivadoHLS/aes_full/full/full.aps
+VivadoHLS/aes_full/full/full.directive
+VivadoHLS/aes_full/full/full_data.json
+VivadoHLS/aes_full/full/impl/
+VivadoHLS/aes_full/full/sim/
+VivadoHLS/aes_full/full/syn/
+VivadoHLS/aes_full/vivado_hls.app
 
 # scratch code
 

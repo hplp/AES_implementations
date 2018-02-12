@@ -231,3 +231,15 @@ void AES_Decrypt(unsigned char ciphertext[stt_lng],
 		plaintext[i] = state[i];
 	}
 }
+
+// AES Full
+void AES_Full(bool cipher, bool inverse_cipher, unsigned char data_in[stt_lng],
+		unsigned char expandedKey[ExtdCipherKeyLenghth_max], unsigned short Nr,
+		unsigned char data_out[stt_lng]) {
+	if (cipher) {
+		AES_Encrypt(data_in, expandedKey, Nr, data_out);
+	}
+	if (inverse_cipher) {
+		AES_Decrypt(data_in, expandedKey, Nr, data_out);
+	}
+}
