@@ -1,7 +1,8 @@
 #include "AESfunctions.h"
 #include "AEStables.h"
 
-void AES_Full(bool cipher, bool inverse_cipher, unsigned char data_in[stt_lng],
+void AES_Full(bool mode_cipher, bool mode_inverse_cipher,
+		unsigned char data_in[stt_lng],
 		unsigned char expandedKey[ExtdCipherKeyLenghth_max], unsigned short Nr,
 		unsigned char data_out[stt_lng]);
 
@@ -88,7 +89,7 @@ int main() {
 	// These variables allow to change the AES length
 	// Nk = 4, 6 or 8 for AES 128, 192 or 256 respectively
 	// Only set Nk and the rest will compute according to the AES specification
-	unsigned short Nk = 8; // 4 or 6 or 8 [32-bit words] columns in cipher key
+	unsigned short Nk = 4; // 4 or 6 or 8 [32-bit words] columns in cipher key
 	unsigned short CipherKeyLenghth = Nk * rows; // bytes
 	unsigned short Nr = max(Nb, Nk) + 6; // = 10, 12 or 14 rounds
 	unsigned short ExtdCipherKeyLenghth = (Nr + 1) * stt_lng; // bytes in the expanded cipher key

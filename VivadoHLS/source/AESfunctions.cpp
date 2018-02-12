@@ -166,7 +166,7 @@ void AES_Encrypt(unsigned char plaintext[stt_lng],
 // Copy plaintext into state
 	unsigned char state[stt_lng];
 	L_copy: for (unsigned short i = 0; i < stt_lng; i++) {
-#pragma HLS pipeline
+//#pragma HLS pipeline
 		state[i] = plaintext[i];
 	}
 
@@ -184,8 +184,8 @@ void AES_Encrypt(unsigned char plaintext[stt_lng],
 	}
 
 	// Copy state to ciphertext
-	for (unsigned short i = 0; i < stt_lng; i++) {
-#pragma HLS unroll
+	L_copy_o: for (unsigned short i = 0; i < stt_lng; i++) {
+//#pragma HLS unroll
 		ciphertext[i] = state[i];
 	}
 }
@@ -209,7 +209,7 @@ void AES_Decrypt(unsigned char ciphertext[stt_lng],
 	// copy ciphertext into state
 	unsigned char state[stt_lng];
 	L_copy: for (unsigned short i = 0; i < stt_lng; i++) {
-#pragma HLS pipeline
+//#pragma HLS pipeline
 		state[i] = ciphertext[i];
 	}
 
@@ -226,20 +226,25 @@ void AES_Decrypt(unsigned char ciphertext[stt_lng],
 	}
 
 	// Copy state to plaintext
-	for (unsigned short i = 0; i < stt_lng; i++) {
-#pragma HLS unroll
+	L_copy_o: for (unsigned short i = 0; i < stt_lng; i++) {
+//#pragma HLS unroll
 		plaintext[i] = state[i];
 	}
 }
 
 // AES Full
-void AES_Full(bool cipher, bool inverse_cipher, unsigned char data_in[stt_lng],
+void AES_Full(bool mode_cipher, bool mode_inverse_cipher,
+		unsigned char data_in[stt_lng],
 		unsigned char expandedKey[ExtdCipherKeyLenghth_max], unsigned short Nr,
 		unsigned char data_out[stt_lng]) {
-	if (cipher) {
+#pragma HLS INTERFACE axis port=data_in
+#pragma HLS INTERFACE axis port=expandedKey
+#pragma HLS INTERFACE axis port=data_out
+#pragma HLS inline region // will inline the functions unless inlining is off
+	if (mode_cipher) {
 		AES_Encrypt(data_in, expandedKey, Nr, data_out);
 	}
-	if (inverse_cipher) {
+	if (mode_inverse_cipher) {
 		AES_Decrypt(data_in, expandedKey, Nr, data_out);
 	}
 }
