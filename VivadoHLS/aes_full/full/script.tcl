@@ -5,9 +5,9 @@
 ############################################################
 open_project aes_full
 set_top AES_Full
-add_files source/AEStables.h
-add_files source/AESfunctions.h
 add_files source/AESfunctions.cpp
+add_files source/AESfunctions.h
+add_files source/AEStables.h
 add_files -tb source/test_AES_full.cpp
 open_solution "full"
 set_part {xc7z020clg400-1} -tool vivado
