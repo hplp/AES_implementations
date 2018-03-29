@@ -153,9 +153,11 @@ void AddRoundKey(unsigned char* state, unsigned char* roundKey) {
 void AES_Encrypt(unsigned char plaintext[stt_lng],
 		unsigned char expandedKey[ExtdCipherKeyLenghth_max], unsigned short Nr,
 		unsigned char ciphertext[stt_lng]) {
-#pragma HLS INTERFACE axis port=plaintext
-#pragma HLS INTERFACE axis port=expandedKey
-#pragma HLS INTERFACE axis port=ciphertext
+#pragma HLS INTERFACE s_axilite port=plaintext bundle=CRTLSc
+#pragma HLS INTERFACE s_axilite port=expandedKey bundle=CRTLSc
+#pragma HLS INTERFACE s_axilite port=Nr bundle=CRTLSc
+#pragma HLS INTERFACE s_axilite port=ciphertext bundle=CRTLSc
+#pragma HLS INTERFACe s_axilite port=return bundle=CRTLSc
 
 #pragma HLS inline region // will inline the functions unless inlining is off
 #pragma HLS allocation instances=AddRoundKey limit=1 function // ensure only one instance of AddRoundKey
@@ -194,9 +196,11 @@ void AES_Encrypt(unsigned char plaintext[stt_lng],
 void AES_Decrypt(unsigned char ciphertext[stt_lng],
 		unsigned char expandedKey[ExtdCipherKeyLenghth_max], unsigned short Nr,
 		unsigned char plaintext[stt_lng]) {
-#pragma HLS INTERFACE axis port=ciphertext
-#pragma HLS INTERFACE axis port=expandedKey
-#pragma HLS INTERFACE axis port=plaintext
+#pragma HLS INTERFACE s_axilite port=ciphertext bundle=CRTLSic
+#pragma HLS INTERFACE s_axilite port=expandedKey bundle=CRTLSic
+#pragma HLS INTERFACE s_axilite port=Nr bundle=CRTLSic
+#pragma HLS INTERFACE s_axilite port=plaintext bundle=CRTLSic
+#pragma HLS INTERFACe s_axilite port=return bundle=CRTLSic
 
 #pragma HLS inline region // will inline the functions unless inlining is off
 #pragma HLS allocation instances=AddRoundKey limit=1 function // ensure only one instance of AddRoundKey
@@ -237,9 +241,14 @@ void AES_Full(bool mode_cipher, bool mode_inverse_cipher,
 		unsigned char data_in[stt_lng],
 		unsigned char expandedKey[ExtdCipherKeyLenghth_max], unsigned short Nr,
 		unsigned char data_out[stt_lng]) {
-#pragma HLS INTERFACE axis port=data_in
-#pragma HLS INTERFACE axis port=expandedKey
-#pragma HLS INTERFACE axis port=data_out
+#pragma HLS INTERFACE s_axilite port=mode_cipher bundle=CRTLS
+#pragma HLS INTERFACE s_axilite port=mode_inverse_cipher bundle=CRTLS
+#pragma HLS INTERFACE s_axilite port=data_in bundle=CRTLS
+#pragma HLS INTERFACE s_axilite port=expandedKey bundle=CRTLS
+#pragma HLS INTERFACE s_axilite port=Nr bundle=CRTLS
+#pragma HLS INTERFACE s_axilite port=data_out bundle=CRTLS
+#pragma HLS INTERFACe s_axilite port=return bundle=CRTLS
+
 #pragma HLS inline region // will inline the functions unless inlining is off
 	if (mode_cipher) {
 		AES_Encrypt(data_in, expandedKey, Nr, data_out);

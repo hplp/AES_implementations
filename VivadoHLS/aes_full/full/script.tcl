@@ -10,8 +10,8 @@ add_files source/AESfunctions.h
 add_files source/AEStables.h
 add_files -tb source/test_AES_full.cpp
 open_solution "full"
-set_part {xc7z020clg400-1} -tool vivado
-create_clock -period 2.43 -name default
+set_part {xc7z020clg400-1}
+create_clock -period 10 -name default
 set_clock_uncertainty 0
 #source "./aes_full/full/directives.tcl"
 csim_design -clean
