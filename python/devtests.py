@@ -1,11 +1,16 @@
 from AESfunctions import *
 
-state = [0x32, 0x43, 0xf6, 0xa8, 0x88, 0x5a, 0x30, 0x8d,
-         0x31, 0x31, 0x98, 0xa2, 0xe0, 0x37, 0x07, 0x34]
-state = [137, 237, 94, 106, 5, 202, 118, 51,
-         129, 53, 8, 95, 226, 28, 64, 189]
-roundkey = [0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
-            0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f]
+
+def tohex(state):
+    stateHex = [0] * 16
+    for i in range(16):
+        stateHex[i] = hex(state[i])
+    return stateHex
+
+
+#state = [0x32, 0x43, 0xf6, 0xa8, 0x88, 0x5a, 0x30, 0x8d, 0x31, 0x31, 0x98, 0xa2, 0xe0, 0x37, 0x07, 0x34]
+#state = [137, 237, 94, 106, 5, 202, 118, 51, 129, 53, 8, 95, 226, 28, 64, 189]
+#roundkey = [0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f]
 #print("original: ", state)
 #print("roundkey: ", roundkey)
 
@@ -17,28 +22,28 @@ roundkey = [0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
 # for i in range(16): roundkeyHex[i]=hex(roundkey[i])
 # print("roundHex: ",roundkeyHex,"\n")
 
-# stateSbB = SubBytes(state)
-# print("afterSbB: ", stateSbB, "\n")
+state = [0x32, 0x43, 0xf6, 0xa8, 0x88, 0x5a, 0x30, 0x8d, 0x31, 0x31, 0x98, 0xa2, 0xe0, 0x37, 0x07, 0x34]
+print("original: ", tohex(state), "\n")
 
-# stateiSbB = InvSubBytes(state)
-# print("afteriSbB: ", stateiSbB, "\n")
+state = [0x32, 0x43, 0xf6, 0xa8, 0x88, 0x5a, 0x30, 0x8d, 0x31, 0x31, 0x98, 0xa2, 0xe0, 0x37, 0x07, 0x34]
+print("afterSbB: ", tohex(SubBytes(state)))
+state = [0x32, 0x43, 0xf6, 0xa8, 0x88, 0x5a, 0x30, 0x8d, 0x31, 0x31, 0x98, 0xa2, 0xe0, 0x37, 0x07, 0x34]
+print("afteriSbB: ", tohex(InvSubBytes(state)), "\n")
 
-# stateSR = ShiftRows(state)
-# print("afterShR: ", stateSR)
+state = [0x32, 0x43, 0xf6, 0xa8, 0x88, 0x5a, 0x30, 0x8d, 0x31, 0x31, 0x98, 0xa2, 0xe0, 0x37, 0x07, 0x34]
+print("afterShR: ", tohex(ShiftRows(state)))
+state = [0x32, 0x43, 0xf6, 0xa8, 0x88, 0x5a, 0x30, 0x8d, 0x31, 0x31, 0x98, 0xa2, 0xe0, 0x37, 0x07, 0x34]
+print("afteriShR: ", tohex(InvShiftRows(state)), "\n")
 
-# stateiSR = InvShiftRows(state)
-# print("afteriShR: ", stateiSR)
-
-# stateMC = MixColumns(state)
-# print("afterMxC: ", stateMC)
-
-# stateiMC = InvMixColumns(state)
-# print("afteriMxC: ", stateiMC)
+state = [0x32, 0x43, 0xf6, 0xa8, 0x88, 0x5a, 0x30, 0x8d, 0x31, 0x31, 0x98, 0xa2, 0xe0, 0x37, 0x07, 0x34]
+print("afterMxC: ", tohex(MixColumns(state)))
+state = [0x32, 0x43, 0xf6, 0xa8, 0x88, 0x5a, 0x30, 0x8d, 0x31, 0x31, 0x98, 0xa2, 0xe0, 0x37, 0x07, 0x34]
+print("afteriMxC: ", tohex(InvMixColumns(state)), "\n")
 
 # stateARK = AddRoundKey(state, roundkey)
 # print("afterARK: ", stateARK)
 
-expandedKey = KeyExpansion(roundkey, 4)
+#expandedKey = KeyExpansion(roundkey, 4)
 # ij_roundKeyHex = [0] * 16
 # for i in range(11):
 #    for j in range(16):
@@ -62,18 +67,17 @@ expandedKey = KeyExpansion(roundkey, 4)
 #        (i + 1) * stt_lng:(i + 2) * stt_lng])
 #    print("state: ", i + 1, state)
 
-state = AddRoundKey(state, expandedKey[10 * stt_lng:(10 + 1) * stt_lng])
-print("state: ", 0, state)
+#state = AddRoundKey(state, expandedKey[10 * stt_lng:(10 + 1) * stt_lng])
+#print("state: ", 0, state)
 
-for i in range(10):
-    state = InvShiftRows(state)
-    state = InvSubBytes(state)
-    state = AddRoundKey(state, expandedKey[
-        (10 - i - 1) * stt_lng:(10 - i) * stt_lng])
-    # Skip InvMixColumns in final round
-    if(i != (10 - 1)):
-        state = InvMixColumns(state)
-    print("state: ", i + 1, state)
+# for i in range(10):
+#    state = InvShiftRows(state)
+#    state = InvSubBytes(state)
+#    state = AddRoundKey(state, expandedKey[(10 - i - 1) * stt_lng:(10 - i) * stt_lng])
+# Skip InvMixColumns in final round
+#    if(i != (10 - 1)):
+#        state = InvMixColumns(state)
+#    print("state: ", i + 1, state)
 
 #state = AddRoundKey(state, roundkey)
 #state = SubBytes(state)

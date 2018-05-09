@@ -105,8 +105,11 @@ MVS_Python/
 cpp/.vs/
 cpp/Debug/
 
-# PyRTL
-PyRTL/
+# PyCharm
+.idea/
+
+# python scratch dev tests
+python/devtests.py
 
 #VivadoHLS
 VivadoHLS/cipher/.apc/
