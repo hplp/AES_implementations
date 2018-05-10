@@ -1,8 +1,7 @@
+from pyrtl import *
+
 import random
 import io
-
-import pyrtl
-from pyrtl import *
 
 # start with empty working block
 reset_working_block()
@@ -53,5 +52,5 @@ with io.StringIO() as vfile:
 
 print("// Output Verilog Testbench:")
 with io.StringIO() as tbfile:
-    pyrtl.output_verilog_testbench(dest_file=tbfile, simulation_trace=sim_trace)
+    output_verilog_testbench(dest_file=tbfile, simulation_trace=sim_trace)
     print(tbfile.getvalue())

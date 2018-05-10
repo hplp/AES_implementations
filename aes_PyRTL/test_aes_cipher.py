@@ -1,28 +1,35 @@
 import pyrtl
 import io
+
+# inport AES class
 from AES import *
 
-
+# start with empty working block
 pyrtl.reset_working_block()
+
+# create aes object instance and invoke describe
 aes = AES()
 aes.describe()
 
+# declare cipher inputs
+plaintext = pyrtl.Input(bitwidth=128, name='plaintext')
+key = pyrtl.Input(bitwidth=128, name='key')
+cipher_start = pyrtl.Input(bitwidth=1, name='cipher_start')
 
-aes_plaintext = pyrtl.Input(bitwidth=128, name='aes_plaintext')
-aes_key = pyrtl.Input(bitwidth=128, name='aes_key')
-aes_cipher_start = pyrtl.Input(1, name='aes_cipher_start')
+# declare cipher outputs
+ciphertext = pyrtl.Output(bitwidth=128, name='ciphertext')
+cipher_ready = pyrtl.Output(bitwidth=1, name='cipher_ready')
 
-aes_ciphertext = pyrtl.Output(bitwidth=128, name='aes_ciphertext')
-aes_cipher_ready = pyrtl.Output(1, name='aes_cipher_ready')
+# invoke aes cipher_m
+ciphertext_out, cipher_ready_out = aes.cipher_round(plaintext, key, cipher_start)
 
-aes_cipher_ready_out, aes_ciphertext_out = aes.cipher_m(aes_plaintext, aes_key, aes_cipher_start)
+# connect outputs
+ciphertext <<= ciphertext_out
+cipher_ready <<= cipher_ready_out
 
-#aes_cipher_ready <<= aes_cipher_ready_out
-#aes_ciphertext <<= aes_ciphertext_out
-
-#print(pyrtl.working_block())
-#pyrtl.synthesize()
-#pyrtl.optimize()
+# print(pyrtl.working_block())
+# pyrtl.synthesize()
+# pyrtl.optimize()
 #f = open("aes_ec.v", "w")
 # with io.StringIO() as vfile:
 #    pyrtl.OutputToVerilog(vfile)

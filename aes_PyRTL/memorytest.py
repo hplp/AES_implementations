@@ -1,8 +1,6 @@
-import random
-import io
-
-import pyrtl
 from pyrtl import *
+
+import io
 
 # start with empty working block
 reset_working_block()
@@ -36,8 +34,8 @@ simulation_values = {
 memory_init = {addr: 0 for addr in range(256)}
 memory_values = {memory: memory_init}
 
-sim_trace = pyrtl.SimulationTrace()
-sim = pyrtl.Simulation(tracer=sim_trace, memory_value_map=memory_values)
+sim_trace = SimulationTrace()
+sim = Simulation(tracer=sim_trace, memory_value_map=memory_values)
 for cycle in range(len(simulation_values['write_enable'])):
     sim.step({k: int(v[cycle]) for k, v in simulation_values.items()})
 sim_trace.render_trace()
@@ -53,5 +51,5 @@ with io.StringIO() as vfile:
 
 print("// Output Verilog Testbench:")
 with io.StringIO() as tbfile:
-    pyrtl.output_verilog_testbench(dest_file=tbfile, simulation_trace=sim_trace)
+    output_verilog_testbench(dest_file=tbfile, simulation_trace=sim_trace)
     print(tbfile.getvalue())

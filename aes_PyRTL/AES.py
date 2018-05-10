@@ -15,7 +15,6 @@ See the file test_aes.py for a usage example
 
 from __future__ import division, absolute_import
 import pyrtl
-import io
 from pyrtl.rtllib import libutils
 
 
@@ -32,14 +31,15 @@ class AES(object):
     # AES can use 128, 192, or 256 bit cipher keys
     #             16,  24,  or 32 byte cipher keys
     #             Nk = 4, 6 or 8 [32-bit words] columns in cipher key
-    #             Nr = max(Nb, Nk)+6 = 10, 12 or 14 rounds
+    #             Nr = max(Nb, Nk) + 6 = 10, 12 or 14 rounds
     def __init__(self):
         self.memories_built = False  # memories not yet built
         self.Nb = 4  # number of columns in state (in this standard)
         self.rows = 4  # number of rows
-        self.StateLength = self.Nb * self.rows  # state length
+        self.StateLength = self.Nb * self.rows  # state length in bytes
+        self.StateLengthBits = self.Nb * self.rows * 8  # state length in bits
         self.Nk = 4  # 4 or 6 or 8 [32-bit words] columns in cipher key
-        self.KeyLength = self.Nk * self.rows  # key length
+        self.KeyLength = self.Nk * self.rows  # key length in bytes
         self.KeyLengthBits = self.Nk * self.rows * 8  # key length in bits
         self.Nr = max(self.Nb, self.Nk) + 6  # = 10, 12 or 14 rounds
 
@@ -47,28 +47,32 @@ class AES(object):
         print("AES with Nb = %d columns, Nk = %d (32-bit) words i.e. KeyLenghth = %d bytes (or %d bits), Nr = %d rounds" %
               (self.Nb, self.Nk, self.KeyLength, self.KeyLengthBits, self.Nr))
 
-    def cipher_m(self, plaintext_in, key_in, start):
+    def cipher_round(self, plaintext_in, key_in, start):
         """
         AES Cipher executing one round per clock cycle
         """
+
+        # check that the inputs are of the right length
         if len(key_in) != self.KeyLengthBits:
-            raise pyrtl.PyrtlError(
-                "AES key lenghth is incorrect! " + str(self.KeyLengthBits) + "!=" + str(len(key_in)))
-        if len(plaintext_in) != (self.StateLength * 8):
-            raise pyrtl.PyrtlError(
-                "AES plaintext lenghth is incorrect! " + str(self.StateLength * 8) + "!=" + str(len(plaintext_in)))
+            raise pyrtl.PyrtlError("AES key lenghth is incorrect! " +
+                                   str(self.KeyLengthBits) + " != " + str(len(key_in)))
+        if len(plaintext_in) != (self.StateLengthBits):
+            raise pyrtl.PyrtlError("AES plaintext lenghth is incorrect! " +
+                                   str(self.StateLengthBits) + " != " + str(len(plaintext_in)))
 
-        state = (pyrtl.Register(self.StateLength * 8))
-
+        # create state and key registers
+        state = (pyrtl.Register(self.StateLengthBits))
         key = (pyrtl.Register(self.KeyLengthBits))
-        key_exp_in, add_round_in = (pyrtl.WireVector(
-            self.StateLength * 8) for i in range(2))
 
+        # two StateLengthBits-wide WireVectors
+        key_exp_in, add_round_in = (pyrtl.WireVector(self.StateLengthBits) for i in range(2))
+
+        # count rounds logic
         counter = pyrtl.Register(4, 'counter')
         round = pyrtl.WireVector(4, 'round')
-
         counter.next <<= round
 
+        # connect aes methods
         sub_out = self._sub_bytes(state)
         shift_out = self._shift_rows(sub_out)
         mix_out = self._mix_columns(shift_out)
@@ -97,7 +101,7 @@ class AES(object):
                     add_round_in |= mix_out
 
         ready = (counter == self.Nr)
-        return ready, state
+        return state, ready
 
     def _key_gen(self, key):
         keys = [key]
@@ -137,20 +141,20 @@ class AES(object):
         return pyrtl.concat_list(subbed)
 
     @staticmethod
-    def _inv_shift_rows(in_vector):
-        a = libutils.partition_wire(in_vector, 8)
-        return pyrtl.concat_list((a[12], a[9],  a[6],  a[3],
-                                  a[0],  a[13], a[10], a[7],
-                                  a[4],  a[1],  a[14], a[11],
-                                  a[8],  a[5],  a[2],  a[15]))
-
-    @staticmethod
     def _shift_rows(in_vector):
         a = libutils.partition_wire(in_vector, 8)
         return pyrtl.concat_list((a[4], a[9], a[14], a[3],
                                   a[8], a[13], a[2], a[7],
                                   a[12], a[1], a[6], a[11],
                                   a[0], a[5], a[10], a[15]))
+
+    @staticmethod
+    def _inv_shift_rows(in_vector):
+        a = libutils.partition_wire(in_vector, 8)
+        return pyrtl.concat_list((a[12], a[9],  a[6],  a[3],
+                                  a[0],  a[13], a[10], a[7],
+                                  a[4],  a[1],  a[14], a[11],
+                                  a[8],  a[5],  a[2],  a[15]))
 
     def _galois_mult(self, c, mult_table):
         if mult_table == 1:
@@ -183,7 +187,7 @@ class AES(object):
 
     def _build_memories(self):
         def build_mem(data):
-            return pyrtl.RomBlock(bitwidth=8, addrwidth=8, romdata=data, build_new_roms=True, asynchronous=True)
+            return pyrtl.RomBlock(bitwidth=8, addrwidth=8, romdata=data, build_new_roms=True, asynchronous=False)
 
         self.sbox = build_mem(self._sbox_data)
         self.inv_sbox = build_mem(self._inv_sbox_data)

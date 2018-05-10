@@ -108,6 +108,15 @@ cpp/Debug/
 # PyCharm
 .idea/
 
+# PyRTL
+aes_PyRTL/RTL.v
+aes_PyRTL/Testbench.v
+aes_PyRTL/work/
+aes_PyRTL/waveform.vcd
+aes_PyRTL/vsim.wlf
+aes_PyRTL/sim_aes_PyRTL.cr.mti
+aes_PyRTL/sim_aes_PyRTL.mpf
+
 # python scratch dev tests
 python/devtests.py
 
@@ -157,6 +166,3 @@ VivadoHLS/aes_full/full/impl/
 VivadoHLS/aes_full/full/sim/
 VivadoHLS/aes_full/full/syn/
 VivadoHLS/aes_full/vivado_hls.app
-
-# scratch code
-
