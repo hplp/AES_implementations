@@ -109,13 +109,7 @@ cpp/Debug/
 .idea/
 
 # PyRTL
-aes_PyRTL/RTL.v
-aes_PyRTL/Testbench.v
-aes_PyRTL/work/
-aes_PyRTL/waveform.vcd
-aes_PyRTL/vsim.wlf
-aes_PyRTL/sim_aes_PyRTL.cr.mti
-aes_PyRTL/sim_aes_PyRTL.mpf
+aes_PyRTL/sim/
 
 # python scratch dev tests
 python/devtests.py
