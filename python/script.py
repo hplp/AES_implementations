@@ -8,7 +8,7 @@ Nb = 4  # columns
 #             16,  24,  or 32 byte cipher keys
 #             Nk = 4, 6 or 8 [32-bit words] columns in cipher key
 #             Nr = max(Nb, Nk)+6 = 10, 12 or 14 rounds
-Nk = 4  # 4 or 6 or 8 [32-bit words] columns in cipher key
+Nk = 8  # 4 or 6 or 8 [32-bit words] columns in cipher key
 rows = 4
 stt_lng = Nb * rows  # state length
 CipherKeyLenghth = Nk * rows
@@ -26,6 +26,12 @@ print("key: ", len(key), key)
 # Expand key
 expandedKey = KeyExpansion(key, Nk)
 print("expkey: ", len(expandedKey), expandedKey, "\n")
+expandedKey_hex = [0] * len(expandedKey)
+index = 0
+for v in expandedKey:
+    expandedKey_hex[index] = hex(v)
+    index = index + 1
+print("expkey HEX: ", len(expandedKey_hex), expandedKey_hex, "\n")
 
 
 # Create a test input data (plaintext)

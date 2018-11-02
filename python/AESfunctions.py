@@ -17,11 +17,6 @@ def KeyExpansion(inputKey, Nk):
         in4[1] = s_box[in4[2]]
         in4[2] = s_box[in4[3]]
         in4[3] = s_box[t]
-        # SubWord substitutes with S-Box value
-        # in4[0] = s_box[in4[0]]
-        # in4[1] = s_box[in4[1]]
-        # in4[2] = s_box[in4[2]]
-        # in4[3] = s_box[in4[3]]
         # RCon (round constant) 1st byte XOR rcon
         in4[0] = in4[0] ^ rcon[i]
         # Return KeyExpansionCore
@@ -199,7 +194,7 @@ def AES_Encrypt(message, expandedKey, Nr):  # Cipher
     state = [0] * stt_lng
     # Convert chars to HEX (INT) using ASCII
     for i in range(stt_lng):
-        state[i] = ord(message[i])
+        state[i] = message[i]
 
     # Whitening with round key
     state = AddRoundKey(state, expandedKey[0:(stt_lng)])
