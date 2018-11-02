@@ -1,12 +1,13 @@
-# AES_code
-Flexible AES 128, 192, and 256 implementations
+# AES implementations
+Flexible AES 128, 192, and 256 implementations in Python, C++, Vivado HLS, chisel and PyRTL
 
 ## Goals of this work:
 - provide a Python and C/C++ implementation - OK
-- provide a Vivado HLS implementation - to do
+- provide a Vivado HLS implementation - OK
 - provide a chisel implementation - OK
 - provide a rocket-chip RoCC accelerator - starting
 - provide custom RISC-V instructions - to do
+- provide a PyRTL implementation - started
 - propose a dual-clock acceleration - to do
 
 ## Python implementation details
