@@ -1,22 +1,23 @@
 # AES implementations
-Flexible AES 128, 192, and 256 implementations in Python, C++, Vivado HLS, chisel and PyRTL
+Flexible AES 128, 192, and 256 implementations in Python, C++, Vivado HLS, Chisel and PyRTL, and Verilog
 
 ## Goals of this work:
 - provide a Python and C/C++ implementation - OK
 - provide a Vivado HLS implementation - OK
-- provide a chisel implementation - OK
+- provide a Chisel implementation - OK
 - provide a rocket-chip RoCC accelerator - starting
 - provide custom RISC-V instructions - to do
 - provide a PyRTL implementation - started
 - propose a dual-clock acceleration - to do
+- provide a Verilog implementation - OK
 
 ## Python implementation details
-- script.py contains the test run of the cipher and inverse cipher
-- AESfunctions.py contains the implementation of each of the AES subroutines as well as the Cipher and the Inverse Cipher
-- AEStables.py contains all the AES tables data
-- devtests.py can be used as a further scratch-test area
-- This is a functional implementation of AES (TODO: OOP version)
-- Fully parametrizable for all AES versions (128, 192, 256) and other parameters 
+- `script.py` contains the test run of the cipher and inverse cipher
+- `AESfunctions.py` contains the implementation of each of the AES subroutines as well as the Cipher and the Inverse Cipher
+- `AEStables.py` contains all the AES tables data
+- `devtests.py` can be used as a further scratch-test area
+- this is a functional implementation of AES (TODO: OOP version)
+- fully parametrizable for all AES versions (128, 192, 256) and other parameters 
 - tested in Sublime Text on Windows 10 with Python 3.6 (64-bit)
 
 ## C++ implementation details
