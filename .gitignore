@@ -100,10 +100,11 @@ ENV/
 # mypy
 .mypy_cache/
 
-# Microsoft Visual Studio project
+# Microsoft Visual Studio project / VS Code
 MVS_Python/
 cpp/.vs/
 cpp/Debug/
+.vscode/
 
 # PyCharm
 .idea/
@@ -113,6 +114,12 @@ aes_PyRTL/sim/
 
 # python scratch dev tests
 python/devtests.py
+
+# Quartus II and Vivado projects for Verilog
+QS128
+VivadoSynthesis128
+VivadoSynthesis192
+VivadoSynthesis256
 
 #VivadoHLS
 VivadoHLS/cipher/.apc/
