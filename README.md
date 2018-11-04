@@ -23,6 +23,9 @@ Flexible AES 128, 192, and 256 implementations in Python, C++, Vivado HLS, chise
 - supports AES 128, 192 and 256 by allocating memory to accomodate all versions
 - tested in Microsoft Visual Studio
 
+## Verilog implementation details
+The Verilog implementation provided here is the same exact implementation from Altera's Advanced Synthesis Cookbook, only with the `stratixii_lcell_comb` replaced with a bitwise XOR (`^` in Verilog).
+
 ## Useful links:
 
 What's a Creel? YouTube channel has some great videos on explaining and implementing AES
