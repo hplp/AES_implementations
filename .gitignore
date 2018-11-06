@@ -115,8 +115,10 @@ aes_PyRTL/sim/
 # python scratch dev tests
 python/devtests.py
 
-# Quartus II and Vivado projects for Verilog
+# Quartus II / ModelSim / Vivado projects for Verilog
 QS128
+QS256
+ModelSim
 VivadoSynthesis128
 VivadoSynthesis192
 VivadoSynthesis256
