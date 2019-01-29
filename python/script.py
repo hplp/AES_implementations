@@ -8,13 +8,14 @@ Nb = 4  # columns
 #             16,  24,  or 32 byte cipher keys
 #             Nk = 4, 6 or 8 [32-bit words] columns in cipher key
 #             Nr = max(Nb, Nk)+6 = 10, 12 or 14 rounds
-Nk = 8  # 4 or 6 or 8 [32-bit words] columns in cipher key
+Nk = 4  # 4 or 6 or 8 [32-bit words] columns in cipher key
 rows = 4
 stt_lng = Nb * rows  # state length
 CipherKeyLenghth = Nk * rows
 Nr = max(Nb, Nk) + 6  # = 10, 12 or 14 rounds
 print("AES with Nb =", Nb, "columns, Nk =", Nk, "(32-bit) words i.e. CipherKeyLenghth =",
       CipherKeyLenghth, "bytes (or", CipherKeyLenghth * 8, "bits), Nr =", Nr, "rounds \n")
+
 
 # Create a dummy test cipher key
 key = [0] * CipherKeyLenghth
@@ -35,7 +36,7 @@ print("expkey HEX: ", len(expandedKey_hex), expandedKey_hex, "\n")
 
 
 # Create a test input data (plaintext)
-message = "The quick brown fox jumps over the lazy dog."
+message = "Hello, World! This text is an expensive, important secret."
 print("message: ", len(message), message)
 
 
@@ -45,19 +46,25 @@ if len(message) % stt_lng:
 print("padded: ", len(message), message, "\n")
 
 
+# Use ord to convert to number values, Unicode, ASCII-like
+ord_message = [0] * len(message)
+for i in range(len(message)):
+    ord_message[i] = ord(message[i])
+message = ord_message
+print("unicode: ", len(message), message, "\n")
+
+
 # Ciphertext
 encrypted_message = [0] * len(message)
 index = 0
 while(message):
-    encrypted_message[index:index +
-                      stt_lng] = AES_Encrypt(message[:stt_lng], expandedKey, Nr)
+    encrypted_message[index:index + stt_lng] = AES_Encrypt(message[:stt_lng], expandedKey, Nr)
     message = message[stt_lng:]
     index = index + stt_lng
-print("encrypted: ", len(encrypted_message), encrypted_message)
+print("encrypted: ", len(encrypted_message), encrypted_message, "\n")
 #encrypted_message_chr = "".join(chr(i) for i in encrypted_message)
-#print("ecr chars: ", len(encrypted_message_chr), encrypted_message_chr)
-
-
+#print("ecr chars: ", len(encrypted_message_chr), "\n")
+#print(encrypted_message_chr, "\n")
 encrypted_message_hex = [0] * len(encrypted_message)
 index = 0
 for v in encrypted_message:

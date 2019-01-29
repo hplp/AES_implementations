@@ -190,14 +190,11 @@ def AddRoundKey(state, roundKey):
     return state
 
 
-def AES_Encrypt(message, expandedKey, Nr):  # Cipher
+def AES_Encrypt(plaintext, expandedKey, Nr):  # Cipher
     state = [0] * stt_lng
-    # Convert chars to HEX (INT) using ASCII
-    for i in range(stt_lng):
-        state[i] = message[i]
 
     # Whitening with round key
-    state = AddRoundKey(state, expandedKey[0:(stt_lng)])
+    state = AddRoundKey(plaintext, expandedKey[0:(stt_lng)])
 
     # Rounds
     for i in range(Nr):
@@ -213,8 +210,8 @@ def AES_Encrypt(message, expandedKey, Nr):  # Cipher
     return state
 
 
-def AES_Decrypt(encrypted_message, expandedKey, Nr):  # Inverse Cipher
-    state = encrypted_message
+def AES_Decrypt(ciphertext, expandedKey, Nr):  # Inverse Cipher
+    state = ciphertext
 
     # Whitening with round key
     state = AddRoundKey(state, expandedKey[Nr * stt_lng:(Nr + 1) * stt_lng])
