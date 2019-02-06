@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "AESfunctions.h"
 
 int main()
@@ -17,7 +16,7 @@ int main()
     cout << "key = ";
     for (unsigned int i = 0; i < CipherKeyLenghth; i++) {
         key[i] = (unsigned char)i;
-        printf("0x%X ", key[i]);
+        cout << "0x" << hex << (unsigned int)key[i] << " ";
     } cout << endl << endl;
 
 
@@ -25,16 +24,18 @@ int main()
     unsigned char expandedKey[ExtdCipherKeyLenghth_max];
     KeyExpansion(key, Nk, expandedKey);
     cout << "expandedKey = ";
-    for (unsigned int i = 0; i < ExtdCipherKeyLenghth; i++) { printf("0x%X ", expandedKey[i]); }
+    for (unsigned int i = 0; i < ExtdCipherKeyLenghth; i++) { cout << dec << (unsigned int)expandedKey[i] << " "; }
+    cout << "<=> ";
+    for (unsigned int i = 0; i < ExtdCipherKeyLenghth; i++) { cout << "0x" << hex << (unsigned int)expandedKey[i] << " "; }
     cout << endl << endl;
 
 
     // create a test input data (plaintext) (ABCDEFGHIJKLMNOP)
     unsigned char plaintext[stt_lng] = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P' };
     cout << "plaintext = ";
-    for (unsigned int i = 0; i < stt_lng; i++) { printf("%c ", plaintext[i]); }
-    cout << " <=> ";
-    for (unsigned int i = 0; i < stt_lng; i++) { printf("%X ", plaintext[i]); }
+    for (unsigned int i = 0; i < stt_lng; i++) { cout << plaintext[i] << " "; }
+    cout << "<=> ";
+    for (unsigned int i = 0; i < stt_lng; i++) { cout << "0x" << hex << (unsigned int)plaintext[i] << " "; }
     cout << endl << endl;
 
 
@@ -42,19 +43,19 @@ int main()
     unsigned char ciphertext[stt_lng];
     AES_Encrypt(plaintext, expandedKey, Nr, ciphertext);
     cout << "ciphertext = ";
-    for (unsigned int i = 0; i < stt_lng; i++) { printf("%X ", ciphertext[i]); }
-    cout << " <=> ";
-    for (unsigned int i = 0; i < stt_lng; i++) { printf("%d ", ciphertext[i]); }
-    cout << endl;
+    for (unsigned int i = 0; i < stt_lng; i++) { cout << dec << (unsigned int)ciphertext[i] << " "; }
+    cout << "<=> ";
+    for (unsigned int i = 0; i < stt_lng; i++) { cout << "0x" << hex << (unsigned int)ciphertext[i] << " "; }
+    cout << endl << endl;
 
 
     // decrypt
     unsigned char decrypted_plaintext[stt_lng];
     AES_Decrypt(ciphertext, expandedKey, Nr, decrypted_plaintext);
     cout << "decrypted_plaintext = ";
-    for (unsigned int i = 0; i < stt_lng; i++) { printf("%c ", decrypted_plaintext[i]); }
-    cout << " <=> ";
-    for (unsigned int i = 0; i < stt_lng; i++) { printf("%X ", decrypted_plaintext[i]); }
+    for (unsigned int i = 0; i < stt_lng; i++) { cout << decrypted_plaintext[i] << " "; }
+    cout << "<=> ";
+    for (unsigned int i = 0; i < stt_lng; i++) { cout << "0x" << hex << (unsigned int)decrypted_plaintext[i] << " "; }
     cout << endl << endl;
 
     return 0;
@@ -110,7 +111,7 @@ unsigned char key[CipherKeyLenghth_max] =
     0x2d, 0x98, 0x10, 0xa3, 0x09, 0x14, 0xdf, 0xf4
 };
 
-// Appendix B – Cipher Example
+// Appendix B ï¿½ Cipher Example
 unsigned char plaintext[stt_lng] = { 0x32, 0x43, 0xf6, 0xa8, 0x88, 0x5a, 0x30, 0x8d, 0x31, 0x31, 0x98, 0xa2, 0xe0, 0x37, 0x07, 0x34 };
 
 // C.1 AES-128 (Nk=4, Nr=10)

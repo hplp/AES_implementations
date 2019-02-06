@@ -1,6 +1,5 @@
 // https://en.wikipedia.org/wiki/Advanced_Encryption_Standard
 
-#include "stdafx.h"
 #include "AESfunctions.h"
 #include "AEStables.h"
 
