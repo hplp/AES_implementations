@@ -123,6 +123,10 @@ VivadoSynthesis128
 VivadoSynthesis192
 VivadoSynthesis256
 
+# Chisel
+aes_chisel/test_run_dir128/
+aes_chisel/test_run_dir256/
+
 #VivadoHLS
 VivadoHLS/cipher/.apc/
 VivadoHLS/cipher/.settings/
