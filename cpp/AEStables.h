@@ -1,5 +1,3 @@
-#pragma once
-
 // Rijndael S - box https://en.wikipedia.org/wiki/Rijndael_S-box
 const unsigned char s_box[256] =
 {
