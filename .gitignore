@@ -102,8 +102,8 @@ ENV/
 
 # Microsoft Visual Studio project / VS Code
 MVS_Python/
-cpp/.vs/
-cpp/Debug/
+VisualStudioEmptyProject/.vs/
+VisualStudioEmptyProject/Debug/
 .vscode/
 
 # PyCharm
