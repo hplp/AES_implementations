@@ -3,7 +3,7 @@
 #include "AESfunctions.h"
 #include "AEStables.h"
 
-void KeyExpansionCore(unsigned char* in4, unsigned char i)
+void KeyExpansionCore(unsigned char* in4, unsigned short i)
 {
     // RotWord rotates left
     // SubWord substitutes with S - Box value
@@ -25,22 +25,22 @@ void SubWord(unsigned char* in4)
     in4[3] = s_box[in4[3]];
 }
 
-void KeyExpansion(unsigned char* inputKey, unsigned int Nk, unsigned char* expandedKey)
+void KeyExpansion(unsigned char* inputKey, unsigned short Nk, unsigned char* expandedKey)
 {
-    unsigned int Nr = (Nk > Nb) ? Nk + 6 : Nb + 6; // = 10, 12 or 14 rounds
+    unsigned short Nr = (Nk > Nb) ? Nk + 6 : Nb + 6; // = 10, 12 or 14 rounds
     // Copy the inputKey at the beginning of expandedKey
-    for (unsigned int i = 0; i < Nk * rows; i++) { expandedKey[i] = inputKey[i]; }
+    for (unsigned short i = 0; i < Nk * rows; i++) { expandedKey[i] = inputKey[i]; }
 
     // Variables
-    unsigned int byGen = Nk * rows;
-    unsigned int rconIdx = 1;
+    unsigned short byGen = Nk * rows;
+    unsigned short rconIdx = 1;
     unsigned char temp[rows];
 
     // Generate expanded keys
     while (byGen < (Nr + 1) * stt_lng)
     {
         // Read previously generated last 4 bytes (last word)
-        for (unsigned int i = 0; i < rows; i++) { temp[i] = expandedKey[byGen - rows + i]; }
+        for (unsigned short i = 0; i < rows; i++) { temp[i] = expandedKey[byGen - rows + i]; }
         // Perform KeyExpansionCore once for each 16 byte key
         if (byGen % (Nk * rows) == 0)
         {
@@ -52,7 +52,7 @@ void KeyExpansion(unsigned char* inputKey, unsigned int Nk, unsigned char* expan
             SubWord(temp);
         }
         // XOR temp with [bytesGenerated-16] and store in expandedKeys
-        for (unsigned int i = 0; i < rows; i++) {
+        for (unsigned short i = 0; i < rows; i++) {
             expandedKey[byGen] = expandedKey[byGen - Nk * rows] ^ temp[i];
             byGen++;
         }
@@ -62,12 +62,12 @@ void KeyExpansion(unsigned char* inputKey, unsigned int Nk, unsigned char* expan
 
 void SubBytes(unsigned char* state)
 {
-    for (unsigned int i = 0; i < stt_lng; i++) { state[i] = s_box[state[i]]; }
+    for (unsigned short i = 0; i < stt_lng; i++) { state[i] = s_box[state[i]]; }
 }
 
 void InvSubBytes(unsigned char* state)
 {
-    for (unsigned int i = 0; i < stt_lng; i++) { state[i] = inverted_s_box[state[i]]; }
+    for (unsigned short i = 0; i < stt_lng; i++) { state[i] = inverted_s_box[state[i]]; }
 }
 
 
@@ -93,7 +93,7 @@ void ShiftRows(unsigned char* state)
     tmp_state[13] = state[1];
     tmp_state[14] = state[6];
     tmp_state[15] = state[11];
-    for (unsigned int i = 0; i < stt_lng; i++) { state[i] = tmp_state[i]; }
+    for (unsigned short i = 0; i < stt_lng; i++) { state[i] = tmp_state[i]; }
 }
 
 void InvShiftRows(unsigned char* state)
@@ -118,7 +118,7 @@ void InvShiftRows(unsigned char* state)
     tmp_state[13] = state[9];
     tmp_state[14] = state[6];
     tmp_state[15] = state[3];
-    for (unsigned int i = 0; i < stt_lng; i++) { state[i] = tmp_state[i]; }
+    for (unsigned short i = 0; i < stt_lng; i++) { state[i] = tmp_state[i]; }
 }
 
 
@@ -143,7 +143,7 @@ void MixColumns(unsigned char* state) {
     tmp_state[13] = state[12] ^ mul02[state[13]] ^ mul03[state[14]] ^ state[15];
     tmp_state[14] = state[12] ^ state[13] ^ mul02[state[14]] ^ mul03[state[15]];
     tmp_state[15] = mul03[state[12]] ^ state[13] ^ state[14] ^ mul02[state[15]];
-    for (unsigned int i = 0; i < stt_lng; i++) { state[i] = tmp_state[i]; }
+    for (unsigned short i = 0; i < stt_lng; i++) { state[i] = tmp_state[i]; }
 }
 
 void InvMixColumns(unsigned char* state) {
@@ -167,27 +167,27 @@ void InvMixColumns(unsigned char* state) {
     tmp_state[13] = mul09[state[12]] ^ mul14[state[13]] ^ mul11[state[14]] ^ mul13[state[15]];
     tmp_state[14] = mul13[state[12]] ^ mul09[state[13]] ^ mul14[state[14]] ^ mul11[state[15]];
     tmp_state[15] = mul11[state[12]] ^ mul13[state[13]] ^ mul09[state[14]] ^ mul14[state[15]];
-    for (unsigned int i = 0; i < stt_lng; i++) { state[i] = tmp_state[i]; }
+    for (unsigned short i = 0; i < stt_lng; i++) { state[i] = tmp_state[i]; }
 }
 
 
 void AddRoundKey(unsigned char* state, unsigned char* roundKey)
 {
-    for (unsigned int i = 0; i < stt_lng; i++) { state[i] ^= roundKey[i]; }
+    for (unsigned short i = 0; i < stt_lng; i++) { state[i] ^= roundKey[i]; }
 }
 
 
 // Cipher
-void AES_Encrypt(unsigned char* plaintext, unsigned char* expandedKey, unsigned int Nr, unsigned char* ciphertext)
+void AES_Encrypt(unsigned char* plaintext, unsigned char* expandedKey, unsigned short Nr, unsigned char* ciphertext)
 {
     // Copy plaintext into state
     unsigned char state[stt_lng];
-    for (unsigned int i = 0; i < stt_lng; i++) { state[i] = plaintext[i]; }
+    for (unsigned short i = 0; i < stt_lng; i++) { state[i] = plaintext[i]; }
 
     // Whitening
     AddRoundKey(state, expandedKey + (stt_lng * 0)); // Round Key
 
-    for (unsigned int i = 0; i < Nr; i++)
+    for (unsigned short i = 0; i < Nr; i++)
     {
         SubBytes(state);
         ShiftRows(state);
@@ -196,19 +196,19 @@ void AES_Encrypt(unsigned char* plaintext, unsigned char* expandedKey, unsigned 
     }
 
     // Copy state to ciphertext
-    for (unsigned int i = 0; i < stt_lng; i++) { ciphertext[i] = state[i]; }
+    for (unsigned short i = 0; i < stt_lng; i++) { ciphertext[i] = state[i]; }
 }
 
 // Inverse Cipher
-void AES_Decrypt(unsigned char* ciphertext, unsigned char* expandedKey, unsigned int Nr, unsigned char* plaintext)
+void AES_Decrypt(unsigned char* ciphertext, unsigned char* expandedKey, unsigned short Nr, unsigned char* plaintext)
 {
     // copy ciphertext into state
     unsigned char state[stt_lng];
-    for (unsigned int i = 0; i < stt_lng; i++) { state[i] = ciphertext[i]; }
+    for (unsigned short i = 0; i < stt_lng; i++) { state[i] = ciphertext[i]; }
 
     AddRoundKey(state, expandedKey + (stt_lng * Nr));  // Round Key
 
-    for (unsigned int i = 0; i < Nr; i++)
+    for (unsigned short i = 0; i < Nr; i++)
     {
         InvShiftRows(state);
         InvSubBytes(state);
@@ -217,7 +217,7 @@ void AES_Decrypt(unsigned char* ciphertext, unsigned char* expandedKey, unsigned
     }
 
     // Copy state to plaintext
-    for (unsigned int i = 0; i < stt_lng; i++) { plaintext[i] = state[i]; }
+    for (unsigned short i = 0; i < stt_lng; i++) { plaintext[i] = state[i]; }
 }
 
 /*
