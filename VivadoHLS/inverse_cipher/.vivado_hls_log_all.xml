@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vivadoHLSLog:LogRoot xmlns:vivadoHLSLog="www.xilinx.com/vivadoHLSLog">
+  <errorLogs>
+    <logs>
+      <synLog/>
+      <simLog/>
+      <mgLog/>
+      <packageLog/>
+      <csimLog/>
+    </logs>
+  </errorLogs>
+  <warningLogs>
+    <logs>
+      <synLog>
+        <logs message="WARNING: [SCHED 204-69] Unable to schedule 'load' operation ('roundKey[4]', source/AESfunctions.cpp:299) on array 'expandedKey' due to limited memory ports. Please consider using a memory core with more ports or partitioning the array 'expandedKey'." projectName="inverse_cipher" solutionName="solution1" date="2019-02-11T19:16:21.069-0500" type="Warning"/>
+        <logs message="WARNING: [SCHED 204-68] The II Violation in module 'AES_Decrypt': Unable to enforce a carried dependence constraint (II = 3, distance = 1, offset = 1)&#xD;&#xA;   between 'store' operation (source/AESfunctions.cpp:304) of variable 'state[0]', source/AESfunctions.cpp:304 on local variable 'state[0]' and 'load' operation ('state_0_6_load_1', source/AESfunctions.cpp:293) on local variable 'state[0]'." projectName="inverse_cipher" solutionName="solution1" date="2019-02-11T19:16:20.979-0500" type="Warning"/>
+        <logs message="WARNING: [SCHED 204-68] The II Violation in module 'AES_Decrypt': Unable to enforce a carried dependence constraint (II = 2, distance = 1, offset = 1)&#xD;&#xA;   between 'store' operation (source/AESfunctions.cpp:304) of variable 'state[0]', source/AESfunctions.cpp:304 on local variable 'state[0]' and 'load' operation ('state_0_6_load_1', source/AESfunctions.cpp:293) on local variable 'state[0]'." projectName="inverse_cipher" solutionName="solution1" date="2019-02-11T19:16:20.959-0500" type="Warning"/>
+        <logs message="WARNING: [SCHED 204-68] The II Violation in module 'AES_Decrypt': Unable to enforce a carried dependence constraint (II = 1, distance = 1, offset = 1)&#xD;&#xA;   between 'store' operation (source/AESfunctions.cpp:304) of variable 'state[0]', source/AESfunctions.cpp:304 on local variable 'state[0]' and 'load' operation ('state_0_6_load_1', source/AESfunctions.cpp:293) on local variable 'state[0]'." projectName="inverse_cipher" solutionName="solution1" date="2019-02-11T19:16:20.942-0500" type="Warning"/>
+      </synLog>
+      <simLog/>
+      <mgLog/>
+      <packageLog/>
+      <csimLog/>
+    </logs>
+  </warningLogs>
+</vivadoHLSLog:LogRoot>
