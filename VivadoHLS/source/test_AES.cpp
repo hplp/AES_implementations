@@ -1,5 +1,4 @@
 #include "AESfunctions.h"
-#include "AEStables.h"
 
 void AES_Encrypt(unsigned char plaintext[stt_lng],
 		unsigned char expandedKey[ExtdCipherKeyLenghth_max], unsigned short Nr,

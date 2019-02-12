@@ -1,5 +1,4 @@
 #include "AESfunctions.h"
-#include "AEStables.h"
 
 void AES_Full(bool mode_cipher, bool mode_inverse_cipher,
 		unsigned char data_in[stt_lng],

@@ -3,7 +3,7 @@
 #include "AESfunctions.h"
 #include "AEStables.h"
 
-void KeyExpansionCore(unsigned char* in4, unsigned char i)
+void KeyExpansionCore(unsigned char* in4, unsigned short i)
 {
     // RotWord rotates left
     // SubWord substitutes with S - Box value
