@@ -39,18 +39,20 @@ sim_trace = SimulationTrace()
 sim = Simulation(tracer=sim_trace)
 for cycle in range(len(simulation_values['rom1_address'])):
     sim.step({k: v[cycle] for k, v in simulation_values.items()})
-sim_trace.render_trace()
+sim_trace.render_trace(segment_size=50)
 
 working_block()
 synthesize()
 optimize()
 
-print("// Output Verilog RTL:")
+f = open("sim/RTL.v", "w")
 with io.StringIO() as vfile:
     OutputToVerilog(vfile)
-    print(vfile.getvalue())
+    f.write(vfile.getvalue())
+f.close()
 
-print("// Output Verilog Testbench:")
+f = open("sim/Testbench.v", "w")
 with io.StringIO() as tbfile:
     output_verilog_testbench(dest_file=tbfile, simulation_trace=sim_trace)
-    print(tbfile.getvalue())
+    f.write(tbfile.getvalue())
+f.close()

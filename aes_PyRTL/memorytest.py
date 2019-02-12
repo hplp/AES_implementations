@@ -5,7 +5,6 @@ import io
 # start with empty working block
 reset_working_block()
 
-
 # declare blocs and registers
 memory = MemBlock(bitwidth=8, addrwidth=8, name='memory')
 
@@ -17,18 +16,14 @@ read_address = Input(bitwidth=8, name='read_address')
 read_data = Output(bitwidth=8, name='read_data')
 
 # connect them
-read_data <<= memory[read_address]
 memory[write_address] <<= MemBlock.EnabledWrite(write_data, write_enable)
-
-# just a counter register
-counter = Register(bitwidth=8, name='counter')
-counter.next <<= select(write_enable, falsecase=counter, truecase=counter + 1)
+read_data <<= memory[read_address]
 
 simulation_values = {
-    'write_enable':       "00111111111100000000000000",
-    'write_address':      "00012345678900000000000000",
-    'write_data':         "00012345678900000000000000",
-    'read_address':       "00000000000000001234567890"
+    'write_enable':       "001111111111000000000000000",
+    'write_address':      "000123456789000000000000000",
+    'write_data':         "000123456789000000000000000",
+    'read_address':       "000000000000000012345678900"
 }
 
 memory_init = {addr: 0 for addr in range(256)}
@@ -38,18 +33,20 @@ sim_trace = SimulationTrace()
 sim = Simulation(tracer=sim_trace, memory_value_map=memory_values)
 for cycle in range(len(simulation_values['write_enable'])):
     sim.step({k: int(v[cycle]) for k, v in simulation_values.items()})
-sim_trace.render_trace()
+sim_trace.render_trace(segment_size=50)
 
-working_block()
-synthesize()
-optimize()
+#working_block()
+#synthesize()
+#optimize()
 
-print("// Output Verilog RTL:")
+f = open("sim/RTL.v", "w")
 with io.StringIO() as vfile:
     OutputToVerilog(vfile)
-    print(vfile.getvalue())
+    f.write(vfile.getvalue())
+f.close()
 
-print("// Output Verilog Testbench:")
+f = open("sim/Testbench.v", "w")
 with io.StringIO() as tbfile:
     output_verilog_testbench(dest_file=tbfile, simulation_trace=sim_trace)
-    print(tbfile.getvalue())
+    f.write(tbfile.getvalue())
+f.close()

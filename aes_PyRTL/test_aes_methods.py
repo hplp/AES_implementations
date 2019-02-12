@@ -47,19 +47,19 @@ sim_trace.render_trace(trace_list=['state_in',
                                    'state_out_SB', 'state_out_ISB',
                                    'state_out_SR', 'state_out_ISR',
                                    'state_out_MC', 'state_out_IMC', 'state_out_ARK'
-                                   ], symbol_len=40, segment_size=1)
+                                   ], symbol_len=50)
 
 working_block()
 synthesize()
 optimize()
 
-f = open("RTL.v", "w")
+f = open("sim/RTL.v", "w")
 with io.StringIO() as vfile:
     OutputToVerilog(vfile)
     f.write(vfile.getvalue())
 f.close()
 
-f = open("Testbench.v", "w")
+f = open("sim/Testbench.v", "w")
 with io.StringIO() as tbfile:
     output_verilog_testbench(dest_file=tbfile, simulation_trace=sim_trace)
     f.write(tbfile.getvalue())
