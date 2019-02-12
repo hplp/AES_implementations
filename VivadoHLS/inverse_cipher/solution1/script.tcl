@@ -5,10 +5,10 @@
 ############################################################
 open_project inverse_cipher
 set_top AES_Decrypt
-add_files source/AESfunctions.cpp
-add_files source/AESfunctions.h
 add_files source/AEStables.h
-add_files -tb source/test_AES.cpp
+add_files source/AESfunctions.h
+add_files source/AESfunctions.cpp
+add_files -tb source/test_AES.cpp -cflags "-Wno-unknown-pragmas"
 open_solution "solution1"
 set_part {xc7z020clg400-1} -tool vivado
 create_clock -period 8 -name default
