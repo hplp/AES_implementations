@@ -62,7 +62,7 @@ void KeyExpansion(unsigned char* inputKey, unsigned short Nk, unsigned char* exp
 
 void SubBytes(unsigned char* state) {
 #pragma HLS inline off
-	for (unsigned short i = 0; i < stt_lng; i++) {
+	L_SB: for (unsigned short i = 0; i < stt_lng; i++) {
 #pragma HLS unroll
 		state[i] = s_box[state[i]];
 	}
@@ -70,7 +70,7 @@ void SubBytes(unsigned char* state) {
 
 void InvSubBytes(unsigned char* state) {
 #pragma HLS inline off
-	for (unsigned short i = 0; i < stt_lng; i++) {
+	L_ISB: for (unsigned short i = 0; i < stt_lng; i++) {
 #pragma HLS unroll
 		state[i] = inverted_s_box[state[i]];
 	}
@@ -99,7 +99,7 @@ void ShiftRows(unsigned char* state) {
 	tmp_state[13] = state[1];
 	tmp_state[14] = state[6];
 	tmp_state[15] = state[11];
-	for (unsigned short i = 0; i < stt_lng; i++) {
+	L_SR: for (unsigned short i = 0; i < stt_lng; i++) {
 #pragma HLS unroll
 		state[i] = tmp_state[i];
 	}
@@ -127,7 +127,7 @@ void InvShiftRows(unsigned char* state) {
 	tmp_state[13] = state[9];
 	tmp_state[14] = state[6];
 	tmp_state[15] = state[3];
-	for (unsigned short i = 0; i < stt_lng; i++) {
+	L_ISR: for (unsigned short i = 0; i < stt_lng; i++) {
 #pragma HLS unroll
 		state[i] = tmp_state[i];
 	}
@@ -156,7 +156,7 @@ void MixColumns(unsigned char* state) {
 	tmp_state[13] = state[12] ^ mul02[state[13]] ^ mul03[state[14]] ^ state[15];
 	tmp_state[14] = state[12] ^ state[13] ^ mul02[state[14]] ^ mul03[state[15]];
 	tmp_state[15] = mul03[state[12]] ^ state[13] ^ state[14] ^ mul02[state[15]];
-	for (unsigned short i = 0; i < stt_lng; i++) {
+	L_MC: for (unsigned short i = 0; i < stt_lng; i++) {
 #pragma HLS unroll
 		state[i] = tmp_state[i];
 	}
@@ -184,7 +184,7 @@ void InvMixColumns(unsigned char* state) {
 	tmp_state[13] = mul09[state[12]] ^ mul14[state[13]] ^ mul11[state[14]] ^ mul13[state[15]];
 	tmp_state[14] = mul13[state[12]] ^ mul09[state[13]] ^ mul14[state[14]] ^ mul11[state[15]];
 	tmp_state[15] = mul11[state[12]] ^ mul13[state[13]] ^ mul09[state[14]] ^ mul14[state[15]];
-	for (unsigned short i = 0; i < stt_lng; i++) {
+	L_IMC: for (unsigned short i = 0; i < stt_lng; i++) {
 #pragma HLS unroll
 		state[i] = tmp_state[i];
 	}
@@ -193,7 +193,7 @@ void InvMixColumns(unsigned char* state) {
 
 void AddRoundKey(unsigned char* state, unsigned char* roundKey) {
 #pragma HLS inline off
-	for (unsigned short i = 0; i < stt_lng; i++) {
+	L_ARK: for (unsigned short i = 0; i < stt_lng; i++) {
 #pragma HLS unroll
 		state[i] ^= roundKey[i];
 	}
@@ -216,14 +216,6 @@ void AES_Encrypt(unsigned char plaintext[stt_lng],
 #pragma HLS array_map variable=mul02 instance=cipher horizontal
 #pragma HLS array_map variable=mul03 instance=cipher horizontal
 
-	// Copy ExtdCipherKeyLength into memory
-	unsigned char expandedKeyMem[ExtdCipherKeyLenghth_max];
-	L_copy_EK: for (unsigned short i = 0; i < ((Nr + 1) * stt_lng); i++) {
-		//#pragma HLS unroll
-		expandedKeyMem[i] = expandedKey[i];
-		cout << dec << (unsigned short)expandedKeyMem[i] << " ";
-	} cout << endl;
-
 	// Copy plaintext into state
 	unsigned char state[stt_lng];
 	L_copy_i: for (unsigned short i = 0; i < stt_lng; i++) {
@@ -231,12 +223,17 @@ void AES_Encrypt(unsigned char plaintext[stt_lng],
 		state[i] = plaintext[i];
 	}
 
+	// Copy ExtdCipherKeyLength into 2D memory
+	unsigned char expandedKeyMem[Nr_max + 1][stt_lng];
+	L_copy_EK1: for (unsigned short i = 0; i < (Nr + 1); i++){
+		L_copy_EK2: for (unsigned short j = 0; j < stt_lng; j++){
+			expandedKeyMem[i][j] = expandedKey[i*stt_lng + j];
+			//cout << dec << (unsigned short)expandedKeyMem2[i][j] << " ";
+		} //cout << endl;
+	} //cout << endl;
+
 	// Whitening
-	unsigned char roundKey[stt_lng];
-	L_copy_rk0: for (unsigned short i = 0; i < stt_lng; i++) {
-		#pragma HLS unroll
-		roundKey[i] = expandedKeyMem[stt_lng * 0 + i];
-	}
+	unsigned char *roundKey = expandedKeyMem[0];
 	AddRoundKey(state, roundKey); // Round Key
 
 	L_rounds: for (unsigned short j = 0; j < Nr_max; j++) {
@@ -250,10 +247,7 @@ void AES_Encrypt(unsigned char plaintext[stt_lng],
 			MixColumns(state);
 		}
 
-		L_copy_rk: for (unsigned short i = 0; i < stt_lng; i++) {
-			#pragma HLS unroll
-			roundKey[i] = expandedKeyMem[stt_lng * (j + 1) + i];
-		}
+		roundKey = expandedKeyMem[j + 1];
 		AddRoundKey(state, roundKey); // Round Key
 	}
 
