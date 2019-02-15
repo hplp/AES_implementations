@@ -211,10 +211,18 @@ void AES_Encrypt(unsigned char plaintext[stt_lng],
 #pragma HLS INTERFACe s_axilite port=return bundle=CRTLSc
 
 #pragma HLS inline region // will inline the functions unless inlining is off
-#pragma HLS allocation instances=AddRoundKey limit=1 function // ensure only one instance of AddRoundKey
+//#pragma HLS allocation instances=AddRoundKey limit=1 function // ensure only one instance of AddRoundKey
 #pragma HLS array_map variable=s_box instance=cipher horizontal // group cipher tables together
 #pragma HLS array_map variable=mul02 instance=cipher horizontal
 #pragma HLS array_map variable=mul03 instance=cipher horizontal
+
+	// Copy ExtdCipherKeyLength into memory
+	unsigned char expandedKeyMem[ExtdCipherKeyLenghth_max];
+	L_copy_EK: for (unsigned short i = 0; i < ((Nr + 1) * stt_lng); i++) {
+		//#pragma HLS unroll
+		expandedKeyMem[i] = expandedKey[i];
+		cout << dec << (unsigned short)expandedKeyMem[i] << " ";
+	} cout << endl;
 
 	// Copy plaintext into state
 	unsigned char state[stt_lng];
@@ -227,11 +235,12 @@ void AES_Encrypt(unsigned char plaintext[stt_lng],
 	unsigned char roundKey[stt_lng];
 	L_copy_rk0: for (unsigned short i = 0; i < stt_lng; i++) {
 		#pragma HLS unroll
-		roundKey[i] = expandedKey[stt_lng * 0 + i];
+		roundKey[i] = expandedKeyMem[stt_lng * 0 + i];
 	}
 	AddRoundKey(state, roundKey); // Round Key
 
-	L_rounds: for (unsigned short j = 0; j < Nr; j++) {
+	L_rounds: for (unsigned short j = 0; j < Nr_max; j++) {
+		#pragma HLS unroll
 
 		SubBytes(state);
 
@@ -243,7 +252,7 @@ void AES_Encrypt(unsigned char plaintext[stt_lng],
 
 		L_copy_rk: for (unsigned short i = 0; i < stt_lng; i++) {
 			#pragma HLS unroll
-			roundKey[i] = expandedKey[stt_lng * (j + 1) + i];
+			roundKey[i] = expandedKeyMem[stt_lng * (j + 1) + i];
 		}
 		AddRoundKey(state, roundKey); // Round Key
 	}
