@@ -39,3 +39,8 @@ Link to the AES standard
 Altera's Advanced Synthesis Cookbook includes an AES 128/256 implementation
 - https://www.altera.com/content/dam/altera-www/global/en_US/pdfs/literature/manual/stx_cookbook.pdf
 - https://www.altera.com/literature/manual/cookbook.zip
+
+University of Virginia ECE Wiki FPGA tutorials
+- http://venividiwiki.ee.virginia.edu/mediawiki/index.php/Xilinx
+- http://venividiwiki.ee.virginia.edu/mediawiki/index.php/Altera
+- http://venividiwiki.ee.virginia.edu/mediawiki/index.php/ToolsXilinxLabsRTLHLSAES
