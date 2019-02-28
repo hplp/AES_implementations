@@ -1,4 +1,4 @@
-from AESfunctions import *
+from AESfunctions import KeyExpansion, AES_Encrypt, AES_Decrypt
 
 # Nb = 4 columns in state (in this standard)
 Nb = 4  # columns
