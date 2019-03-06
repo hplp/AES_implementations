@@ -2,63 +2,61 @@
 
 #include "AESfunctions.h"
 #include "AEStables.h"
+#include "AESkeys.h"
 
-void KeyExpansionCore(unsigned char* in4, unsigned short i)
-{
-    // RotWord rotates left
-    // SubWord substitutes with S - Box value
-    unsigned char t = in4[0];
-    in4[0] = s_box[in4[1]];
-    in4[1] = s_box[in4[2]];
-    in4[2] = s_box[in4[3]];
-    in4[3] = s_box[t];
-    // RCon (round constant) 1st byte XOR rcon
-    in4[0] = in4[0] ^ rcon[i];
+void KeyExpansionCore(unsigned char* in4, unsigned short i) {
+	// RotWord rotates left
+	// SubWord substitutes with S - Box value
+	unsigned char t = in4[0];
+	in4[0] = s_box[in4[1]];
+	in4[1] = s_box[in4[2]];
+	in4[2] = s_box[in4[3]];
+	in4[3] = s_box[t];
+	// RCon (round constant) 1st byte XOR rcon
+	in4[0] = in4[0] ^ rcon[i];
 }
 
-void SubWord(unsigned char* in4)
-{
-    // SubWord substitutes with S - Box value
-    in4[0] = s_box[in4[0]];
-    in4[1] = s_box[in4[1]];
-    in4[2] = s_box[in4[2]];
-    in4[3] = s_box[in4[3]];
+void SubWord(unsigned char* in4) {
+	// SubWord substitutes with S - Box value
+	in4[0] = s_box[in4[0]];
+	in4[1] = s_box[in4[1]];
+	in4[2] = s_box[in4[2]];
+	in4[3] = s_box[in4[3]];
 }
 
-void KeyExpansion(unsigned char* inputKey, unsigned short Nk, unsigned char* expandedKey)
-{
-    unsigned short Nr = (Nk > Nb) ? Nk + 6 : Nb + 6; // = 10, 12 or 14 rounds
-    // Copy the inputKey at the beginning of expandedKey
-    for (unsigned short i = 0; i < Nk * rows; i++) { expandedKey[i] = inputKey[i]; }
+void KeyExpansion(unsigned char* inputKey, unsigned short Nk,
+		unsigned char* expandedKey) {
+	unsigned short Nr = (Nk > Nb) ? Nk + 6 : Nb + 6; // = 10, 12 or 14 rounds
+	// Copy the inputKey at the beginning of expandedKey
+	for (unsigned short i = 0; i < Nk * rows; i++) {
+		expandedKey[i] = inputKey[i];
+	}
 
-    // Variables
-    unsigned short byGen = Nk * rows;
-    unsigned short rconIdx = 1;
-    unsigned char temp[rows];
+	// Variables
+	unsigned short byGen = Nk * rows;
+	unsigned short rconIdx = 1;
+	unsigned char temp[rows];
 
-    // Generate expanded keys
-    while (byGen < (Nr + 1) * stt_lng)
-    {
-        // Read previously generated last 4 bytes (last word)
-        for (unsigned short i = 0; i < rows; i++) { temp[i] = expandedKey[byGen - rows + i]; }
-        // Perform KeyExpansionCore once for each 16 byte key
-        if (byGen % (Nk * rows) == 0)
-        {
-            KeyExpansionCore(temp, rconIdx);
-            rconIdx++;
-        }
-        else if ((Nk > 6) && (byGen % (Nk * rows) == (4 * rows)))
-        {
-            SubWord(temp);
-        }
-        // XOR temp with [bytesGenerated-16] and store in expandedKeys
-        for (unsigned short i = 0; i < rows; i++) {
-            expandedKey[byGen] = expandedKey[byGen - Nk * rows] ^ temp[i];
-            byGen++;
-        }
-    }
+	// Generate expanded keys
+	while (byGen < (Nr + 1) * stt_lng) {
+		// Read previously generated last 4 bytes (last word)
+		for (unsigned short i = 0; i < rows; i++) {
+			temp[i] = expandedKey[byGen - rows + i];
+		}
+		// Perform KeyExpansionCore once for each 16 byte key
+		if (byGen % (Nk * rows) == 0) {
+			KeyExpansionCore(temp, rconIdx);
+			rconIdx++;
+		} else if ((Nk > 6) && (byGen % (Nk * rows) == (4 * rows))) {
+			SubWord(temp);
+		}
+		// XOR temp with [bytesGenerated-16] and store in expandedKeys
+		for (unsigned short i = 0; i < rows; i++) {
+			expandedKey[byGen] = expandedKey[byGen - Nk * rows] ^ temp[i];
+			byGen++;
+		}
+	}
 }
-
 
 void SubBytes(unsigned char* state) {
 #pragma HLS inline off
@@ -75,7 +73,6 @@ void InvSubBytes(unsigned char* state) {
 		state[i] = inverted_s_box[state[i]];
 	}
 }
-
 
 void ShiftRows(unsigned char* state) {
 #pragma HLS inline off
@@ -133,7 +130,6 @@ void InvShiftRows(unsigned char* state) {
 	}
 }
 
-
 void MixColumns(unsigned char* state) {
 #pragma HLS inline off
 	unsigned char tmp_state[stt_lng];
@@ -190,150 +186,134 @@ void InvMixColumns(unsigned char* state) {
 	}
 }
 
-
-void AddRoundKey(unsigned char* state, unsigned char* roundKey) {
+void AddRoundKey(unsigned char* state, unsigned short Nr, unsigned short round) {
 #pragma HLS inline off
+#pragma HLS array_map variable=expandedKey128 instance=expandedKey horizontal
+#pragma HLS array_map variable=expandedKey192 instance=expandedKey horizontal
+#pragma HLS array_map variable=expandedKey256 instance=expandedKey horizontal
 	L_ARK: for (unsigned short i = 0; i < stt_lng; i++) {
 #pragma HLS unroll
-		state[i] ^= roundKey[i];
+		switch (Nr) {
+		case 10:
+			state[i] ^= expandedKey128[round][i];
+			break;
+		case 12:
+			state[i] ^= expandedKey192[round][i];
+			break;
+		case 14:
+			state[i] ^= expandedKey256[round][i];
+			break;
+		}
 	}
 }
 
-
 // Cipher
-void AES_Encrypt(unsigned char plaintext[stt_lng],
-		unsigned char expandedKey[ExtdCipherKeyLenghth_max], unsigned short Nr,
-		unsigned char ciphertext[stt_lng]) {
-#pragma HLS INTERFACE s_axilite port=plaintext bundle=CRTLSc
-#pragma HLS INTERFACE s_axilite port=expandedKey bundle=CRTLSc
-#pragma HLS INTERFACE s_axilite port=Nr bundle=CRTLSc
-#pragma HLS INTERFACE s_axilite port=ciphertext bundle=CRTLSc
-#pragma HLS INTERFACe s_axilite port=return bundle=CRTLSc
+void AES_Encrypt(unsigned char plaintext[stt_lng], unsigned short Nr, unsigned char ciphertext[stt_lng]) {
+#pragma HLS INTERFACe s_axilite          port=return     bundle=Cipher
+#pragma HLS INTERFACE s_axilite          port=Nr         bundle=Cipher
+#pragma HLS INTERFACE s_axilite depth=16 port=plaintext  bundle=Cipher
+#pragma HLS INTERFACE s_axilite depth=16 port=ciphertext bundle=Cipher
 
 #pragma HLS inline region // will inline the functions unless inlining is off
+#pragma HLS pipeline // reduces II
+
 //#pragma HLS allocation instances=AddRoundKey limit=1 function // ensure only one instance of AddRoundKey
-#pragma HLS array_map variable=s_box instance=cipher horizontal // group cipher tables together
-#pragma HLS array_map variable=mul02 instance=cipher horizontal
-#pragma HLS array_map variable=mul03 instance=cipher horizontal
+
+// group cipher tables together
+#pragma HLS array_map variable=s_box          instance=cipher      horizontal
+#pragma HLS array_map variable=mul02          instance=cipher      horizontal
+#pragma HLS array_map variable=mul03          instance=cipher      horizontal
 
 	// Copy plaintext into state
 	unsigned char state[stt_lng];
 	L_copy_i: for (unsigned short i = 0; i < stt_lng; i++) {
-		#pragma HLS unroll
+#pragma HLS unroll
 		state[i] = plaintext[i];
 	}
 
-	// Copy ExtdCipherKeyLength into 2D memory
-	unsigned char expandedKeyMem[Nr_max + 1][stt_lng];
-	L_copy_EK1: for (unsigned short i = 0; i < (Nr + 1); i++){
-		L_copy_EK2: for (unsigned short j = 0; j < stt_lng; j++){
-			expandedKeyMem[i][j] = expandedKey[i*stt_lng + j];
-			//cout << dec << (unsigned short)expandedKeyMem2[i][j] << " ";
-		} //cout << endl;
-	} //cout << endl;
-
-	// Whitening
-	unsigned char *roundKey = expandedKeyMem[0];
-	AddRoundKey(state, roundKey); // Round Key
+	AddRoundKey(state, Nr, 0);
 
 	L_rounds: for (unsigned short j = 0; j < Nr_max; j++) {
-		#pragma HLS unroll
-
+#pragma HLS unroll
 		SubBytes(state);
-
 		ShiftRows(state);
-
-		if (j != (Nr - 1)) {
+		if (j != (Nr - 1))
 			MixColumns(state);
-		}
-
-		roundKey = expandedKeyMem[j + 1];
-		AddRoundKey(state, roundKey); // Round Key
+		AddRoundKey(state, Nr, j + 1);
+		if (j == (Nr - 1))
+			break; // early exit
 	}
 
 	// Copy state to ciphertext
 	L_copy_o: for (unsigned short i = 0; i < stt_lng; i++) {
-		#pragma HLS unroll
+#pragma HLS unroll
 		ciphertext[i] = state[i];
 	}
 }
 
-
 // Inverse Cipher
-void AES_Decrypt(unsigned char ciphertext[stt_lng],
-		unsigned char expandedKey[ExtdCipherKeyLenghth_max], unsigned short Nr,
-		unsigned char plaintext[stt_lng]) {
-#pragma HLS INTERFACE s_axilite port=ciphertext bundle=CRTLSic
-#pragma HLS INTERFACE s_axilite port=expandedKey bundle=CRTLSic
-#pragma HLS INTERFACE s_axilite port=Nr bundle=CRTLSic
-#pragma HLS INTERFACE s_axilite port=plaintext bundle=CRTLSic
-#pragma HLS INTERFACe s_axilite port=return bundle=CRTLSic
+void AES_Decrypt(unsigned char ciphertext[stt_lng], unsigned short Nr, unsigned char plaintext[stt_lng]) {
+#pragma HLS INTERFACe s_axilite          port=return     bundle=Decipher
+#pragma HLS INTERFACE s_axilite          port=Nr         bundle=Decipher
+#pragma HLS INTERFACE s_axilite depth=16 port=plaintext  bundle=Decipher
+#pragma HLS INTERFACE s_axilite depth=16 port=ciphertext bundle=Decipher
 
 #pragma HLS inline region // will inline the functions unless inlining is off
-#pragma HLS allocation instances=AddRoundKey limit=1 function // ensure only one instance of AddRoundKey
-#pragma HLS array_map variable=inverted_s_box instance=inverse_cipher horizontal
-#pragma HLS array_map variable=mul09 instance=inverse_cipher horizontal // group inverse cipher tables together
-#pragma HLS array_map variable=mul11 instance=inverse_cipher horizontal
-#pragma HLS array_map variable=mul13 instance=inverse_cipher horizontal
-#pragma HLS array_map variable=mul14 instance=inverse_cipher horizontal
+#pragma HLS pipeline // reduces II
+
+//#pragma HLS allocation instances=AddRoundKey limit=1 function // ensure only one instance of AddRoundKey
+
+// group cipher tables together
+#pragma HLS array_map variable=inverted_s_box instance=decipher horizontal
+#pragma HLS array_map variable=mul09          instance=decipher horizontal
+#pragma HLS array_map variable=mul11          instance=decipher horizontal
+#pragma HLS array_map variable=mul13          instance=decipher horizontal
+#pragma HLS array_map variable=mul14          instance=decipher horizontal
 
 	// Copy ciphertext into state
 	unsigned char state[stt_lng];
 	L_copy_i: for (unsigned short i = 0; i < stt_lng; i++) {
-		#pragma HLS unroll
+#pragma HLS unroll
 		state[i] = ciphertext[i];
 	}
 
-	unsigned char roundKey[stt_lng];
-	L_copy_rk0: for (unsigned short i = 0; i < stt_lng; i++) {
-		#pragma HLS unroll
-		roundKey[i] = expandedKey[stt_lng * Nr + i];
-	}
-	AddRoundKey(state, roundKey); // Round Key
+	AddRoundKey(state, Nr, Nr);
 
-	L_rounds: for (unsigned short j = 0; j < Nr; j++) {
-
+	L_rounds: for (unsigned short j = 0; j < Nr_max; j++) {
+#pragma HLS unroll
 		InvShiftRows(state);
-
 		InvSubBytes(state);
-
-		L_copy_rk: for (unsigned short i = 0; i < stt_lng; i++) {
-			#pragma HLS unroll
-			roundKey[i] = expandedKey[stt_lng * (Nr - j - 1) + i];
-		}
-		AddRoundKey(state, roundKey); // Round Key
-
-		if (j != (Nr - 1)) {
+		AddRoundKey(state, Nr, Nr - j - 1);
+		if (j != (Nr - 1))
 			InvMixColumns(state);
-		}
+		else
+			break;
 	}
 
 	// Copy state to plaintext
 	L_copy_o: for (unsigned short i = 0; i < stt_lng; i++) {
-		#pragma HLS unroll
+#pragma HLS unroll
 		plaintext[i] = state[i];
 	}
 }
 
-
-// AES Full
+//// AES Full
 void AES_Full(bool mode_cipher, bool mode_inverse_cipher,
-		unsigned char data_in[stt_lng],
-		unsigned char expandedKey[ExtdCipherKeyLenghth_max], unsigned short Nr,
+		unsigned char data_in[stt_lng], unsigned short Nr,
 		unsigned char data_out[stt_lng]) {
-		#pragma HLS INTERFACE s_axilite port=mode_cipher bundle=CRTLS
-		#pragma HLS INTERFACE s_axilite port=mode_inverse_cipher bundle=CRTLS
-		#pragma HLS INTERFACE s_axilite port=data_in bundle=CRTLS
-		#pragma HLS INTERFACE s_axilite port=expandedKey bundle=CRTLS
-		#pragma HLS INTERFACE s_axilite port=Nr bundle=CRTLS
-		#pragma HLS INTERFACE s_axilite port=data_out bundle=CRTLS
-		#pragma HLS INTERFACe s_axilite port=return bundle=CRTLS
+#pragma HLS INTERFACe s_axilite          port=return              bundle=AES
+#pragma HLS INTERFACE s_axilite          port=mode_cipher         bundle=AES
+#pragma HLS INTERFACE s_axilite          port=mode_inverse_cipher bundle=AES
+#pragma HLS INTERFACE s_axilite depth=16 port=data_in             bundle=AES
+#pragma HLS INTERFACE s_axilite          port=Nr                  bundle=AES
+#pragma HLS INTERFACE s_axilite depth=16 port=data_out            bundle=AES
 
-	#pragma HLS inline region // will inline the functions unless inlining is off
+#pragma HLS inline region // will inline the functions unless inlining is off
+
 	if (mode_cipher) {
-		AES_Encrypt(data_in, expandedKey, Nr, data_out);
+		AES_Encrypt(data_in, Nr, data_out);
 	}
 	if (mode_inverse_cipher) {
-		AES_Decrypt(data_in, expandedKey, Nr, data_out);
+		AES_Decrypt(data_in, Nr, data_out);
 	}
 }

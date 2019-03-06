@@ -6,7 +6,7 @@ const unsigned short Nb = 4; // columns (could be changed to a larger number in 
 const unsigned short rows = 4; // rows
 const unsigned short stt_lng = Nb * rows; // state length
 
-// This will allocate (hardware and memory) resources to accommodate all AES
+// This will allocate (hardware and memory) resources to accommodate all AES at the same time up to max
 const unsigned short Nk_max = 8; // =(4, 6 or 8), max [32-bit words] columns in cipher key
 const unsigned short CipherKeyLenghth_max = Nk_max * rows; // max bytes in key length
 const unsigned short Nr_max = (Nk_max > Nb) ? Nk_max + 6 : Nb + 6; // max number of rounds
