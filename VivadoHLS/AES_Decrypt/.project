@@ -52,6 +52,11 @@
 			<location>D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/source/AESfunctions.h</location>
 		</link>
 		<link>
+			<name>source/AESkeys.h</name>
+			<type>1</type>
+			<location>D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/source/AESkeys.h</location>
+		</link>
+		<link>
 			<name>source/AEStables.h</name>
 			<type>1</type>
 			<location>D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/source/AEStables.h</location>

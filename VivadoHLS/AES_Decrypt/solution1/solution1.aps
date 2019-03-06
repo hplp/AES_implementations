@@ -28,7 +28,7 @@
             
     <schedule model="AES_Decrypt"/>
             
-    <config_export format="ip_catalog" rtl="verilog"/>
+    <config_export description="AES Decrypt HLS" display_name="AES_Decrypt_HLS" format="ip_catalog" library="HLS" rtl="verilog" vendor="UVA_HPLP"/>
         
   </config>
   <UIConfigurations>
@@ -64,7 +64,7 @@
     </UIAutoSimConf>
   </UIConfigurations>
   <ExportDesign askAgain="true" evaluate="false" flow="false" flowChoice="syn" formatName="ip_catalog" rtl="verilog" rtlButton="true" rtlCombo="verilog">
-    <Format formatName="ip_catalog"/>
+    <Format description="AES Decrypt HLS" display_name="AES_Decrypt_HLS" formatName="ip_catalog" library="HLS" vendor="UVA_HPLP"/>
     <Format formatName="sysgen"/>
     <Format formatName="sysgen_ise"/>
     <Format formatName="syn_dcp"/>
