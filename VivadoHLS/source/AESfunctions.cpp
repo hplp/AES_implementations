@@ -210,14 +210,19 @@ void AES_Encrypt(unsigned char Nr, unsigned char plaintext[stt_lng], unsigned ch
 
 #pragma HLS inline region // will inline the functions unless inlining is off
 
-#pragma HLS INTERFACE s_axilite          port=Nr         bundle=Cipher
-#pragma HLS INTERFACE axis register forward port=plaintext
-#pragma HLS INTERFACE axis register reverse port=ciphertext
-#pragma HLS INTERFACe s_axilite          port=return     bundle=Cipher
+#pragma HLS INTERFACE s_axilite port=Nr         bundle=Cipher
+#pragma HLS INTERFACE s_axilite port=plaintext  bundle=Cipher
+#pragma HLS INTERFACE s_axilite port=ciphertext bundle=Cipher
+//#pragma HLS INTERFACE axis register forward port=plaintext
+//#pragma HLS INTERFACE axis register reverse port=ciphertext
+#pragma HLS INTERFACe s_axilite port=return     bundle=Cipher
 
 #pragma HLS pipeline // reduces II
 
-//#pragma HLS allocation instances=AddRoundKey limit=1 function // ensure only one instance of AddRoundKey
+// ensure only one instance; proper unroll needs 15-14-13 instances
+#pragma HLS allocation instances=AddRoundKey limit=1 function
+#pragma HLS allocation instances=SubBytes    limit=1 function
+#pragma HLS allocation instances=MixColumns  limit=1 function
 
 // group cipher tables together
 #pragma HLS array_map variable=s_box instance=cipher horizontal
@@ -256,14 +261,19 @@ void AES_Decrypt(unsigned char Nr, unsigned char ciphertext[stt_lng], unsigned c
 
 #pragma HLS inline region // will inline the functions unless inlining is off
 
-#pragma HLS INTERFACE s_axilite          port=Nr         bundle=Decipher
-#pragma HLS INTERFACE axis register forward port=ciphertext
-#pragma HLS INTERFACE axis register reverse port=plaintext
-#pragma HLS INTERFACe s_axilite          port=return     bundle=Decipher
+#pragma HLS INTERFACE s_axilite port=Nr         bundle=Decipher
+#pragma HLS INTERFACE s_axilite port=ciphertext bundle=Decipher
+#pragma HLS INTERFACE s_axilite port=plaintext  bundle=Decipher
+//#pragma HLS INTERFACE axis register forward port=ciphertext
+//#pragma HLS INTERFACE axis register reverse port=plaintext
+#pragma HLS INTERFACe s_axilite port=return     bundle=Decipher
 
 #pragma HLS pipeline // reduces II
 
-//#pragma HLS allocation instances=AddRoundKey limit=1 function // ensure only one instance of AddRoundKey
+// ensure only one instance; proper unroll needs 15-14-13 instances
+#pragma HLS allocation instances=AddRoundKey   limit=1 function
+#pragma HLS allocation instances=InvSubBytes   limit=1 function
+#pragma HLS allocation instances=InvMixColumns limit=1 function
 
 // group cipher tables together
 #pragma HLS array_map variable=inverted_s_box instance=decipher horizontal
@@ -305,11 +315,13 @@ void AES_Full(bool cipher_or_i_cipher, unsigned char Nr,
 
 #pragma HLS inline region // will inline the functions unless inlining is off
 
-#pragma HLS INTERFACE s_axilite          port=cipher_or_i_cipher  bundle=AES
-#pragma HLS INTERFACE s_axilite          port=Nr                  bundle=AES
-#pragma HLS INTERFACE axis register forward port=data_in
-#pragma HLS INTERFACE axis register reverse port=data_out
-#pragma HLS INTERFACe s_axilite          port=return              bundle=AES
+#pragma HLS INTERFACE s_axilite port=cipher_or_i_cipher bundle=AES
+#pragma HLS INTERFACE s_axilite port=Nr                 bundle=AES
+#pragma HLS INTERFACE s_axilite port=data_in            bundle=AES
+#pragma HLS INTERFACE s_axilite port=data_out           bundle=AES
+//#pragma HLS INTERFACE axis register forward port=data_in
+//#pragma HLS INTERFACE axis register reverse port=data_out
+#pragma HLS INTERFACe s_axilite port=return             bundle=AES
 
 	if (cipher_or_i_cipher)
 		AES_Encrypt(Nr, data_in, data_out);

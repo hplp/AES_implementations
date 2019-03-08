@@ -4,9 +4,8 @@
 
 #include "xaes_full.h" // Contains AES Full macros and functions
 
-#include "AEStables.h"
-
 #include <stdlib.h>
+#include <stdbool.h>
 
 // These are AES constants for AES 128, 192, 256
 const unsigned short Nb = 4; // columns (can be changed to a larger number in the future)
@@ -44,12 +43,12 @@ int main() {
 	XAes_full_Initialize(&do_Aes_full, XPAR_AES_FULL_0_DEVICE_ID);
 
 	unsigned short NkVals[3] = {4, 6, 8};
-	unsigned short Nk, CipherKeyLenghth, Nr, ExtdCipherKeyLenghth;
+	unsigned short Nk, CipherKeyLenghth, Nr;//, ExtdCipherKeyLenghth;
 
 	// create a dummy test cipher key
-	unsigned char key[CipherKeyLenghth_max];
+	//unsigned char key[CipherKeyLenghth_max];
 	// extend key
-	unsigned char expandedKey[ExtdCipherKeyLenghth_max];
+	//unsigned char expandedKey[ExtdCipherKeyLenghth_max];
 
 	// create a test input data (plaintext) (ABCDEFGHIJKLMNOP)
 	unsigned char plaintext[stt_lng];
@@ -69,6 +68,8 @@ int main() {
 	// variable array for decrypted plaintext
 	unsigned char decrypted_plaintext[stt_lng];
 
+	bool all_tests_pass = true;
+
 	for (unsigned short test = 0; test < 512; test++) {
 
 		// These variables allow to change the AES length, they have to be smaller than their equivalent max
@@ -77,7 +78,7 @@ int main() {
 		Nk = NkVals[rand() % 3];//Nk = 4; // 4 or 6 or 8 [32-bit words] columns in cipher key
 		CipherKeyLenghth = Nk * rows; // bytes
 		Nr = (Nk > Nb) ? Nk + 6 : Nb + 6; // = 10, 12 or 14 rounds
-		ExtdCipherKeyLenghth = (Nr + 1) * stt_lng; // bytes in the expanded cipher key
+		//ExtdCipherKeyLenghth = (Nr + 1) * stt_lng; // bytes in the expanded cipher key
 
 		// Print a description
 		xil_printf(
@@ -87,8 +88,7 @@ int main() {
 		/** Encrypt **/
 
 		// Write AES Cipher inputs
-		XAes_full_Set_mode_cipher(&do_Aes_full, 1);
-		XAes_full_Set_mode_inverse_cipher(&do_Aes_full, 0);
+		XAes_full_Set_cipher_or_i_cipher(&do_Aes_full, 1);
 		XAes_full_Write_data_in_Bytes(&do_Aes_full, 0, plaintext, stt_lng); // int offset, char *data, int length
 		XAes_full_Set_Nr(&do_Aes_full, Nr);
 
@@ -114,8 +114,7 @@ int main() {
 		/** Decrypt **/
 
 		// Write AES Inverse Cipher inputs
-		XAes_full_Set_mode_cipher(&do_Aes_full, 0);
-		XAes_full_Set_mode_inverse_cipher(&do_Aes_full, 1);
+		XAes_full_Set_cipher_or_i_cipher(&do_Aes_full, 0);
 		XAes_full_Write_data_in_Bytes(&do_Aes_full, 0, ciphertext, stt_lng); // int offset, char *data, int length
 		XAes_full_Set_Nr(&do_Aes_full, Nr);
 
@@ -140,8 +139,14 @@ int main() {
 
 		if (plaintext[0] == decrypted_plaintext[0])
 			xil_printf("test %d passed \n\r", test);
+		else
+			all_tests_pass = false;
 
 	}
+	if (all_tests_pass)
+		xil_printf("all tests pass!\n\r");
+	else
+		xil_printf("fail\n\r");
 
 	cleanup_platform();
 	return 0;
