@@ -60,7 +60,7 @@ void KeyExpansion(unsigned char* inputKey, unsigned short Nk,
 
 void SubBytes(unsigned char* state) {
 #pragma HLS inline off
-	L_SB: for (unsigned short i = 0; i < stt_lng; i++) {
+	L_SB: for (unsigned char i = 0; i < stt_lng; i++) {
 #pragma HLS unroll
 		state[i] = s_box[state[i]];
 	}
@@ -68,14 +68,13 @@ void SubBytes(unsigned char* state) {
 
 void InvSubBytes(unsigned char* state) {
 #pragma HLS inline off
-	L_ISB: for (unsigned short i = 0; i < stt_lng; i++) {
+	L_ISB: for (unsigned char i = 0; i < stt_lng; i++) {
 #pragma HLS unroll
 		state[i] = inverted_s_box[state[i]];
 	}
 }
 
 void ShiftRows(unsigned char* state) {
-#pragma HLS inline off
 	unsigned char tmp_state[stt_lng];
 	tmp_state[0] = state[0];
 	tmp_state[1] = state[5];
@@ -96,14 +95,13 @@ void ShiftRows(unsigned char* state) {
 	tmp_state[13] = state[1];
 	tmp_state[14] = state[6];
 	tmp_state[15] = state[11];
-	L_SR: for (unsigned short i = 0; i < stt_lng; i++) {
+	L_SR: for (unsigned char i = 0; i < stt_lng; i++) {
 #pragma HLS unroll
 		state[i] = tmp_state[i];
 	}
 }
 
 void InvShiftRows(unsigned char* state) {
-#pragma HLS inline off
 	unsigned char tmp_state[stt_lng];
 	tmp_state[0] = state[0];
 	tmp_state[1] = state[13];
@@ -124,7 +122,7 @@ void InvShiftRows(unsigned char* state) {
 	tmp_state[13] = state[9];
 	tmp_state[14] = state[6];
 	tmp_state[15] = state[3];
-	L_ISR: for (unsigned short i = 0; i < stt_lng; i++) {
+	L_ISR: for (unsigned char i = 0; i < stt_lng; i++) {
 #pragma HLS unroll
 		state[i] = tmp_state[i];
 	}
@@ -152,7 +150,7 @@ void MixColumns(unsigned char* state) {
 	tmp_state[13] = state[12] ^ mul02[state[13]] ^ mul03[state[14]] ^ state[15];
 	tmp_state[14] = state[12] ^ state[13] ^ mul02[state[14]] ^ mul03[state[15]];
 	tmp_state[15] = mul03[state[12]] ^ state[13] ^ state[14] ^ mul02[state[15]];
-	L_MC: for (unsigned short i = 0; i < stt_lng; i++) {
+	L_MC: for (unsigned char i = 0; i < stt_lng; i++) {
 #pragma HLS unroll
 		state[i] = tmp_state[i];
 	}
@@ -180,18 +178,18 @@ void InvMixColumns(unsigned char* state) {
 	tmp_state[13] = mul09[state[12]] ^ mul14[state[13]] ^ mul11[state[14]] ^ mul13[state[15]];
 	tmp_state[14] = mul13[state[12]] ^ mul09[state[13]] ^ mul14[state[14]] ^ mul11[state[15]];
 	tmp_state[15] = mul11[state[12]] ^ mul13[state[13]] ^ mul09[state[14]] ^ mul14[state[15]];
-	L_IMC: for (unsigned short i = 0; i < stt_lng; i++) {
+	L_IMC: for (unsigned char i = 0; i < stt_lng; i++) {
 #pragma HLS unroll
 		state[i] = tmp_state[i];
 	}
 }
 
-void AddRoundKey(unsigned char* state, unsigned short Nr, unsigned short round) {
+void AddRoundKey(unsigned char* state, unsigned char Nr, unsigned char round) {
 #pragma HLS inline off
 #pragma HLS array_map variable=expandedKey128 instance=expandedKey horizontal
 #pragma HLS array_map variable=expandedKey192 instance=expandedKey horizontal
 #pragma HLS array_map variable=expandedKey256 instance=expandedKey horizontal
-	L_ARK: for (unsigned short i = 0; i < stt_lng; i++) {
+	L_ARK: for (unsigned char i = 0; i < stt_lng; i++) {
 #pragma HLS unroll
 		switch (Nr) {
 		case 10:
@@ -208,32 +206,34 @@ void AddRoundKey(unsigned char* state, unsigned short Nr, unsigned short round) 
 }
 
 // Cipher
-void AES_Encrypt(unsigned char plaintext[stt_lng], unsigned short Nr, unsigned char ciphertext[stt_lng]) {
-#pragma HLS INTERFACe s_axilite          port=return     bundle=Cipher
-#pragma HLS INTERFACE s_axilite          port=Nr         bundle=Cipher
-#pragma HLS INTERFACE s_axilite depth=16 port=plaintext  bundle=Cipher
-#pragma HLS INTERFACE s_axilite depth=16 port=ciphertext bundle=Cipher
+void AES_Encrypt(unsigned char Nr, unsigned char plaintext[stt_lng], unsigned char ciphertext[stt_lng]) {
 
 #pragma HLS inline region // will inline the functions unless inlining is off
+
+#pragma HLS INTERFACE s_axilite          port=Nr         bundle=Cipher
+#pragma HLS INTERFACE axis register forward port=plaintext
+#pragma HLS INTERFACE axis register reverse port=ciphertext
+#pragma HLS INTERFACe s_axilite          port=return     bundle=Cipher
+
 #pragma HLS pipeline // reduces II
 
 //#pragma HLS allocation instances=AddRoundKey limit=1 function // ensure only one instance of AddRoundKey
 
 // group cipher tables together
-#pragma HLS array_map variable=s_box          instance=cipher      horizontal
-#pragma HLS array_map variable=mul02          instance=cipher      horizontal
-#pragma HLS array_map variable=mul03          instance=cipher      horizontal
+#pragma HLS array_map variable=s_box instance=cipher horizontal
+#pragma HLS array_map variable=mul02 instance=cipher horizontal
+#pragma HLS array_map variable=mul03 instance=cipher horizontal
 
 	// Copy plaintext into state
 	unsigned char state[stt_lng];
-	L_copy_i: for (unsigned short i = 0; i < stt_lng; i++) {
+	L_copy_i: for (unsigned char i = 0; i < stt_lng; i++) {
 #pragma HLS unroll
 		state[i] = plaintext[i];
 	}
 
 	AddRoundKey(state, Nr, 0);
 
-	L_rounds: for (unsigned short j = 0; j < Nr_max; j++) {
+	L_rounds: for (unsigned char j = 0; j < Nr_max; j++) {
 #pragma HLS unroll
 		SubBytes(state);
 		ShiftRows(state);
@@ -245,20 +245,22 @@ void AES_Encrypt(unsigned char plaintext[stt_lng], unsigned short Nr, unsigned c
 	}
 
 	// Copy state to ciphertext
-	L_copy_o: for (unsigned short i = 0; i < stt_lng; i++) {
+	L_copy_o: for (unsigned char i = 0; i < stt_lng; i++) {
 #pragma HLS unroll
 		ciphertext[i] = state[i];
 	}
 }
 
 // Inverse Cipher
-void AES_Decrypt(unsigned char ciphertext[stt_lng], unsigned short Nr, unsigned char plaintext[stt_lng]) {
-#pragma HLS INTERFACe s_axilite          port=return     bundle=Decipher
-#pragma HLS INTERFACE s_axilite          port=Nr         bundle=Decipher
-#pragma HLS INTERFACE s_axilite depth=16 port=plaintext  bundle=Decipher
-#pragma HLS INTERFACE s_axilite depth=16 port=ciphertext bundle=Decipher
+void AES_Decrypt(unsigned char Nr, unsigned char ciphertext[stt_lng], unsigned char plaintext[stt_lng]) {
 
 #pragma HLS inline region // will inline the functions unless inlining is off
+
+#pragma HLS INTERFACE s_axilite          port=Nr         bundle=Decipher
+#pragma HLS INTERFACE axis register forward port=ciphertext
+#pragma HLS INTERFACE axis register reverse port=plaintext
+#pragma HLS INTERFACe s_axilite          port=return     bundle=Decipher
+
 #pragma HLS pipeline // reduces II
 
 //#pragma HLS allocation instances=AddRoundKey limit=1 function // ensure only one instance of AddRoundKey
@@ -272,14 +274,14 @@ void AES_Decrypt(unsigned char ciphertext[stt_lng], unsigned short Nr, unsigned 
 
 	// Copy ciphertext into state
 	unsigned char state[stt_lng];
-	L_copy_i: for (unsigned short i = 0; i < stt_lng; i++) {
+	L_copy_i: for (unsigned char i = 0; i < stt_lng; i++) {
 #pragma HLS unroll
 		state[i] = ciphertext[i];
 	}
 
 	AddRoundKey(state, Nr, Nr);
 
-	L_rounds: for (unsigned short j = 0; j < Nr_max; j++) {
+	L_rounds: for (unsigned char j = 0; j < Nr_max; j++) {
 #pragma HLS unroll
 		InvShiftRows(state);
 		InvSubBytes(state);
@@ -291,29 +293,26 @@ void AES_Decrypt(unsigned char ciphertext[stt_lng], unsigned short Nr, unsigned 
 	}
 
 	// Copy state to plaintext
-	L_copy_o: for (unsigned short i = 0; i < stt_lng; i++) {
+	L_copy_o: for (unsigned char i = 0; i < stt_lng; i++) {
 #pragma HLS unroll
 		plaintext[i] = state[i];
 	}
 }
 
 //// AES Full
-void AES_Full(bool mode_cipher, bool mode_inverse_cipher,
-		unsigned char data_in[stt_lng], unsigned short Nr,
-		unsigned char data_out[stt_lng]) {
-#pragma HLS INTERFACe s_axilite          port=return              bundle=AES
-#pragma HLS INTERFACE s_axilite          port=mode_cipher         bundle=AES
-#pragma HLS INTERFACE s_axilite          port=mode_inverse_cipher bundle=AES
-#pragma HLS INTERFACE s_axilite depth=16 port=data_in             bundle=AES
-#pragma HLS INTERFACE s_axilite          port=Nr                  bundle=AES
-#pragma HLS INTERFACE s_axilite depth=16 port=data_out            bundle=AES
+void AES_Full(bool cipher_or_i_cipher, unsigned char Nr,
+		unsigned char data_in[stt_lng], unsigned char data_out[stt_lng]) {
 
 #pragma HLS inline region // will inline the functions unless inlining is off
 
-	if (mode_cipher) {
-		AES_Encrypt(data_in, Nr, data_out);
-	}
-	if (mode_inverse_cipher) {
-		AES_Decrypt(data_in, Nr, data_out);
-	}
+#pragma HLS INTERFACE s_axilite          port=cipher_or_i_cipher  bundle=AES
+#pragma HLS INTERFACE s_axilite          port=Nr                  bundle=AES
+#pragma HLS INTERFACE axis register forward port=data_in
+#pragma HLS INTERFACE axis register reverse port=data_out
+#pragma HLS INTERFACe s_axilite          port=return              bundle=AES
+
+	if (cipher_or_i_cipher)
+		AES_Encrypt(Nr, data_in, data_out);
+	else
+		AES_Decrypt(Nr, data_in, data_out);
 }

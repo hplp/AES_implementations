@@ -1,8 +1,7 @@
 #include "AESfunctions.h"
 
-void AES_Full(bool mode_cipher, bool mode_inverse_cipher,
-		unsigned char data_in[stt_lng], unsigned short Nr,
-		unsigned char data_out[stt_lng]);
+void AES_Full(bool cipher_or_i_cipher, unsigned char Nr,
+		unsigned char data_in[stt_lng], unsigned char data_out[stt_lng]);
 
 void KeyExpansion(unsigned char* inputKey, unsigned short Nk, unsigned char* expandedKey);
 
@@ -22,6 +21,8 @@ int main()
 	unsigned char ciphertext[stt_lng];
 	// variable array for decrypted plaintext
 	unsigned char decrypted_plaintext[stt_lng];
+
+	bool all_tests_pass = true;
 
 	for (unsigned short test = 0; test < 512; test++) {
 
@@ -60,7 +61,7 @@ int main()
 
 
 		// encrypt
-		AES_Full(true, false, plaintext, Nr, ciphertext);
+		AES_Full(true, (unsigned char) Nr, plaintext, ciphertext);
 		cout << "ciphertext = ";
 		for (unsigned short i = 0; i < stt_lng; i++) { cout << dec << (unsigned short)ciphertext[i] << " "; }
 		cout << "<=> ";
@@ -69,7 +70,7 @@ int main()
 
 
 		// decrypt
-		AES_Full(false, true, ciphertext, Nr, decrypted_plaintext);
+		AES_Full(false, (unsigned char) Nr, ciphertext, decrypted_plaintext);
 		cout << "decrypted_plaintext = ";
 		for (unsigned short i = 0; i < stt_lng; i++) { cout << decrypted_plaintext[i] << " "; }
 		cout << "<=> ";
@@ -78,7 +79,14 @@ int main()
 
 		if (plaintext[0] == decrypted_plaintext[0])
 			cout << "test " << dec << test << " passed" << endl << endl;
+		else
+			all_tests_pass = false;
 
 	}
+	if (all_tests_pass)
+		cout << "all tests pass!" << endl << endl;
+	else
+		cout << "fail" << endl << endl;
+
 	return 0;
 }

@@ -1,8 +1,8 @@
 #include "AESfunctions.h"
 
-void AES_Encrypt(unsigned char plaintext[stt_lng], unsigned short Nr, unsigned char ciphertext[stt_lng]);
+void AES_Encrypt(unsigned char Nr, unsigned char plaintext[stt_lng], unsigned char ciphertext[stt_lng]);
 
-void AES_Decrypt(unsigned char ciphertext[stt_lng], unsigned short Nr, unsigned char plaintext[stt_lng]);
+void AES_Decrypt(unsigned char Nr, unsigned char ciphertext[stt_lng], unsigned char plaintext[stt_lng]);
 
 void KeyExpansion(unsigned char* inputKey, unsigned short Nk, unsigned char* expandedKey);
 
@@ -22,6 +22,8 @@ int main()
 	unsigned char ciphertext[stt_lng];
 	// variable array for decrypted plaintext
 	unsigned char decrypted_plaintext[stt_lng];
+
+	bool all_tests_pass = true;
 
 	for (unsigned short test = 0; test < 512; test++) {
 
@@ -60,7 +62,7 @@ int main()
 
 
 		// encrypt
-		AES_Encrypt(plaintext, Nr, ciphertext);
+		AES_Encrypt((unsigned char) Nr, plaintext, ciphertext);
 		cout << "ciphertext = ";
 		for (unsigned short i = 0; i < stt_lng; i++) { cout << dec << (unsigned short)ciphertext[i] << " "; }
 		cout << "<=> ";
@@ -69,7 +71,7 @@ int main()
 
 
 		// decrypt
-		AES_Decrypt(ciphertext, Nr, decrypted_plaintext);
+		AES_Decrypt((unsigned char) Nr, ciphertext, decrypted_plaintext);
 		cout << "decrypted_plaintext = ";
 		for (unsigned short i = 0; i < stt_lng; i++) { cout << decrypted_plaintext[i] << " "; }
 		cout << "<=> ";
@@ -78,6 +80,13 @@ int main()
 
 		if (plaintext[0] == decrypted_plaintext[0])
 			cout << "test " << dec << test << " passed" << endl << endl;
+		else
+			all_tests_pass = false;
 	}
-    return 0;
+	if (all_tests_pass)
+		cout << "all tests pass!" << endl << endl;
+	else
+		cout << "fail" << endl << endl;
+
+	return 0;
 }
