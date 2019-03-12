@@ -5,10 +5,10 @@
 ############################################################
 open_project AES_Decrypt
 set_top AES_Decrypt
-add_files source/AEStables.h
-add_files source/AESkeys.h
-add_files source/AESfunctions.h
 add_files source/AESfunctions.cpp
+add_files source/AESfunctions.h
+add_files source/AESkeys.h
+add_files source/AEStables.h
 add_files -tb source/test_AES.cpp -cflags "-Wno-unknown-pragmas"
 open_solution "solution1"
 set_part {xc7z020clg400-1} -tool vivado
