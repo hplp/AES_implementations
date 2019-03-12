@@ -5,10 +5,10 @@
 ############################################################
 open_project AES_Full
 set_top AES_Full
-add_files source/AESfunctions.cpp
-add_files source/AESfunctions.h
-add_files source/AESkeys.h
 add_files source/AEStables.h
+add_files source/AESkeys.h
+add_files source/AESfunctions.h
+add_files source/AESfunctions.cpp
 add_files -tb source/test_AES_full.cpp -cflags "-Wno-unknown-pragmas"
 open_solution "solution1"
 set_part {xc7z020clg400-1} -tool vivado
@@ -18,4 +18,4 @@ config_export -description {AES Full HLS} -display_name AES_Full_HLS -format ip_
 csim_design -clean
 csynth_design
 cosim_design
-export_design -rtl verilog -format ip_catalog -description "AES Full HLS" -vendor "UVA_HPLP" -library "HLS" -display_name "AES_Full_HLS"
+export_design -rtl verilog -format ip_catalog -description "AES Full HLS rolled" -vendor "UVA_HPLP" -library "HLS" -display_name "AES_Full_HLS_rolled"

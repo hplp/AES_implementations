@@ -28,7 +28,7 @@
             
     <schedule model="AES_Full"/>
             
-    <config_export description="AES Full HLS" display_name="AES_Full_HLS" format="ip_catalog" library="HLS" rtl="verilog" vendor="UVA_HPLP"/>
+    <config_export description="AES Full HLS rolled" display_name="AES_Full_HLS_rolled" format="ip_catalog" library="HLS" rtl="verilog" vendor="UVA_HPLP"/>
         
   </config>
   <UIConfigurations>
@@ -64,7 +64,7 @@
     </UIAutoSimConf>
   </UIConfigurations>
   <ExportDesign askAgain="true" evaluate="false" flow="false" flowChoice="syn" formatName="ip_catalog" rtl="verilog" rtlButton="true" rtlCombo="verilog">
-    <Format description="AES Full HLS" display_name="AES_Full_HLS" formatName="ip_catalog" library="HLS" vendor="UVA_HPLP"/>
+    <Format description="AES Full HLS rolled" display_name="AES_Full_HLS_rolled" formatName="ip_catalog" library="HLS" vendor="UVA_HPLP"/>
     <Format formatName="sysgen"/>
     <Format formatName="sysgen_ise"/>
     <Format formatName="syn_dcp"/>
