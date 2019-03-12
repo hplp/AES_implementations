@@ -217,8 +217,6 @@ void AES_Encrypt(unsigned char Nr, unsigned char plaintext[stt_lng], unsigned ch
 //#pragma HLS INTERFACE axis register reverse port=ciphertext
 #pragma HLS INTERFACe s_axilite port=return     bundle=Cipher
 
-#pragma HLS pipeline // reduces II
-
 // ensure only one instance; proper unroll needs 15-14-13 instances
 #pragma HLS allocation instances=AddRoundKey limit=1 function
 #pragma HLS allocation instances=SubBytes    limit=1 function
@@ -232,14 +230,12 @@ void AES_Encrypt(unsigned char Nr, unsigned char plaintext[stt_lng], unsigned ch
 	// Copy plaintext into state
 	unsigned char state[stt_lng];
 	L_copy_i: for (unsigned char i = 0; i < stt_lng; i++) {
-#pragma HLS unroll
 		state[i] = plaintext[i];
 	}
 
 	AddRoundKey(state, Nr, 0);
 
 	L_rounds: for (unsigned char j = 0; j < Nr_max; j++) {
-#pragma HLS unroll
 		SubBytes(state);
 		ShiftRows(state);
 		if (j != (Nr - 1))
@@ -251,7 +247,6 @@ void AES_Encrypt(unsigned char Nr, unsigned char plaintext[stt_lng], unsigned ch
 
 	// Copy state to ciphertext
 	L_copy_o: for (unsigned char i = 0; i < stt_lng; i++) {
-#pragma HLS unroll
 		ciphertext[i] = state[i];
 	}
 }
@@ -268,8 +263,6 @@ void AES_Decrypt(unsigned char Nr, unsigned char ciphertext[stt_lng], unsigned c
 //#pragma HLS INTERFACE axis register reverse port=plaintext
 #pragma HLS INTERFACe s_axilite port=return     bundle=Decipher
 
-#pragma HLS pipeline // reduces II
-
 // ensure only one instance; proper unroll needs 15-14-13 instances
 #pragma HLS allocation instances=AddRoundKey   limit=1 function
 #pragma HLS allocation instances=InvSubBytes   limit=1 function
@@ -285,14 +278,12 @@ void AES_Decrypt(unsigned char Nr, unsigned char ciphertext[stt_lng], unsigned c
 	// Copy ciphertext into state
 	unsigned char state[stt_lng];
 	L_copy_i: for (unsigned char i = 0; i < stt_lng; i++) {
-#pragma HLS unroll
 		state[i] = ciphertext[i];
 	}
 
 	AddRoundKey(state, Nr, Nr);
 
 	L_rounds: for (unsigned char j = 0; j < Nr_max; j++) {
-#pragma HLS unroll
 		InvShiftRows(state);
 		InvSubBytes(state);
 		AddRoundKey(state, Nr, Nr - j - 1);
@@ -304,7 +295,6 @@ void AES_Decrypt(unsigned char Nr, unsigned char ciphertext[stt_lng], unsigned c
 
 	// Copy state to plaintext
 	L_copy_o: for (unsigned char i = 0; i < stt_lng; i++) {
-#pragma HLS unroll
 		plaintext[i] = state[i];
 	}
 }
