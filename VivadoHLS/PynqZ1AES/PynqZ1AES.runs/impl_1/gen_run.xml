@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_1" LaunchPart="xc7z020clg400-1" LaunchTime="1552083472">
+<GenRun Id="impl_1" LaunchPart="xc7z020clg400-1" LaunchTime="1552421119">
   <File Type="BITSTR-BMM" Name="ZAES_wrapper_bd.bmm"/>
   <File Type="OPT-METHODOLOGY-DRC" Name="ZAES_wrapper_methodology_drc_opted.rpt"/>
   <File Type="INIT-TIMING" Name="ZAES_wrapper_timing_summary_init.rpt"/>
@@ -104,9 +104,7 @@
     </Config>
   </FileSet>
   <Strategy Version="1" Minor="2">
-    <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2018">
-      <Desc>Default settings for Implementation.</Desc>
-    </StratHandle>
+    <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2018"/>
     <Step Id="init_design"/>
     <Step Id="opt_design"/>
     <Step Id="power_opt_design"/>
@@ -117,8 +115,7 @@
     <Step Id="post_route_phys_opt_design"/>
     <Step Id="write_bitstream"/>
   </Strategy>
-  <BlockFileSet Type="BlockSrcs" Name="ZAES_AES_Full_0_0"/>
   <BlockFileSet Type="BlockSrcs" Name="ZAES_rst_ps7_0_100M_0"/>
   <BlockFileSet Type="BlockSrcs" Name="ZAES_processing_system7_0_0"/>
-  <BlockFileSet Type="BlockSrcs" Name="ZAES_auto_pc_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="ZAES_AES_Full_0_0"/>
 </GenRun>

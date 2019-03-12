@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7z020clg400-1" LaunchTime="1552083211">
+<GenRun Id="synth_1" LaunchPart="xc7z020clg400-1" LaunchTime="1552421117">
   <File Type="PA-TCL" Name="ZAES_wrapper.tcl"/>
   <File Type="RDS-PROPCONSTRS" Name="ZAES_wrapper_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="ZAES_wrapper_reports.tcl"/>
@@ -44,13 +44,10 @@
     </Config>
   </FileSet>
   <Strategy Version="1" Minor="2">
-    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2018">
-      <Desc>Vivado Synthesis Defaults</Desc>
-    </StratHandle>
+    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2018"/>
     <Step Id="synth_design"/>
   </Strategy>
-  <BlockFileSet Type="BlockSrcs" Name="ZAES_AES_Full_0_0"/>
   <BlockFileSet Type="BlockSrcs" Name="ZAES_rst_ps7_0_100M_0"/>
   <BlockFileSet Type="BlockSrcs" Name="ZAES_processing_system7_0_0"/>
-  <BlockFileSet Type="BlockSrcs" Name="ZAES_auto_pc_0"/>
+  <BlockFileSet Type="BlockSrcs" Name="ZAES_AES_Full_0_0"/>
 </GenRun>

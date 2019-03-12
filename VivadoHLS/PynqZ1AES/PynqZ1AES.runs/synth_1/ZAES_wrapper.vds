@@ -2,8 +2,8 @@
 # Vivado v2018.3 (64-bit)
 # SW Build 2405991 on Thu Dec  6 23:38:27 MST 2018
 # IP Build 2404404 on Fri Dec  7 01:43:56 MST 2018
-# Start of session at: Fri Mar  8 17:16:02 2019
-# Process ID: 7312
+# Start of session at: Tue Mar 12 16:05:22 2019
+# Process ID: 22276
 # Current directory: D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES/PynqZ1AES.runs/synth_1
 # Command line: vivado.exe -log ZAES_wrapper.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source ZAES_wrapper.tcl
 # Log file: D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES/PynqZ1AES.runs/synth_1/ZAES_wrapper.vds
@@ -22,27 +22,27 @@ Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 5028 
+INFO: Helper process launched with PID 33852 
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 386.148 ; gain = 101.824
+Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 387.301 ; gain = 102.141
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'ZAES_wrapper' [D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES/PynqZ1AES.srcs/sources_1/bd/ZAES/hdl/ZAES_wrapper.v:12]
 INFO: [Synth 8-6157] synthesizing module 'ZAES' [D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES/PynqZ1AES.srcs/sources_1/bd/ZAES/synth/ZAES.v:13]
-INFO: [Synth 8-6157] synthesizing module 'ZAES_AES_Full_0_0' [D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES/PynqZ1AES.runs/synth_1/.Xil/Vivado-7312-HPLP-SM7ED/realtime/ZAES_AES_Full_0_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'ZAES_AES_Full_0_0' (1#1) [D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES/PynqZ1AES.runs/synth_1/.Xil/Vivado-7312-HPLP-SM7ED/realtime/ZAES_AES_Full_0_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'ZAES_AES_Full_0_0' [D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES/PynqZ1AES.runs/synth_1/.Xil/Vivado-22276-HPLP-SM7ED/realtime/ZAES_AES_Full_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'ZAES_AES_Full_0_0' (1#1) [D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES/PynqZ1AES.runs/synth_1/.Xil/Vivado-22276-HPLP-SM7ED/realtime/ZAES_AES_Full_0_0_stub.v:6]
 WARNING: [Synth 8-350] instance 'AES_Full_0' of module 'ZAES_AES_Full_0_0' requires 20 connections, but only 19 given [D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES/PynqZ1AES.srcs/sources_1/bd/ZAES/synth/ZAES.v:137]
-INFO: [Synth 8-6157] synthesizing module 'ZAES_processing_system7_0_0' [D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES/PynqZ1AES.runs/synth_1/.Xil/Vivado-7312-HPLP-SM7ED/realtime/ZAES_processing_system7_0_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'ZAES_processing_system7_0_0' (2#1) [D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES/PynqZ1AES.runs/synth_1/.Xil/Vivado-7312-HPLP-SM7ED/realtime/ZAES_processing_system7_0_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'ZAES_processing_system7_0_0' [D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES/PynqZ1AES.runs/synth_1/.Xil/Vivado-22276-HPLP-SM7ED/realtime/ZAES_processing_system7_0_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'ZAES_processing_system7_0_0' (2#1) [D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES/PynqZ1AES.runs/synth_1/.Xil/Vivado-22276-HPLP-SM7ED/realtime/ZAES_processing_system7_0_0_stub.v:6]
 WARNING: [Synth 8-350] instance 'processing_system7_0' of module 'ZAES_processing_system7_0_0' requires 65 connections, but only 63 given [D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES/PynqZ1AES.srcs/sources_1/bd/ZAES/synth/ZAES.v:157]
 INFO: [Synth 8-6157] synthesizing module 'ZAES_ps7_0_axi_periph_0' [D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES/PynqZ1AES.srcs/sources_1/bd/ZAES/synth/ZAES.v:292]
 INFO: [Synth 8-6157] synthesizing module 's00_couplers_imp_1GLKWA3' [D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES/PynqZ1AES.srcs/sources_1/bd/ZAES/synth/ZAES.v:597]
-INFO: [Synth 8-6157] synthesizing module 'ZAES_auto_pc_0' [D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES/PynqZ1AES.runs/synth_1/.Xil/Vivado-7312-HPLP-SM7ED/realtime/ZAES_auto_pc_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'ZAES_auto_pc_0' (3#1) [D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES/PynqZ1AES.runs/synth_1/.Xil/Vivado-7312-HPLP-SM7ED/realtime/ZAES_auto_pc_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'ZAES_auto_pc_0' [D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES/PynqZ1AES.runs/synth_1/.Xil/Vivado-22276-HPLP-SM7ED/realtime/ZAES_auto_pc_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'ZAES_auto_pc_0' (3#1) [D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES/PynqZ1AES.runs/synth_1/.Xil/Vivado-22276-HPLP-SM7ED/realtime/ZAES_auto_pc_0_stub.v:6]
 WARNING: [Synth 8-350] instance 'auto_pc' of module 'ZAES_auto_pc_0' requires 59 connections, but only 57 given [D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES/PynqZ1AES.srcs/sources_1/bd/ZAES/synth/ZAES.v:832]
 INFO: [Synth 8-6155] done synthesizing module 's00_couplers_imp_1GLKWA3' (4#1) [D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES/PynqZ1AES.srcs/sources_1/bd/ZAES/synth/ZAES.v:597]
 INFO: [Synth 8-6155] done synthesizing module 'ZAES_ps7_0_axi_periph_0' (5#1) [D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES/PynqZ1AES.srcs/sources_1/bd/ZAES/synth/ZAES.v:292]
-INFO: [Synth 8-6157] synthesizing module 'ZAES_rst_ps7_0_100M_0' [D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES/PynqZ1AES.runs/synth_1/.Xil/Vivado-7312-HPLP-SM7ED/realtime/ZAES_rst_ps7_0_100M_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'ZAES_rst_ps7_0_100M_0' (6#1) [D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES/PynqZ1AES.runs/synth_1/.Xil/Vivado-7312-HPLP-SM7ED/realtime/ZAES_rst_ps7_0_100M_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'ZAES_rst_ps7_0_100M_0' [D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES/PynqZ1AES.runs/synth_1/.Xil/Vivado-22276-HPLP-SM7ED/realtime/ZAES_rst_ps7_0_100M_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'ZAES_rst_ps7_0_100M_0' (6#1) [D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES/PynqZ1AES.runs/synth_1/.Xil/Vivado-22276-HPLP-SM7ED/realtime/ZAES_rst_ps7_0_100M_0_stub.v:6]
 WARNING: [Synth 8-350] instance 'rst_ps7_0_100M' of module 'ZAES_rst_ps7_0_100M_0' requires 10 connections, but only 6 given [D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES/PynqZ1AES.srcs/sources_1/bd/ZAES/synth/ZAES.v:283]
 INFO: [Synth 8-6155] done synthesizing module 'ZAES' (7#1) [D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES/PynqZ1AES.srcs/sources_1/bd/ZAES/synth/ZAES.v:13]
 INFO: [Synth 8-6155] done synthesizing module 'ZAES_wrapper' (8#1) [D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES/PynqZ1AES.srcs/sources_1/bd/ZAES/hdl/ZAES_wrapper.v:12]
@@ -51,7 +51,7 @@ WARNING: [Synth 8-3331] design s00_couplers_imp_1GLKWA3 has unconnected port M_A
 WARNING: [Synth 8-3331] design ZAES_ps7_0_axi_periph_0 has unconnected port ACLK
 WARNING: [Synth 8-3331] design ZAES_ps7_0_axi_periph_0 has unconnected port ARESETN
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 442.688 ; gain = 158.363
+Finished RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 443.160 ; gain = 158.000
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -64,10 +64,10 @@ Report Check Netlist:
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 442.688 ; gain = 158.363
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 443.160 ; gain = 158.000
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 442.688 ; gain = 158.363
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 443.160 ; gain = 158.000
 ---------------------------------------------------------------------------------
 INFO: [Device 21-403] Loading part xc7z020clg400-1
 INFO: [Project 1-570] Preparing netlist for logic optimization
@@ -86,21 +86,21 @@ Parsing XDC File [D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES
 Finished Parsing XDC File [D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES/PynqZ1AES.runs/synth_1/dont_touch.xdc]
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 723.574 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 723.750 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 723.586 ; gain = 0.000
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.021 . Memory (MB): peak = 723.586 ; gain = 0.012
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 723.750 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.020 . Memory (MB): peak = 723.750 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 723.586 ; gain = 439.262
+Finished Constraint Validation : Time (s): cpu = 00:00:11 ; elapsed = 00:00:13 . Memory (MB): peak = 723.750 ; gain = 438.590
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7z020clg400-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 723.586 ; gain = 439.262
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:11 ; elapsed = 00:00:13 . Memory (MB): peak = 723.750 ; gain = 438.590
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
@@ -372,10 +372,10 @@ Applied set_property DONT_TOUCH = true for ZAES_i/ps7_0_axi_periph. (constraint 
 Applied set_property DONT_TOUCH = true for ZAES_i/rst_ps7_0_100M. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for ZAES_i/ps7_0_axi_periph/s00_couplers/auto_pc. (constraint file  auto generated constraint, line ).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:12 ; elapsed = 00:00:13 . Memory (MB): peak = 723.586 ; gain = 439.262
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:12 ; elapsed = 00:00:14 . Memory (MB): peak = 723.750 ; gain = 438.590
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:12 ; elapsed = 00:00:14 . Memory (MB): peak = 723.586 ; gain = 439.262
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:12 ; elapsed = 00:00:14 . Memory (MB): peak = 723.750 ; gain = 438.590
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -415,7 +415,7 @@ WARNING: [Synth 8-3331] design ZAES_ps7_0_axi_periph_0 has unconnected port ARES
 WARNING: [Synth 8-3331] design ZAES_ps7_0_axi_periph_0 has unconnected port M00_ACLK
 WARNING: [Synth 8-3331] design ZAES_ps7_0_axi_periph_0 has unconnected port M00_ARESETN
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:13 ; elapsed = 00:00:14 . Memory (MB): peak = 723.586 ; gain = 439.262
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:13 ; elapsed = 00:00:15 . Memory (MB): peak = 723.750 ; gain = 438.590
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -429,13 +429,13 @@ Start Applying XDC Timing Constraints
 INFO: [Synth 8-5578] Moved timing constraint from pin 'ZAES_i/processing_system7_0/FCLK_CLK0' to pin 'ZAES_i/processing_system7_0/bbstub_FCLK_CLK0/O'
 INFO: [Synth 8-5819] Moved 1 constraints on hierarchical pins to their respective driving/loading pins
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:22 ; elapsed = 00:00:23 . Memory (MB): peak = 782.363 ; gain = 498.039
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:21 ; elapsed = 00:00:24 . Memory (MB): peak = 786.082 ; gain = 500.922
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:22 ; elapsed = 00:00:23 . Memory (MB): peak = 782.438 ; gain = 498.113
+Finished Timing Optimization : Time (s): cpu = 00:00:21 ; elapsed = 00:00:24 . Memory (MB): peak = 786.156 ; gain = 500.996
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -447,7 +447,7 @@ Report RTL Partitions:
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:22 ; elapsed = 00:00:23 . Memory (MB): peak = 792.164 ; gain = 507.840
+Finished Technology Mapping : Time (s): cpu = 00:00:21 ; elapsed = 00:00:24 . Memory (MB): peak = 796.012 ; gain = 510.852
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -471,7 +471,7 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 792.164 ; gain = 507.840
+Finished IO Insertion : Time (s): cpu = 00:00:22 ; elapsed = 00:00:25 . Memory (MB): peak = 796.012 ; gain = 510.852
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -484,7 +484,7 @@ Report Check Netlist:
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 792.164 ; gain = 507.840
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:22 ; elapsed = 00:00:25 . Memory (MB): peak = 796.012 ; gain = 510.852
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -496,25 +496,25 @@ Report RTL Partitions:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 792.164 ; gain = 507.840
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:22 ; elapsed = 00:00:25 . Memory (MB): peak = 796.012 ; gain = 510.852
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 792.164 ; gain = 507.840
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:22 ; elapsed = 00:00:25 . Memory (MB): peak = 796.012 ; gain = 510.852
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 792.164 ; gain = 507.840
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:22 ; elapsed = 00:00:25 . Memory (MB): peak = 796.012 ; gain = 510.852
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 792.164 ; gain = 507.840
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:22 ; elapsed = 00:00:25 . Memory (MB): peak = 796.012 ; gain = 510.852
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -550,25 +550,25 @@ Report Instance Areas:
 |4     |      s00_couplers   |s00_couplers_imp_1GLKWA3 |   177|
 +------+---------------------+-------------------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 792.164 ; gain = 507.840
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:22 ; elapsed = 00:00:25 . Memory (MB): peak = 796.012 ; gain = 510.852
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 4 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:13 ; elapsed = 00:00:18 . Memory (MB): peak = 792.164 ; gain = 226.941
-Synthesis Optimization Complete : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 792.164 ; gain = 507.840
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:14 ; elapsed = 00:00:18 . Memory (MB): peak = 796.012 ; gain = 230.262
+Synthesis Optimization Complete : Time (s): cpu = 00:00:23 ; elapsed = 00:00:25 . Memory (MB): peak = 796.012 ; gain = 510.852
 INFO: [Project 1-571] Translating synthesized netlist
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 808.246 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 812.504 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
 INFO: [Common 17-83] Releasing license: Synthesis
 32 Infos, 13 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:24 ; elapsed = 00:00:27 . Memory (MB): peak = 812.828 ; gain = 535.676
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 812.828 ; gain = 0.000
+synth_design: Time (s): cpu = 00:00:25 ; elapsed = 00:00:28 . Memory (MB): peak = 817.277 ; gain = 539.273
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 817.277 ; gain = 0.000
 WARNING: [Constraints 18-5210] No constraints selected for write.
 Resolution: This message can indicate that there are no constraints for the design, or it can indicate that the used_in flags are set such that the constraints are ignored. This later case is used when running synth_design to not write synthesis constraints to the resulting checkpoint. Instead, project constraints are read when the synthesized design is opened.
 INFO: [Common 17-1381] The checkpoint 'D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES/PynqZ1AES.runs/synth_1/ZAES_wrapper.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file ZAES_wrapper_utilization_synth.rpt -pb ZAES_wrapper_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Fri Mar  8 17:16:36 2019...
+INFO: [Common 17-206] Exiting Vivado at Tue Mar 12 16:05:57 2019...

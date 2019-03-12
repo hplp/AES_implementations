@@ -3,8 +3,8 @@
 -- Tool Version: Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
 -- Date        : Fri Mar  8 17:15:09 2019
 -- Host        : HPLP-SM7ED running 64-bit major release  (build 9200)
--- Command     : write_vhdl -force -mode synth_stub
---               d:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES/PynqZ1AES.srcs/sources_1/bd/ZAES/ip/ZAES_auto_pc_0/ZAES_auto_pc_0_stub.vhdl
+-- Command     : write_vhdl -force -mode synth_stub -rename_top ZAES_auto_pc_0 -prefix
+--               ZAES_auto_pc_0_ ZAES_auto_pc_0_stub.vhdl
 -- Design      : ZAES_auto_pc_0
 -- Purpose     : Stub declaration of top-level module interface
 -- Device      : xc7z020clg400-1

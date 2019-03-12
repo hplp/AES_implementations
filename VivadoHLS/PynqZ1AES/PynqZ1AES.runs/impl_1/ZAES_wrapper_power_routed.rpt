@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date             : Fri Mar  8 17:20:30 2019
+| Date             : Tue Mar 12 16:09:06 2019
 | Host             : HPLP-SM7ED running 64-bit major release  (build 9200)
 | Command          : report_power -file ZAES_wrapper_power_routed.rpt -pb ZAES_wrapper_power_summary_routed.pb -rpx ZAES_wrapper_power_routed.rpx
 | Design           : ZAES_wrapper
@@ -30,14 +30,14 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 1.524        |
+| Total On-Chip Power (W)  | 1.454        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 1.381        |
-| Device Static (W)        | 0.142        |
+| Dynamic (W)              | 1.314        |
+| Device Static (W)        | 0.140        |
 | Effective TJA (C/W)      | 11.5         |
-| Max Ambient (C)          | 67.4         |
-| Junction Temperature (C) | 42.6         |
+| Max Ambient (C)          | 68.2         |
+| Junction Temperature (C) | 41.8         |
 | Confidence Level         | Medium       |
 | Setting File             | ---          |
 | Simulation Activity File | ---          |
@@ -52,19 +52,19 @@ Table of Contents
 +-------------------------+-----------+----------+-----------+-----------------+
 | On-Chip                 | Power (W) | Used     | Available | Utilization (%) |
 +-------------------------+-----------+----------+-----------+-----------------+
-| Clocks                  |     0.012 |        3 |       --- |             --- |
-| Slice Logic             |     0.015 |     8573 |       --- |             --- |
-|   LUT as Logic          |     0.015 |     3261 |     53200 |            6.13 |
-|   Register              |    <0.001 |     4341 |    106400 |            4.08 |
+| Clocks                  |     0.014 |        3 |       --- |             --- |
+| Slice Logic             |     0.002 |    12074 |       --- |             --- |
+|   LUT as Logic          |     0.002 |     4222 |     53200 |            7.94 |
+|   Register              |    <0.001 |     6597 |    106400 |            6.20 |
 |   CARRY4                |    <0.001 |       12 |     13300 |            0.09 |
-|   LUT as Shift Register |    <0.001 |       60 |     17400 |            0.34 |
+|   LUT as Shift Register |    <0.001 |       65 |     17400 |            0.37 |
 |   F7/F8 Muxes           |    <0.001 |       10 |     53200 |            0.02 |
-|   Others                |     0.000 |      211 |       --- |             --- |
-| Signals                 |     0.035 |     8662 |       --- |             --- |
-| Block RAM               |     0.063 |       42 |       140 |           30.00 |
+|   Others                |     0.000 |      209 |       --- |             --- |
+| Signals                 |     0.004 |    11858 |       --- |             --- |
+| Block RAM               |     0.037 |       42 |       140 |           30.00 |
 | PS7                     |     1.256 |        1 |       --- |             --- |
-| Static Power            |     0.142 |          |           |                 |
-| Total                   |     1.524 |          |           |                 |
+| Static Power            |     0.140 |          |           |                 |
+| Total                   |     1.454 |          |           |                 |
 +-------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -74,8 +74,8 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.137 |       0.120 |      0.016 |
-| Vccaux    |       1.800 |     0.015 |       0.000 |      0.015 |
+| Vccint    |       1.000 |     0.071 |       0.055 |      0.016 |
+| Vccaux    |       1.800 |     0.014 |       0.000 |      0.014 |
 | Vcco33    |       3.300 |     0.000 |       0.000 |      0.000 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
 | Vcco18    |       1.800 |     0.000 |       0.000 |      0.000 |
@@ -83,11 +83,11 @@ Table of Contents
 | Vcco135   |       1.350 |     0.000 |       0.000 |      0.000 |
 | Vcco12    |       1.200 |     0.000 |       0.000 |      0.000 |
 | Vccaux_io |       1.800 |     0.000 |       0.000 |      0.000 |
-| Vccbram   |       1.000 |     0.008 |       0.005 |      0.003 |
+| Vccbram   |       1.000 |     0.006 |       0.003 |      0.003 |
 | MGTAVcc   |       1.000 |     0.000 |       0.000 |      0.000 |
 | MGTAVtt   |       1.200 |     0.000 |       0.000 |      0.000 |
 | MGTVccaux |       1.800 |     0.000 |       0.000 |      0.000 |
-| Vccpint   |       1.000 |     0.675 |       0.647 |      0.028 |
+| Vccpint   |       1.000 |     0.674 |       0.647 |      0.027 |
 | Vccpaux   |       1.800 |     0.036 |       0.026 |      0.010 |
 | Vccpll    |       1.800 |     0.017 |       0.014 |      0.003 |
 | Vcco_ddr  |       1.500 |     0.354 |       0.352 |      0.002 |
@@ -150,14 +150,14 @@ Table of Contents
 +--------------------------+-----------+
 | Name                     | Power (W) |
 +--------------------------+-----------+
-| ZAES_wrapper             |     1.381 |
-|   ZAES_i                 |     1.381 |
-|     AES_Full_0           |     0.120 |
-|       inst               |     0.120 |
+| ZAES_wrapper             |     1.314 |
+|   ZAES_i                 |     1.314 |
+|     AES_Full_0           |     0.053 |
+|       inst               |     0.053 |
 |     processing_system7_0 |     1.256 |
 |       inst               |     1.256 |
-|     ps7_0_axi_periph     |     0.005 |
-|       s00_couplers       |     0.005 |
+|     ps7_0_axi_periph     |     0.004 |
+|       s00_couplers       |     0.004 |
 +--------------------------+-----------+
 
 

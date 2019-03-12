@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -----------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date         : Fri Mar  8 17:15:58 2019
+| Date         : Tue Mar 12 16:02:36 2019
 | Host         : HPLP-SM7ED running 64-bit major release  (build 9200)
 | Command      : report_utilization -file ZAES_AES_Full_0_0_utilization_synth.rpt -pb ZAES_AES_Full_0_0_utilization_synth.pb
 | Design       : ZAES_AES_Full_0_0
@@ -27,18 +27,20 @@ Table of Contents
 1. Slice Logic
 --------------
 
-+-------------------------+------+-------+-----------+-------+
-|        Site Type        | Used | Fixed | Available | Util% |
-+-------------------------+------+-------+-----------+-------+
-| Slice LUTs*             | 2901 |     0 |     53200 |  5.45 |
-|   LUT as Logic          | 2901 |     0 |     53200 |  5.45 |
-|   LUT as Memory         |    0 |     0 |     17400 |  0.00 |
-| Slice Registers         | 3876 |     0 |    106400 |  3.64 |
-|   Register as Flip Flop | 3876 |     0 |    106400 |  3.64 |
-|   Register as Latch     |    0 |     0 |    106400 |  0.00 |
-| F7 Muxes                |   10 |     0 |     26600 |  0.04 |
-| F8 Muxes                |    0 |     0 |     13300 |  0.00 |
-+-------------------------+------+-------+-----------+-------+
++----------------------------+------+-------+-----------+-------+
+|          Site Type         | Used | Fixed | Available | Util% |
++----------------------------+------+-------+-----------+-------+
+| Slice LUTs*                | 3873 |     0 |     53200 |  7.28 |
+|   LUT as Logic             | 3868 |     0 |     53200 |  7.27 |
+|   LUT as Memory            |    5 |     0 |     17400 |  0.03 |
+|     LUT as Distributed RAM |    0 |     0 |           |       |
+|     LUT as Shift Register  |    5 |     0 |           |       |
+| Slice Registers            | 6132 |     0 |    106400 |  5.76 |
+|   Register as Flip Flop    | 6132 |     0 |    106400 |  5.76 |
+|   Register as Latch        |    0 |     0 |    106400 |  0.00 |
+| F7 Muxes                   |   10 |     0 |     26600 |  0.04 |
+| F8 Muxes                   |    0 |     0 |     13300 |  0.00 |
++----------------------------+------+-------+-----------+-------+
 * Warning! The Final LUT count, after physical optimizations and full implementation, is typically lower. Run opt_design after synthesis, if not already completed, for a more realistic count.
 
 
@@ -56,8 +58,8 @@ Table of Contents
 | 0     |          Yes |           - |            - |
 | 0     |          Yes |           - |          Set |
 | 0     |          Yes |           - |        Reset |
-| 9     |          Yes |         Set |            - |
-| 3867  |          Yes |       Reset |            - |
+| 4     |          Yes |         Set |            - |
+| 6128  |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
 
 
@@ -148,16 +150,17 @@ Table of Contents
 +----------+------+---------------------+
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
-| FDRE     | 3867 |        Flop & Latch |
-| LUT6     |  962 |                 LUT |
-| LUT5     |  943 |                 LUT |
-| LUT3     |  834 |                 LUT |
-| LUT4     |  648 |                 LUT |
+| FDRE     | 6128 |        Flop & Latch |
+| LUT3     | 1392 |                 LUT |
+| LUT6     | 1349 |                 LUT |
+| LUT5     | 1024 |                 LUT |
+| LUT4     |  696 |                 LUT |
+| LUT2     |  239 |                 LUT |
 | RAMB18E1 |   80 |        Block Memory |
-| LUT2     |   80 |                 LUT |
+| LUT1     |   15 |                 LUT |
 | MUXF7    |   10 |               MuxFx |
-| FDSE     |    9 |        Flop & Latch |
-| LUT1     |    6 |                 LUT |
+| SRL16E   |    5 |  Distributed Memory |
+| FDSE     |    4 |        Flop & Latch |
 | RAMB36E1 |    2 |        Block Memory |
 +----------+------+---------------------+
 

@@ -48,7 +48,7 @@
 
 
 // IP VLNV: UVA_HPLP:HLS:AES_Full:1.0
-// IP Revision: 1903081709
+// IP Revision: 1903121554
 
 (* X_CORE_INFO = "AES_Full,Vivado 2018.3" *)
 (* CHECK_LICENSE_TYPE = "ZAES_AES_Full_0_0,AES_Full,{}" *)
