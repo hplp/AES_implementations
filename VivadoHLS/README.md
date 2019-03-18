@@ -7,3 +7,6 @@ For help to run on hardware, generate the IP with Vivado HLS, then make a Vivado
 - http://venividiwiki.ee.virginia.edu/mediawiki/index.php/ToolsXilinxLabsHelloZynq
 - http://venividiwiki.ee.virginia.edu/mediawiki/index.php/ToolsXilinxLabsRTLHLSIP#Custom_IP_block_using_High-Level_Synthesis
 - http://venividiwiki.ee.virginia.edu/mediawiki/index.php/ToolsXilinxLabsRTLHLSAES
+
+## Branch info
+Branch HLS-rolled is a lite, compact, implementation of AES in Vivado HLS that aims at low utilization. The AES rounds are rolled, which each of the AES transforms appearing only once. The AES transforms however are unrolled, thus still achieving a decent throughput.
