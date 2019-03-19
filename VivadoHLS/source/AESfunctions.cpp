@@ -24,8 +24,7 @@ void SubWord(unsigned char* in4) {
 	in4[3] = s_box[in4[3]];
 }
 
-void KeyExpansion(unsigned char* inputKey, unsigned short Nk,
-		unsigned char* expandedKey) {
+void KeyExpansion(unsigned char* inputKey, unsigned short Nk, unsigned char* expandedKey) {
 	unsigned short Nr = (Nk > Nb) ? Nk + 6 : Nb + 6; // = 10, 12 or 14 rounds
 	// Copy the inputKey at the beginning of expandedKey
 	for (unsigned short i = 0; i < Nk * rows; i++) {
@@ -310,8 +309,7 @@ void AES_Decrypt(unsigned char Nr, unsigned char ciphertext[stt_lng], unsigned c
 }
 
 //// AES Full
-void AES_Full(bool cipher_or_i_cipher, unsigned char Nr,
-		unsigned char data_in[stt_lng], unsigned char data_out[stt_lng]) {
+void AES_Full(bool cipher_or_i_cipher, unsigned char Nr, unsigned char data_in[stt_lng], unsigned char data_out[stt_lng]) {
 
 #pragma HLS inline region // will inline the functions unless inlining is off
 
@@ -329,4 +327,41 @@ void AES_Full(bool cipher_or_i_cipher, unsigned char Nr,
 		AES_Encrypt(Nr, data_in, data_out);
 	else
 		AES_Decrypt(Nr, data_in, data_out);
+}
+
+//// AES Full with 32-bit AXI Stream interface
+void AES_Full_axis32(bool cipher_or_i_cipher, unsigned char Nr, unsigned int inStream[stt_lng / 4], unsigned int outStream[stt_lng / 4]) {
+
+#pragma HLS inline region // will inline the functions unless inlining is off
+
+#pragma HLS INTERFACE s_axilite port=cipher_or_i_cipher bundle=AES
+#pragma HLS INTERFACE s_axilite port=Nr                 bundle=AES
+#pragma HLS INTERFACE axis register forward port=inStream
+#pragma HLS INTERFACE axis register reverse port=outStream
+#pragma HLS INTERFACe s_axilite port=return             bundle=AES
+
+#pragma HLS pipeline II=4 // reduces II
+
+	unsigned char data_in[stt_lng];
+	unsigned char data_out[stt_lng];
+
+	for (char i = 0; i < stt_lng / 4; i++) {
+		data_in[4 * i + 3] = (char) (inStream[i] >> 0);
+		data_in[4 * i + 2] = (char) (inStream[i] >> 8);
+		data_in[4 * i + 1] = (char) (inStream[i] >> 16);
+		data_in[4 * i + 0] = (char) (inStream[i] >> 24);
+	}
+
+	//for(char i = 0; i < stt_lng; i++) printf("%c ", data_in[i]);
+
+	if (cipher_or_i_cipher)
+		AES_Encrypt(Nr, data_in, data_out);
+	else
+		AES_Decrypt(Nr, data_in, data_out);
+
+	//for(char i = 0; i < stt_lng; i++) printf("%x ", data_out[i]);
+
+	for (char i = 0; i < stt_lng / 4; i++) {
+		outStream[i] = (int) ((data_out[i * 4 + 0] << 24) | (data_out[i * 4 + 1] << 16) | (data_out[i * 4 + 2] << 8) | (data_out[i * 4 + 3] << 0));
+	}
 }

@@ -175,4 +175,19 @@ VivadoHLS/AES_Full/solution1/solution1.funcunit
 VivadoHLS/AES_Full/solution1/solution1.log
 VivadoHLS/AES_Full/solution1/solution1_data.json
 
+VivadoHLS/AES_Full_axis32/.apc
+VivadoHLS/AES_Full_axis32/.settings
+VivadoHLS/AES_Full_axis32/.vivado_hls_log_all.xml
+VivadoHLS/AES_Full_axis32/solution1/.autopilot
+VivadoHLS/AES_Full_axis32/solution1/.tcls
+VivadoHLS/AES_Full_axis32/solution1/csim
+VivadoHLS/AES_Full_axis32/solution1/impl
+VivadoHLS/AES_Full_axis32/solution1/sim
+VivadoHLS/AES_Full_axis32/solution1/syn
+VivadoHLS/AES_Full_axis32/solution1/sdx.tcl
+VivadoHLS/AES_Full_axis32/solution1/solution1.directive
+VivadoHLS/AES_Full_axis32/solution1/solution1.funcunit
+VivadoHLS/AES_Full_axis32/solution1/solution1.log
+VivadoHLS/AES_Full_axis32/solution1/solution1_data.json
+
 VivadoHLS/PynqZ1AESrld/
