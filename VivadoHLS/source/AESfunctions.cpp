@@ -219,7 +219,7 @@ void AES_Encrypt(unsigned char Nr, unsigned char plaintext[stt_lng], unsigned ch
 #pragma HLS pipeline II=16 // reduces II
 
 // ensure only one instance; proper unroll needs 15-14-13 instances
-#pragma HLS allocation instances=AddRoundKey limit=1 function
+#pragma HLS allocation instances=AddRoundKey limit=8 function
 #pragma HLS allocation instances=SubBytes    limit=1 function
 #pragma HLS allocation instances=MixColumns  limit=1 function
 
@@ -270,7 +270,7 @@ void AES_Decrypt(unsigned char Nr, unsigned char ciphertext[stt_lng], unsigned c
 #pragma HLS pipeline II=16 // reduces II
 
 // ensure only one instance; proper unroll needs 15-14-13 instances
-#pragma HLS allocation instances=AddRoundKey   limit=1 function
+#pragma HLS allocation instances=AddRoundKey   limit=8 function
 #pragma HLS allocation instances=InvSubBytes   limit=1 function
 #pragma HLS allocation instances=InvMixColumns limit=1 function
 

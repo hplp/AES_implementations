@@ -22,7 +22,7 @@ int main() {
 	unsigned int inputStream[stt_lng / 4];
 	unsigned int outputStream[stt_lng / 4];
 	for (int i = 0; i < stt_lng / 4; i++) {
-		inputStream[i] = (int) ((plaintext[i * 4 + 0] << 24) | (plaintext[i * 4 + 1] << 16) | (plaintext[i * 4 + 2] << 8) | (plaintext[i * 4 + 3] << 0));
+		inputStream[i] = (unsigned int) ((plaintext[i * 4 + 0] << 24) | (plaintext[i * 4 + 1] << 16) | (plaintext[i * 4 + 2] << 8) | (plaintext[i * 4 + 3] << 0));
 	}
 
 	bool all_tests_pass = true;

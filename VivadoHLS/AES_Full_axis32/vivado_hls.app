@@ -1,4 +1,4 @@
-<project xmlns="com.autoesl.autopilot.project" top="AES_Full_axis32" name="AES_Full_axis32">
+<project xmlns="com.autoesl.autopilot.project" name="AES_Full_axis32" top="AES_Full_axis32">
     <includePaths/>
     <libraryPaths/>
     <Simulation>
@@ -6,10 +6,10 @@
     </Simulation>
     <files xmlns="">
         <file name="../../source/test_AES_full.cpp" sc="0" tb="1" cflags=" -Wno-unknown-pragmas" blackbox="false"/>
-        <file name="source/AEStables.h" sc="0" tb="false" cflags="" blackbox="false"/>
-        <file name="source/AESkeys.h" sc="0" tb="false" cflags="" blackbox="false"/>
-        <file name="source/AESfunctions.h" sc="0" tb="false" cflags="" blackbox="false"/>
         <file name="source/AESfunctions.cpp" sc="0" tb="false" cflags="" blackbox="false"/>
+        <file name="source/AESfunctions.h" sc="0" tb="false" cflags="" blackbox="false"/>
+        <file name="source/AESkeys.h" sc="0" tb="false" cflags="" blackbox="false"/>
+        <file name="source/AEStables.h" sc="0" tb="false" cflags="" blackbox="false"/>
     </files>
     <solutions xmlns="">
         <solution name="solution1" status="active"/>
