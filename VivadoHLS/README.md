@@ -9,4 +9,4 @@ For help to run on hardware, generate the IP with Vivado HLS, then make a Vivado
 - http://venividiwiki.ee.virginia.edu/mediawiki/index.php/ToolsXilinxLabsRTLHLSAES
 
 ## Branch info
-Branch HLS-axis32 is a pipelined, unrolled, implementation of AES in Vivado HLS that also uses a 32-bit AXI Stream interface.
+Branch HLS-axis128 is a pipelined, unrolled, implementation of AES in Vivado HLS that features a 128-bit AXI Stream interface. This is a huge, fully unrolled and pipelined version, that can take 128-bit for encryption at each cycle.
