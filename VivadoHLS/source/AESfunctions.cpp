@@ -219,9 +219,9 @@ void AES_Encrypt(unsigned char Nr, unsigned char plaintext[stt_lng], unsigned ch
 #pragma HLS pipeline II=16 // reduces II
 
 // ensure only one instance; proper unroll needs 15-14-13 instances
-#pragma HLS allocation instances=AddRoundKey limit=8 function
-#pragma HLS allocation instances=SubBytes    limit=1 function
-#pragma HLS allocation instances=MixColumns  limit=1 function
+//#pragma HLS allocation instances=AddRoundKey limit=1 function
+//#pragma HLS allocation instances=SubBytes    limit=1 function
+//#pragma HLS allocation instances=MixColumns  limit=1 function
 
 // group cipher tables together
 #pragma HLS array_map variable=s_box instance=cipher horizontal
@@ -270,9 +270,9 @@ void AES_Decrypt(unsigned char Nr, unsigned char ciphertext[stt_lng], unsigned c
 #pragma HLS pipeline II=16 // reduces II
 
 // ensure only one instance; proper unroll needs 15-14-13 instances
-#pragma HLS allocation instances=AddRoundKey   limit=8 function
-#pragma HLS allocation instances=InvSubBytes   limit=1 function
-#pragma HLS allocation instances=InvMixColumns limit=1 function
+//#pragma HLS allocation instances=AddRoundKey   limit=1 function
+//#pragma HLS allocation instances=InvSubBytes   limit=1 function
+//#pragma HLS allocation instances=InvMixColumns limit=1 function
 
 // group cipher tables together
 #pragma HLS array_map variable=inverted_s_box instance=decipher horizontal
@@ -363,5 +363,64 @@ void AES_Full_axis32(bool cipher_or_i_cipher, unsigned char Nr, unsigned int inS
 
 	for (char i = 0; i < stt_lng / 4; i++) {
 		outStream[i] = (int) ((data_out[i * 4 + 0] << 24) | (data_out[i * 4 + 1] << 16) | (data_out[i * 4 + 2] << 8) | (data_out[i * 4 + 3] << 0));
+	}
+}
+
+//// AES Full with 128-bit AXI Stream interface
+void AES_Full_axis128(bool cipher_or_i_cipher, unsigned char Nr, aes_inout &aes_in, aes_inout &aes_out) {
+
+#pragma HLS inline region // will inline the functions unless inlining is off
+
+#pragma HLS INTERFACE s_axilite port=cipher_or_i_cipher bundle=AES
+#pragma HLS INTERFACE s_axilite port=Nr                 bundle=AES
+#pragma HLS INTERFACE axis register forward port=aes_in
+#pragma HLS INTERFACE axis register reverse port=aes_out
+#pragma HLS INTERFACe s_axilite port=return             bundle=AES
+
+	L_stream: for (unsigned char i = 0; i < 100; i++) {
+#pragma HLS pipeline
+
+		unsigned char data_in[stt_lng];
+		unsigned char data_out[stt_lng];
+
+		data_in[0] = aes_in.data0;
+		data_in[1] = aes_in.data1;
+		data_in[2] = aes_in.data2;
+		data_in[3] = aes_in.data3;
+		data_in[4] = aes_in.data4;
+		data_in[5] = aes_in.data5;
+		data_in[6] = aes_in.data6;
+		data_in[7] = aes_in.data7;
+		data_in[8] = aes_in.data8;
+		data_in[9] = aes_in.data9;
+		data_in[10] = aes_in.data10;
+		data_in[11] = aes_in.data11;
+		data_in[12] = aes_in.data12;
+		data_in[13] = aes_in.data13;
+		data_in[14] = aes_in.data14;
+		data_in[15] = aes_in.data15;
+
+		if (cipher_or_i_cipher)
+			AES_Encrypt(Nr, data_in, data_out);
+		else
+			AES_Decrypt(Nr, data_in, data_out);
+
+		aes_out.data0 = data_out[0];
+		aes_out.data1 = data_out[1];
+		aes_out.data2 = data_out[2];
+		aes_out.data3 = data_out[3];
+		aes_out.data4 = data_out[4];
+		aes_out.data5 = data_out[5];
+		aes_out.data6 = data_out[6];
+		aes_out.data7 = data_out[7];
+		aes_out.data8 = data_out[8];
+		aes_out.data9 = data_out[9];
+		aes_out.data10 = data_out[10];
+		aes_out.data11 = data_out[11];
+		aes_out.data12 = data_out[12];
+		aes_out.data13 = data_out[13];
+		aes_out.data14 = data_out[14];
+		aes_out.data15 = data_out[15];
+
 	}
 }
