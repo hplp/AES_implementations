@@ -177,3 +177,5 @@ VivadoHLS/AES_Full/solution1/solution1_data.json
 
 VivadoHLS/PYNQ-Z1
 VivadoHLS/PynqZ1AES-AXI-stream
+VivadoHLS/AES_Full_axis128
+VivadoHLS/AES_Full_axis32
