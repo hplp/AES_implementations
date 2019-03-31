@@ -30,3 +30,5 @@ typedef struct {
 	unsigned char data14;
 	unsigned char data15;
 } aes_inout;
+
+#define AES_WORDS 100

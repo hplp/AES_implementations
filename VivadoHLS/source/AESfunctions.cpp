@@ -210,13 +210,11 @@ void AES_Encrypt(unsigned char Nr, unsigned char plaintext[stt_lng], unsigned ch
 #pragma HLS inline region // will inline the functions unless inlining is off
 
 #pragma HLS INTERFACE s_axilite port=Nr         bundle=Cipher
-//#pragma HLS INTERFACE s_axilite port=plaintext  bundle=Cipher
-//#pragma HLS INTERFACE s_axilite port=ciphertext bundle=Cipher
 #pragma HLS INTERFACE axis register forward port=plaintext
 #pragma HLS INTERFACE axis register reverse port=ciphertext
 #pragma HLS INTERFACe s_axilite port=return     bundle=Cipher
 
-#pragma HLS pipeline II=16 // reduces II
+#pragma HLS pipeline //II=2
 
 // ensure only one instance; proper unroll needs 15-14-13 instances
 //#pragma HLS allocation instances=AddRoundKey limit=1 function
@@ -235,18 +233,24 @@ void AES_Encrypt(unsigned char Nr, unsigned char plaintext[stt_lng], unsigned ch
 		state[i] = plaintext[i];
 	}
 
+	// prior to rounds
 	AddRoundKey(state, Nr, 0);
 
-	L_rounds: for (unsigned char j = 0; j < Nr_max; j++) {
+	// rounds 1 to Nr-1
+	L_rounds: for (unsigned char j = 0; j < Nr_max - 1; j++) {
 #pragma HLS unroll
 		SubBytes(state);
 		ShiftRows(state);
-		if (j != (Nr - 1))
-			MixColumns(state);
+		MixColumns(state);
 		AddRoundKey(state, Nr, j + 1);
-		if (j == (Nr - 1))
+		if (j == (Nr - 2))
 			break; // early exit
 	}
+
+	// last round
+	SubBytes(state);
+	ShiftRows(state);
+	AddRoundKey(state, Nr, Nr);
 
 	// Copy state to ciphertext
 	L_copy_o: for (unsigned char i = 0; i < stt_lng; i++) {
@@ -261,13 +265,11 @@ void AES_Decrypt(unsigned char Nr, unsigned char ciphertext[stt_lng], unsigned c
 #pragma HLS inline region // will inline the functions unless inlining is off
 
 #pragma HLS INTERFACE s_axilite port=Nr         bundle=Decipher
-//#pragma HLS INTERFACE s_axilite port=ciphertext bundle=Decipher
-//#pragma HLS INTERFACE s_axilite port=plaintext  bundle=Decipher
 #pragma HLS INTERFACE axis register forward port=ciphertext
 #pragma HLS INTERFACE axis register reverse port=plaintext
 #pragma HLS INTERFACe s_axilite port=return     bundle=Decipher
 
-#pragma HLS pipeline II=16 // reduces II
+#pragma HLS pipeline //II=
 
 // ensure only one instance; proper unroll needs 15-14-13 instances
 //#pragma HLS allocation instances=AddRoundKey   limit=1 function
@@ -288,18 +290,24 @@ void AES_Decrypt(unsigned char Nr, unsigned char ciphertext[stt_lng], unsigned c
 		state[i] = ciphertext[i];
 	}
 
+	// prior to rounds
 	AddRoundKey(state, Nr, Nr);
 
-	L_rounds: for (unsigned char j = 0; j < Nr_max; j++) {
+	// rounds 1 to Nr-1
+	L_rounds: for (unsigned char j = 0; j < Nr_max - 1; j++) {
 #pragma HLS unroll
 		InvShiftRows(state);
 		InvSubBytes(state);
 		AddRoundKey(state, Nr, Nr - j - 1);
-		if (j != (Nr - 1))
-			InvMixColumns(state);
-		else
+		InvMixColumns(state);
+		if (j == (Nr - 2))
 			break;
 	}
+
+	// last round
+	InvShiftRows(state);
+	InvSubBytes(state);
+	AddRoundKey(state, Nr, 0);
 
 	// Copy state to plaintext
 	L_copy_o: for (unsigned char i = 0; i < stt_lng; i++) {
@@ -308,66 +316,8 @@ void AES_Decrypt(unsigned char Nr, unsigned char ciphertext[stt_lng], unsigned c
 	}
 }
 
-//// AES Full
-void AES_Full(bool cipher_or_i_cipher, unsigned char Nr, unsigned char data_in[stt_lng], unsigned char data_out[stt_lng]) {
-
-#pragma HLS inline region // will inline the functions unless inlining is off
-
-#pragma HLS INTERFACE s_axilite port=cipher_or_i_cipher bundle=AES
-#pragma HLS INTERFACE s_axilite port=Nr                 bundle=AES
-//#pragma HLS INTERFACE s_axilite port=data_in            bundle=AES
-//#pragma HLS INTERFACE s_axilite port=data_out           bundle=AES
-#pragma HLS INTERFACE axis register forward port=data_in
-#pragma HLS INTERFACE axis register reverse port=data_out
-#pragma HLS INTERFACe s_axilite port=return             bundle=AES
-
-#pragma HLS pipeline II=16 // reduces II
-
-	if (cipher_or_i_cipher)
-		AES_Encrypt(Nr, data_in, data_out);
-	else
-		AES_Decrypt(Nr, data_in, data_out);
-}
-
-//// AES Full with 32-bit AXI Stream interface
-void AES_Full_axis32(bool cipher_or_i_cipher, unsigned char Nr, unsigned int inStream[stt_lng / 4], unsigned int outStream[stt_lng / 4]) {
-
-#pragma HLS inline region // will inline the functions unless inlining is off
-
-#pragma HLS INTERFACE s_axilite port=cipher_or_i_cipher bundle=AES
-#pragma HLS INTERFACE s_axilite port=Nr                 bundle=AES
-#pragma HLS INTERFACE axis register forward port=inStream
-#pragma HLS INTERFACE axis register reverse port=outStream
-#pragma HLS INTERFACe s_axilite port=return             bundle=AES
-
-#pragma HLS pipeline II=4 // reduces II
-
-	unsigned char data_in[stt_lng];
-	unsigned char data_out[stt_lng];
-
-	for (char i = 0; i < stt_lng / 4; i++) {
-		data_in[4 * i + 3] = (char) (inStream[i] >> 0);
-		data_in[4 * i + 2] = (char) (inStream[i] >> 8);
-		data_in[4 * i + 1] = (char) (inStream[i] >> 16);
-		data_in[4 * i + 0] = (char) (inStream[i] >> 24);
-	}
-
-	//for(char i = 0; i < stt_lng; i++) printf("%c ", data_in[i]);
-
-	if (cipher_or_i_cipher)
-		AES_Encrypt(Nr, data_in, data_out);
-	else
-		AES_Decrypt(Nr, data_in, data_out);
-
-	//for(char i = 0; i < stt_lng; i++) printf("%x ", data_out[i]);
-
-	for (char i = 0; i < stt_lng / 4; i++) {
-		outStream[i] = (int) ((data_out[i * 4 + 0] << 24) | (data_out[i * 4 + 1] << 16) | (data_out[i * 4 + 2] << 8) | (data_out[i * 4 + 3] << 0));
-	}
-}
-
 //// AES Full with 128-bit AXI Stream interface
-void AES_Full_axis128(bool cipher_or_i_cipher, unsigned char Nr, aes_inout &aes_in, aes_inout &aes_out) {
+void AES_Full_axis128(bool cipher_or_i_cipher, unsigned char Nr, aes_inout aes_in[AES_WORDS], aes_inout aes_out[AES_WORDS]) {
 
 #pragma HLS inline region // will inline the functions unless inlining is off
 
@@ -377,50 +327,50 @@ void AES_Full_axis128(bool cipher_or_i_cipher, unsigned char Nr, aes_inout &aes_
 #pragma HLS INTERFACE axis register reverse port=aes_out
 #pragma HLS INTERFACe s_axilite port=return             bundle=AES
 
-	L_stream: for (unsigned char i = 0; i < 100; i++) {
-#pragma HLS pipeline
+	L_stream: for (unsigned char i = 0; i < AES_WORDS; i++) {
+#pragma HLS pipeline II=1
 
 		unsigned char data_in[stt_lng];
 		unsigned char data_out[stt_lng];
 
-		data_in[0] = aes_in.data0;
-		data_in[1] = aes_in.data1;
-		data_in[2] = aes_in.data2;
-		data_in[3] = aes_in.data3;
-		data_in[4] = aes_in.data4;
-		data_in[5] = aes_in.data5;
-		data_in[6] = aes_in.data6;
-		data_in[7] = aes_in.data7;
-		data_in[8] = aes_in.data8;
-		data_in[9] = aes_in.data9;
-		data_in[10] = aes_in.data10;
-		data_in[11] = aes_in.data11;
-		data_in[12] = aes_in.data12;
-		data_in[13] = aes_in.data13;
-		data_in[14] = aes_in.data14;
-		data_in[15] = aes_in.data15;
+		data_in[0] = aes_in[i].data0;
+		data_in[1] = aes_in[i].data1;
+		data_in[2] = aes_in[i].data2;
+		data_in[3] = aes_in[i].data3;
+		data_in[4] = aes_in[i].data4;
+		data_in[5] = aes_in[i].data5;
+		data_in[6] = aes_in[i].data6;
+		data_in[7] = aes_in[i].data7;
+		data_in[8] = aes_in[i].data8;
+		data_in[9] = aes_in[i].data9;
+		data_in[10] = aes_in[i].data10;
+		data_in[11] = aes_in[i].data11;
+		data_in[12] = aes_in[i].data12;
+		data_in[13] = aes_in[i].data13;
+		data_in[14] = aes_in[i].data14;
+		data_in[15] = aes_in[i].data15;
 
 		if (cipher_or_i_cipher)
 			AES_Encrypt(Nr, data_in, data_out);
 		else
 			AES_Decrypt(Nr, data_in, data_out);
 
-		aes_out.data0 = data_out[0];
-		aes_out.data1 = data_out[1];
-		aes_out.data2 = data_out[2];
-		aes_out.data3 = data_out[3];
-		aes_out.data4 = data_out[4];
-		aes_out.data5 = data_out[5];
-		aes_out.data6 = data_out[6];
-		aes_out.data7 = data_out[7];
-		aes_out.data8 = data_out[8];
-		aes_out.data9 = data_out[9];
-		aes_out.data10 = data_out[10];
-		aes_out.data11 = data_out[11];
-		aes_out.data12 = data_out[12];
-		aes_out.data13 = data_out[13];
-		aes_out.data14 = data_out[14];
-		aes_out.data15 = data_out[15];
+		aes_out[i].data0 = data_out[0];
+		aes_out[i].data1 = data_out[1];
+		aes_out[i].data2 = data_out[2];
+		aes_out[i].data3 = data_out[3];
+		aes_out[i].data4 = data_out[4];
+		aes_out[i].data5 = data_out[5];
+		aes_out[i].data6 = data_out[6];
+		aes_out[i].data7 = data_out[7];
+		aes_out[i].data8 = data_out[8];
+		aes_out[i].data9 = data_out[9];
+		aes_out[i].data10 = data_out[10];
+		aes_out[i].data11 = data_out[11];
+		aes_out[i].data12 = data_out[12];
+		aes_out[i].data13 = data_out[13];
+		aes_out[i].data14 = data_out[14];
+		aes_out[i].data15 = data_out[15];
 
 	}
 }
