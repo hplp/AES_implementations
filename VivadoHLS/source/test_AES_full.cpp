@@ -1,4 +1,5 @@
 #include "AESfunctions.h"
+#include <stdlib.h>
 
 void AES_Full_axis128(bool cipher_or_i_cipher, unsigned char Nr, aes_inout aes_in[AES_WORDS], aes_inout aes_out[AES_WORDS]);
 
