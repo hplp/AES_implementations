@@ -13,8 +13,9 @@ add_files -tb source/test_AES_full.cpp -cflags "-Wno-unknown-pragmas"
 open_solution "solution1"
 set_part {xc7z020clg400-1} -tool vivado
 create_clock -period 10 -name default
+config_export -description {AES Full AXI Stream 128} -display_name AES_Full_axis128 -format ip_catalog -rtl verilog -vendor hplp
 #source "./AES_Full_axis128/solution1/directives.tcl"
 csim_design -clean
 csynth_design
 cosim_design -O -reduce_diskspace
-export_design -format ip_catalog
+export_design -rtl verilog -format ip_catalog -description "AES Full AXI Stream 128" -vendor "hplp" -display_name "AES_Full_axis128"

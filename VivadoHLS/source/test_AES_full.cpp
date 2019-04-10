@@ -33,8 +33,7 @@ int main() {
 		plaintext_words[i].data14 = random_char();
 		plaintext_words[i].data15 = random_char();
 		//cout << i << " " << hex << (unsigned short) plaintext_words[i].data15 << " ";
-	}
-//	cout << endl;
+	} //cout << endl;
 
 	bool all_tests_pass = true;
 	for (unsigned short test = 0; test < 32; test++) {

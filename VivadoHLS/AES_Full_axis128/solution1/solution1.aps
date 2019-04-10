@@ -23,11 +23,17 @@
     <clock default="false" name="default" period="10"/>
   </clockList>
   <config>
-            
+                
+    
     <config_compile blackbox=""/>
-            
+                
+    
     <schedule model="AES_Full_axis128"/>
-        
+                
+    
+    <config_export description="AES Full AXI Stream 128" display_name="AES_Full_axis128" format="ip_catalog" rtl="verilog" vendor="hplp"/>
+            
+  
   </config>
   <UIConfigurations>
     <UIAutosynConf boardInfo="Xilinx PYNQ-Z1 (xc7z020clg400-1) " hideTrivialOp="true" isBasedOnBoard="true" isSolutionDirty="false" isStopAskAgain="false" showDetailDesignViewer="false">
@@ -61,8 +67,8 @@
       </RTLs>
     </UIAutoSimConf>
   </UIConfigurations>
-  <ExportDesign askAgain="true" evaluate="false" flow="false" flowChoice="syn" formatName="ip_catalog" rtl="verilog" rtlButton="false" rtlCombo="verilog">
-    <Format formatName="ip_catalog"/>
+  <ExportDesign askAgain="true" evaluate="false" flow="false" flowChoice="syn" formatName="ip_catalog" rtl="verilog" rtlButton="true" rtlCombo="verilog">
+    <Format description="AES Full AXI Stream 128" display_name="AES_Full_axis128" formatName="ip_catalog" vendor="hplp"/>
     <Format formatName="sysgen"/>
     <Format formatName="sysgen_ise"/>
     <Format formatName="syn_dcp"/>
