@@ -177,5 +177,14 @@ VivadoHLS/AES_Full/solution1/solution1_data.json
 
 VivadoHLS/PYNQ-Z1
 VivadoHLS/PynqZ1AES-AXI-stream
+VivadoHLS/PynqZ1AES-AXI-stream128/
 VivadoHLS/AES_Full_axis128
 VivadoHLS/AES_Full_axis32
+
+VivadoHLS/axi4_stream_join/
+VivadoHLS/axi4_stream_join_ip/
+VivadoHLS/axi4_stream_split/
+VivadoHLS/axi4_stream_split_ip/
+
+# scratch
+VivadoHLS/source/test_AES_full_ap_uint.cpp
