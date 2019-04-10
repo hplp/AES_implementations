@@ -1,0 +1,63 @@
+# VSIM commands for join
+force -freeze sim:/axi4_stream_join/in_data00_TDATA 16#AA 0
+force -freeze sim:/axi4_stream_join/in_data01_TDATA 16#BB 0
+force -freeze sim:/axi4_stream_join/in_data02_TDATA 16#CC 0
+force -freeze sim:/axi4_stream_join/in_data03_TDATA 16#DD 0
+force -freeze sim:/axi4_stream_join/in_data04_TDATA 16#EE 0
+force -freeze sim:/axi4_stream_join/in_data05_TDATA 16#FF 0
+force -freeze sim:/axi4_stream_join/in_data06_TDATA 16#AB 0
+force -freeze sim:/axi4_stream_join/in_data07_TDATA 16#CD 0
+force -freeze sim:/axi4_stream_join/in_data08_TDATA 16#EF 0
+force -freeze sim:/axi4_stream_join/in_data09_TDATA 16#AB 0
+force -freeze sim:/axi4_stream_join/in_data10_TDATA 16#CD 0
+force -freeze sim:/axi4_stream_join/in_data11_TDATA 16#EF 0
+force -freeze sim:/axi4_stream_join/in_data12_TDATA 16#AA 0
+force -freeze sim:/axi4_stream_join/in_data13_TDATA 16#BB 0
+force -freeze sim:/axi4_stream_join/in_data14_TDATA 16#CC 0
+force -freeze sim:/axi4_stream_join/in_data15_TDATA 16#DD 0
+
+force -freeze sim:/axi4_stream_join/in_data00_TVALID 1 0
+force -freeze sim:/axi4_stream_join/in_data01_TVALID 1 0
+force -freeze sim:/axi4_stream_join/in_data02_TVALID 1 0
+force -freeze sim:/axi4_stream_join/in_data03_TVALID 1 0
+force -freeze sim:/axi4_stream_join/in_data04_TVALID 1 0
+force -freeze sim:/axi4_stream_join/in_data05_TVALID 1 0
+force -freeze sim:/axi4_stream_join/in_data06_TVALID 1 0
+force -freeze sim:/axi4_stream_join/in_data07_TVALID 1 0
+force -freeze sim:/axi4_stream_join/in_data08_TVALID 1 0
+force -freeze sim:/axi4_stream_join/in_data09_TVALID 1 0
+force -freeze sim:/axi4_stream_join/in_data10_TVALID 1 0
+force -freeze sim:/axi4_stream_join/in_data11_TVALID 1 0
+force -freeze sim:/axi4_stream_join/in_data12_TVALID 1 0
+force -freeze sim:/axi4_stream_join/in_data13_TVALID 1 0
+force -freeze sim:/axi4_stream_join/in_data14_TVALID 1 0
+force -freeze sim:/axi4_stream_join/in_data15_TVALID 1 0
+
+force -freeze sim:/axi4_stream_join/out_data_TREADY 1 0
+
+run 100
+
+
+# VSIM commands for split
+force -freeze sim:/axi4_stream_split/in_data_TDATA 16#AABBCCDDEEFFABCDEFABCDEFAABBCCDD 0
+
+force -freeze sim:/axi4_stream_split/in_data_TVALID 1 0
+
+force -freeze sim:/axi4_stream_split/out_data00_TREADY 1 0
+force -freeze sim:/axi4_stream_split/out_data01_TREADY 1 0
+force -freeze sim:/axi4_stream_split/out_data02_TREADY 1 0
+force -freeze sim:/axi4_stream_split/out_data03_TREADY 1 0
+force -freeze sim:/axi4_stream_split/out_data04_TREADY 1 0
+force -freeze sim:/axi4_stream_split/out_data05_TREADY 1 0
+force -freeze sim:/axi4_stream_split/out_data06_TREADY 1 0
+force -freeze sim:/axi4_stream_split/out_data07_TREADY 1 0
+force -freeze sim:/axi4_stream_split/out_data08_TREADY 1 0
+force -freeze sim:/axi4_stream_split/out_data09_TREADY 1 0
+force -freeze sim:/axi4_stream_split/out_data10_TREADY 1 0
+force -freeze sim:/axi4_stream_split/out_data11_TREADY 1 0
+force -freeze sim:/axi4_stream_split/out_data12_TREADY 1 0
+force -freeze sim:/axi4_stream_split/out_data13_TREADY 1 0
+force -freeze sim:/axi4_stream_split/out_data14_TREADY 1 0
+force -freeze sim:/axi4_stream_split/out_data15_TREADY 1 0
+
+run 100
