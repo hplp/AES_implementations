@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <xparameters.h>
+#include "xaes_full_axis128.h"
+#include "xaxidma.h"
+
+// Aes_fill and axiDMA pointers and handlers
+XAes_full_axis128 Aes_full_axis128;
+XAes_full_axis128_Config *Aes_full_axis128_cfg;
+XAxiDma axiDMA;
+XAxiDma_Config *axiDMA_cfg;
+
+// DMA addresses
+#define MEM_BASE_ADDR 0x01000000
+#define TX_BUFFER_BASE (MEM_BASE_ADDR+0x00100000)
+#define RX_BUFFER_BASE (MEM_BASE_ADDR+0x00300000)
+
+char random_char() {
+	unsigned short min_ascii = 65;
+	unsigned short max_ascii = 90;
+	return min_ascii + rand() % (max_ascii - min_ascii + 1);
+}
+
+int main()
+{
+	printf("random %d\n", random_char());
+	return 0;
+}

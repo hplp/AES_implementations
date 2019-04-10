@@ -1,0 +1,6 @@
+vhdl xil_defaultlib  \
+"../../../bd/ZynqAES/ip/ZynqAES_axi_smc_0/bd_0/ip/ip_1/sim/bd_3e2c_psr_aclk_0.vhd" \
+"../../../bd/ZynqAES/ip/ZynqAES_rst_ps7_0_100M_2/sim/ZynqAES_rst_ps7_0_100M_2.vhd" \
+"../../../bd/ZynqAES/ip/ZynqAES_axi_dma_0_1/sim/ZynqAES_axi_dma_0_1.vhd" \
+
+nosort
