@@ -96,18 +96,16 @@ int main() {
 
 		printf("Sending data to AES core\n");
 		XAxiDma_SimpleTransfer(&axiDMA, (u32) plaintext, (u32) stt_lng * sizeof(unsigned char), XAXIDMA_DMA_TO_DEVICE);
-		//sleep(1);
 
 		printf("Receive data from AES core\n");
 		XAxiDma_SimpleTransfer(&axiDMA, (u32) m_dma_buffer_RX, (u32) stt_lng * sizeof(unsigned char), XAXIDMA_DEVICE_TO_DMA);
-		//sleep(1);
 		while (XAxiDma_Busy(&axiDMA, XAXIDMA_DEVICE_TO_DMA))
-			; // no T_LAST signal
+			;
 
 		Xil_DCacheInvalidateRange((u32) m_dma_buffer_RX, (u32) stt_lng * sizeof(unsigned char));
 
 		while (!XAes_full_axis8_IsDone(&Aes_full_axis8))
-			; // no T_LAST signal
+			;
 		printf("Encrypt complete\n");
 
 		printf("ciphertext = ");
@@ -127,18 +125,16 @@ int main() {
 
 		printf("Sending data to AES core\n");
 		XAxiDma_SimpleTransfer(&axiDMA, (u32) ciphertext, (u32) stt_lng * sizeof(unsigned char), XAXIDMA_DMA_TO_DEVICE);
-		//sleep(1);
 
 		printf("Receive data from AES core\n");
 		XAxiDma_SimpleTransfer(&axiDMA, (u32) m_dma_buffer_RX, (u32) stt_lng * sizeof(unsigned char), XAXIDMA_DEVICE_TO_DMA);
-		//sleep(1);
 		while (XAxiDma_Busy(&axiDMA, XAXIDMA_DEVICE_TO_DMA))
-			; // no T_LAST signal
+			;
 
 		Xil_DCacheInvalidateRange((u32) m_dma_buffer_RX, (u32) stt_lng * sizeof(unsigned char));
 
 		while (!XAes_full_axis8_IsDone(&Aes_full_axis8))
-			; // no T_LAST signal
+			;
 		printf("Decrypt complete\n");
 
 		printf("decrypted_plaintext = ");
