@@ -31,21 +31,21 @@
  
  
 /******************************************************************/
-/* Definitions for driver AES_FULL */
-#define XPAR_XAES_FULL_NUM_INSTANCES 1
+/* Definitions for driver AES_FULL_AXIS8 */
+#define XPAR_XAES_FULL_AXIS8_NUM_INSTANCES 1
 
-/* Definitions for peripheral AES_FULL_0 */
-#define XPAR_AES_FULL_0_DEVICE_ID 0
-#define XPAR_AES_FULL_0_S_AXI_AES_BASEADDR 0x43C00000
-#define XPAR_AES_FULL_0_S_AXI_AES_HIGHADDR 0x43C0FFFF
+/* Definitions for peripheral AES_FULL_AXIS8_0 */
+#define XPAR_AES_FULL_AXIS8_0_DEVICE_ID 0
+#define XPAR_AES_FULL_AXIS8_0_S_AXI_AES_BASEADDR 0x43C00000
+#define XPAR_AES_FULL_AXIS8_0_S_AXI_AES_HIGHADDR 0x43C0FFFF
 
 
 /******************************************************************/
 
-/* Canonical definitions for peripheral AES_FULL_0 */
-#define XPAR_XAES_FULL_0_DEVICE_ID XPAR_AES_FULL_0_DEVICE_ID
-#define XPAR_XAES_FULL_0_S_AXI_AES_BASEADDR 0x43C00000
-#define XPAR_XAES_FULL_0_S_AXI_AES_HIGHADDR 0x43C0FFFF
+/* Canonical definitions for peripheral AES_FULL_AXIS8_0 */
+#define XPAR_XAES_FULL_AXIS8_0_DEVICE_ID XPAR_AES_FULL_AXIS8_0_DEVICE_ID
+#define XPAR_XAES_FULL_AXIS8_0_S_AXI_AES_BASEADDR 0x43C00000
+#define XPAR_XAES_FULL_AXIS8_0_S_AXI_AES_HIGHADDR 0x43C0FFFF
 
 
 /******************************************************************/
@@ -336,14 +336,14 @@
 /* Definitions for Fabric interrupts connected to ps7_scugic_0 */
 #define XPAR_FABRIC_AXI_DMA_0_MM2S_INTROUT_INTR 61U
 #define XPAR_FABRIC_AXI_DMA_0_S2MM_INTROUT_INTR 62U
-#define XPAR_FABRIC_AES_FULL_0_INTERRUPT_INTR 63U
+#define XPAR_FABRIC_AES_FULL_AXIS8_0_INTERRUPT_INTR 63U
 
 /******************************************************************/
 
 /* Canonical definitions for Fabric interrupts connected to ps7_scugic_0 */
 #define XPAR_FABRIC_AXIDMA_0_MM2S_INTROUT_VEC_ID XPAR_FABRIC_AXI_DMA_0_MM2S_INTROUT_INTR
 #define XPAR_FABRIC_AXIDMA_0_S2MM_INTROUT_VEC_ID XPAR_FABRIC_AXI_DMA_0_S2MM_INTROUT_INTR
-#define XPAR_FABRIC_AES_FULL_0_VEC_ID XPAR_FABRIC_AES_FULL_0_INTERRUPT_INTR
+#define XPAR_FABRIC_AES_FULL_AXIS8_0_VEC_ID XPAR_FABRIC_AES_FULL_AXIS8_0_INTERRUPT_INTR
 
 /******************************************************************/
 

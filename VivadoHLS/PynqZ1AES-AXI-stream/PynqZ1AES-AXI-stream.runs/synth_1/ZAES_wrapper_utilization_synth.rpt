@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date         : Thu Mar 14 18:56:14 2019
+| Date         : Wed Apr 10 22:19:34 2019
 | Host         : HPLP-SM7ED running 64-bit major release  (build 9200)
 | Command      : report_utilization -file ZAES_wrapper_utilization_synth.rpt -pb ZAES_wrapper_utilization_synth.pb
 | Design       : ZAES_wrapper
@@ -181,7 +181,7 @@ Table of Contents
 | ZAES_axi_smc_1              |    1 |
 | ZAES_axi_dma_0_2            |    1 |
 | ZAES_auto_pc_0              |    1 |
-| ZAES_AES_Full_0_1           |    1 |
+| ZAES_AES_Full_axis8_0_0     |    1 |
 +-----------------------------+------+
 
 

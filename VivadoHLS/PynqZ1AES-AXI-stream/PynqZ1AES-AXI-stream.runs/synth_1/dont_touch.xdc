@@ -22,11 +22,11 @@ set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==ZAES_xbar_1 || 
 # IP: bd/ZAES/ip/ZAES_ps7_0_axi_periph_2/ZAES_ps7_0_axi_periph_2.xci
 set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==ZAES_ps7_0_axi_periph_2 || ORIG_REF_NAME==ZAES_ps7_0_axi_periph_2} -quiet] -quiet
 
-# IP: bd/ZAES/ip/ZAES_AES_Full_0_1/ZAES_AES_Full_0_1.xci
-set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==ZAES_AES_Full_0_1 || ORIG_REF_NAME==ZAES_AES_Full_0_1} -quiet] -quiet
-
 # IP: bd/ZAES/ip/ZAES_xlconcat_0_2/ZAES_xlconcat_0_2.xci
 set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==ZAES_xlconcat_0_2 || ORIG_REF_NAME==ZAES_xlconcat_0_2} -quiet] -quiet
+
+# IP: bd/ZAES/ip/ZAES_AES_Full_axis8_0_0/ZAES_AES_Full_axis8_0_0.xci
+set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==ZAES_AES_Full_axis8_0_0 || ORIG_REF_NAME==ZAES_AES_Full_axis8_0_0} -quiet] -quiet
 
 # IP: bd/ZAES/ip/ZAES_auto_pc_0/ZAES_auto_pc_0.xci
 set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==ZAES_auto_pc_0 || ORIG_REF_NAME==ZAES_auto_pc_0} -quiet] -quiet

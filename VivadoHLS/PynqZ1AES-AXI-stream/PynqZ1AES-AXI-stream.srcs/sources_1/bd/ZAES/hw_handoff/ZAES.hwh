@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Thu Mar 14 18:42:04 2019" VIVADOVERSION="2018.3">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Wed Apr 10 22:16:56 2019" VIVADOVERSION="2018.3">
 
   <SYSTEMINFO ARCH="zynq" BOARD="www.digilentinc.com:pynq-z1:part0:1.0" DEVICE="7z020" NAME="ZAES" PACKAGE="clg400" SPEEDGRADE="-1"/>
 
@@ -159,7 +159,7 @@
   </EXTERNALINTERFACES>
 
   <MODULES>
-    <MODULE COREREVISION="1903121626" FULLNAME="/AES_Full_0" HWVERSION="1.0" INSTANCE="AES_Full_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="AES_Full" VLNV="UVA_HPLP:HLS:AES_Full:1.0">
+    <MODULE COREREVISION="1904102215" FULLNAME="/AES_Full_axis8_0" HWVERSION="1.0" INSTANCE="AES_Full_axis8_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="AES_Full_axis8" VLNV="UVA_HPLP:hls:AES_Full_axis8:1.0">
       <DOCUMENTS/>
       <ADDRESSBLOCKS>
         <ADDRESSBLOCK ACCESS="read-write" INTERFACE="s_axi_AES" NAME="Reg" RANGE="65536" USAGE="register">
@@ -420,98 +420,98 @@
       <PARAMETERS>
         <PARAMETER NAME="C_S_AXI_AES_ADDR_WIDTH" VALUE="5"/>
         <PARAMETER NAME="C_S_AXI_AES_DATA_WIDTH" VALUE="32"/>
-        <PARAMETER NAME="Component_Name" VALUE="ZAES_AES_Full_0_1"/>
+        <PARAMETER NAME="Component_Name" VALUE="ZAES_AES_Full_axis8_0_0"/>
         <PARAMETER NAME="clk_period" VALUE="10"/>
         <PARAMETER NAME="machine" VALUE="64"/>
         <PARAMETER NAME="combinational" VALUE="0"/>
-        <PARAMETER NAME="latency" VALUE="124"/>
+        <PARAMETER NAME="latency" VALUE="122"/>
         <PARAMETER NAME="II" VALUE="16"/>
         <PARAMETER NAME="EDK_IPTYPE" VALUE="PERIPHERAL"/>
         <PARAMETER NAME="C_S_AXI_AES_BASEADDR" VALUE="0x43C00000"/>
         <PARAMETER NAME="C_S_AXI_AES_HIGHADDR" VALUE="0x43C0FFFF"/>
       </PARAMETERS>
       <PORTS>
-        <PORT DIR="I" LEFT="4" NAME="s_axi_AES_AWADDR" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_0_s_axi_AES_AWADDR">
+        <PORT DIR="I" LEFT="4" NAME="s_axi_AES_AWADDR" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_axis8_0_s_axi_AES_AWADDR">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M01_AXI_awaddr"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="s_axi_AES_AWVALID" SIGIS="undef" SIGNAME="AES_Full_0_s_axi_AES_AWVALID">
+        <PORT DIR="I" NAME="s_axi_AES_AWVALID" SIGIS="undef" SIGNAME="AES_Full_axis8_0_s_axi_AES_AWVALID">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M01_AXI_awvalid"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="s_axi_AES_AWREADY" SIGIS="undef" SIGNAME="AES_Full_0_s_axi_AES_AWREADY">
+        <PORT DIR="O" NAME="s_axi_AES_AWREADY" SIGIS="undef" SIGNAME="AES_Full_axis8_0_s_axi_AES_AWREADY">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M01_AXI_awready"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="31" NAME="s_axi_AES_WDATA" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_0_s_axi_AES_WDATA">
+        <PORT DIR="I" LEFT="31" NAME="s_axi_AES_WDATA" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_axis8_0_s_axi_AES_WDATA">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M01_AXI_wdata"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="3" NAME="s_axi_AES_WSTRB" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_0_s_axi_AES_WSTRB">
+        <PORT DIR="I" LEFT="3" NAME="s_axi_AES_WSTRB" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_axis8_0_s_axi_AES_WSTRB">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M01_AXI_wstrb"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="s_axi_AES_WVALID" SIGIS="undef" SIGNAME="AES_Full_0_s_axi_AES_WVALID">
+        <PORT DIR="I" NAME="s_axi_AES_WVALID" SIGIS="undef" SIGNAME="AES_Full_axis8_0_s_axi_AES_WVALID">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M01_AXI_wvalid"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="s_axi_AES_WREADY" SIGIS="undef" SIGNAME="AES_Full_0_s_axi_AES_WREADY">
+        <PORT DIR="O" NAME="s_axi_AES_WREADY" SIGIS="undef" SIGNAME="AES_Full_axis8_0_s_axi_AES_WREADY">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M01_AXI_wready"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="1" NAME="s_axi_AES_BRESP" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_0_s_axi_AES_BRESP">
+        <PORT DIR="O" LEFT="1" NAME="s_axi_AES_BRESP" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_axis8_0_s_axi_AES_BRESP">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M01_AXI_bresp"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="s_axi_AES_BVALID" SIGIS="undef" SIGNAME="AES_Full_0_s_axi_AES_BVALID">
+        <PORT DIR="O" NAME="s_axi_AES_BVALID" SIGIS="undef" SIGNAME="AES_Full_axis8_0_s_axi_AES_BVALID">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M01_AXI_bvalid"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="s_axi_AES_BREADY" SIGIS="undef" SIGNAME="AES_Full_0_s_axi_AES_BREADY">
+        <PORT DIR="I" NAME="s_axi_AES_BREADY" SIGIS="undef" SIGNAME="AES_Full_axis8_0_s_axi_AES_BREADY">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M01_AXI_bready"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="4" NAME="s_axi_AES_ARADDR" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_0_s_axi_AES_ARADDR">
+        <PORT DIR="I" LEFT="4" NAME="s_axi_AES_ARADDR" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_axis8_0_s_axi_AES_ARADDR">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M01_AXI_araddr"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="s_axi_AES_ARVALID" SIGIS="undef" SIGNAME="AES_Full_0_s_axi_AES_ARVALID">
+        <PORT DIR="I" NAME="s_axi_AES_ARVALID" SIGIS="undef" SIGNAME="AES_Full_axis8_0_s_axi_AES_ARVALID">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M01_AXI_arvalid"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="s_axi_AES_ARREADY" SIGIS="undef" SIGNAME="AES_Full_0_s_axi_AES_ARREADY">
+        <PORT DIR="O" NAME="s_axi_AES_ARREADY" SIGIS="undef" SIGNAME="AES_Full_axis8_0_s_axi_AES_ARREADY">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M01_AXI_arready"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="31" NAME="s_axi_AES_RDATA" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_0_s_axi_AES_RDATA">
+        <PORT DIR="O" LEFT="31" NAME="s_axi_AES_RDATA" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_axis8_0_s_axi_AES_RDATA">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M01_AXI_rdata"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="1" NAME="s_axi_AES_RRESP" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_0_s_axi_AES_RRESP">
+        <PORT DIR="O" LEFT="1" NAME="s_axi_AES_RRESP" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_axis8_0_s_axi_AES_RRESP">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M01_AXI_rresp"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="s_axi_AES_RVALID" SIGIS="undef" SIGNAME="AES_Full_0_s_axi_AES_RVALID">
+        <PORT DIR="O" NAME="s_axi_AES_RVALID" SIGIS="undef" SIGNAME="AES_Full_axis8_0_s_axi_AES_RVALID">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M01_AXI_rvalid"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="s_axi_AES_RREADY" SIGIS="undef" SIGNAME="AES_Full_0_s_axi_AES_RREADY">
+        <PORT DIR="I" NAME="s_axi_AES_RREADY" SIGIS="undef" SIGNAME="AES_Full_axis8_0_s_axi_AES_RREADY">
           <CONNECTIONS>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M01_AXI_rready"/>
           </CONNECTIONS>
@@ -526,37 +526,37 @@
             <CONNECTION INSTANCE="rst_ps7_0_100M" PORT="peripheral_aresetn"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="interrupt" SENSITIVITY="LEVEL_HIGH" SIGIS="INTERRUPT" SIGNAME="AES_Full_0_interrupt">
+        <PORT DIR="O" NAME="interrupt" SENSITIVITY="LEVEL_HIGH" SIGIS="INTERRUPT" SIGNAME="AES_Full_axis8_0_interrupt">
           <CONNECTIONS>
             <CONNECTION INSTANCE="xlconcat_0" PORT="In2"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="data_out_TVALID" SIGIS="undef" SIGNAME="AES_Full_0_data_out_TVALID">
+        <PORT DIR="O" NAME="data_out_TVALID" SIGIS="undef" SIGNAME="AES_Full_axis8_0_data_out_TVALID">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axi_dma_0" PORT="s_axis_s2mm_tvalid"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="data_out_TREADY" SIGIS="undef" SIGNAME="AES_Full_0_data_out_TREADY">
+        <PORT DIR="I" NAME="data_out_TREADY" SIGIS="undef" SIGNAME="AES_Full_axis8_0_data_out_TREADY">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axi_dma_0" PORT="s_axis_s2mm_tready"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="7" NAME="data_out_TDATA" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_0_data_out_TDATA">
+        <PORT DIR="O" LEFT="7" NAME="data_out_TDATA" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_axis8_0_data_out_TDATA">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axi_dma_0" PORT="s_axis_s2mm_tdata"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="data_in_TVALID" SIGIS="undef" SIGNAME="AES_Full_0_data_in_TVALID">
+        <PORT DIR="I" NAME="data_in_TVALID" SIGIS="undef" SIGNAME="AES_Full_axis8_0_data_in_TVALID">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axi_dma_0" PORT="m_axis_mm2s_tvalid"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="data_in_TREADY" SIGIS="undef" SIGNAME="AES_Full_0_data_in_TREADY">
+        <PORT DIR="O" NAME="data_in_TREADY" SIGIS="undef" SIGNAME="AES_Full_axis8_0_data_in_TREADY">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axi_dma_0" PORT="m_axis_mm2s_tready"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="7" NAME="data_in_TDATA" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_0_data_in_TDATA">
+        <PORT DIR="I" LEFT="7" NAME="data_in_TDATA" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_axis8_0_data_in_TDATA">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axi_dma_0" PORT="m_axis_mm2s_tdata"/>
           </CONNECTIONS>
@@ -616,7 +616,7 @@
             <PORTMAP LOGICAL="RREADY" PHYSICAL="s_axi_AES_RREADY"/>
           </PORTMAPS>
         </BUSINTERFACE>
-        <BUSINTERFACE BUSNAME="AES_Full_0_data_out" NAME="data_out" TYPE="INITIATOR" VLNV="xilinx.com:interface:axis:1.0">
+        <BUSINTERFACE BUSNAME="AES_Full_axis8_0_data_out" NAME="data_out" TYPE="INITIATOR" VLNV="xilinx.com:interface:axis:1.0">
           <PARAMETER NAME="TDATA_NUM_BYTES" VALUE="1"/>
           <PARAMETER NAME="TUSER_WIDTH" VALUE="0"/>
           <PARAMETER NAME="LAYERED_METADATA" VALUE="xilinx.com:interface:datatypes:1.0 {CLK {datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 1} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0}}} TDATA {datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 8} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0} integer {signed {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value false}}}} TDATA_WIDTH 8}"/>
@@ -1708,20 +1708,20 @@
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="mm2s_prmry_reset_out_n" SIGIS="rst"/>
-        <PORT DIR="O" LEFT="7" NAME="m_axis_mm2s_tdata" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_0_data_in_TDATA">
+        <PORT DIR="O" LEFT="7" NAME="m_axis_mm2s_tdata" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_axis8_0_data_in_TDATA">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="AES_Full_0" PORT="data_in_TDATA"/>
+            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="data_in_TDATA"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" LEFT="0" NAME="m_axis_mm2s_tkeep" RIGHT="0" SIGIS="undef"/>
-        <PORT DIR="O" NAME="m_axis_mm2s_tvalid" SIGIS="undef" SIGNAME="AES_Full_0_data_in_TVALID">
+        <PORT DIR="O" NAME="m_axis_mm2s_tvalid" SIGIS="undef" SIGNAME="AES_Full_axis8_0_data_in_TVALID">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="AES_Full_0" PORT="data_in_TVALID"/>
+            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="data_in_TVALID"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="m_axis_mm2s_tready" SIGIS="undef" SIGNAME="AES_Full_0_data_in_TREADY">
+        <PORT DIR="I" NAME="m_axis_mm2s_tready" SIGIS="undef" SIGNAME="AES_Full_axis8_0_data_in_TREADY">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="AES_Full_0" PORT="data_in_TREADY"/>
+            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="data_in_TREADY"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="m_axis_mm2s_tlast" SIGIS="undef"/>
@@ -1806,20 +1806,20 @@
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="s2mm_prmry_reset_out_n" SIGIS="rst"/>
-        <PORT DIR="I" LEFT="7" NAME="s_axis_s2mm_tdata" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_0_data_out_TDATA">
+        <PORT DIR="I" LEFT="7" NAME="s_axis_s2mm_tdata" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_axis8_0_data_out_TDATA">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="AES_Full_0" PORT="data_out_TDATA"/>
+            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="data_out_TDATA"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="I" LEFT="0" NAME="s_axis_s2mm_tkeep" RIGHT="0" SIGIS="undef"/>
-        <PORT DIR="I" NAME="s_axis_s2mm_tvalid" SIGIS="undef" SIGNAME="AES_Full_0_data_out_TVALID">
+        <PORT DIR="I" NAME="s_axis_s2mm_tvalid" SIGIS="undef" SIGNAME="AES_Full_axis8_0_data_out_TVALID">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="AES_Full_0" PORT="data_out_TVALID"/>
+            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="data_out_TVALID"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="s_axis_s2mm_tready" SIGIS="undef" SIGNAME="AES_Full_0_data_out_TREADY">
+        <PORT DIR="O" NAME="s_axis_s2mm_tready" SIGIS="undef" SIGNAME="AES_Full_axis8_0_data_out_TREADY">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="AES_Full_0" PORT="data_out_TREADY"/>
+            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="data_out_TREADY"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="I" NAME="s_axis_s2mm_tlast" SIGIS="undef"/>
@@ -2008,7 +2008,7 @@
             <PORTMAP LOGICAL="TVALID" PHYSICAL="m_axis_mm2s_tvalid"/>
           </PORTMAPS>
         </BUSINTERFACE>
-        <BUSINTERFACE BUSNAME="AES_Full_0_data_out" NAME="S_AXIS_S2MM" TYPE="TARGET" VLNV="xilinx.com:interface:axis:1.0">
+        <BUSINTERFACE BUSNAME="AES_Full_axis8_0_data_out" NAME="S_AXIS_S2MM" TYPE="TARGET" VLNV="xilinx.com:interface:axis:1.0">
           <PARAMETER NAME="TDATA_NUM_BYTES" VALUE="1"/>
           <PARAMETER NAME="TDEST_WIDTH" VALUE="0"/>
           <PARAMETER NAME="TID_WIDTH" VALUE="0"/>
@@ -2037,7 +2037,7 @@
       </MEMORYMAP>
       <PERIPHERALS>
         <PERIPHERAL INSTANCE="processing_system7_0"/>
-        <PERIPHERAL INSTANCE="AES_Full_0"/>
+        <PERIPHERAL INSTANCE="AES_Full_axis8_0"/>
       </PERIPHERALS>
     </MODULE>
     <MODULE BD="ZAES_axi_smc_1" BDTYPE="SBD" COREREVISION="10" DRIVERMODE="CORE" FULLNAME="/axi_smc" HWVERSION="1.0" INSTANCE="axi_smc" IPTYPE="BUS" IS_ENABLE="1" MODCLASS="BUS" MODTYPE="smartconnect" SIM_BD="ZAES_axi_smc_1" VLNV="xilinx.com:ip:smartconnect:1.0">
@@ -3990,9 +3990,9 @@
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="ACLK"/>
             <CONNECTION INSTANCE="axi_dma_0" PORT="m_axi_mm2s_aclk"/>
             <CONNECTION INSTANCE="axi_dma_0" PORT="m_axi_s2mm_aclk"/>
-            <CONNECTION INSTANCE="AES_Full_0" PORT="ap_clk"/>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M01_ACLK"/>
             <CONNECTION INSTANCE="processing_system7_0" PORT="S_AXI_HP0_ACLK"/>
+            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="ap_clk"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="FCLK_RESET0_N" SIGIS="rst" SIGNAME="processing_system7_0_FCLK_RESET0_N">
@@ -4310,11 +4310,11 @@
       </BUSINTERFACES>
       <MEMORYMAP>
         <MEMRANGE ADDRESSBLOCK="Reg" BASENAME="C_BASEADDR" BASEVALUE="0x40400000" HIGHNAME="C_HIGHADDR" HIGHVALUE="0x4040FFFF" INSTANCE="axi_dma_0" IS_DATA="TRUE" IS_INSTRUCTION="TRUE" MASTERBUSINTERFACE="M_AXI_GP0" MEMTYPE="REGISTER" SLAVEBUSINTERFACE="S_AXI_LITE"/>
-        <MEMRANGE ADDRESSBLOCK="Reg" BASENAME="C_S_AXI_AES_BASEADDR" BASEVALUE="0x43C00000" HIGHNAME="C_S_AXI_AES_HIGHADDR" HIGHVALUE="0x43C0FFFF" INSTANCE="AES_Full_0" IS_DATA="TRUE" IS_INSTRUCTION="TRUE" MASTERBUSINTERFACE="M_AXI_GP0" MEMTYPE="REGISTER" SLAVEBUSINTERFACE="s_axi_AES"/>
+        <MEMRANGE ADDRESSBLOCK="Reg" BASENAME="C_S_AXI_AES_BASEADDR" BASEVALUE="0x43C00000" HIGHNAME="C_S_AXI_AES_HIGHADDR" HIGHVALUE="0x43C0FFFF" INSTANCE="AES_Full_axis8_0" IS_DATA="TRUE" IS_INSTRUCTION="TRUE" MASTERBUSINTERFACE="M_AXI_GP0" MEMTYPE="REGISTER" SLAVEBUSINTERFACE="s_axi_AES"/>
       </MEMORYMAP>
       <PERIPHERALS>
         <PERIPHERAL INSTANCE="axi_dma_0"/>
-        <PERIPHERAL INSTANCE="AES_Full_0"/>
+        <PERIPHERAL INSTANCE="AES_Full_axis8_0"/>
       </PERIPHERALS>
     </MODULE>
     <MODULE COREREVISION="19" FULLNAME="/ps7_0_axi_periph" HWVERSION="2.1" INSTANCE="ps7_0_axi_periph" IPTYPE="BUS" IS_ENABLE="1" MODCLASS="BUS" MODTYPE="axi_interconnect" VLNV="xilinx.com:ip:axi_interconnect:2.1">
@@ -4680,93 +4680,6 @@
             <CONNECTION INSTANCE="rst_ps7_0_100M" PORT="peripheral_aresetn"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="31" NAME="M01_AXI_awaddr" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_0_s_axi_AES_AWADDR">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="AES_Full_0" PORT="s_axi_AES_AWADDR"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" NAME="M01_AXI_awprot" SIGIS="undef"/>
-        <PORT DIR="O" NAME="M01_AXI_awvalid" SIGIS="undef" SIGNAME="AES_Full_0_s_axi_AES_AWVALID">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="AES_Full_0" PORT="s_axi_AES_AWVALID"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="I" NAME="M01_AXI_awready" SIGIS="undef" SIGNAME="AES_Full_0_s_axi_AES_AWREADY">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="AES_Full_0" PORT="s_axi_AES_AWREADY"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" LEFT="31" NAME="M01_AXI_wdata" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_0_s_axi_AES_WDATA">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="AES_Full_0" PORT="s_axi_AES_WDATA"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" LEFT="3" NAME="M01_AXI_wstrb" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_0_s_axi_AES_WSTRB">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="AES_Full_0" PORT="s_axi_AES_WSTRB"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" NAME="M01_AXI_wvalid" SIGIS="undef" SIGNAME="AES_Full_0_s_axi_AES_WVALID">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="AES_Full_0" PORT="s_axi_AES_WVALID"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="I" NAME="M01_AXI_wready" SIGIS="undef" SIGNAME="AES_Full_0_s_axi_AES_WREADY">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="AES_Full_0" PORT="s_axi_AES_WREADY"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="I" LEFT="1" NAME="M01_AXI_bresp" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_0_s_axi_AES_BRESP">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="AES_Full_0" PORT="s_axi_AES_BRESP"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="I" NAME="M01_AXI_bvalid" SIGIS="undef" SIGNAME="AES_Full_0_s_axi_AES_BVALID">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="AES_Full_0" PORT="s_axi_AES_BVALID"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" NAME="M01_AXI_bready" SIGIS="undef" SIGNAME="AES_Full_0_s_axi_AES_BREADY">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="AES_Full_0" PORT="s_axi_AES_BREADY"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" LEFT="31" NAME="M01_AXI_araddr" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_0_s_axi_AES_ARADDR">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="AES_Full_0" PORT="s_axi_AES_ARADDR"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" NAME="M01_AXI_arprot" SIGIS="undef"/>
-        <PORT DIR="O" NAME="M01_AXI_arvalid" SIGIS="undef" SIGNAME="AES_Full_0_s_axi_AES_ARVALID">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="AES_Full_0" PORT="s_axi_AES_ARVALID"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="I" NAME="M01_AXI_arready" SIGIS="undef" SIGNAME="AES_Full_0_s_axi_AES_ARREADY">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="AES_Full_0" PORT="s_axi_AES_ARREADY"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="I" LEFT="31" NAME="M01_AXI_rdata" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_0_s_axi_AES_RDATA">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="AES_Full_0" PORT="s_axi_AES_RDATA"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="I" LEFT="1" NAME="M01_AXI_rresp" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_0_s_axi_AES_RRESP">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="AES_Full_0" PORT="s_axi_AES_RRESP"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="I" NAME="M01_AXI_rvalid" SIGIS="undef" SIGNAME="AES_Full_0_s_axi_AES_RVALID">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="AES_Full_0" PORT="s_axi_AES_RVALID"/>
-          </CONNECTIONS>
-        </PORT>
-        <PORT DIR="O" NAME="M01_AXI_rready" SIGIS="undef" SIGNAME="AES_Full_0_s_axi_AES_RREADY">
-          <CONNECTIONS>
-            <CONNECTION INSTANCE="AES_Full_0" PORT="s_axi_AES_RREADY"/>
-          </CONNECTIONS>
-        </PORT>
         <PORT DIR="I" LEFT="11" NAME="S00_AXI_awid" RIGHT="0" SIGIS="undef" SIGNAME="processing_system7_0_M_AXI_GP0_AWID">
           <CONNECTIONS>
             <CONNECTION INSTANCE="processing_system7_0" PORT="M_AXI_GP0_AWID"/>
@@ -5040,6 +4953,93 @@
             <CONNECTION INSTANCE="axi_dma_0" PORT="s_axi_lite_rready"/>
           </CONNECTIONS>
         </PORT>
+        <PORT DIR="O" LEFT="31" NAME="M01_AXI_awaddr" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_axis8_0_s_axi_AES_AWADDR">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="s_axi_AES_AWADDR"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="M01_AXI_awprot" SIGIS="undef"/>
+        <PORT DIR="O" NAME="M01_AXI_awvalid" SIGIS="undef" SIGNAME="AES_Full_axis8_0_s_axi_AES_AWVALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="s_axi_AES_AWVALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="M01_AXI_awready" SIGIS="undef" SIGNAME="AES_Full_axis8_0_s_axi_AES_AWREADY">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="s_axi_AES_AWREADY"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="31" NAME="M01_AXI_wdata" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_axis8_0_s_axi_AES_WDATA">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="s_axi_AES_WDATA"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="3" NAME="M01_AXI_wstrb" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_axis8_0_s_axi_AES_WSTRB">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="s_axi_AES_WSTRB"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="M01_AXI_wvalid" SIGIS="undef" SIGNAME="AES_Full_axis8_0_s_axi_AES_WVALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="s_axi_AES_WVALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="M01_AXI_wready" SIGIS="undef" SIGNAME="AES_Full_axis8_0_s_axi_AES_WREADY">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="s_axi_AES_WREADY"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="1" NAME="M01_AXI_bresp" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_axis8_0_s_axi_AES_BRESP">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="s_axi_AES_BRESP"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="M01_AXI_bvalid" SIGIS="undef" SIGNAME="AES_Full_axis8_0_s_axi_AES_BVALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="s_axi_AES_BVALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="M01_AXI_bready" SIGIS="undef" SIGNAME="AES_Full_axis8_0_s_axi_AES_BREADY">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="s_axi_AES_BREADY"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" LEFT="31" NAME="M01_AXI_araddr" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_axis8_0_s_axi_AES_ARADDR">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="s_axi_AES_ARADDR"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="M01_AXI_arprot" SIGIS="undef"/>
+        <PORT DIR="O" NAME="M01_AXI_arvalid" SIGIS="undef" SIGNAME="AES_Full_axis8_0_s_axi_AES_ARVALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="s_axi_AES_ARVALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="M01_AXI_arready" SIGIS="undef" SIGNAME="AES_Full_axis8_0_s_axi_AES_ARREADY">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="s_axi_AES_ARREADY"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="31" NAME="M01_AXI_rdata" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_axis8_0_s_axi_AES_RDATA">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="s_axi_AES_RDATA"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="1" NAME="M01_AXI_rresp" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_axis8_0_s_axi_AES_RRESP">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="s_axi_AES_RRESP"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="M01_AXI_rvalid" SIGIS="undef" SIGNAME="AES_Full_axis8_0_s_axi_AES_RVALID">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="s_axi_AES_RVALID"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="O" NAME="M01_AXI_rready" SIGIS="undef" SIGNAME="AES_Full_axis8_0_s_axi_AES_RREADY">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="s_axi_AES_RREADY"/>
+          </CONNECTIONS>
+        </PORT>
       </PORTS>
       <BUSINTERFACES>
         <BUSINTERFACE BUSNAME="processing_system7_0_M_AXI_GP0" DATAWIDTH="32" NAME="S00_AXI" TYPE="SLAVE" VLNV="xilinx.com:interface:aximm:1.0">
@@ -5176,8 +5176,8 @@
             <CONNECTION INSTANCE="axi_dma_0" PORT="axi_resetn"/>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M00_ARESETN"/>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="ARESETN"/>
-            <CONNECTION INSTANCE="AES_Full_0" PORT="ap_rst_n"/>
             <CONNECTION INSTANCE="ps7_0_axi_periph" PORT="M01_ARESETN"/>
+            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="ap_rst_n"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>
@@ -5234,9 +5234,9 @@
             <CONNECTION INSTANCE="axi_dma_0" PORT="s2mm_introut"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="0" NAME="In2" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_0_interrupt">
+        <PORT DIR="I" LEFT="0" NAME="In2" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_axis8_0_interrupt">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="AES_Full_0" PORT="interrupt"/>
+            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="interrupt"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" LEFT="2" NAME="dout" RIGHT="0" SIGIS="undef" SIGNAME="xlconcat_0_dout">

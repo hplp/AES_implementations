@@ -3,7 +3,7 @@
 	"modules": {
 		"ZAES": {
 			"proto_instances": {
-				"/AES_Full_0/data_in": {
+				"/AES_Full_axis8_0/data_in": {
 					"interface": "xilinx.com:interface:axis:1.0",
 					"ports": {
 						"ACLK": { "actual": "ap_clk"},
@@ -13,7 +13,7 @@
 						"TVALID": { "actual": "data_in_TVALID"}
 					}
 				},
-				"/AES_Full_0/data_out": {
+				"/AES_Full_axis8_0/data_out": {
 					"interface": "xilinx.com:interface:axis:1.0",
 					"ports": {
 						"ACLK": { "actual": "ap_clk"},
@@ -23,7 +23,7 @@
 						"TVALID": { "actual": "data_out_TVALID"}
 					}
 				},
-				"/AES_Full_0/s_axi_AES": {
+				"/AES_Full_axis8_0/s_axi_AES": {
 					"interface": "xilinx.com:interface:aximm:1.0",
 					"ports": {
 						"ACLK": { "actual": "ap_clk"},
