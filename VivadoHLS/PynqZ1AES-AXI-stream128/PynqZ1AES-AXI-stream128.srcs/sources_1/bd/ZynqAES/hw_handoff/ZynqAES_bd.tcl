@@ -164,12 +164,6 @@ proc create_root_design { parentCell } {
   # Create instance: AES_Full_axis128_0, and set properties
   set AES_Full_axis128_0 [ create_bd_cell -type ip -vlnv hplp:hls:AES_Full_axis128:1.0 AES_Full_axis128_0 ]
 
-  # Create instance: axi4_stream_join_0, and set properties
-  set axi4_stream_join_0 [ create_bd_cell -type ip -vlnv xilinx.com:user:axi4_stream_join:1.0 axi4_stream_join_0 ]
-
-  # Create instance: axi4_stream_split_0, and set properties
-  set axi4_stream_split_0 [ create_bd_cell -type ip -vlnv xilinx.com:user:axi4_stream_split:1.0 axi4_stream_split_0 ]
-
   # Create instance: axi_dma_0, and set properties
   set axi_dma_0 [ create_bd_cell -type ip -vlnv xilinx.com:ip:axi_dma:7.1 axi_dma_0 ]
   set_property -dict [ list \
@@ -985,40 +979,8 @@ proc create_root_design { parentCell } {
  ] $xlconcat_0
 
   # Create interface connections
-  connect_bd_intf_net -intf_net AES_Full_axis128_0_aes_out_data0 [get_bd_intf_pins AES_Full_axis128_0/aes_out_data0] [get_bd_intf_pins axi4_stream_join_0/in_data00]
-  connect_bd_intf_net -intf_net AES_Full_axis128_0_aes_out_data1 [get_bd_intf_pins AES_Full_axis128_0/aes_out_data1] [get_bd_intf_pins axi4_stream_join_0/in_data01]
-  connect_bd_intf_net -intf_net AES_Full_axis128_0_aes_out_data2 [get_bd_intf_pins AES_Full_axis128_0/aes_out_data2] [get_bd_intf_pins axi4_stream_join_0/in_data02]
-  connect_bd_intf_net -intf_net AES_Full_axis128_0_aes_out_data3 [get_bd_intf_pins AES_Full_axis128_0/aes_out_data3] [get_bd_intf_pins axi4_stream_join_0/in_data03]
-  connect_bd_intf_net -intf_net AES_Full_axis128_0_aes_out_data4 [get_bd_intf_pins AES_Full_axis128_0/aes_out_data4] [get_bd_intf_pins axi4_stream_join_0/in_data04]
-  connect_bd_intf_net -intf_net AES_Full_axis128_0_aes_out_data5 [get_bd_intf_pins AES_Full_axis128_0/aes_out_data5] [get_bd_intf_pins axi4_stream_join_0/in_data05]
-  connect_bd_intf_net -intf_net AES_Full_axis128_0_aes_out_data6 [get_bd_intf_pins AES_Full_axis128_0/aes_out_data6] [get_bd_intf_pins axi4_stream_join_0/in_data06]
-  connect_bd_intf_net -intf_net AES_Full_axis128_0_aes_out_data7 [get_bd_intf_pins AES_Full_axis128_0/aes_out_data7] [get_bd_intf_pins axi4_stream_join_0/in_data07]
-  connect_bd_intf_net -intf_net AES_Full_axis128_0_aes_out_data8 [get_bd_intf_pins AES_Full_axis128_0/aes_out_data8] [get_bd_intf_pins axi4_stream_join_0/in_data08]
-  connect_bd_intf_net -intf_net AES_Full_axis128_0_aes_out_data9 [get_bd_intf_pins AES_Full_axis128_0/aes_out_data9] [get_bd_intf_pins axi4_stream_join_0/in_data09]
-  connect_bd_intf_net -intf_net AES_Full_axis128_0_aes_out_data10 [get_bd_intf_pins AES_Full_axis128_0/aes_out_data10] [get_bd_intf_pins axi4_stream_join_0/in_data10]
-  connect_bd_intf_net -intf_net AES_Full_axis128_0_aes_out_data11 [get_bd_intf_pins AES_Full_axis128_0/aes_out_data11] [get_bd_intf_pins axi4_stream_join_0/in_data11]
-  connect_bd_intf_net -intf_net AES_Full_axis128_0_aes_out_data12 [get_bd_intf_pins AES_Full_axis128_0/aes_out_data12] [get_bd_intf_pins axi4_stream_join_0/in_data12]
-  connect_bd_intf_net -intf_net AES_Full_axis128_0_aes_out_data13 [get_bd_intf_pins AES_Full_axis128_0/aes_out_data13] [get_bd_intf_pins axi4_stream_join_0/in_data13]
-  connect_bd_intf_net -intf_net AES_Full_axis128_0_aes_out_data14 [get_bd_intf_pins AES_Full_axis128_0/aes_out_data14] [get_bd_intf_pins axi4_stream_join_0/in_data14]
-  connect_bd_intf_net -intf_net AES_Full_axis128_0_aes_out_data15 [get_bd_intf_pins AES_Full_axis128_0/aes_out_data15] [get_bd_intf_pins axi4_stream_join_0/in_data15]
-  connect_bd_intf_net -intf_net axi4_stream_join_0_out_data [get_bd_intf_pins axi4_stream_join_0/out_data] [get_bd_intf_pins axi_dma_0/S_AXIS_S2MM]
-  connect_bd_intf_net -intf_net axi4_stream_split_0_out_data00 [get_bd_intf_pins AES_Full_axis128_0/aes_in_data0] [get_bd_intf_pins axi4_stream_split_0/out_data00]
-  connect_bd_intf_net -intf_net axi4_stream_split_0_out_data01 [get_bd_intf_pins AES_Full_axis128_0/aes_in_data1] [get_bd_intf_pins axi4_stream_split_0/out_data01]
-  connect_bd_intf_net -intf_net axi4_stream_split_0_out_data02 [get_bd_intf_pins AES_Full_axis128_0/aes_in_data2] [get_bd_intf_pins axi4_stream_split_0/out_data02]
-  connect_bd_intf_net -intf_net axi4_stream_split_0_out_data03 [get_bd_intf_pins AES_Full_axis128_0/aes_in_data3] [get_bd_intf_pins axi4_stream_split_0/out_data03]
-  connect_bd_intf_net -intf_net axi4_stream_split_0_out_data04 [get_bd_intf_pins AES_Full_axis128_0/aes_in_data4] [get_bd_intf_pins axi4_stream_split_0/out_data04]
-  connect_bd_intf_net -intf_net axi4_stream_split_0_out_data05 [get_bd_intf_pins AES_Full_axis128_0/aes_in_data5] [get_bd_intf_pins axi4_stream_split_0/out_data05]
-  connect_bd_intf_net -intf_net axi4_stream_split_0_out_data06 [get_bd_intf_pins AES_Full_axis128_0/aes_in_data6] [get_bd_intf_pins axi4_stream_split_0/out_data06]
-  connect_bd_intf_net -intf_net axi4_stream_split_0_out_data07 [get_bd_intf_pins AES_Full_axis128_0/aes_in_data7] [get_bd_intf_pins axi4_stream_split_0/out_data07]
-  connect_bd_intf_net -intf_net axi4_stream_split_0_out_data08 [get_bd_intf_pins AES_Full_axis128_0/aes_in_data8] [get_bd_intf_pins axi4_stream_split_0/out_data08]
-  connect_bd_intf_net -intf_net axi4_stream_split_0_out_data09 [get_bd_intf_pins AES_Full_axis128_0/aes_in_data9] [get_bd_intf_pins axi4_stream_split_0/out_data09]
-  connect_bd_intf_net -intf_net axi4_stream_split_0_out_data10 [get_bd_intf_pins AES_Full_axis128_0/aes_in_data10] [get_bd_intf_pins axi4_stream_split_0/out_data10]
-  connect_bd_intf_net -intf_net axi4_stream_split_0_out_data11 [get_bd_intf_pins AES_Full_axis128_0/aes_in_data11] [get_bd_intf_pins axi4_stream_split_0/out_data11]
-  connect_bd_intf_net -intf_net axi4_stream_split_0_out_data12 [get_bd_intf_pins AES_Full_axis128_0/aes_in_data12] [get_bd_intf_pins axi4_stream_split_0/out_data12]
-  connect_bd_intf_net -intf_net axi4_stream_split_0_out_data13 [get_bd_intf_pins AES_Full_axis128_0/aes_in_data13] [get_bd_intf_pins axi4_stream_split_0/out_data13]
-  connect_bd_intf_net -intf_net axi4_stream_split_0_out_data14 [get_bd_intf_pins AES_Full_axis128_0/aes_in_data14] [get_bd_intf_pins axi4_stream_split_0/out_data14]
-  connect_bd_intf_net -intf_net axi4_stream_split_0_out_data15 [get_bd_intf_pins AES_Full_axis128_0/aes_in_data15] [get_bd_intf_pins axi4_stream_split_0/out_data15]
-  connect_bd_intf_net -intf_net axi_dma_0_M_AXIS_MM2S [get_bd_intf_pins axi4_stream_split_0/in_data] [get_bd_intf_pins axi_dma_0/M_AXIS_MM2S]
+  connect_bd_intf_net -intf_net AES_Full_axis128_0_aes_out [get_bd_intf_pins AES_Full_axis128_0/aes_out] [get_bd_intf_pins axi_dma_0/S_AXIS_S2MM]
+  connect_bd_intf_net -intf_net axi_dma_0_M_AXIS_MM2S [get_bd_intf_pins AES_Full_axis128_0/aes_in] [get_bd_intf_pins axi_dma_0/M_AXIS_MM2S]
   connect_bd_intf_net -intf_net axi_dma_0_M_AXI_MM2S [get_bd_intf_pins axi_dma_0/M_AXI_MM2S] [get_bd_intf_pins axi_smc/S00_AXI]
   connect_bd_intf_net -intf_net axi_dma_0_M_AXI_S2MM [get_bd_intf_pins axi_dma_0/M_AXI_S2MM] [get_bd_intf_pins axi_smc/S01_AXI]
   connect_bd_intf_net -intf_net axi_smc_M00_AXI [get_bd_intf_pins axi_smc/M00_AXI] [get_bd_intf_pins processing_system7_0/S_AXI_HP0]

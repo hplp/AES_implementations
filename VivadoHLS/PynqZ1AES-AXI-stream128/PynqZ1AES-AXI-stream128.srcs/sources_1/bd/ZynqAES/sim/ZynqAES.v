@@ -1,7 +1,7 @@
 //Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-//Date        : Mon Apr  8 12:41:20 2019
+//Date        : Thu Apr 11 15:47:37 2019
 //Host        : HPLP-SM7ED running 64-bit major release  (build 9200)
 //Command     : generate_target ZynqAES.bd
 //Design      : ZynqAES
@@ -9,7 +9,7 @@
 //--------------------------------------------------------------------------------
 `timescale 1 ps / 1 ps
 
-(* CORE_GENERATION_INFO = "ZynqAES,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=ZynqAES,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=14,numReposBlks=10,numNonXlnxBlks=1,numHierBlks=4,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=1,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,da_axi4_cnt=23,da_ps7_cnt=1,synth_mode=OOC_per_IP}" *) (* HW_HANDOFF = "ZynqAES.hwdef" *) 
+(* CORE_GENERATION_INFO = "ZynqAES,IP_Integrator,{x_ipVendor=xilinx.com,x_ipLibrary=BlockDiagram,x_ipName=ZynqAES,x_ipVersion=1.00.a,x_ipLanguage=VERILOG,numBlks=12,numReposBlks=8,numNonXlnxBlks=1,numHierBlks=4,maxHierDepth=0,numSysgenBlks=0,numHlsBlks=1,numHdlrefBlks=0,numPkgbdBlks=0,bdsource=USER,da_axi4_cnt=23,da_ps7_cnt=1,synth_mode=OOC_per_IP}" *) (* HW_HANDOFF = "ZynqAES.hwdef" *) 
 module ZynqAES
    (DDR_addr,
     DDR_ba,
@@ -54,107 +54,13 @@ module ZynqAES
   (* X_INTERFACE_INFO = "xilinx.com:display_processing_system7:fixedio:1.0 FIXED_IO PS_PORB" *) inout FIXED_IO_ps_porb;
   (* X_INTERFACE_INFO = "xilinx.com:display_processing_system7:fixedio:1.0 FIXED_IO PS_SRSTB" *) inout FIXED_IO_ps_srstb;
 
-  wire [7:0]AES_Full_axis128_0_aes_out_data0_TDATA;
-  wire AES_Full_axis128_0_aes_out_data0_TREADY;
-  wire AES_Full_axis128_0_aes_out_data0_TVALID;
-  wire [7:0]AES_Full_axis128_0_aes_out_data10_TDATA;
-  wire AES_Full_axis128_0_aes_out_data10_TREADY;
-  wire AES_Full_axis128_0_aes_out_data10_TVALID;
-  wire [7:0]AES_Full_axis128_0_aes_out_data11_TDATA;
-  wire AES_Full_axis128_0_aes_out_data11_TREADY;
-  wire AES_Full_axis128_0_aes_out_data11_TVALID;
-  wire [7:0]AES_Full_axis128_0_aes_out_data12_TDATA;
-  wire AES_Full_axis128_0_aes_out_data12_TREADY;
-  wire AES_Full_axis128_0_aes_out_data12_TVALID;
-  wire [7:0]AES_Full_axis128_0_aes_out_data13_TDATA;
-  wire AES_Full_axis128_0_aes_out_data13_TREADY;
-  wire AES_Full_axis128_0_aes_out_data13_TVALID;
-  wire [7:0]AES_Full_axis128_0_aes_out_data14_TDATA;
-  wire AES_Full_axis128_0_aes_out_data14_TREADY;
-  wire AES_Full_axis128_0_aes_out_data14_TVALID;
-  wire [7:0]AES_Full_axis128_0_aes_out_data15_TDATA;
-  wire AES_Full_axis128_0_aes_out_data15_TREADY;
-  wire AES_Full_axis128_0_aes_out_data15_TVALID;
-  wire [7:0]AES_Full_axis128_0_aes_out_data1_TDATA;
-  wire AES_Full_axis128_0_aes_out_data1_TREADY;
-  wire AES_Full_axis128_0_aes_out_data1_TVALID;
-  wire [7:0]AES_Full_axis128_0_aes_out_data2_TDATA;
-  wire AES_Full_axis128_0_aes_out_data2_TREADY;
-  wire AES_Full_axis128_0_aes_out_data2_TVALID;
-  wire [7:0]AES_Full_axis128_0_aes_out_data3_TDATA;
-  wire AES_Full_axis128_0_aes_out_data3_TREADY;
-  wire AES_Full_axis128_0_aes_out_data3_TVALID;
-  wire [7:0]AES_Full_axis128_0_aes_out_data4_TDATA;
-  wire AES_Full_axis128_0_aes_out_data4_TREADY;
-  wire AES_Full_axis128_0_aes_out_data4_TVALID;
-  wire [7:0]AES_Full_axis128_0_aes_out_data5_TDATA;
-  wire AES_Full_axis128_0_aes_out_data5_TREADY;
-  wire AES_Full_axis128_0_aes_out_data5_TVALID;
-  wire [7:0]AES_Full_axis128_0_aes_out_data6_TDATA;
-  wire AES_Full_axis128_0_aes_out_data6_TREADY;
-  wire AES_Full_axis128_0_aes_out_data6_TVALID;
-  wire [7:0]AES_Full_axis128_0_aes_out_data7_TDATA;
-  wire AES_Full_axis128_0_aes_out_data7_TREADY;
-  wire AES_Full_axis128_0_aes_out_data7_TVALID;
-  wire [7:0]AES_Full_axis128_0_aes_out_data8_TDATA;
-  wire AES_Full_axis128_0_aes_out_data8_TREADY;
-  wire AES_Full_axis128_0_aes_out_data8_TVALID;
-  wire [7:0]AES_Full_axis128_0_aes_out_data9_TDATA;
-  wire AES_Full_axis128_0_aes_out_data9_TREADY;
-  wire AES_Full_axis128_0_aes_out_data9_TVALID;
+  wire [127:0]AES_Full_axis128_0_aes_out_TDATA;
+  wire [0:0]AES_Full_axis128_0_aes_out_TLAST;
+  wire AES_Full_axis128_0_aes_out_TREADY;
+  wire AES_Full_axis128_0_aes_out_TVALID;
   wire AES_Full_axis128_0_interrupt;
-  wire [127:0]axi4_stream_join_0_out_data_TDATA;
-  wire axi4_stream_join_0_out_data_TREADY;
-  wire axi4_stream_join_0_out_data_TVALID;
-  wire [7:0]axi4_stream_split_0_out_data00_TDATA;
-  wire axi4_stream_split_0_out_data00_TREADY;
-  wire axi4_stream_split_0_out_data00_TVALID;
-  wire [7:0]axi4_stream_split_0_out_data01_TDATA;
-  wire axi4_stream_split_0_out_data01_TREADY;
-  wire axi4_stream_split_0_out_data01_TVALID;
-  wire [7:0]axi4_stream_split_0_out_data02_TDATA;
-  wire axi4_stream_split_0_out_data02_TREADY;
-  wire axi4_stream_split_0_out_data02_TVALID;
-  wire [7:0]axi4_stream_split_0_out_data03_TDATA;
-  wire axi4_stream_split_0_out_data03_TREADY;
-  wire axi4_stream_split_0_out_data03_TVALID;
-  wire [7:0]axi4_stream_split_0_out_data04_TDATA;
-  wire axi4_stream_split_0_out_data04_TREADY;
-  wire axi4_stream_split_0_out_data04_TVALID;
-  wire [7:0]axi4_stream_split_0_out_data05_TDATA;
-  wire axi4_stream_split_0_out_data05_TREADY;
-  wire axi4_stream_split_0_out_data05_TVALID;
-  wire [7:0]axi4_stream_split_0_out_data06_TDATA;
-  wire axi4_stream_split_0_out_data06_TREADY;
-  wire axi4_stream_split_0_out_data06_TVALID;
-  wire [7:0]axi4_stream_split_0_out_data07_TDATA;
-  wire axi4_stream_split_0_out_data07_TREADY;
-  wire axi4_stream_split_0_out_data07_TVALID;
-  wire [7:0]axi4_stream_split_0_out_data08_TDATA;
-  wire axi4_stream_split_0_out_data08_TREADY;
-  wire axi4_stream_split_0_out_data08_TVALID;
-  wire [7:0]axi4_stream_split_0_out_data09_TDATA;
-  wire axi4_stream_split_0_out_data09_TREADY;
-  wire axi4_stream_split_0_out_data09_TVALID;
-  wire [7:0]axi4_stream_split_0_out_data10_TDATA;
-  wire axi4_stream_split_0_out_data10_TREADY;
-  wire axi4_stream_split_0_out_data10_TVALID;
-  wire [7:0]axi4_stream_split_0_out_data11_TDATA;
-  wire axi4_stream_split_0_out_data11_TREADY;
-  wire axi4_stream_split_0_out_data11_TVALID;
-  wire [7:0]axi4_stream_split_0_out_data12_TDATA;
-  wire axi4_stream_split_0_out_data12_TREADY;
-  wire axi4_stream_split_0_out_data12_TVALID;
-  wire [7:0]axi4_stream_split_0_out_data13_TDATA;
-  wire axi4_stream_split_0_out_data13_TREADY;
-  wire axi4_stream_split_0_out_data13_TVALID;
-  wire [7:0]axi4_stream_split_0_out_data14_TDATA;
-  wire axi4_stream_split_0_out_data14_TREADY;
-  wire axi4_stream_split_0_out_data14_TVALID;
-  wire [7:0]axi4_stream_split_0_out_data15_TDATA;
-  wire axi4_stream_split_0_out_data15_TREADY;
-  wire axi4_stream_split_0_out_data15_TVALID;
   wire [127:0]axi_dma_0_M_AXIS_MM2S_TDATA;
+  wire axi_dma_0_M_AXIS_MM2S_TLAST;
   wire axi_dma_0_M_AXIS_MM2S_TREADY;
   wire axi_dma_0_M_AXIS_MM2S_TVALID;
   wire [63:0]axi_dma_0_M_AXI_MM2S_ARADDR;
@@ -319,102 +225,14 @@ module ZynqAES
   wire [2:0]xlconcat_0_dout;
 
   ZynqAES_AES_Full_axis128_0_1 AES_Full_axis128_0
-       (.aes_in_data0_TDATA(axi4_stream_split_0_out_data00_TDATA),
-        .aes_in_data0_TREADY(axi4_stream_split_0_out_data00_TREADY),
-        .aes_in_data0_TVALID(axi4_stream_split_0_out_data00_TVALID),
-        .aes_in_data10_TDATA(axi4_stream_split_0_out_data10_TDATA),
-        .aes_in_data10_TREADY(axi4_stream_split_0_out_data10_TREADY),
-        .aes_in_data10_TVALID(axi4_stream_split_0_out_data10_TVALID),
-        .aes_in_data11_TDATA(axi4_stream_split_0_out_data11_TDATA),
-        .aes_in_data11_TREADY(axi4_stream_split_0_out_data11_TREADY),
-        .aes_in_data11_TVALID(axi4_stream_split_0_out_data11_TVALID),
-        .aes_in_data12_TDATA(axi4_stream_split_0_out_data12_TDATA),
-        .aes_in_data12_TREADY(axi4_stream_split_0_out_data12_TREADY),
-        .aes_in_data12_TVALID(axi4_stream_split_0_out_data12_TVALID),
-        .aes_in_data13_TDATA(axi4_stream_split_0_out_data13_TDATA),
-        .aes_in_data13_TREADY(axi4_stream_split_0_out_data13_TREADY),
-        .aes_in_data13_TVALID(axi4_stream_split_0_out_data13_TVALID),
-        .aes_in_data14_TDATA(axi4_stream_split_0_out_data14_TDATA),
-        .aes_in_data14_TREADY(axi4_stream_split_0_out_data14_TREADY),
-        .aes_in_data14_TVALID(axi4_stream_split_0_out_data14_TVALID),
-        .aes_in_data15_TDATA(axi4_stream_split_0_out_data15_TDATA),
-        .aes_in_data15_TREADY(axi4_stream_split_0_out_data15_TREADY),
-        .aes_in_data15_TVALID(axi4_stream_split_0_out_data15_TVALID),
-        .aes_in_data1_TDATA(axi4_stream_split_0_out_data01_TDATA),
-        .aes_in_data1_TREADY(axi4_stream_split_0_out_data01_TREADY),
-        .aes_in_data1_TVALID(axi4_stream_split_0_out_data01_TVALID),
-        .aes_in_data2_TDATA(axi4_stream_split_0_out_data02_TDATA),
-        .aes_in_data2_TREADY(axi4_stream_split_0_out_data02_TREADY),
-        .aes_in_data2_TVALID(axi4_stream_split_0_out_data02_TVALID),
-        .aes_in_data3_TDATA(axi4_stream_split_0_out_data03_TDATA),
-        .aes_in_data3_TREADY(axi4_stream_split_0_out_data03_TREADY),
-        .aes_in_data3_TVALID(axi4_stream_split_0_out_data03_TVALID),
-        .aes_in_data4_TDATA(axi4_stream_split_0_out_data04_TDATA),
-        .aes_in_data4_TREADY(axi4_stream_split_0_out_data04_TREADY),
-        .aes_in_data4_TVALID(axi4_stream_split_0_out_data04_TVALID),
-        .aes_in_data5_TDATA(axi4_stream_split_0_out_data05_TDATA),
-        .aes_in_data5_TREADY(axi4_stream_split_0_out_data05_TREADY),
-        .aes_in_data5_TVALID(axi4_stream_split_0_out_data05_TVALID),
-        .aes_in_data6_TDATA(axi4_stream_split_0_out_data06_TDATA),
-        .aes_in_data6_TREADY(axi4_stream_split_0_out_data06_TREADY),
-        .aes_in_data6_TVALID(axi4_stream_split_0_out_data06_TVALID),
-        .aes_in_data7_TDATA(axi4_stream_split_0_out_data07_TDATA),
-        .aes_in_data7_TREADY(axi4_stream_split_0_out_data07_TREADY),
-        .aes_in_data7_TVALID(axi4_stream_split_0_out_data07_TVALID),
-        .aes_in_data8_TDATA(axi4_stream_split_0_out_data08_TDATA),
-        .aes_in_data8_TREADY(axi4_stream_split_0_out_data08_TREADY),
-        .aes_in_data8_TVALID(axi4_stream_split_0_out_data08_TVALID),
-        .aes_in_data9_TDATA(axi4_stream_split_0_out_data09_TDATA),
-        .aes_in_data9_TREADY(axi4_stream_split_0_out_data09_TREADY),
-        .aes_in_data9_TVALID(axi4_stream_split_0_out_data09_TVALID),
-        .aes_out_data0_TDATA(AES_Full_axis128_0_aes_out_data0_TDATA),
-        .aes_out_data0_TREADY(AES_Full_axis128_0_aes_out_data0_TREADY),
-        .aes_out_data0_TVALID(AES_Full_axis128_0_aes_out_data0_TVALID),
-        .aes_out_data10_TDATA(AES_Full_axis128_0_aes_out_data10_TDATA),
-        .aes_out_data10_TREADY(AES_Full_axis128_0_aes_out_data10_TREADY),
-        .aes_out_data10_TVALID(AES_Full_axis128_0_aes_out_data10_TVALID),
-        .aes_out_data11_TDATA(AES_Full_axis128_0_aes_out_data11_TDATA),
-        .aes_out_data11_TREADY(AES_Full_axis128_0_aes_out_data11_TREADY),
-        .aes_out_data11_TVALID(AES_Full_axis128_0_aes_out_data11_TVALID),
-        .aes_out_data12_TDATA(AES_Full_axis128_0_aes_out_data12_TDATA),
-        .aes_out_data12_TREADY(AES_Full_axis128_0_aes_out_data12_TREADY),
-        .aes_out_data12_TVALID(AES_Full_axis128_0_aes_out_data12_TVALID),
-        .aes_out_data13_TDATA(AES_Full_axis128_0_aes_out_data13_TDATA),
-        .aes_out_data13_TREADY(AES_Full_axis128_0_aes_out_data13_TREADY),
-        .aes_out_data13_TVALID(AES_Full_axis128_0_aes_out_data13_TVALID),
-        .aes_out_data14_TDATA(AES_Full_axis128_0_aes_out_data14_TDATA),
-        .aes_out_data14_TREADY(AES_Full_axis128_0_aes_out_data14_TREADY),
-        .aes_out_data14_TVALID(AES_Full_axis128_0_aes_out_data14_TVALID),
-        .aes_out_data15_TDATA(AES_Full_axis128_0_aes_out_data15_TDATA),
-        .aes_out_data15_TREADY(AES_Full_axis128_0_aes_out_data15_TREADY),
-        .aes_out_data15_TVALID(AES_Full_axis128_0_aes_out_data15_TVALID),
-        .aes_out_data1_TDATA(AES_Full_axis128_0_aes_out_data1_TDATA),
-        .aes_out_data1_TREADY(AES_Full_axis128_0_aes_out_data1_TREADY),
-        .aes_out_data1_TVALID(AES_Full_axis128_0_aes_out_data1_TVALID),
-        .aes_out_data2_TDATA(AES_Full_axis128_0_aes_out_data2_TDATA),
-        .aes_out_data2_TREADY(AES_Full_axis128_0_aes_out_data2_TREADY),
-        .aes_out_data2_TVALID(AES_Full_axis128_0_aes_out_data2_TVALID),
-        .aes_out_data3_TDATA(AES_Full_axis128_0_aes_out_data3_TDATA),
-        .aes_out_data3_TREADY(AES_Full_axis128_0_aes_out_data3_TREADY),
-        .aes_out_data3_TVALID(AES_Full_axis128_0_aes_out_data3_TVALID),
-        .aes_out_data4_TDATA(AES_Full_axis128_0_aes_out_data4_TDATA),
-        .aes_out_data4_TREADY(AES_Full_axis128_0_aes_out_data4_TREADY),
-        .aes_out_data4_TVALID(AES_Full_axis128_0_aes_out_data4_TVALID),
-        .aes_out_data5_TDATA(AES_Full_axis128_0_aes_out_data5_TDATA),
-        .aes_out_data5_TREADY(AES_Full_axis128_0_aes_out_data5_TREADY),
-        .aes_out_data5_TVALID(AES_Full_axis128_0_aes_out_data5_TVALID),
-        .aes_out_data6_TDATA(AES_Full_axis128_0_aes_out_data6_TDATA),
-        .aes_out_data6_TREADY(AES_Full_axis128_0_aes_out_data6_TREADY),
-        .aes_out_data6_TVALID(AES_Full_axis128_0_aes_out_data6_TVALID),
-        .aes_out_data7_TDATA(AES_Full_axis128_0_aes_out_data7_TDATA),
-        .aes_out_data7_TREADY(AES_Full_axis128_0_aes_out_data7_TREADY),
-        .aes_out_data7_TVALID(AES_Full_axis128_0_aes_out_data7_TVALID),
-        .aes_out_data8_TDATA(AES_Full_axis128_0_aes_out_data8_TDATA),
-        .aes_out_data8_TREADY(AES_Full_axis128_0_aes_out_data8_TREADY),
-        .aes_out_data8_TVALID(AES_Full_axis128_0_aes_out_data8_TVALID),
-        .aes_out_data9_TDATA(AES_Full_axis128_0_aes_out_data9_TDATA),
-        .aes_out_data9_TREADY(AES_Full_axis128_0_aes_out_data9_TREADY),
-        .aes_out_data9_TVALID(AES_Full_axis128_0_aes_out_data9_TVALID),
+       (.aes_in_TDATA(axi_dma_0_M_AXIS_MM2S_TDATA),
+        .aes_in_TLAST(axi_dma_0_M_AXIS_MM2S_TLAST),
+        .aes_in_TREADY(axi_dma_0_M_AXIS_MM2S_TREADY),
+        .aes_in_TVALID(axi_dma_0_M_AXIS_MM2S_TVALID),
+        .aes_out_TDATA(AES_Full_axis128_0_aes_out_TDATA),
+        .aes_out_TLAST(AES_Full_axis128_0_aes_out_TLAST),
+        .aes_out_TREADY(AES_Full_axis128_0_aes_out_TREADY),
+        .aes_out_TVALID(AES_Full_axis128_0_aes_out_TVALID),
         .ap_clk(processing_system7_0_FCLK_CLK0),
         .ap_rst_n(rst_ps7_0_100M_peripheral_aresetn),
         .interrupt(AES_Full_axis128_0_interrupt),
@@ -435,110 +253,6 @@ module ZynqAES
         .s_axi_AES_WREADY(ps7_0_axi_periph_M01_AXI_WREADY),
         .s_axi_AES_WSTRB(ps7_0_axi_periph_M01_AXI_WSTRB),
         .s_axi_AES_WVALID(ps7_0_axi_periph_M01_AXI_WVALID));
-  ZynqAES_axi4_stream_join_0_1 axi4_stream_join_0
-       (.in_data00_TDATA(AES_Full_axis128_0_aes_out_data0_TDATA),
-        .in_data00_TREADY(AES_Full_axis128_0_aes_out_data0_TREADY),
-        .in_data00_TVALID(AES_Full_axis128_0_aes_out_data0_TVALID),
-        .in_data01_TDATA(AES_Full_axis128_0_aes_out_data1_TDATA),
-        .in_data01_TREADY(AES_Full_axis128_0_aes_out_data1_TREADY),
-        .in_data01_TVALID(AES_Full_axis128_0_aes_out_data1_TVALID),
-        .in_data02_TDATA(AES_Full_axis128_0_aes_out_data2_TDATA),
-        .in_data02_TREADY(AES_Full_axis128_0_aes_out_data2_TREADY),
-        .in_data02_TVALID(AES_Full_axis128_0_aes_out_data2_TVALID),
-        .in_data03_TDATA(AES_Full_axis128_0_aes_out_data3_TDATA),
-        .in_data03_TREADY(AES_Full_axis128_0_aes_out_data3_TREADY),
-        .in_data03_TVALID(AES_Full_axis128_0_aes_out_data3_TVALID),
-        .in_data04_TDATA(AES_Full_axis128_0_aes_out_data4_TDATA),
-        .in_data04_TREADY(AES_Full_axis128_0_aes_out_data4_TREADY),
-        .in_data04_TVALID(AES_Full_axis128_0_aes_out_data4_TVALID),
-        .in_data05_TDATA(AES_Full_axis128_0_aes_out_data5_TDATA),
-        .in_data05_TREADY(AES_Full_axis128_0_aes_out_data5_TREADY),
-        .in_data05_TVALID(AES_Full_axis128_0_aes_out_data5_TVALID),
-        .in_data06_TDATA(AES_Full_axis128_0_aes_out_data6_TDATA),
-        .in_data06_TREADY(AES_Full_axis128_0_aes_out_data6_TREADY),
-        .in_data06_TVALID(AES_Full_axis128_0_aes_out_data6_TVALID),
-        .in_data07_TDATA(AES_Full_axis128_0_aes_out_data7_TDATA),
-        .in_data07_TREADY(AES_Full_axis128_0_aes_out_data7_TREADY),
-        .in_data07_TVALID(AES_Full_axis128_0_aes_out_data7_TVALID),
-        .in_data08_TDATA(AES_Full_axis128_0_aes_out_data8_TDATA),
-        .in_data08_TREADY(AES_Full_axis128_0_aes_out_data8_TREADY),
-        .in_data08_TVALID(AES_Full_axis128_0_aes_out_data8_TVALID),
-        .in_data09_TDATA(AES_Full_axis128_0_aes_out_data9_TDATA),
-        .in_data09_TREADY(AES_Full_axis128_0_aes_out_data9_TREADY),
-        .in_data09_TVALID(AES_Full_axis128_0_aes_out_data9_TVALID),
-        .in_data10_TDATA(AES_Full_axis128_0_aes_out_data10_TDATA),
-        .in_data10_TREADY(AES_Full_axis128_0_aes_out_data10_TREADY),
-        .in_data10_TVALID(AES_Full_axis128_0_aes_out_data10_TVALID),
-        .in_data11_TDATA(AES_Full_axis128_0_aes_out_data11_TDATA),
-        .in_data11_TREADY(AES_Full_axis128_0_aes_out_data11_TREADY),
-        .in_data11_TVALID(AES_Full_axis128_0_aes_out_data11_TVALID),
-        .in_data12_TDATA(AES_Full_axis128_0_aes_out_data12_TDATA),
-        .in_data12_TREADY(AES_Full_axis128_0_aes_out_data12_TREADY),
-        .in_data12_TVALID(AES_Full_axis128_0_aes_out_data12_TVALID),
-        .in_data13_TDATA(AES_Full_axis128_0_aes_out_data13_TDATA),
-        .in_data13_TREADY(AES_Full_axis128_0_aes_out_data13_TREADY),
-        .in_data13_TVALID(AES_Full_axis128_0_aes_out_data13_TVALID),
-        .in_data14_TDATA(AES_Full_axis128_0_aes_out_data14_TDATA),
-        .in_data14_TREADY(AES_Full_axis128_0_aes_out_data14_TREADY),
-        .in_data14_TVALID(AES_Full_axis128_0_aes_out_data14_TVALID),
-        .in_data15_TDATA(AES_Full_axis128_0_aes_out_data15_TDATA),
-        .in_data15_TREADY(AES_Full_axis128_0_aes_out_data15_TREADY),
-        .in_data15_TVALID(AES_Full_axis128_0_aes_out_data15_TVALID),
-        .out_data_TDATA(axi4_stream_join_0_out_data_TDATA),
-        .out_data_TREADY(axi4_stream_join_0_out_data_TREADY),
-        .out_data_TVALID(axi4_stream_join_0_out_data_TVALID));
-  ZynqAES_axi4_stream_split_0_1 axi4_stream_split_0
-       (.in_data_TDATA(axi_dma_0_M_AXIS_MM2S_TDATA),
-        .in_data_TREADY(axi_dma_0_M_AXIS_MM2S_TREADY),
-        .in_data_TVALID(axi_dma_0_M_AXIS_MM2S_TVALID),
-        .out_data00_TDATA(axi4_stream_split_0_out_data00_TDATA),
-        .out_data00_TREADY(axi4_stream_split_0_out_data00_TREADY),
-        .out_data00_TVALID(axi4_stream_split_0_out_data00_TVALID),
-        .out_data01_TDATA(axi4_stream_split_0_out_data01_TDATA),
-        .out_data01_TREADY(axi4_stream_split_0_out_data01_TREADY),
-        .out_data01_TVALID(axi4_stream_split_0_out_data01_TVALID),
-        .out_data02_TDATA(axi4_stream_split_0_out_data02_TDATA),
-        .out_data02_TREADY(axi4_stream_split_0_out_data02_TREADY),
-        .out_data02_TVALID(axi4_stream_split_0_out_data02_TVALID),
-        .out_data03_TDATA(axi4_stream_split_0_out_data03_TDATA),
-        .out_data03_TREADY(axi4_stream_split_0_out_data03_TREADY),
-        .out_data03_TVALID(axi4_stream_split_0_out_data03_TVALID),
-        .out_data04_TDATA(axi4_stream_split_0_out_data04_TDATA),
-        .out_data04_TREADY(axi4_stream_split_0_out_data04_TREADY),
-        .out_data04_TVALID(axi4_stream_split_0_out_data04_TVALID),
-        .out_data05_TDATA(axi4_stream_split_0_out_data05_TDATA),
-        .out_data05_TREADY(axi4_stream_split_0_out_data05_TREADY),
-        .out_data05_TVALID(axi4_stream_split_0_out_data05_TVALID),
-        .out_data06_TDATA(axi4_stream_split_0_out_data06_TDATA),
-        .out_data06_TREADY(axi4_stream_split_0_out_data06_TREADY),
-        .out_data06_TVALID(axi4_stream_split_0_out_data06_TVALID),
-        .out_data07_TDATA(axi4_stream_split_0_out_data07_TDATA),
-        .out_data07_TREADY(axi4_stream_split_0_out_data07_TREADY),
-        .out_data07_TVALID(axi4_stream_split_0_out_data07_TVALID),
-        .out_data08_TDATA(axi4_stream_split_0_out_data08_TDATA),
-        .out_data08_TREADY(axi4_stream_split_0_out_data08_TREADY),
-        .out_data08_TVALID(axi4_stream_split_0_out_data08_TVALID),
-        .out_data09_TDATA(axi4_stream_split_0_out_data09_TDATA),
-        .out_data09_TREADY(axi4_stream_split_0_out_data09_TREADY),
-        .out_data09_TVALID(axi4_stream_split_0_out_data09_TVALID),
-        .out_data10_TDATA(axi4_stream_split_0_out_data10_TDATA),
-        .out_data10_TREADY(axi4_stream_split_0_out_data10_TREADY),
-        .out_data10_TVALID(axi4_stream_split_0_out_data10_TVALID),
-        .out_data11_TDATA(axi4_stream_split_0_out_data11_TDATA),
-        .out_data11_TREADY(axi4_stream_split_0_out_data11_TREADY),
-        .out_data11_TVALID(axi4_stream_split_0_out_data11_TVALID),
-        .out_data12_TDATA(axi4_stream_split_0_out_data12_TDATA),
-        .out_data12_TREADY(axi4_stream_split_0_out_data12_TREADY),
-        .out_data12_TVALID(axi4_stream_split_0_out_data12_TVALID),
-        .out_data13_TDATA(axi4_stream_split_0_out_data13_TDATA),
-        .out_data13_TREADY(axi4_stream_split_0_out_data13_TREADY),
-        .out_data13_TVALID(axi4_stream_split_0_out_data13_TVALID),
-        .out_data14_TDATA(axi4_stream_split_0_out_data14_TDATA),
-        .out_data14_TREADY(axi4_stream_split_0_out_data14_TREADY),
-        .out_data14_TVALID(axi4_stream_split_0_out_data14_TVALID),
-        .out_data15_TDATA(axi4_stream_split_0_out_data15_TDATA),
-        .out_data15_TREADY(axi4_stream_split_0_out_data15_TREADY),
-        .out_data15_TVALID(axi4_stream_split_0_out_data15_TVALID));
   ZynqAES_axi_dma_0_1 axi_dma_0
        (.axi_resetn(rst_ps7_0_100M_peripheral_aresetn),
         .m_axi_mm2s_aclk(processing_system7_0_FCLK_CLK0),
@@ -573,6 +287,7 @@ module ZynqAES
         .m_axi_s2mm_wstrb(axi_dma_0_M_AXI_S2MM_WSTRB),
         .m_axi_s2mm_wvalid(axi_dma_0_M_AXI_S2MM_WVALID),
         .m_axis_mm2s_tdata(axi_dma_0_M_AXIS_MM2S_TDATA),
+        .m_axis_mm2s_tlast(axi_dma_0_M_AXIS_MM2S_TLAST),
         .m_axis_mm2s_tready(axi_dma_0_M_AXIS_MM2S_TREADY),
         .m_axis_mm2s_tvalid(axi_dma_0_M_AXIS_MM2S_TVALID),
         .mm2s_introut(axi_dma_0_mm2s_introut),
@@ -594,11 +309,11 @@ module ZynqAES
         .s_axi_lite_wdata(ps7_0_axi_periph_M00_AXI_WDATA),
         .s_axi_lite_wready(ps7_0_axi_periph_M00_AXI_WREADY),
         .s_axi_lite_wvalid(ps7_0_axi_periph_M00_AXI_WVALID),
-        .s_axis_s2mm_tdata(axi4_stream_join_0_out_data_TDATA),
+        .s_axis_s2mm_tdata(AES_Full_axis128_0_aes_out_TDATA),
         .s_axis_s2mm_tkeep({1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1,1'b1}),
-        .s_axis_s2mm_tlast(1'b0),
-        .s_axis_s2mm_tready(axi4_stream_join_0_out_data_TREADY),
-        .s_axis_s2mm_tvalid(axi4_stream_join_0_out_data_TVALID));
+        .s_axis_s2mm_tlast(AES_Full_axis128_0_aes_out_TLAST),
+        .s_axis_s2mm_tready(AES_Full_axis128_0_aes_out_TREADY),
+        .s_axis_s2mm_tvalid(AES_Full_axis128_0_aes_out_TVALID));
   ZynqAES_axi_smc_0 axi_smc
        (.M00_AXI_araddr(axi_smc_M00_AXI_ARADDR),
         .M00_AXI_arburst(axi_smc_M00_AXI_ARBURST),

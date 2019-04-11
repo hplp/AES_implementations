@@ -2,10 +2,10 @@
 <Root MajorVersion="0" MinorVersion="36">
   <CompositeFile CompositeFileTopName="ZynqAES" CanBeSetAsTop="false" CanDisplayChildGraph="true">
     <Description>Composite Fileset</Description>
-    <Generation Name="SYNTHESIS" State="GENERATED" Timestamp="1554741691"/>
-    <Generation Name="IMPLEMENTATION" State="GENERATED" Timestamp="1554741691"/>
-    <Generation Name="SIMULATION" State="GENERATED" Timestamp="1554741691"/>
-    <Generation Name="HW_HANDOFF" State="GENERATED" Timestamp="1554741691"/>
+    <Generation Name="SYNTHESIS" State="GENERATED" Timestamp="1555012066"/>
+    <Generation Name="IMPLEMENTATION" State="GENERATED" Timestamp="1555012066"/>
+    <Generation Name="SIMULATION" State="GENERATED" Timestamp="1555012066"/>
+    <Generation Name="HW_HANDOFF" State="GENERATED" Timestamp="1555012066"/>
     <FileCollection Name="SOURCES" Type="SOURCES">
       <File Name="ip\ZynqAES_processing_system7_0_0\ZynqAES_processing_system7_0_0.xci" Type="IP">
         <Instance HierarchyPath="processing_system7_0"/>
@@ -75,22 +75,6 @@
       </File>
       <File Name="ip\ZynqAES_AES_Full_axis128_0_1\ZynqAES_AES_Full_axis128_0_1.xci" Type="IP">
         <Instance HierarchyPath="AES_Full_axis128_0"/>
-        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
-        <Library Name="xil_defaultlib"/>
-        <UsedIn Val="SYNTHESIS"/>
-        <UsedIn Val="IMPLEMENTATION"/>
-        <UsedIn Val="SIMULATION"/>
-      </File>
-      <File Name="ip\ZynqAES_axi4_stream_join_0_1\ZynqAES_axi4_stream_join_0_1.xci" Type="IP">
-        <Instance HierarchyPath="axi4_stream_join_0"/>
-        <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
-        <Library Name="xil_defaultlib"/>
-        <UsedIn Val="SYNTHESIS"/>
-        <UsedIn Val="IMPLEMENTATION"/>
-        <UsedIn Val="SIMULATION"/>
-      </File>
-      <File Name="ip\ZynqAES_axi4_stream_split_0_1\ZynqAES_axi4_stream_split_0_1.xci" Type="IP">
-        <Instance HierarchyPath="axi4_stream_split_0"/>
         <Properties IsEditable="false" IsVisible="true" Timestamp="0" IsTrackable="true" IsStatusTracked="true"/>
         <Library Name="xil_defaultlib"/>
         <UsedIn Val="SYNTHESIS"/>

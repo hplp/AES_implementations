@@ -28,12 +28,6 @@ set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==ZynqAES_axi_dma
 # IP: bd/ZynqAES/ip/ZynqAES_AES_Full_axis128_0_1/ZynqAES_AES_Full_axis128_0_1.xci
 set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==ZynqAES_AES_Full_axis128_0_1 || ORIG_REF_NAME==ZynqAES_AES_Full_axis128_0_1} -quiet] -quiet
 
-# IP: bd/ZynqAES/ip/ZynqAES_axi4_stream_join_0_1/ZynqAES_axi4_stream_join_0_1.xci
-set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==ZynqAES_axi4_stream_join_0_1 || ORIG_REF_NAME==ZynqAES_axi4_stream_join_0_1} -quiet] -quiet
-
-# IP: bd/ZynqAES/ip/ZynqAES_axi4_stream_split_0_1/ZynqAES_axi4_stream_split_0_1.xci
-set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==ZynqAES_axi4_stream_split_0_1 || ORIG_REF_NAME==ZynqAES_axi4_stream_split_0_1} -quiet] -quiet
-
 # IP: bd/ZynqAES/ip/ZynqAES_auto_pc_0/ZynqAES_auto_pc_0.xci
 set_property DONT_TOUCH TRUE [get_cells -hier -filter {REF_NAME==ZynqAES_auto_pc_0 || ORIG_REF_NAME==ZynqAES_auto_pc_0} -quiet] -quiet
 

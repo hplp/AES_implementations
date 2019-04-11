@@ -48,7 +48,7 @@
 
 
 // IP VLNV: hplp:hls:AES_Full_axis128:1.0
-// IP Revision: 1904081144
+// IP Revision: 1904111541
 
 (* X_CORE_INFO = "AES_Full_axis128,Vivado 2018.3" *)
 (* CHECK_LICENSE_TYPE = "ZynqAES_AES_Full_axis128_0_1,AES_Full_axis128,{}" *)
@@ -75,102 +75,14 @@ module ZynqAES_AES_Full_axis128_0_1 (
   ap_clk,
   ap_rst_n,
   interrupt,
-  aes_in_data0_TVALID,
-  aes_in_data0_TREADY,
-  aes_in_data0_TDATA,
-  aes_in_data1_TVALID,
-  aes_in_data1_TREADY,
-  aes_in_data1_TDATA,
-  aes_in_data2_TVALID,
-  aes_in_data2_TREADY,
-  aes_in_data2_TDATA,
-  aes_in_data3_TVALID,
-  aes_in_data3_TREADY,
-  aes_in_data3_TDATA,
-  aes_in_data4_TVALID,
-  aes_in_data4_TREADY,
-  aes_in_data4_TDATA,
-  aes_in_data5_TVALID,
-  aes_in_data5_TREADY,
-  aes_in_data5_TDATA,
-  aes_in_data6_TVALID,
-  aes_in_data6_TREADY,
-  aes_in_data6_TDATA,
-  aes_in_data7_TVALID,
-  aes_in_data7_TREADY,
-  aes_in_data7_TDATA,
-  aes_in_data8_TVALID,
-  aes_in_data8_TREADY,
-  aes_in_data8_TDATA,
-  aes_in_data9_TVALID,
-  aes_in_data9_TREADY,
-  aes_in_data9_TDATA,
-  aes_in_data10_TVALID,
-  aes_in_data10_TREADY,
-  aes_in_data10_TDATA,
-  aes_in_data11_TVALID,
-  aes_in_data11_TREADY,
-  aes_in_data11_TDATA,
-  aes_in_data12_TVALID,
-  aes_in_data12_TREADY,
-  aes_in_data12_TDATA,
-  aes_in_data13_TVALID,
-  aes_in_data13_TREADY,
-  aes_in_data13_TDATA,
-  aes_in_data14_TVALID,
-  aes_in_data14_TREADY,
-  aes_in_data14_TDATA,
-  aes_in_data15_TVALID,
-  aes_in_data15_TREADY,
-  aes_in_data15_TDATA,
-  aes_out_data0_TVALID,
-  aes_out_data0_TREADY,
-  aes_out_data0_TDATA,
-  aes_out_data1_TVALID,
-  aes_out_data1_TREADY,
-  aes_out_data1_TDATA,
-  aes_out_data2_TVALID,
-  aes_out_data2_TREADY,
-  aes_out_data2_TDATA,
-  aes_out_data3_TVALID,
-  aes_out_data3_TREADY,
-  aes_out_data3_TDATA,
-  aes_out_data4_TVALID,
-  aes_out_data4_TREADY,
-  aes_out_data4_TDATA,
-  aes_out_data5_TVALID,
-  aes_out_data5_TREADY,
-  aes_out_data5_TDATA,
-  aes_out_data6_TVALID,
-  aes_out_data6_TREADY,
-  aes_out_data6_TDATA,
-  aes_out_data7_TVALID,
-  aes_out_data7_TREADY,
-  aes_out_data7_TDATA,
-  aes_out_data8_TVALID,
-  aes_out_data8_TREADY,
-  aes_out_data8_TDATA,
-  aes_out_data9_TVALID,
-  aes_out_data9_TREADY,
-  aes_out_data9_TDATA,
-  aes_out_data10_TVALID,
-  aes_out_data10_TREADY,
-  aes_out_data10_TDATA,
-  aes_out_data11_TVALID,
-  aes_out_data11_TREADY,
-  aes_out_data11_TDATA,
-  aes_out_data12_TVALID,
-  aes_out_data12_TREADY,
-  aes_out_data12_TDATA,
-  aes_out_data13_TVALID,
-  aes_out_data13_TREADY,
-  aes_out_data13_TDATA,
-  aes_out_data14_TVALID,
-  aes_out_data14_TREADY,
-  aes_out_data14_TDATA,
-  aes_out_data15_TVALID,
-  aes_out_data15_TREADY,
-  aes_out_data15_TDATA
+  aes_in_TVALID,
+  aes_in_TREADY,
+  aes_in_TDATA,
+  aes_in_TLAST,
+  aes_out_TVALID,
+  aes_out_TREADY,
+  aes_out_TDATA,
+  aes_out_TLAST
 );
 
 (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 s_axi_AES AWADDR" *)
@@ -209,8 +121,8 @@ output wire s_axi_AES_RVALID;
 IDTH 0, AWUSER_WIDTH 0, ARUSER_WIDTH 0, WUSER_WIDTH 0, RUSER_WIDTH 0, BUSER_WIDTH 0, HAS_BURST 0, HAS_LOCK 0, HAS_PROT 0, HAS_CACHE 0, HAS_QOS 0, HAS_REGION 0, HAS_WSTRB 1, HAS_BRESP 1, HAS_RRESP 1, SUPPORTS_NARROW_BURST 0, NUM_READ_OUTSTANDING 2, NUM_WRITE_OUTSTANDING 2, MAX_BURST_LENGTH 1, PHASE 0.000, CLK_DOMAIN ZynqAES_processing_system7_0_0_FCLK_CLK0, NUM_READ_THREADS 1, NUM_WRITE_THREADS 1, RUSER_BITS_PER_BYTE 0, WUSER_BITS_PER_BYTE 0, INSERT_VIP 0" *)
 (* X_INTERFACE_INFO = "xilinx.com:interface:aximm:1.0 s_axi_AES RREADY" *)
 input wire s_axi_AES_RREADY;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME ap_clk, ASSOCIATED_BUSIF s_axi_AES:aes_in_data0:aes_in_data1:aes_in_data2:aes_in_data3:aes_in_data4:aes_in_data5:aes_in_data6:aes_in_data7:aes_in_data8:aes_in_data9:aes_in_data10:aes_in_data11:aes_in_data12:aes_in_data13:aes_in_data14:aes_in_data15:aes_out_data0:aes_out_data1:aes_out_data2:aes_out_data3:aes_out_data4:aes_out_data5:aes_out_data6:aes_out_data7:aes_out_data8:aes_out_data9:aes_out_data10:aes_out_data11:aes_out_data12:aes_out_data13:aes_out_data14:aes_out_data15, AS\
-SOCIATED_RESET ap_rst_n, LAYERED_METADATA xilinx.com:interface:datatypes:1.0 {CLK {datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 1} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0}}}}, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN ZynqAES_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME ap_clk, ASSOCIATED_BUSIF s_axi_AES:aes_in:aes_out, ASSOCIATED_RESET ap_rst_n, LAYERED_METADATA xilinx.com:interface:datatypes:1.0 {CLK {datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 1} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0}}}}, FREQ_HZ 100000000, PHASE 0.000, \
+CLK_DOMAIN ZynqAES_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
 (* X_INTERFACE_INFO = "xilinx.com:signal:clock:1.0 ap_clk CLK" *)
 input wire ap_clk;
 (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME ap_rst_n, POLARITY ACTIVE_LOW, LAYERED_METADATA xilinx.com:interface:datatypes:1.0 {RST {datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 1} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0}}}}, INSERT_VIP 0" *)
@@ -219,262 +131,47 @@ input wire ap_rst_n;
 (* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME interrupt, SENSITIVITY LEVEL_HIGH, LAYERED_METADATA xilinx.com:interface:datatypes:1.0 {INTERRUPT {datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 1} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0}}}}, PortWidth 1" *)
 (* X_INTERFACE_INFO = "xilinx.com:signal:interrupt:1.0 interrupt INTERRUPT" *)
 output wire interrupt;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data0 TVALID" *)
-input wire aes_in_data0_TVALID;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data0 TREADY" *)
-output wire aes_in_data0_TREADY;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aes_in_data0, TDATA_NUM_BYTES 1, TUSER_WIDTH 0, LAYERED_METADATA undef, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN ZynqAES_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data0 TDATA" *)
-input wire [7 : 0] aes_in_data0_TDATA;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data1 TVALID" *)
-input wire aes_in_data1_TVALID;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data1 TREADY" *)
-output wire aes_in_data1_TREADY;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aes_in_data1, TDATA_NUM_BYTES 1, TUSER_WIDTH 0, LAYERED_METADATA undef, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN ZynqAES_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data1 TDATA" *)
-input wire [7 : 0] aes_in_data1_TDATA;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data2 TVALID" *)
-input wire aes_in_data2_TVALID;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data2 TREADY" *)
-output wire aes_in_data2_TREADY;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aes_in_data2, TDATA_NUM_BYTES 1, TUSER_WIDTH 0, LAYERED_METADATA undef, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN ZynqAES_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data2 TDATA" *)
-input wire [7 : 0] aes_in_data2_TDATA;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data3 TVALID" *)
-input wire aes_in_data3_TVALID;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data3 TREADY" *)
-output wire aes_in_data3_TREADY;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aes_in_data3, TDATA_NUM_BYTES 1, TUSER_WIDTH 0, LAYERED_METADATA undef, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN ZynqAES_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data3 TDATA" *)
-input wire [7 : 0] aes_in_data3_TDATA;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data4 TVALID" *)
-input wire aes_in_data4_TVALID;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data4 TREADY" *)
-output wire aes_in_data4_TREADY;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aes_in_data4, TDATA_NUM_BYTES 1, TUSER_WIDTH 0, LAYERED_METADATA undef, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN ZynqAES_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data4 TDATA" *)
-input wire [7 : 0] aes_in_data4_TDATA;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data5 TVALID" *)
-input wire aes_in_data5_TVALID;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data5 TREADY" *)
-output wire aes_in_data5_TREADY;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aes_in_data5, TDATA_NUM_BYTES 1, TUSER_WIDTH 0, LAYERED_METADATA undef, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN ZynqAES_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data5 TDATA" *)
-input wire [7 : 0] aes_in_data5_TDATA;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data6 TVALID" *)
-input wire aes_in_data6_TVALID;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data6 TREADY" *)
-output wire aes_in_data6_TREADY;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aes_in_data6, TDATA_NUM_BYTES 1, TUSER_WIDTH 0, LAYERED_METADATA undef, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN ZynqAES_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data6 TDATA" *)
-input wire [7 : 0] aes_in_data6_TDATA;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data7 TVALID" *)
-input wire aes_in_data7_TVALID;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data7 TREADY" *)
-output wire aes_in_data7_TREADY;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aes_in_data7, TDATA_NUM_BYTES 1, TUSER_WIDTH 0, LAYERED_METADATA undef, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN ZynqAES_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data7 TDATA" *)
-input wire [7 : 0] aes_in_data7_TDATA;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data8 TVALID" *)
-input wire aes_in_data8_TVALID;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data8 TREADY" *)
-output wire aes_in_data8_TREADY;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aes_in_data8, TDATA_NUM_BYTES 1, TUSER_WIDTH 0, LAYERED_METADATA undef, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN ZynqAES_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data8 TDATA" *)
-input wire [7 : 0] aes_in_data8_TDATA;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data9 TVALID" *)
-input wire aes_in_data9_TVALID;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data9 TREADY" *)
-output wire aes_in_data9_TREADY;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aes_in_data9, TDATA_NUM_BYTES 1, TUSER_WIDTH 0, LAYERED_METADATA undef, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN ZynqAES_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data9 TDATA" *)
-input wire [7 : 0] aes_in_data9_TDATA;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data10 TVALID" *)
-input wire aes_in_data10_TVALID;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data10 TREADY" *)
-output wire aes_in_data10_TREADY;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aes_in_data10, TDATA_NUM_BYTES 1, TUSER_WIDTH 0, LAYERED_METADATA undef, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN ZynqAES_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data10 TDATA" *)
-input wire [7 : 0] aes_in_data10_TDATA;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data11 TVALID" *)
-input wire aes_in_data11_TVALID;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data11 TREADY" *)
-output wire aes_in_data11_TREADY;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aes_in_data11, TDATA_NUM_BYTES 1, TUSER_WIDTH 0, LAYERED_METADATA undef, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN ZynqAES_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data11 TDATA" *)
-input wire [7 : 0] aes_in_data11_TDATA;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data12 TVALID" *)
-input wire aes_in_data12_TVALID;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data12 TREADY" *)
-output wire aes_in_data12_TREADY;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aes_in_data12, TDATA_NUM_BYTES 1, TUSER_WIDTH 0, LAYERED_METADATA undef, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN ZynqAES_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data12 TDATA" *)
-input wire [7 : 0] aes_in_data12_TDATA;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data13 TVALID" *)
-input wire aes_in_data13_TVALID;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data13 TREADY" *)
-output wire aes_in_data13_TREADY;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aes_in_data13, TDATA_NUM_BYTES 1, TUSER_WIDTH 0, LAYERED_METADATA undef, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN ZynqAES_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data13 TDATA" *)
-input wire [7 : 0] aes_in_data13_TDATA;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data14 TVALID" *)
-input wire aes_in_data14_TVALID;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data14 TREADY" *)
-output wire aes_in_data14_TREADY;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aes_in_data14, TDATA_NUM_BYTES 1, TUSER_WIDTH 0, LAYERED_METADATA undef, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN ZynqAES_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data14 TDATA" *)
-input wire [7 : 0] aes_in_data14_TDATA;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data15 TVALID" *)
-input wire aes_in_data15_TVALID;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data15 TREADY" *)
-output wire aes_in_data15_TREADY;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aes_in_data15, TDATA_NUM_BYTES 1, TUSER_WIDTH 0, LAYERED_METADATA undef, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN ZynqAES_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in_data15 TDATA" *)
-input wire [7 : 0] aes_in_data15_TDATA;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data0 TVALID" *)
-output wire aes_out_data0_TVALID;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data0 TREADY" *)
-input wire aes_out_data0_TREADY;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aes_out_data0, TDATA_NUM_BYTES 1, TUSER_WIDTH 0, LAYERED_METADATA xilinx.com:interface:datatypes:1.0 {CLK {datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 1} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0}}} TDATA {datatype {name {attribs {resolve_type immediate dependen\
-cy {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 8} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0} integer {signed {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value false}}}} TDATA_WIDTH 8}, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, CLK\
-_DOMAIN ZynqAES_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data0 TDATA" *)
-output wire [7 : 0] aes_out_data0_TDATA;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data1 TVALID" *)
-output wire aes_out_data1_TVALID;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data1 TREADY" *)
-input wire aes_out_data1_TREADY;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aes_out_data1, TDATA_NUM_BYTES 1, TUSER_WIDTH 0, LAYERED_METADATA xilinx.com:interface:datatypes:1.0 {CLK {datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 1} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0}}} TDATA {datatype {name {attribs {resolve_type immediate dependen\
-cy {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 8} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0} integer {signed {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value false}}}} TDATA_WIDTH 8}, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, CLK\
-_DOMAIN ZynqAES_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data1 TDATA" *)
-output wire [7 : 0] aes_out_data1_TDATA;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data2 TVALID" *)
-output wire aes_out_data2_TVALID;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data2 TREADY" *)
-input wire aes_out_data2_TREADY;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aes_out_data2, TDATA_NUM_BYTES 1, TUSER_WIDTH 0, LAYERED_METADATA xilinx.com:interface:datatypes:1.0 {CLK {datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 1} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0}}} TDATA {datatype {name {attribs {resolve_type immediate dependen\
-cy {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 8} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0} integer {signed {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value false}}}} TDATA_WIDTH 8}, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, CLK\
-_DOMAIN ZynqAES_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data2 TDATA" *)
-output wire [7 : 0] aes_out_data2_TDATA;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data3 TVALID" *)
-output wire aes_out_data3_TVALID;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data3 TREADY" *)
-input wire aes_out_data3_TREADY;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aes_out_data3, TDATA_NUM_BYTES 1, TUSER_WIDTH 0, LAYERED_METADATA xilinx.com:interface:datatypes:1.0 {CLK {datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 1} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0}}} TDATA {datatype {name {attribs {resolve_type immediate dependen\
-cy {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 8} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0} integer {signed {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value false}}}} TDATA_WIDTH 8}, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, CLK\
-_DOMAIN ZynqAES_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data3 TDATA" *)
-output wire [7 : 0] aes_out_data3_TDATA;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data4 TVALID" *)
-output wire aes_out_data4_TVALID;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data4 TREADY" *)
-input wire aes_out_data4_TREADY;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aes_out_data4, TDATA_NUM_BYTES 1, TUSER_WIDTH 0, LAYERED_METADATA xilinx.com:interface:datatypes:1.0 {CLK {datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 1} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0}}} TDATA {datatype {name {attribs {resolve_type immediate dependen\
-cy {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 8} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0} integer {signed {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value false}}}} TDATA_WIDTH 8}, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, CLK\
-_DOMAIN ZynqAES_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data4 TDATA" *)
-output wire [7 : 0] aes_out_data4_TDATA;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data5 TVALID" *)
-output wire aes_out_data5_TVALID;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data5 TREADY" *)
-input wire aes_out_data5_TREADY;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aes_out_data5, TDATA_NUM_BYTES 1, TUSER_WIDTH 0, LAYERED_METADATA xilinx.com:interface:datatypes:1.0 {CLK {datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 1} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0}}} TDATA {datatype {name {attribs {resolve_type immediate dependen\
-cy {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 8} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0} integer {signed {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value false}}}} TDATA_WIDTH 8}, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, CLK\
-_DOMAIN ZynqAES_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data5 TDATA" *)
-output wire [7 : 0] aes_out_data5_TDATA;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data6 TVALID" *)
-output wire aes_out_data6_TVALID;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data6 TREADY" *)
-input wire aes_out_data6_TREADY;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aes_out_data6, TDATA_NUM_BYTES 1, TUSER_WIDTH 0, LAYERED_METADATA xilinx.com:interface:datatypes:1.0 {CLK {datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 1} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0}}} TDATA {datatype {name {attribs {resolve_type immediate dependen\
-cy {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 8} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0} integer {signed {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value false}}}} TDATA_WIDTH 8}, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, CLK\
-_DOMAIN ZynqAES_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data6 TDATA" *)
-output wire [7 : 0] aes_out_data6_TDATA;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data7 TVALID" *)
-output wire aes_out_data7_TVALID;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data7 TREADY" *)
-input wire aes_out_data7_TREADY;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aes_out_data7, TDATA_NUM_BYTES 1, TUSER_WIDTH 0, LAYERED_METADATA xilinx.com:interface:datatypes:1.0 {CLK {datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 1} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0}}} TDATA {datatype {name {attribs {resolve_type immediate dependen\
-cy {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 8} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0} integer {signed {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value false}}}} TDATA_WIDTH 8}, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, CLK\
-_DOMAIN ZynqAES_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data7 TDATA" *)
-output wire [7 : 0] aes_out_data7_TDATA;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data8 TVALID" *)
-output wire aes_out_data8_TVALID;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data8 TREADY" *)
-input wire aes_out_data8_TREADY;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aes_out_data8, TDATA_NUM_BYTES 1, TUSER_WIDTH 0, LAYERED_METADATA xilinx.com:interface:datatypes:1.0 {CLK {datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 1} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0}}} TDATA {datatype {name {attribs {resolve_type immediate dependen\
-cy {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 8} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0} integer {signed {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value false}}}} TDATA_WIDTH 8}, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, CLK\
-_DOMAIN ZynqAES_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data8 TDATA" *)
-output wire [7 : 0] aes_out_data8_TDATA;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data9 TVALID" *)
-output wire aes_out_data9_TVALID;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data9 TREADY" *)
-input wire aes_out_data9_TREADY;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aes_out_data9, TDATA_NUM_BYTES 1, TUSER_WIDTH 0, LAYERED_METADATA xilinx.com:interface:datatypes:1.0 {CLK {datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 1} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0}}} TDATA {datatype {name {attribs {resolve_type immediate dependen\
-cy {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 8} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0} integer {signed {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value false}}}} TDATA_WIDTH 8}, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, CLK\
-_DOMAIN ZynqAES_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data9 TDATA" *)
-output wire [7 : 0] aes_out_data9_TDATA;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data10 TVALID" *)
-output wire aes_out_data10_TVALID;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data10 TREADY" *)
-input wire aes_out_data10_TREADY;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aes_out_data10, TDATA_NUM_BYTES 1, TUSER_WIDTH 0, LAYERED_METADATA xilinx.com:interface:datatypes:1.0 {CLK {datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 1} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0}}} TDATA {datatype {name {attribs {resolve_type immediate depende\
-ncy {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 8} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0} integer {signed {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value false}}}} TDATA_WIDTH 8}, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, CL\
-K_DOMAIN ZynqAES_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data10 TDATA" *)
-output wire [7 : 0] aes_out_data10_TDATA;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data11 TVALID" *)
-output wire aes_out_data11_TVALID;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data11 TREADY" *)
-input wire aes_out_data11_TREADY;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aes_out_data11, TDATA_NUM_BYTES 1, TUSER_WIDTH 0, LAYERED_METADATA xilinx.com:interface:datatypes:1.0 {CLK {datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 1} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0}}} TDATA {datatype {name {attribs {resolve_type immediate depende\
-ncy {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 8} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0} integer {signed {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value false}}}} TDATA_WIDTH 8}, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, CL\
-K_DOMAIN ZynqAES_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data11 TDATA" *)
-output wire [7 : 0] aes_out_data11_TDATA;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data12 TVALID" *)
-output wire aes_out_data12_TVALID;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data12 TREADY" *)
-input wire aes_out_data12_TREADY;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aes_out_data12, TDATA_NUM_BYTES 1, TUSER_WIDTH 0, LAYERED_METADATA xilinx.com:interface:datatypes:1.0 {CLK {datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 1} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0}}} TDATA {datatype {name {attribs {resolve_type immediate depende\
-ncy {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 8} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0} integer {signed {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value false}}}} TDATA_WIDTH 8}, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, CL\
-K_DOMAIN ZynqAES_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data12 TDATA" *)
-output wire [7 : 0] aes_out_data12_TDATA;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data13 TVALID" *)
-output wire aes_out_data13_TVALID;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data13 TREADY" *)
-input wire aes_out_data13_TREADY;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aes_out_data13, TDATA_NUM_BYTES 1, TUSER_WIDTH 0, LAYERED_METADATA xilinx.com:interface:datatypes:1.0 {CLK {datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 1} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0}}} TDATA {datatype {name {attribs {resolve_type immediate depende\
-ncy {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 8} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0} integer {signed {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value false}}}} TDATA_WIDTH 8}, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, CL\
-K_DOMAIN ZynqAES_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data13 TDATA" *)
-output wire [7 : 0] aes_out_data13_TDATA;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data14 TVALID" *)
-output wire aes_out_data14_TVALID;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data14 TREADY" *)
-input wire aes_out_data14_TREADY;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aes_out_data14, TDATA_NUM_BYTES 1, TUSER_WIDTH 0, LAYERED_METADATA xilinx.com:interface:datatypes:1.0 {CLK {datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 1} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0}}} TDATA {datatype {name {attribs {resolve_type immediate depende\
-ncy {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 8} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0} integer {signed {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value false}}}} TDATA_WIDTH 8}, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, CL\
-K_DOMAIN ZynqAES_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data14 TDATA" *)
-output wire [7 : 0] aes_out_data14_TDATA;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data15 TVALID" *)
-output wire aes_out_data15_TVALID;
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data15 TREADY" *)
-input wire aes_out_data15_TREADY;
-(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aes_out_data15, TDATA_NUM_BYTES 1, TUSER_WIDTH 0, LAYERED_METADATA xilinx.com:interface:datatypes:1.0 {CLK {datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 1} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0}}} TDATA {datatype {name {attribs {resolve_type immediate depende\
-ncy {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 8} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0} integer {signed {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value false}}}} TDATA_WIDTH 8}, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 0, FREQ_HZ 100000000, PHASE 0.000, CL\
-K_DOMAIN ZynqAES_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
-(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out_data15 TDATA" *)
-output wire [7 : 0] aes_out_data15_TDATA;
+(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in TVALID" *)
+input wire aes_in_TVALID;
+(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in TREADY" *)
+output wire aes_in_TREADY;
+(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in TDATA" *)
+input wire [127 : 0] aes_in_TDATA;
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aes_in, TDATA_NUM_BYTES 16, TUSER_WIDTH 0, LAYERED_METADATA xilinx.com:interface:datatypes:1.0 {CLK {datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 1} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0}}}}, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0,\
+ HAS_TLAST 1, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN ZynqAES_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
+(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_in TLAST" *)
+input wire [0 : 0] aes_in_TLAST;
+(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out TVALID" *)
+output wire aes_out_TVALID;
+(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out TREADY" *)
+input wire aes_out_TREADY;
+(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out TDATA" *)
+output wire [127 : 0] aes_out_TDATA;
+(* X_INTERFACE_PARAMETER = "XIL_INTERFACENAME aes_out, TDATA_NUM_BYTES 16, TUSER_WIDTH 0, LAYERED_METADATA xilinx.com:interface:datatypes:1.0 {CLK {datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 1} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0}}} TDATA {datatype {name {attribs {resolve_type immediate dependency {}\
+ format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type automatic dependency {} format long minimum {} maximum {}} value 128} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0} struct {field_data0 {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value data0} enabled {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value true} datatype {name {attribs \
+{resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 8} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0} integer {signed {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value false}}}} field_data1 {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}\
+} value data1} enabled {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value true} datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 8} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 8} integer {signed {attribs {resolve_type immediate dependency {} format boo\
+l minimum {} maximum {}} value false}}}} field_data2 {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value data2} enabled {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value true} datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 8} bitoffset {attribs {resolve_type \
+immediate dependency {} format long minimum {} maximum {}} value 16} integer {signed {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value false}}}} field_data3 {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value data3} enabled {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value true} datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} v\
+alue {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 8} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 24} integer {signed {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value false}}}} field_data4 {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value data4} enabled {attribs {resolve_type immediate dependency {} forma\
+t bool minimum {} maximum {}} value true} datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 8} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 32} integer {signed {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value false}}}} field_data5 {name {attribs {resol\
+ve_type immediate dependency {} format string minimum {} maximum {}} value data5} enabled {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value true} datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 8} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 40} integ\
+er {signed {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value false}}}} field_data6 {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value data6} enabled {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value true} datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format lo\
+ng minimum {} maximum {}} value 8} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 48} integer {signed {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value false}}}} field_data7 {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value data7} enabled {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value true} datatype {name {attribs {resolve\
+_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 8} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 56} integer {signed {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value false}}}} field_data8 {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value\
+ data8} enabled {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value true} datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 8} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 64} integer {signed {attribs {resolve_type immediate dependency {} format bool mini\
+mum {} maximum {}} value false}}}} field_data9 {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value data9} enabled {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value true} datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 8} bitoffset {attribs {resolve_type immedi\
+ate dependency {} format long minimum {} maximum {}} value 72} integer {signed {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value false}}}} field_data10 {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value data10} enabled {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value true} datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value\
+ {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 8} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 80} integer {signed {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value false}}}} field_data11 {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value data11} enabled {attribs {resolve_type immediate dependency {} format \
+bool minimum {} maximum {}} value true} datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 8} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 88} integer {signed {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value false}}}} field_data12 {name {attribs {resolv\
+e_type immediate dependency {} format string minimum {} maximum {}} value data12} enabled {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value true} datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 8} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 96} integ\
+er {signed {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value false}}}} field_data13 {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value data13} enabled {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value true} datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format \
+long minimum {} maximum {}} value 8} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 104} integer {signed {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value false}}}} field_data14 {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value data14} enabled {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value true} datatype {name {attribs {re\
+solve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 8} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 112} integer {signed {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value false}}}} field_data15 {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}\
+} value data15} enabled {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value true} datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 8} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 120} integer {signed {attribs {resolve_type immediate dependency {} format \
+bool minimum {} maximum {}} value false}}}}}}} TDATA_WIDTH 128}, TDEST_WIDTH 0, TID_WIDTH 0, HAS_TREADY 1, HAS_TSTRB 0, HAS_TKEEP 0, HAS_TLAST 1, FREQ_HZ 100000000, PHASE 0.000, CLK_DOMAIN ZynqAES_processing_system7_0_0_FCLK_CLK0, INSERT_VIP 0" *)
+(* X_INTERFACE_INFO = "xilinx.com:interface:axis:1.0 aes_out TLAST" *)
+output wire [0 : 0] aes_out_TLAST;
 
   AES_Full_axis128 #(
     .C_S_AXI_AES_ADDR_WIDTH(5),
@@ -500,101 +197,13 @@ output wire [7 : 0] aes_out_data15_TDATA;
     .ap_clk(ap_clk),
     .ap_rst_n(ap_rst_n),
     .interrupt(interrupt),
-    .aes_in_data0_TVALID(aes_in_data0_TVALID),
-    .aes_in_data0_TREADY(aes_in_data0_TREADY),
-    .aes_in_data0_TDATA(aes_in_data0_TDATA),
-    .aes_in_data1_TVALID(aes_in_data1_TVALID),
-    .aes_in_data1_TREADY(aes_in_data1_TREADY),
-    .aes_in_data1_TDATA(aes_in_data1_TDATA),
-    .aes_in_data2_TVALID(aes_in_data2_TVALID),
-    .aes_in_data2_TREADY(aes_in_data2_TREADY),
-    .aes_in_data2_TDATA(aes_in_data2_TDATA),
-    .aes_in_data3_TVALID(aes_in_data3_TVALID),
-    .aes_in_data3_TREADY(aes_in_data3_TREADY),
-    .aes_in_data3_TDATA(aes_in_data3_TDATA),
-    .aes_in_data4_TVALID(aes_in_data4_TVALID),
-    .aes_in_data4_TREADY(aes_in_data4_TREADY),
-    .aes_in_data4_TDATA(aes_in_data4_TDATA),
-    .aes_in_data5_TVALID(aes_in_data5_TVALID),
-    .aes_in_data5_TREADY(aes_in_data5_TREADY),
-    .aes_in_data5_TDATA(aes_in_data5_TDATA),
-    .aes_in_data6_TVALID(aes_in_data6_TVALID),
-    .aes_in_data6_TREADY(aes_in_data6_TREADY),
-    .aes_in_data6_TDATA(aes_in_data6_TDATA),
-    .aes_in_data7_TVALID(aes_in_data7_TVALID),
-    .aes_in_data7_TREADY(aes_in_data7_TREADY),
-    .aes_in_data7_TDATA(aes_in_data7_TDATA),
-    .aes_in_data8_TVALID(aes_in_data8_TVALID),
-    .aes_in_data8_TREADY(aes_in_data8_TREADY),
-    .aes_in_data8_TDATA(aes_in_data8_TDATA),
-    .aes_in_data9_TVALID(aes_in_data9_TVALID),
-    .aes_in_data9_TREADY(aes_in_data9_TREADY),
-    .aes_in_data9_TDATA(aes_in_data9_TDATA),
-    .aes_in_data10_TVALID(aes_in_data10_TVALID),
-    .aes_in_data10_TREADY(aes_in_data10_TREADY),
-    .aes_in_data10_TDATA(aes_in_data10_TDATA),
-    .aes_in_data11_TVALID(aes_in_data11_TVALID),
-    .aes_in_data11_TREADY(aes_in_data11_TREADY),
-    .aes_in_data11_TDATA(aes_in_data11_TDATA),
-    .aes_in_data12_TVALID(aes_in_data12_TVALID),
-    .aes_in_data12_TREADY(aes_in_data12_TREADY),
-    .aes_in_data12_TDATA(aes_in_data12_TDATA),
-    .aes_in_data13_TVALID(aes_in_data13_TVALID),
-    .aes_in_data13_TREADY(aes_in_data13_TREADY),
-    .aes_in_data13_TDATA(aes_in_data13_TDATA),
-    .aes_in_data14_TVALID(aes_in_data14_TVALID),
-    .aes_in_data14_TREADY(aes_in_data14_TREADY),
-    .aes_in_data14_TDATA(aes_in_data14_TDATA),
-    .aes_in_data15_TVALID(aes_in_data15_TVALID),
-    .aes_in_data15_TREADY(aes_in_data15_TREADY),
-    .aes_in_data15_TDATA(aes_in_data15_TDATA),
-    .aes_out_data0_TVALID(aes_out_data0_TVALID),
-    .aes_out_data0_TREADY(aes_out_data0_TREADY),
-    .aes_out_data0_TDATA(aes_out_data0_TDATA),
-    .aes_out_data1_TVALID(aes_out_data1_TVALID),
-    .aes_out_data1_TREADY(aes_out_data1_TREADY),
-    .aes_out_data1_TDATA(aes_out_data1_TDATA),
-    .aes_out_data2_TVALID(aes_out_data2_TVALID),
-    .aes_out_data2_TREADY(aes_out_data2_TREADY),
-    .aes_out_data2_TDATA(aes_out_data2_TDATA),
-    .aes_out_data3_TVALID(aes_out_data3_TVALID),
-    .aes_out_data3_TREADY(aes_out_data3_TREADY),
-    .aes_out_data3_TDATA(aes_out_data3_TDATA),
-    .aes_out_data4_TVALID(aes_out_data4_TVALID),
-    .aes_out_data4_TREADY(aes_out_data4_TREADY),
-    .aes_out_data4_TDATA(aes_out_data4_TDATA),
-    .aes_out_data5_TVALID(aes_out_data5_TVALID),
-    .aes_out_data5_TREADY(aes_out_data5_TREADY),
-    .aes_out_data5_TDATA(aes_out_data5_TDATA),
-    .aes_out_data6_TVALID(aes_out_data6_TVALID),
-    .aes_out_data6_TREADY(aes_out_data6_TREADY),
-    .aes_out_data6_TDATA(aes_out_data6_TDATA),
-    .aes_out_data7_TVALID(aes_out_data7_TVALID),
-    .aes_out_data7_TREADY(aes_out_data7_TREADY),
-    .aes_out_data7_TDATA(aes_out_data7_TDATA),
-    .aes_out_data8_TVALID(aes_out_data8_TVALID),
-    .aes_out_data8_TREADY(aes_out_data8_TREADY),
-    .aes_out_data8_TDATA(aes_out_data8_TDATA),
-    .aes_out_data9_TVALID(aes_out_data9_TVALID),
-    .aes_out_data9_TREADY(aes_out_data9_TREADY),
-    .aes_out_data9_TDATA(aes_out_data9_TDATA),
-    .aes_out_data10_TVALID(aes_out_data10_TVALID),
-    .aes_out_data10_TREADY(aes_out_data10_TREADY),
-    .aes_out_data10_TDATA(aes_out_data10_TDATA),
-    .aes_out_data11_TVALID(aes_out_data11_TVALID),
-    .aes_out_data11_TREADY(aes_out_data11_TREADY),
-    .aes_out_data11_TDATA(aes_out_data11_TDATA),
-    .aes_out_data12_TVALID(aes_out_data12_TVALID),
-    .aes_out_data12_TREADY(aes_out_data12_TREADY),
-    .aes_out_data12_TDATA(aes_out_data12_TDATA),
-    .aes_out_data13_TVALID(aes_out_data13_TVALID),
-    .aes_out_data13_TREADY(aes_out_data13_TREADY),
-    .aes_out_data13_TDATA(aes_out_data13_TDATA),
-    .aes_out_data14_TVALID(aes_out_data14_TVALID),
-    .aes_out_data14_TREADY(aes_out_data14_TREADY),
-    .aes_out_data14_TDATA(aes_out_data14_TDATA),
-    .aes_out_data15_TVALID(aes_out_data15_TVALID),
-    .aes_out_data15_TREADY(aes_out_data15_TREADY),
-    .aes_out_data15_TDATA(aes_out_data15_TDATA)
+    .aes_in_TVALID(aes_in_TVALID),
+    .aes_in_TREADY(aes_in_TREADY),
+    .aes_in_TDATA(aes_in_TDATA),
+    .aes_in_TLAST(aes_in_TLAST),
+    .aes_out_TVALID(aes_out_TVALID),
+    .aes_out_TREADY(aes_out_TREADY),
+    .aes_out_TDATA(aes_out_TDATA),
+    .aes_out_TLAST(aes_out_TLAST)
   );
 endmodule

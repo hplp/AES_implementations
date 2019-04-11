@@ -24,7 +24,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES-AXI-stream128/PynqZ1AES-AXI-stream128.runs/impl_1'
+HD_PWD='D:/WS/AES_implementations/VivadoHLS/PynqZ1AES-AXI-stream128/PynqZ1AES-AXI-stream128.runs/impl_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log

@@ -22,9 +22,7 @@
       },
       "xlconcat_0": "",
       "axi_dma_0": "",
-      "axi4_stream_join_0": "",
-      "AES_Full_axis128_0": "",
-      "axi4_stream_split_0": ""
+      "AES_Full_axis128_0": ""
     },
     "interface_ports": {
       "DDR": {
@@ -1922,16 +1920,16 @@
               }
             },
             "interface_nets": {
-              "auto_pc_to_s00_couplers": {
-                "interface_ports": [
-                  "M_AXI",
-                  "auto_pc/M_AXI"
-                ]
-              },
               "s00_couplers_to_auto_pc": {
                 "interface_ports": [
                   "S_AXI",
                   "auto_pc/S_AXI"
+                ]
+              },
+              "auto_pc_to_s00_couplers": {
+                "interface_ports": [
+                  "M_AXI",
+                  "auto_pc/M_AXI"
                 ]
               }
             },
@@ -2060,22 +2058,10 @@
           }
         },
         "interface_nets": {
-          "xbar_to_m00_couplers": {
-            "interface_ports": [
-              "xbar/M00_AXI",
-              "m00_couplers/S_AXI"
-            ]
-          },
           "m01_couplers_to_ps7_0_axi_periph": {
             "interface_ports": [
               "M01_AXI",
               "m01_couplers/M_AXI"
-            ]
-          },
-          "xbar_to_m01_couplers": {
-            "interface_ports": [
-              "xbar/M01_AXI",
-              "m01_couplers/S_AXI"
             ]
           },
           "ps7_0_axi_periph_to_s00_couplers": {
@@ -2084,16 +2070,28 @@
               "s00_couplers/S_AXI"
             ]
           },
+          "m00_couplers_to_ps7_0_axi_periph": {
+            "interface_ports": [
+              "M00_AXI",
+              "m00_couplers/M_AXI"
+            ]
+          },
           "s00_couplers_to_xbar": {
             "interface_ports": [
               "s00_couplers/M_AXI",
               "xbar/S00_AXI"
             ]
           },
-          "m00_couplers_to_ps7_0_axi_periph": {
+          "xbar_to_m01_couplers": {
             "interface_ports": [
-              "M00_AXI",
-              "m00_couplers/M_AXI"
+              "xbar/M01_AXI",
+              "m01_couplers/S_AXI"
+            ]
+          },
+          "xbar_to_m00_couplers": {
+            "interface_ports": [
+              "xbar/M00_AXI",
+              "m00_couplers/S_AXI"
             ]
           }
         },
@@ -2175,50 +2173,12 @@
           }
         }
       },
-      "axi4_stream_join_0": {
-        "vlnv": "xilinx.com:user:axi4_stream_join:1.0",
-        "xci_name": "ZynqAES_axi4_stream_join_0_1"
-      },
       "AES_Full_axis128_0": {
         "vlnv": "hplp:hls:AES_Full_axis128:1.0",
         "xci_name": "ZynqAES_AES_Full_axis128_0_1"
-      },
-      "axi4_stream_split_0": {
-        "vlnv": "xilinx.com:user:axi4_stream_split:1.0",
-        "xci_name": "ZynqAES_axi4_stream_split_0_1"
       }
     },
     "interface_nets": {
-      "AES_Full_axis128_0_aes_out_data7": {
-        "interface_ports": [
-          "AES_Full_axis128_0/aes_out_data7",
-          "axi4_stream_join_0/in_data07"
-        ]
-      },
-      "AES_Full_axis128_0_aes_out_data6": {
-        "interface_ports": [
-          "AES_Full_axis128_0/aes_out_data6",
-          "axi4_stream_join_0/in_data06"
-        ]
-      },
-      "AES_Full_axis128_0_aes_out_data3": {
-        "interface_ports": [
-          "AES_Full_axis128_0/aes_out_data3",
-          "axi4_stream_join_0/in_data03"
-        ]
-      },
-      "processing_system7_0_FIXED_IO": {
-        "interface_ports": [
-          "FIXED_IO",
-          "processing_system7_0/FIXED_IO"
-        ]
-      },
-      "processing_system7_0_M_AXI_GP0": {
-        "interface_ports": [
-          "processing_system7_0/M_AXI_GP0",
-          "ps7_0_axi_periph/S00_AXI"
-        ]
-      },
       "axi_smc_M00_AXI": {
         "interface_ports": [
           "axi_smc/M00_AXI",
@@ -2231,16 +2191,22 @@
           "axi_smc/S01_AXI"
         ]
       },
-      "AES_Full_axis128_0_aes_out_data15": {
-        "interface_ports": [
-          "AES_Full_axis128_0/aes_out_data15",
-          "axi4_stream_join_0/in_data15"
-        ]
-      },
       "processing_system7_0_DDR": {
         "interface_ports": [
           "DDR",
           "processing_system7_0/DDR"
+        ]
+      },
+      "processing_system7_0_M_AXI_GP0": {
+        "interface_ports": [
+          "processing_system7_0/M_AXI_GP0",
+          "ps7_0_axi_periph/S00_AXI"
+        ]
+      },
+      "processing_system7_0_FIXED_IO": {
+        "interface_ports": [
+          "FIXED_IO",
+          "processing_system7_0/FIXED_IO"
         ]
       },
       "ps7_0_axi_periph_M00_AXI": {
@@ -2261,184 +2227,16 @@
           "AES_Full_axis128_0/s_axi_AES"
         ]
       },
-      "AES_Full_axis128_0_aes_out_data9": {
-        "interface_ports": [
-          "AES_Full_axis128_0/aes_out_data9",
-          "axi4_stream_join_0/in_data09"
-        ]
-      },
-      "axi4_stream_split_0_out_data14": {
-        "interface_ports": [
-          "axi4_stream_split_0/out_data14",
-          "AES_Full_axis128_0/aes_in_data14"
-        ]
-      },
-      "axi4_stream_split_0_out_data07": {
-        "interface_ports": [
-          "axi4_stream_split_0/out_data07",
-          "AES_Full_axis128_0/aes_in_data7"
-        ]
-      },
-      "axi4_stream_split_0_out_data02": {
-        "interface_ports": [
-          "axi4_stream_split_0/out_data02",
-          "AES_Full_axis128_0/aes_in_data2"
-        ]
-      },
-      "axi4_stream_join_0_out_data": {
-        "interface_ports": [
-          "axi4_stream_join_0/out_data",
-          "axi_dma_0/S_AXIS_S2MM"
-        ]
-      },
-      "AES_Full_axis128_0_aes_out_data10": {
-        "interface_ports": [
-          "AES_Full_axis128_0/aes_out_data10",
-          "axi4_stream_join_0/in_data10"
-        ]
-      },
-      "AES_Full_axis128_0_aes_out_data8": {
-        "interface_ports": [
-          "AES_Full_axis128_0/aes_out_data8",
-          "axi4_stream_join_0/in_data08"
-        ]
-      },
-      "AES_Full_axis128_0_aes_out_data2": {
-        "interface_ports": [
-          "AES_Full_axis128_0/aes_out_data2",
-          "axi4_stream_join_0/in_data02"
-        ]
-      },
-      "AES_Full_axis128_0_aes_out_data4": {
-        "interface_ports": [
-          "AES_Full_axis128_0/aes_out_data4",
-          "axi4_stream_join_0/in_data04"
-        ]
-      },
-      "AES_Full_axis128_0_aes_out_data5": {
-        "interface_ports": [
-          "AES_Full_axis128_0/aes_out_data5",
-          "axi4_stream_join_0/in_data05"
-        ]
-      },
-      "AES_Full_axis128_0_aes_out_data1": {
-        "interface_ports": [
-          "AES_Full_axis128_0/aes_out_data1",
-          "axi4_stream_join_0/in_data01"
-        ]
-      },
-      "AES_Full_axis128_0_aes_out_data0": {
-        "interface_ports": [
-          "AES_Full_axis128_0/aes_out_data0",
-          "axi4_stream_join_0/in_data00"
-        ]
-      },
-      "axi4_stream_split_0_out_data13": {
-        "interface_ports": [
-          "axi4_stream_split_0/out_data13",
-          "AES_Full_axis128_0/aes_in_data13"
-        ]
-      },
-      "axi4_stream_split_0_out_data10": {
-        "interface_ports": [
-          "axi4_stream_split_0/out_data10",
-          "AES_Full_axis128_0/aes_in_data10"
-        ]
-      },
       "axi_dma_0_M_AXIS_MM2S": {
         "interface_ports": [
-          "axi4_stream_split_0/in_data",
-          "axi_dma_0/M_AXIS_MM2S"
+          "axi_dma_0/M_AXIS_MM2S",
+          "AES_Full_axis128_0/aes_in"
         ]
       },
-      "axi4_stream_split_0_out_data09": {
+      "AES_Full_axis128_0_aes_out": {
         "interface_ports": [
-          "axi4_stream_split_0/out_data09",
-          "AES_Full_axis128_0/aes_in_data9"
-        ]
-      },
-      "axi4_stream_split_0_out_data11": {
-        "interface_ports": [
-          "axi4_stream_split_0/out_data11",
-          "AES_Full_axis128_0/aes_in_data11"
-        ]
-      },
-      "axi4_stream_split_0_out_data12": {
-        "interface_ports": [
-          "axi4_stream_split_0/out_data12",
-          "AES_Full_axis128_0/aes_in_data12"
-        ]
-      },
-      "axi4_stream_split_0_out_data15": {
-        "interface_ports": [
-          "axi4_stream_split_0/out_data15",
-          "AES_Full_axis128_0/aes_in_data15"
-        ]
-      },
-      "axi4_stream_split_0_out_data00": {
-        "interface_ports": [
-          "axi4_stream_split_0/out_data00",
-          "AES_Full_axis128_0/aes_in_data0"
-        ]
-      },
-      "axi4_stream_split_0_out_data05": {
-        "interface_ports": [
-          "axi4_stream_split_0/out_data05",
-          "AES_Full_axis128_0/aes_in_data5"
-        ]
-      },
-      "axi4_stream_split_0_out_data01": {
-        "interface_ports": [
-          "axi4_stream_split_0/out_data01",
-          "AES_Full_axis128_0/aes_in_data1"
-        ]
-      },
-      "axi4_stream_split_0_out_data03": {
-        "interface_ports": [
-          "axi4_stream_split_0/out_data03",
-          "AES_Full_axis128_0/aes_in_data3"
-        ]
-      },
-      "axi4_stream_split_0_out_data06": {
-        "interface_ports": [
-          "axi4_stream_split_0/out_data06",
-          "AES_Full_axis128_0/aes_in_data6"
-        ]
-      },
-      "axi4_stream_split_0_out_data08": {
-        "interface_ports": [
-          "axi4_stream_split_0/out_data08",
-          "AES_Full_axis128_0/aes_in_data8"
-        ]
-      },
-      "AES_Full_axis128_0_aes_out_data14": {
-        "interface_ports": [
-          "AES_Full_axis128_0/aes_out_data14",
-          "axi4_stream_join_0/in_data14"
-        ]
-      },
-      "AES_Full_axis128_0_aes_out_data11": {
-        "interface_ports": [
-          "AES_Full_axis128_0/aes_out_data11",
-          "axi4_stream_join_0/in_data11"
-        ]
-      },
-      "AES_Full_axis128_0_aes_out_data12": {
-        "interface_ports": [
-          "AES_Full_axis128_0/aes_out_data12",
-          "axi4_stream_join_0/in_data12"
-        ]
-      },
-      "AES_Full_axis128_0_aes_out_data13": {
-        "interface_ports": [
-          "AES_Full_axis128_0/aes_out_data13",
-          "axi4_stream_join_0/in_data13"
-        ]
-      },
-      "axi4_stream_split_0_out_data04": {
-        "interface_ports": [
-          "axi4_stream_split_0/out_data04",
-          "AES_Full_axis128_0/aes_in_data4"
+          "AES_Full_axis128_0/aes_out",
+          "axi_dma_0/S_AXIS_S2MM"
         ]
       }
     },

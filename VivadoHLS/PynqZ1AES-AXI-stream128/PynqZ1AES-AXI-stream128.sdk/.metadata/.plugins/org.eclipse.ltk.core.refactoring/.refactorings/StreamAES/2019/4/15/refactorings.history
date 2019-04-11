@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;StreamAES/src/main.cc&apos; to &apos;test_AES_axis128_ZynqSDK.cc&apos;" description="Rename resource &apos;main.cc&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main.cc" name="test_AES_axis128_ZynqSDK.cc" stamp="1555015033451" updateReferences="true"/>
+</session>

@@ -221,23 +221,19 @@ vcom -work xil_defaultlib -64 -93 \
 "../../../bd/ZynqAES/ip/ZynqAES_axi_dma_0_1/sim/ZynqAES_axi_dma_0_1.vhd" \
 
 vlog -work xil_defaultlib -64 "+incdir+../../../../PynqZ1AES-AXI-stream128.srcs/sources_1/bd/ZynqAES/ipshared/ec67/hdl" "+incdir+../../../../PynqZ1AES-AXI-stream128.srcs/sources_1/bd/ZynqAES/ipshared/70cf/hdl" "+incdir+../../../../PynqZ1AES-AXI-stream128.srcs/sources_1/bd/ZynqAES/ipshared/979d/hdl/verilog" "+incdir+../../../../PynqZ1AES-AXI-stream128.srcs/sources_1/bd/ZynqAES/ipshared/b2d0/hdl/verilog" "+incdir+../../../../PynqZ1AES-AXI-stream128.srcs/sources_1/bd/ZynqAES/ip/ZynqAES_processing_system7_0_0" "+incdir+C:/Dev/Xilinx/Vivado/2018.3/data/xilinx_vip/include" \
-"../../../../PynqZ1AES-AXI-stream128.srcs/sources_1/bd/ZynqAES/ipshared/6346/hdl/verilog/AddRoundKey.v" \
-"../../../../PynqZ1AES-AXI-stream128.srcs/sources_1/bd/ZynqAES/ipshared/6346/hdl/verilog/AddRoundKey_expanbkb.v" \
-"../../../../PynqZ1AES-AXI-stream128.srcs/sources_1/bd/ZynqAES/ipshared/6346/hdl/verilog/AES_Full_axis128_AES_s_axi.v" \
-"../../../../PynqZ1AES-AXI-stream128.srcs/sources_1/bd/ZynqAES/ipshared/6346/hdl/verilog/InvMixColumns.v" \
-"../../../../PynqZ1AES-AXI-stream128.srcs/sources_1/bd/ZynqAES/ipshared/6346/hdl/verilog/InvMixColumns_decdEe.v" \
-"../../../../PynqZ1AES-AXI-stream128.srcs/sources_1/bd/ZynqAES/ipshared/6346/hdl/verilog/InvSubBytes.v" \
-"../../../../PynqZ1AES-AXI-stream128.srcs/sources_1/bd/ZynqAES/ipshared/6346/hdl/verilog/InvSubBytes_decipcud.v" \
-"../../../../PynqZ1AES-AXI-stream128.srcs/sources_1/bd/ZynqAES/ipshared/6346/hdl/verilog/MixColumns.v" \
-"../../../../PynqZ1AES-AXI-stream128.srcs/sources_1/bd/ZynqAES/ipshared/6346/hdl/verilog/MixColumns_cipher.v" \
-"../../../../PynqZ1AES-AXI-stream128.srcs/sources_1/bd/ZynqAES/ipshared/6346/hdl/verilog/SubBytes.v" \
-"../../../../PynqZ1AES-AXI-stream128.srcs/sources_1/bd/ZynqAES/ipshared/6346/hdl/verilog/SubBytes_cipher.v" \
-"../../../../PynqZ1AES-AXI-stream128.srcs/sources_1/bd/ZynqAES/ipshared/6346/hdl/verilog/AES_Full_axis128.v" \
+"../../../../PynqZ1AES-AXI-stream128.srcs/sources_1/bd/ZynqAES/ipshared/0e42/hdl/verilog/AddRoundKey.v" \
+"../../../../PynqZ1AES-AXI-stream128.srcs/sources_1/bd/ZynqAES/ipshared/0e42/hdl/verilog/AddRoundKey_expanbkb.v" \
+"../../../../PynqZ1AES-AXI-stream128.srcs/sources_1/bd/ZynqAES/ipshared/0e42/hdl/verilog/AES_Full_axis128_AES_s_axi.v" \
+"../../../../PynqZ1AES-AXI-stream128.srcs/sources_1/bd/ZynqAES/ipshared/0e42/hdl/verilog/InvMixColumns.v" \
+"../../../../PynqZ1AES-AXI-stream128.srcs/sources_1/bd/ZynqAES/ipshared/0e42/hdl/verilog/InvMixColumns_decdEe.v" \
+"../../../../PynqZ1AES-AXI-stream128.srcs/sources_1/bd/ZynqAES/ipshared/0e42/hdl/verilog/InvSubBytes.v" \
+"../../../../PynqZ1AES-AXI-stream128.srcs/sources_1/bd/ZynqAES/ipshared/0e42/hdl/verilog/InvSubBytes_decipcud.v" \
+"../../../../PynqZ1AES-AXI-stream128.srcs/sources_1/bd/ZynqAES/ipshared/0e42/hdl/verilog/MixColumns.v" \
+"../../../../PynqZ1AES-AXI-stream128.srcs/sources_1/bd/ZynqAES/ipshared/0e42/hdl/verilog/MixColumns_cipher.v" \
+"../../../../PynqZ1AES-AXI-stream128.srcs/sources_1/bd/ZynqAES/ipshared/0e42/hdl/verilog/SubBytes.v" \
+"../../../../PynqZ1AES-AXI-stream128.srcs/sources_1/bd/ZynqAES/ipshared/0e42/hdl/verilog/SubBytes_cipher.v" \
+"../../../../PynqZ1AES-AXI-stream128.srcs/sources_1/bd/ZynqAES/ipshared/0e42/hdl/verilog/AES_Full_axis128.v" \
 "../../../bd/ZynqAES/ip/ZynqAES_AES_Full_axis128_0_1/sim/ZynqAES_AES_Full_axis128_0_1.v" \
-"../../../bd/ZynqAES/ipshared/db99/src/axi4_stream_join.v" \
-"../../../bd/ZynqAES/ip/ZynqAES_axi4_stream_join_0_1/sim/ZynqAES_axi4_stream_join_0_1.v" \
-"../../../bd/ZynqAES/ipshared/3153/src/axi4_stream_split.v" \
-"../../../bd/ZynqAES/ip/ZynqAES_axi4_stream_split_0_1/sim/ZynqAES_axi4_stream_split_0_1.v" \
 
 vlog -work axi_protocol_converter_v2_1_18 -64 "+incdir+../../../../PynqZ1AES-AXI-stream128.srcs/sources_1/bd/ZynqAES/ipshared/ec67/hdl" "+incdir+../../../../PynqZ1AES-AXI-stream128.srcs/sources_1/bd/ZynqAES/ipshared/70cf/hdl" "+incdir+../../../../PynqZ1AES-AXI-stream128.srcs/sources_1/bd/ZynqAES/ipshared/979d/hdl/verilog" "+incdir+../../../../PynqZ1AES-AXI-stream128.srcs/sources_1/bd/ZynqAES/ipshared/b2d0/hdl/verilog" "+incdir+../../../../PynqZ1AES-AXI-stream128.srcs/sources_1/bd/ZynqAES/ip/ZynqAES_processing_system7_0_0" "+incdir+C:/Dev/Xilinx/Vivado/2018.3/data/xilinx_vip/include" \
 "../../../../PynqZ1AES-AXI-stream128.srcs/sources_1/bd/ZynqAES/ipshared/7a04/hdl/axi_protocol_converter_v2_1_vl_rfs.v" \

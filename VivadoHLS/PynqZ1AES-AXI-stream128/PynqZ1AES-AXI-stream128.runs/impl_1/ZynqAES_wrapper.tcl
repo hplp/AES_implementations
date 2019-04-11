@@ -60,8 +60,6 @@ proc step_failed { step } {
   close $ch
 }
 
-set_msg_config -id {Common 17-41} -limit 10000000
-set_msg_config -id {HDL-1065} -limit 10000
 
 start_step init_design
 set ACTIVE_STEP init_design
@@ -71,21 +69,21 @@ set rc [catch {
   set_property board_part www.digilentinc.com:pynq-z1:part0:1.0 [current_project]
   set_property design_mode GateLvl [current_fileset]
   set_param project.singleFileAddWarning.threshold 0
-  set_property webtalk.parent_dir D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES-AXI-stream128/PynqZ1AES-AXI-stream128.cache/wt [current_project]
-  set_property parent.project_path D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES-AXI-stream128/PynqZ1AES-AXI-stream128.xpr [current_project]
+  set_property webtalk.parent_dir D:/WS/AES_implementations/VivadoHLS/PynqZ1AES-AXI-stream128/PynqZ1AES-AXI-stream128.cache/wt [current_project]
+  set_property parent.project_path D:/WS/AES_implementations/VivadoHLS/PynqZ1AES-AXI-stream128/PynqZ1AES-AXI-stream128.xpr [current_project]
   set_property ip_repo_paths {
-  d:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/AES_Full_axis128/solution1/impl
-  d:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/axi4_stream_join_ip
-  D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/axi4_stream_split_ip
+  D:/WS/AES_implementations/VivadoHLS/AES_Full_axis128/solution1/impl
+  D:/WS/AES_implementations/VivadoHLS/axi4_stream_join_ip
+  D:/WS/AES_implementations/VivadoHLS/axi4_stream_split_ip
 } [current_project]
   update_ip_catalog
-  set_property ip_output_repo D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES-AXI-stream128/PynqZ1AES-AXI-stream128.cache/ip [current_project]
+  set_property ip_output_repo D:/WS/AES_implementations/VivadoHLS/PynqZ1AES-AXI-stream128/PynqZ1AES-AXI-stream128.cache/ip [current_project]
   set_property ip_cache_permissions {read write} [current_project]
   set_property XPM_LIBRARIES {XPM_CDC XPM_FIFO XPM_MEMORY} [current_project]
-  add_files -quiet D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES-AXI-stream128/PynqZ1AES-AXI-stream128.runs/synth_1/ZynqAES_wrapper.dcp
+  add_files -quiet D:/WS/AES_implementations/VivadoHLS/PynqZ1AES-AXI-stream128/PynqZ1AES-AXI-stream128.runs/synth_1/ZynqAES_wrapper.dcp
   set_msg_config -source 4 -id {BD 41-1661} -limit 0
   set_param project.isImplRun true
-  add_files D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES-AXI-stream128/PynqZ1AES-AXI-stream128.srcs/sources_1/bd/ZynqAES/ZynqAES.bd
+  add_files D:/WS/AES_implementations/VivadoHLS/PynqZ1AES-AXI-stream128/PynqZ1AES-AXI-stream128.srcs/sources_1/bd/ZynqAES/ZynqAES.bd
   set_param project.isImplRun false
   set_param project.isImplRun true
   link_design -top ZynqAES_wrapper -part xc7z020clg400-1

@@ -2,67 +2,33 @@
    "ExpandedHierarchyInLayout":"",
    "guistr":"# # String gsaved with Nlview 6.8.11  2018-08-07 bk=1.4403 VDI=40 GEI=35 GUI=JA:9.0 non-TLS
 #  -string -flagsOSRD
-preplace port DDR -pg 1 -y 650 -defaultsOSRD
-preplace port FIXED_IO -pg 1 -y 670 -defaultsOSRD
-preplace inst axi_dma_0 -pg 1 -lvl 5 -y 600 -defaultsOSRD
-preplace inst axi_smc -pg 1 -lvl 6 -y 570 -defaultsOSRD
-preplace inst AES_Full_axis128_0 -pg 1 -lvl 3 -y 240 -defaultsOSRD
-preplace inst xlconcat_0 -pg 1 -lvl 6 -y 740 -defaultsOSRD
-preplace inst axi4_stream_join_0 -pg 1 -lvl 4 -y 230 -defaultsOSRD
-preplace inst ps7_0_axi_periph -pg 1 -lvl 2 -y 620 -defaultsOSRD
-preplace inst rst_ps7_0_100M -pg 1 -lvl 1 -y 930 -defaultsOSRD
-preplace inst axi4_stream_split_0 -pg 1 -lvl 2 -y 230 -defaultsOSRD
-preplace inst processing_system7_0 -pg 1 -lvl 7 -y 700 -defaultsOSRD
-preplace netloc axi4_stream_split_0_out_data10 1 2 1 N
-preplace netloc AES_Full_axis128_0_aes_out_data7 1 3 1 N
-preplace netloc AES_Full_axis128_0_aes_out_data15 1 3 1 N
-preplace netloc processing_system7_0_DDR 1 7 1 NJ
-preplace netloc axi4_stream_split_0_out_data11 1 2 1 N
-preplace netloc AES_Full_axis128_0_aes_out_data8 1 3 1 N
-preplace netloc axi4_stream_split_0_out_data12 1 2 1 N
-preplace netloc AES_Full_axis128_0_aes_out_data9 1 3 1 N
-preplace netloc axi4_stream_split_0_out_data13 1 2 1 N
-preplace netloc axi4_stream_split_0_out_data00 1 2 1 N
-preplace netloc processing_system7_0_M_AXI_GP0 1 1 7 400 820 NJ 820 NJ 820 NJ 820 NJ 820 NJ 820 2490
-preplace netloc rst_ps7_0_100M_peripheral_aresetn 1 1 5 380 780 730 650 NJ 650 1330 720 1720J
-preplace netloc axi4_stream_split_0_out_data14 1 2 1 N
-preplace netloc axi4_stream_split_0_out_data01 1 2 1 N
-preplace netloc axi_smc_M00_AXI 1 6 1 2010
-preplace netloc processing_system7_0_FCLK_RESET0_N 1 0 8 30 830 NJ 830 NJ 830 NJ 830 NJ 830 NJ 830 NJ 830 2480
-preplace netloc axi4_stream_split_0_out_data02 1 2 1 N
-preplace netloc axi4_stream_split_0_out_data15 1 2 1 N
-preplace netloc axi4_stream_split_0_out_data03 1 2 1 N
-preplace netloc AES_Full_axis128_0_aes_out_data0 1 3 1 N
-preplace netloc ps7_0_axi_periph_M01_AXI 1 2 1 700
-preplace netloc axi_dma_0_s2mm_introut 1 5 1 1690
-preplace netloc axi4_stream_split_0_out_data04 1 2 1 N
-preplace netloc AES_Full_axis128_0_aes_out_data1 1 3 1 N
-preplace netloc axi_dma_0_M_AXI_MM2S 1 5 1 N
-preplace netloc xlconcat_0_dout 1 6 1 N
-preplace netloc axi4_stream_split_0_out_data05 1 2 1 N
-preplace netloc AES_Full_axis128_0_aes_out_data2 1 3 1 N
-preplace netloc AES_Full_axis128_0_aes_out_data10 1 3 1 N
-preplace netloc processing_system7_0_FIXED_IO 1 7 1 NJ
-preplace netloc axi_dma_0_mm2s_introut 1 5 1 1730
-preplace netloc axi4_stream_split_0_out_data06 1 2 1 N
-preplace netloc axi4_stream_join_0_out_data 1 4 1 1340
-preplace netloc AES_Full_axis128_0_aes_out_data3 1 3 1 N
-preplace netloc AES_Full_axis128_0_aes_out_data11 1 3 1 N
-preplace netloc axi_dma_0_M_AXI_S2MM 1 5 1 N
-preplace netloc axi4_stream_split_0_out_data07 1 2 1 N
-preplace netloc AES_Full_axis128_0_aes_out_data4 1 3 1 N
-preplace netloc AES_Full_axis128_0_aes_out_data12 1 3 1 N
-preplace netloc AES_Full_axis128_0_interrupt 1 3 3 1090J 440 NJ 440 1700
-preplace netloc processing_system7_0_FCLK_CLK0 1 0 8 20 770 370 770 710 590 NJ 590 1340 730 1710 660 2020 590 2500
-preplace netloc axi_dma_0_M_AXIS_MM2S 1 1 5 390 760 NJ 760 NJ 760 NJ 760 1680
-preplace netloc axi4_stream_split_0_out_data08 1 2 1 N
-preplace netloc AES_Full_axis128_0_aes_out_data5 1 3 1 N
-preplace netloc AES_Full_axis128_0_aes_out_data13 1 3 1 N
-preplace netloc ps7_0_axi_periph_M00_AXI 1 2 3 720 550 NJ 550 NJ
-preplace netloc axi4_stream_split_0_out_data09 1 2 1 N
-preplace netloc AES_Full_axis128_0_aes_out_data6 1 3 1 N
-preplace netloc AES_Full_axis128_0_aes_out_data14 1 3 1 N
-levelinfo -pg 1 0 200 550 910 1210 1510 1870 2250 2520 -top 0 -bot 1030
+preplace port DDR -pg 1 -y 230 -defaultsOSRD
+preplace port FIXED_IO -pg 1 -y 250 -defaultsOSRD
+preplace inst axi_dma_0 -pg 1 -lvl 4 -y 290 -defaultsOSRD
+preplace inst axi_smc -pg 1 -lvl 5 -y 260 -defaultsOSRD
+preplace inst AES_Full_axis128_0 -pg 1 -lvl 3 -y 520 -defaultsOSRD
+preplace inst xlconcat_0 -pg 1 -lvl 5 -y 90 -defaultsOSRD
+preplace inst ps7_0_axi_periph -pg 1 -lvl 2 -y 250 -defaultsOSRD
+preplace inst rst_ps7_0_100M -pg 1 -lvl 1 -y 510 -defaultsOSRD
+preplace inst processing_system7_0 -pg 1 -lvl 6 -y 280 -defaultsOSRD
+preplace netloc processing_system7_0_DDR 1 6 1 NJ
+preplace netloc processing_system7_0_M_AXI_GP0 1 1 6 370 10 NJ 10 NJ 10 NJ 10 NJ 10 2190
+preplace netloc rst_ps7_0_100M_peripheral_aresetn 1 1 4 380 400 700 340 1040 170 1390J
+preplace netloc axi_smc_M00_AXI 1 5 1 N
+preplace netloc processing_system7_0_FCLK_RESET0_N 1 0 7 30 410 NJ 410 NJ 410 NJ 410 NJ 410 NJ 410 2180
+preplace netloc AES_Full_axis128_0_aes_out 1 3 1 1030
+preplace netloc ps7_0_axi_periph_M01_AXI 1 2 1 680
+preplace netloc axi_dma_0_s2mm_introut 1 4 1 1420
+preplace netloc axi_dma_0_M_AXI_MM2S 1 4 1 N
+preplace netloc xlconcat_0_dout 1 5 1 1710
+preplace netloc processing_system7_0_FIXED_IO 1 6 1 NJ
+preplace netloc axi_dma_0_mm2s_introut 1 4 1 1400
+preplace netloc axi_dma_0_M_AXI_S2MM 1 4 1 N
+preplace netloc AES_Full_axis128_0_interrupt 1 3 2 1010J 110 N
+preplace netloc processing_system7_0_FCLK_CLK0 1 0 7 20 390 370 390 690 320 1020 160 1410 170 1720 170 2180
+preplace netloc axi_dma_0_M_AXIS_MM2S 1 2 3 710 150 NJ 150 1380
+preplace netloc ps7_0_axi_periph_M00_AXI 1 2 2 N 240 NJ
+levelinfo -pg 1 0 200 530 860 1210 1570 1950 2220 -top 0 -bot 610
 "
 }
 {

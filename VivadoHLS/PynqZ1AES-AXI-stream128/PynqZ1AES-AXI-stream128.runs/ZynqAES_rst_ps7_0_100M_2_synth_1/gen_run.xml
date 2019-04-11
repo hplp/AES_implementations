@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <GenRun Id="ZynqAES_rst_ps7_0_100M_2_synth_1" LaunchPart="xc7z020clg400-1" LaunchTime="1554494725">
   <File Type="PA-TCL" Name="ZynqAES_rst_ps7_0_100M_2.tcl"/>
-  <File Type="RDS-PROPCONSTRS" Name="ZynqAES_rst_ps7_0_100M_2_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="ZynqAES_rst_ps7_0_100M_2_reports.tcl"/>
   <File Type="RDS-RDS" Name="ZynqAES_rst_ps7_0_100M_2.vds"/>
-  <File Type="RDS-UTIL" Name="ZynqAES_rst_ps7_0_100M_2_utilization_synth.rpt"/>
-  <File Type="RDS-UTIL-PB" Name="ZynqAES_rst_ps7_0_100M_2_utilization_synth.pb"/>
   <File Type="RDS-DCP" Name="ZynqAES_rst_ps7_0_100M_2.dcp"/>
-  <File Type="VDS-TIMINGSUMMARY" Name="ZynqAES_rst_ps7_0_100M_2_timing_summary_synth.rpt"/>
-  <File Type="VDS-TIMING-PB" Name="ZynqAES_rst_ps7_0_100M_2_timing_summary_synth.pb"/>
   <FileSet Name="sources" Type="BlockSrcs" RelSrcDir="$PSRCDIR/ZynqAES_rst_ps7_0_100M_2">
     <File Path="$PSRCDIR/sources_1/bd/ZynqAES/ip/ZynqAES_rst_ps7_0_100M_2/ZynqAES_rst_ps7_0_100M_2.xci">
       <FileInfo>

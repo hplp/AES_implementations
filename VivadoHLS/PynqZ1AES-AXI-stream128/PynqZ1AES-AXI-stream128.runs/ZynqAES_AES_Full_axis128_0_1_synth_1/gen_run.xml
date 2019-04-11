@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="ZynqAES_AES_Full_axis128_0_1_synth_1" LaunchPart="xc7z020clg400-1" LaunchTime="1554741695">
+<GenRun Id="ZynqAES_AES_Full_axis128_0_1_synth_1" LaunchPart="xc7z020clg400-1" LaunchTime="1555011889">
   <File Type="PA-TCL" Name="ZynqAES_AES_Full_axis128_0_1.tcl"/>
   <File Type="RDS-PROPCONSTRS" Name="ZynqAES_AES_Full_axis128_0_1_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="ZynqAES_AES_Full_axis128_0_1_reports.tcl"/>
@@ -12,9 +12,11 @@
   <FileSet Name="sources" Type="BlockSrcs" RelSrcDir="$PSRCDIR/ZynqAES_AES_Full_axis128_0_1">
     <File Path="$PSRCDIR/sources_1/bd/ZynqAES/ip/ZynqAES_AES_Full_axis128_0_1/ZynqAES_AES_Full_axis128_0_1.xci">
       <FileInfo>
+        <Attr Name="Library" Val="xil_defaultlib"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
+        <Attr Name="ProcessingOrder" Val="EARLY"/>
       </FileInfo>
     </File>
     <Config>
@@ -25,9 +27,11 @@
   <FileSet Name="constrs_in" Type="BlockSrcs" RelSrcDir="$PSRCDIR/ZynqAES_AES_Full_axis128_0_1">
     <File Path="$PSRCDIR/sources_1/bd/ZynqAES/ip/ZynqAES_AES_Full_axis128_0_1/ZynqAES_AES_Full_axis128_0_1.xci">
       <FileInfo>
+        <Attr Name="Library" Val="xil_defaultlib"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
+        <Attr Name="ProcessingOrder" Val="EARLY"/>
       </FileInfo>
     </File>
     <Config>
