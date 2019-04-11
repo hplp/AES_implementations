@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Wed Apr 10 22:16:56 2019" VIVADOVERSION="2018.3">
+<EDKSYSTEM EDWVERSION="1.2" TIMESTAMP="Thu Apr 11 12:12:43 2019" VIVADOVERSION="2018.3">
 
   <SYSTEMINFO ARCH="zynq" BOARD="www.digilentinc.com:pynq-z1:part0:1.0" DEVICE="7z020" NAME="ZAES" PACKAGE="clg400" SPEEDGRADE="-1"/>
 
@@ -159,7 +159,7 @@
   </EXTERNALINTERFACES>
 
   <MODULES>
-    <MODULE COREREVISION="1904102215" FULLNAME="/AES_Full_axis8_0" HWVERSION="1.0" INSTANCE="AES_Full_axis8_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="AES_Full_axis8" VLNV="UVA_HPLP:hls:AES_Full_axis8:1.0">
+    <MODULE COREREVISION="1904111202" FULLNAME="/AES_Full_axis8_0" HWVERSION="1.0" INSTANCE="AES_Full_axis8_0" IPTYPE="PERIPHERAL" IS_ENABLE="1" MODCLASS="PERIPHERAL" MODTYPE="AES_Full_axis8" VLNV="UVA_HPLP:hls:AES_Full_axis8:1.0">
       <DOCUMENTS/>
       <ADDRESSBLOCKS>
         <ADDRESSBLOCK ACCESS="read-write" INTERFACE="s_axi_AES" NAME="Reg" RANGE="65536" USAGE="register">
@@ -531,34 +531,44 @@
             <CONNECTION INSTANCE="xlconcat_0" PORT="In2"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="data_out_TVALID" SIGIS="undef" SIGNAME="AES_Full_axis8_0_data_out_TVALID">
+        <PORT DIR="O" NAME="stream_out_TVALID" SIGIS="undef" SIGNAME="AES_Full_axis8_0_stream_out_TVALID">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axi_dma_0" PORT="s_axis_s2mm_tvalid"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="data_out_TREADY" SIGIS="undef" SIGNAME="AES_Full_axis8_0_data_out_TREADY">
+        <PORT DIR="I" NAME="stream_out_TREADY" SIGIS="undef" SIGNAME="AES_Full_axis8_0_stream_out_TREADY">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axi_dma_0" PORT="s_axis_s2mm_tready"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" LEFT="7" NAME="data_out_TDATA" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_axis8_0_data_out_TDATA">
+        <PORT DIR="O" LEFT="7" NAME="stream_out_TDATA" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_axis8_0_stream_out_TDATA">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axi_dma_0" PORT="s_axis_s2mm_tdata"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="data_in_TVALID" SIGIS="undef" SIGNAME="AES_Full_axis8_0_data_in_TVALID">
+        <PORT DIR="O" LEFT="0" NAME="stream_out_TLAST" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_axis8_0_stream_out_TLAST">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="axi_dma_0" PORT="s_axis_s2mm_tlast"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" NAME="stream_in_TVALID" SIGIS="undef" SIGNAME="AES_Full_axis8_0_stream_in_TVALID">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axi_dma_0" PORT="m_axis_mm2s_tvalid"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="data_in_TREADY" SIGIS="undef" SIGNAME="AES_Full_axis8_0_data_in_TREADY">
+        <PORT DIR="O" NAME="stream_in_TREADY" SIGIS="undef" SIGNAME="AES_Full_axis8_0_stream_in_TREADY">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axi_dma_0" PORT="m_axis_mm2s_tready"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" LEFT="7" NAME="data_in_TDATA" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_axis8_0_data_in_TDATA">
+        <PORT DIR="I" LEFT="7" NAME="stream_in_TDATA" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_axis8_0_stream_in_TDATA">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axi_dma_0" PORT="m_axis_mm2s_tdata"/>
+          </CONNECTIONS>
+        </PORT>
+        <PORT DIR="I" LEFT="0" NAME="stream_in_TLAST" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_axis8_0_stream_in_TLAST">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="axi_dma_0" PORT="m_axis_mm2s_tlast"/>
           </CONNECTIONS>
         </PORT>
       </PORTS>
@@ -616,7 +626,7 @@
             <PORTMAP LOGICAL="RREADY" PHYSICAL="s_axi_AES_RREADY"/>
           </PORTMAPS>
         </BUSINTERFACE>
-        <BUSINTERFACE BUSNAME="AES_Full_axis8_0_data_out" NAME="data_out" TYPE="INITIATOR" VLNV="xilinx.com:interface:axis:1.0">
+        <BUSINTERFACE BUSNAME="AES_Full_axis8_0_stream_out" NAME="stream_out" TYPE="INITIATOR" VLNV="xilinx.com:interface:axis:1.0">
           <PARAMETER NAME="TDATA_NUM_BYTES" VALUE="1"/>
           <PARAMETER NAME="TUSER_WIDTH" VALUE="0"/>
           <PARAMETER NAME="LAYERED_METADATA" VALUE="xilinx.com:interface:datatypes:1.0 {CLK {datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 1} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0}}} TDATA {datatype {name {attribs {resolve_type immediate dependency {} format string minimum {} maximum {}} value {}} bitwidth {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 8} bitoffset {attribs {resolve_type immediate dependency {} format long minimum {} maximum {}} value 0} integer {signed {attribs {resolve_type immediate dependency {} format bool minimum {} maximum {}} value false}}}} TDATA_WIDTH 8}"/>
@@ -625,18 +635,19 @@
           <PARAMETER NAME="HAS_TREADY" VALUE="1"/>
           <PARAMETER NAME="HAS_TSTRB" VALUE="0"/>
           <PARAMETER NAME="HAS_TKEEP" VALUE="0"/>
-          <PARAMETER NAME="HAS_TLAST" VALUE="0"/>
+          <PARAMETER NAME="HAS_TLAST" VALUE="1"/>
           <PARAMETER NAME="FREQ_HZ" VALUE="100000000"/>
           <PARAMETER NAME="PHASE" VALUE="0.000"/>
           <PARAMETER NAME="CLK_DOMAIN" VALUE="ZAES_processing_system7_0_1_FCLK_CLK0"/>
           <PARAMETER NAME="INSERT_VIP" VALUE="0"/>
           <PORTMAPS>
-            <PORTMAP LOGICAL="TVALID" PHYSICAL="data_out_TVALID"/>
-            <PORTMAP LOGICAL="TREADY" PHYSICAL="data_out_TREADY"/>
-            <PORTMAP LOGICAL="TDATA" PHYSICAL="data_out_TDATA"/>
+            <PORTMAP LOGICAL="TVALID" PHYSICAL="stream_out_TVALID"/>
+            <PORTMAP LOGICAL="TREADY" PHYSICAL="stream_out_TREADY"/>
+            <PORTMAP LOGICAL="TDATA" PHYSICAL="stream_out_TDATA"/>
+            <PORTMAP LOGICAL="TLAST" PHYSICAL="stream_out_TLAST"/>
           </PORTMAPS>
         </BUSINTERFACE>
-        <BUSINTERFACE BUSNAME="axi_dma_0_M_AXIS_MM2S" NAME="data_in" TYPE="TARGET" VLNV="xilinx.com:interface:axis:1.0">
+        <BUSINTERFACE BUSNAME="axi_dma_0_M_AXIS_MM2S" NAME="stream_in" TYPE="TARGET" VLNV="xilinx.com:interface:axis:1.0">
           <PARAMETER NAME="TDATA_NUM_BYTES" VALUE="1"/>
           <PARAMETER NAME="TUSER_WIDTH" VALUE="0"/>
           <PARAMETER NAME="LAYERED_METADATA" VALUE="undef"/>
@@ -645,15 +656,16 @@
           <PARAMETER NAME="HAS_TREADY" VALUE="1"/>
           <PARAMETER NAME="HAS_TSTRB" VALUE="0"/>
           <PARAMETER NAME="HAS_TKEEP" VALUE="0"/>
-          <PARAMETER NAME="HAS_TLAST" VALUE="0"/>
+          <PARAMETER NAME="HAS_TLAST" VALUE="1"/>
           <PARAMETER NAME="FREQ_HZ" VALUE="100000000"/>
           <PARAMETER NAME="PHASE" VALUE="0.000"/>
           <PARAMETER NAME="CLK_DOMAIN" VALUE="ZAES_processing_system7_0_1_FCLK_CLK0"/>
           <PARAMETER NAME="INSERT_VIP" VALUE="0"/>
           <PORTMAPS>
-            <PORTMAP LOGICAL="TVALID" PHYSICAL="data_in_TVALID"/>
-            <PORTMAP LOGICAL="TREADY" PHYSICAL="data_in_TREADY"/>
-            <PORTMAP LOGICAL="TDATA" PHYSICAL="data_in_TDATA"/>
+            <PORTMAP LOGICAL="TVALID" PHYSICAL="stream_in_TVALID"/>
+            <PORTMAP LOGICAL="TREADY" PHYSICAL="stream_in_TREADY"/>
+            <PORTMAP LOGICAL="TDATA" PHYSICAL="stream_in_TDATA"/>
+            <PORTMAP LOGICAL="TLAST" PHYSICAL="stream_in_TLAST"/>
           </PORTMAPS>
         </BUSINTERFACE>
       </BUSINTERFACES>
@@ -1708,23 +1720,27 @@
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="mm2s_prmry_reset_out_n" SIGIS="rst"/>
-        <PORT DIR="O" LEFT="7" NAME="m_axis_mm2s_tdata" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_axis8_0_data_in_TDATA">
+        <PORT DIR="O" LEFT="7" NAME="m_axis_mm2s_tdata" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_axis8_0_stream_in_TDATA">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="data_in_TDATA"/>
+            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="stream_in_TDATA"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" LEFT="0" NAME="m_axis_mm2s_tkeep" RIGHT="0" SIGIS="undef"/>
-        <PORT DIR="O" NAME="m_axis_mm2s_tvalid" SIGIS="undef" SIGNAME="AES_Full_axis8_0_data_in_TVALID">
+        <PORT DIR="O" NAME="m_axis_mm2s_tvalid" SIGIS="undef" SIGNAME="AES_Full_axis8_0_stream_in_TVALID">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="data_in_TVALID"/>
+            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="stream_in_TVALID"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="m_axis_mm2s_tready" SIGIS="undef" SIGNAME="AES_Full_axis8_0_data_in_TREADY">
+        <PORT DIR="I" NAME="m_axis_mm2s_tready" SIGIS="undef" SIGNAME="AES_Full_axis8_0_stream_in_TREADY">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="data_in_TREADY"/>
+            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="stream_in_TREADY"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="m_axis_mm2s_tlast" SIGIS="undef"/>
+        <PORT DIR="O" NAME="m_axis_mm2s_tlast" SIGIS="undef" SIGNAME="AES_Full_axis8_0_stream_in_TLAST">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="stream_in_TLAST"/>
+          </CONNECTIONS>
+        </PORT>
         <PORT DIR="O" LEFT="31" NAME="m_axi_s2mm_awaddr" RIGHT="0" SIGIS="undef" SIGNAME="axi_dma_0_m_axi_s2mm_awaddr">
           <CONNECTIONS>
             <CONNECTION INSTANCE="axi_smc" PORT="S02_AXI_awaddr"/>
@@ -1806,23 +1822,27 @@
           </CONNECTIONS>
         </PORT>
         <PORT DIR="O" NAME="s2mm_prmry_reset_out_n" SIGIS="rst"/>
-        <PORT DIR="I" LEFT="7" NAME="s_axis_s2mm_tdata" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_axis8_0_data_out_TDATA">
+        <PORT DIR="I" LEFT="7" NAME="s_axis_s2mm_tdata" RIGHT="0" SIGIS="undef" SIGNAME="AES_Full_axis8_0_stream_out_TDATA">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="data_out_TDATA"/>
+            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="stream_out_TDATA"/>
           </CONNECTIONS>
         </PORT>
         <PORT DIR="I" LEFT="0" NAME="s_axis_s2mm_tkeep" RIGHT="0" SIGIS="undef"/>
-        <PORT DIR="I" NAME="s_axis_s2mm_tvalid" SIGIS="undef" SIGNAME="AES_Full_axis8_0_data_out_TVALID">
+        <PORT DIR="I" NAME="s_axis_s2mm_tvalid" SIGIS="undef" SIGNAME="AES_Full_axis8_0_stream_out_TVALID">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="data_out_TVALID"/>
+            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="stream_out_TVALID"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="O" NAME="s_axis_s2mm_tready" SIGIS="undef" SIGNAME="AES_Full_axis8_0_data_out_TREADY">
+        <PORT DIR="O" NAME="s_axis_s2mm_tready" SIGIS="undef" SIGNAME="AES_Full_axis8_0_stream_out_TREADY">
           <CONNECTIONS>
-            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="data_out_TREADY"/>
+            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="stream_out_TREADY"/>
           </CONNECTIONS>
         </PORT>
-        <PORT DIR="I" NAME="s_axis_s2mm_tlast" SIGIS="undef"/>
+        <PORT DIR="I" NAME="s_axis_s2mm_tlast" SIGIS="undef" SIGNAME="AES_Full_axis8_0_stream_out_TLAST">
+          <CONNECTIONS>
+            <CONNECTION INSTANCE="AES_Full_axis8_0" PORT="stream_out_TLAST"/>
+          </CONNECTIONS>
+        </PORT>
         <PORT DIR="O" NAME="mm2s_introut" SENSITIVITY="LEVEL_HIGH" SIGIS="INTERRUPT" SIGNAME="axi_dma_0_mm2s_introut">
           <CONNECTIONS>
             <CONNECTION INSTANCE="xlconcat_0" PORT="In0"/>
@@ -2008,7 +2028,7 @@
             <PORTMAP LOGICAL="TVALID" PHYSICAL="m_axis_mm2s_tvalid"/>
           </PORTMAPS>
         </BUSINTERFACE>
-        <BUSINTERFACE BUSNAME="AES_Full_axis8_0_data_out" NAME="S_AXIS_S2MM" TYPE="TARGET" VLNV="xilinx.com:interface:axis:1.0">
+        <BUSINTERFACE BUSNAME="AES_Full_axis8_0_stream_out" NAME="S_AXIS_S2MM" TYPE="TARGET" VLNV="xilinx.com:interface:axis:1.0">
           <PARAMETER NAME="TDATA_NUM_BYTES" VALUE="1"/>
           <PARAMETER NAME="TDEST_WIDTH" VALUE="0"/>
           <PARAMETER NAME="TID_WIDTH" VALUE="0"/>

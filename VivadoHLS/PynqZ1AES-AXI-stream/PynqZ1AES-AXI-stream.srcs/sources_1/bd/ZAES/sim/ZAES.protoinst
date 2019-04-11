@@ -3,26 +3,6 @@
 	"modules": {
 		"ZAES": {
 			"proto_instances": {
-				"/AES_Full_axis8_0/data_in": {
-					"interface": "xilinx.com:interface:axis:1.0",
-					"ports": {
-						"ACLK": { "actual": "ap_clk"},
-						"ARESETN": { "actual": "ap_rst_n"},
-						"TDATA": { "actual": "data_in_TDATA"},
-						"TREADY": { "actual": "data_in_TREADY"},
-						"TVALID": { "actual": "data_in_TVALID"}
-					}
-				},
-				"/AES_Full_axis8_0/data_out": {
-					"interface": "xilinx.com:interface:axis:1.0",
-					"ports": {
-						"ACLK": { "actual": "ap_clk"},
-						"ARESETN": { "actual": "ap_rst_n"},
-						"TDATA": { "actual": "data_out_TDATA"},
-						"TREADY": { "actual": "data_out_TREADY"},
-						"TVALID": { "actual": "data_out_TVALID"}
-					}
-				},
 				"/AES_Full_axis8_0/s_axi_AES": {
 					"interface": "xilinx.com:interface:aximm:1.0",
 					"ports": {
@@ -45,6 +25,28 @@
 						"WREADY": { "actual": "s_axi_AES_WREADY"},
 						"WSTRB": { "actual": "s_axi_AES_WSTRB"},
 						"WVALID": { "actual": "s_axi_AES_WVALID"}
+					}
+				},
+				"/AES_Full_axis8_0/stream_in": {
+					"interface": "xilinx.com:interface:axis:1.0",
+					"ports": {
+						"ACLK": { "actual": "ap_clk"},
+						"ARESETN": { "actual": "ap_rst_n"},
+						"TDATA": { "actual": "stream_in_TDATA"},
+						"TLAST": { "actual": "stream_in_TLAST"},
+						"TREADY": { "actual": "stream_in_TREADY"},
+						"TVALID": { "actual": "stream_in_TVALID"}
+					}
+				},
+				"/AES_Full_axis8_0/stream_out": {
+					"interface": "xilinx.com:interface:axis:1.0",
+					"ports": {
+						"ACLK": { "actual": "ap_clk"},
+						"ARESETN": { "actual": "ap_rst_n"},
+						"TDATA": { "actual": "stream_out_TDATA"},
+						"TLAST": { "actual": "stream_out_TLAST"},
+						"TREADY": { "actual": "stream_out_TREADY"},
+						"TVALID": { "actual": "stream_out_TVALID"}
 					}
 				},
 				"/axi_dma_0/M_AXIS_MM2S": {

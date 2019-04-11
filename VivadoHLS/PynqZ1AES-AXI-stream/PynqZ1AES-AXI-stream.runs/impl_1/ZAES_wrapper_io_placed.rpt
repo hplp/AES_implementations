@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------
 | Tool Version              : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date                      : Wed Apr 10 22:21:43 2019
+| Date                      : Thu Apr 11 12:15:45 2019
 | Host                      : HPLP-SM7ED running 64-bit major release  (build 9200)
 | Command                   : report_io -file ZAES_wrapper_io_placed.rpt
 | Design                    : ZAES_wrapper

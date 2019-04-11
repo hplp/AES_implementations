@@ -11,3 +11,8 @@ const unsigned char Nk_max = 8; // =(4, 6 or 8), max [32-bit words] columns in c
 const unsigned char CipherKeyLenghth_max = Nk_max * rows; // max bytes in key length
 const unsigned char Nr_max = (Nk_max > Nb) ? Nk_max + 6 : Nb + 6; // max number of rounds
 const unsigned char ExtdCipherKeyLenghth_max = (Nr_max + 1) * stt_lng; // max bytes in extended key length
+
+typedef struct {
+	unsigned char text_byte;
+	bool TLAST;
+} aes_byte;

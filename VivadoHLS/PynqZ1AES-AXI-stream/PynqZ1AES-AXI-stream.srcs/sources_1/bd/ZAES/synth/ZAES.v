@@ -1,7 +1,7 @@
 //Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-//Date        : Wed Apr 10 22:16:47 2019
+//Date        : Thu Apr 11 12:12:35 2019
 //Host        : HPLP-SM7ED running 64-bit major release  (build 9200)
 //Command     : generate_target ZAES.bd
 //Design      : ZAES
@@ -54,11 +54,13 @@ module ZAES
   (* X_INTERFACE_INFO = "xilinx.com:display_processing_system7:fixedio:1.0 FIXED_IO PS_PORB" *) inout FIXED_IO_ps_porb;
   (* X_INTERFACE_INFO = "xilinx.com:display_processing_system7:fixedio:1.0 FIXED_IO PS_SRSTB" *) inout FIXED_IO_ps_srstb;
 
-  wire [7:0]AES_Full_axis8_0_data_out_TDATA;
-  wire AES_Full_axis8_0_data_out_TREADY;
-  wire AES_Full_axis8_0_data_out_TVALID;
   wire AES_Full_axis8_0_interrupt;
+  wire [7:0]AES_Full_axis8_0_stream_out_TDATA;
+  wire [0:0]AES_Full_axis8_0_stream_out_TLAST;
+  wire AES_Full_axis8_0_stream_out_TREADY;
+  wire AES_Full_axis8_0_stream_out_TVALID;
   wire [7:0]axi_dma_0_M_AXIS_MM2S_TDATA;
+  wire axi_dma_0_M_AXIS_MM2S_TLAST;
   wire axi_dma_0_M_AXIS_MM2S_TREADY;
   wire axi_dma_0_M_AXIS_MM2S_TVALID;
   wire [31:0]axi_dma_0_M_AXI_MM2S_ARADDR;
@@ -225,12 +227,6 @@ module ZAES
   ZAES_AES_Full_axis8_0_0 AES_Full_axis8_0
        (.ap_clk(processing_system7_0_FCLK_CLK0),
         .ap_rst_n(rst_ps7_0_100M_peripheral_aresetn),
-        .data_in_TDATA(axi_dma_0_M_AXIS_MM2S_TDATA),
-        .data_in_TREADY(axi_dma_0_M_AXIS_MM2S_TREADY),
-        .data_in_TVALID(axi_dma_0_M_AXIS_MM2S_TVALID),
-        .data_out_TDATA(AES_Full_axis8_0_data_out_TDATA),
-        .data_out_TREADY(AES_Full_axis8_0_data_out_TREADY),
-        .data_out_TVALID(AES_Full_axis8_0_data_out_TVALID),
         .interrupt(AES_Full_axis8_0_interrupt),
         .s_axi_AES_ARADDR(ps7_0_axi_periph_M01_AXI_ARADDR[4:0]),
         .s_axi_AES_ARREADY(ps7_0_axi_periph_M01_AXI_ARREADY),
@@ -248,7 +244,15 @@ module ZAES
         .s_axi_AES_WDATA(ps7_0_axi_periph_M01_AXI_WDATA),
         .s_axi_AES_WREADY(ps7_0_axi_periph_M01_AXI_WREADY),
         .s_axi_AES_WSTRB(ps7_0_axi_periph_M01_AXI_WSTRB),
-        .s_axi_AES_WVALID(ps7_0_axi_periph_M01_AXI_WVALID));
+        .s_axi_AES_WVALID(ps7_0_axi_periph_M01_AXI_WVALID),
+        .stream_in_TDATA(axi_dma_0_M_AXIS_MM2S_TDATA),
+        .stream_in_TLAST(axi_dma_0_M_AXIS_MM2S_TLAST),
+        .stream_in_TREADY(axi_dma_0_M_AXIS_MM2S_TREADY),
+        .stream_in_TVALID(axi_dma_0_M_AXIS_MM2S_TVALID),
+        .stream_out_TDATA(AES_Full_axis8_0_stream_out_TDATA),
+        .stream_out_TLAST(AES_Full_axis8_0_stream_out_TLAST),
+        .stream_out_TREADY(AES_Full_axis8_0_stream_out_TREADY),
+        .stream_out_TVALID(AES_Full_axis8_0_stream_out_TVALID));
   ZAES_axi_dma_0_2 axi_dma_0
        (.axi_resetn(rst_ps7_0_100M_peripheral_aresetn),
         .m_axi_mm2s_aclk(processing_system7_0_FCLK_CLK0),
@@ -283,6 +287,7 @@ module ZAES
         .m_axi_s2mm_wstrb(axi_dma_0_M_AXI_S2MM_WSTRB),
         .m_axi_s2mm_wvalid(axi_dma_0_M_AXI_S2MM_WVALID),
         .m_axis_mm2s_tdata(axi_dma_0_M_AXIS_MM2S_TDATA),
+        .m_axis_mm2s_tlast(axi_dma_0_M_AXIS_MM2S_TLAST),
         .m_axis_mm2s_tready(axi_dma_0_M_AXIS_MM2S_TREADY),
         .m_axis_mm2s_tvalid(axi_dma_0_M_AXIS_MM2S_TVALID),
         .mm2s_introut(axi_dma_0_mm2s_introut),
@@ -304,11 +309,11 @@ module ZAES
         .s_axi_lite_wdata(ps7_0_axi_periph_M00_AXI_WDATA),
         .s_axi_lite_wready(ps7_0_axi_periph_M00_AXI_WREADY),
         .s_axi_lite_wvalid(ps7_0_axi_periph_M00_AXI_WVALID),
-        .s_axis_s2mm_tdata(AES_Full_axis8_0_data_out_TDATA),
+        .s_axis_s2mm_tdata(AES_Full_axis8_0_stream_out_TDATA),
         .s_axis_s2mm_tkeep(1'b1),
-        .s_axis_s2mm_tlast(1'b0),
-        .s_axis_s2mm_tready(AES_Full_axis8_0_data_out_TREADY),
-        .s_axis_s2mm_tvalid(AES_Full_axis8_0_data_out_TVALID));
+        .s_axis_s2mm_tlast(AES_Full_axis8_0_stream_out_TLAST),
+        .s_axis_s2mm_tready(AES_Full_axis8_0_stream_out_TREADY),
+        .s_axis_s2mm_tvalid(AES_Full_axis8_0_stream_out_TVALID));
   ZAES_axi_smc_1 axi_smc
        (.M00_AXI_araddr(axi_smc_M00_AXI_ARADDR),
         .M00_AXI_arburst(axi_smc_M00_AXI_ARBURST),

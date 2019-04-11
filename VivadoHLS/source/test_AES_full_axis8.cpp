@@ -1,6 +1,7 @@
 #include "AESfunctions.h"
 
-void AES_Full_axis8(bool cipher_or_i_cipher, unsigned char Nr, unsigned char data_in[stt_lng], unsigned char data_out[stt_lng]);
+//void AES_Full_axis8(bool cipher_or_i_cipher, unsigned char Nr, unsigned char data_in[stt_lng], unsigned char data_out[stt_lng]);
+void AES_Full_axis8(bool cipher_or_i_cipher, unsigned char Nr, aes_byte stream_in[stt_lng], aes_byte stream_out[stt_lng]);
 
 //void KeyExpansion(unsigned char* inputKey, unsigned short Nk, unsigned char* expandedKey);
 
@@ -20,6 +21,17 @@ int main() {
 	unsigned char decrypted_plaintext[stt_lng];
 
 	bool all_tests_pass = true;
+
+	aes_byte stream_in[stt_lng];
+	aes_byte stream_out[stt_lng];
+	aes_byte stream_out_d[stt_lng];
+	for (unsigned char i = 0; i < stt_lng; i++) {
+		stream_in[i].text_byte = plaintext[i];
+		if (i != (stt_lng - 1))
+			stream_in[i].TLAST = false;
+		else
+			stream_in[i].TLAST = true;
+	}
 
 	for (unsigned short test = 0; test < 512; test++) {
 
@@ -53,10 +65,11 @@ int main() {
 //		cout << endl << endl;
 
 		// encrypt
-		AES_Full_axis8(true, (unsigned char) Nr, plaintext, ciphertext);
+		AES_Full_axis8(true, (unsigned char) Nr, stream_in, stream_out);
 		cout << "ciphertext = ";
 		for (unsigned short i = 0; i < stt_lng; i++) {
-			cout << dec << (unsigned short) ciphertext[i] << " ";
+			ciphertext[i] = stream_out[i].text_byte;
+			cout << dec << (unsigned short) stream_out[i].TLAST << dec << (unsigned short) ciphertext[i] << " ";
 		}
 		cout << "<=> ";
 		for (unsigned short i = 0; i < stt_lng; i++) {
@@ -65,10 +78,11 @@ int main() {
 		cout << endl << endl;
 
 		// decrypt
-		AES_Full_axis8(false, (unsigned char) Nr, ciphertext, decrypted_plaintext);
+		AES_Full_axis8(false, (unsigned char) Nr, stream_out, stream_out_d);
 		cout << "decrypted_plaintext = ";
 		for (unsigned short i = 0; i < stt_lng; i++) {
-			cout << decrypted_plaintext[i] << " ";
+			decrypted_plaintext[i] = stream_out_d[i].text_byte;
+			cout << dec << (unsigned short) stream_out_d[i].TLAST << decrypted_plaintext[i] << " ";
 		}
 		cout << "<=> ";
 		for (unsigned short i = 0; i < stt_lng; i++) {

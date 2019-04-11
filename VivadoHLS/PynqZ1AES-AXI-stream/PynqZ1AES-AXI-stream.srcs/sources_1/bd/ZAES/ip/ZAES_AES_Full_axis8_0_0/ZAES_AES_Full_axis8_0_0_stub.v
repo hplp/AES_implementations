@@ -1,10 +1,10 @@
 // Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 // --------------------------------------------------------------------------------
 // Tool Version: Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-// Date        : Wed Apr 10 22:18:55 2019
+// Date        : Thu Apr 11 12:11:47 2019
 // Host        : HPLP-SM7ED running 64-bit major release  (build 9200)
 // Command     : write_verilog -force -mode synth_stub
-//               d:/WS/AES_implementations/VivadoHLS/PynqZ1AES-AXI-stream/PynqZ1AES-AXI-stream.srcs/sources_1/bd/ZAES/ip/ZAES_AES_Full_axis8_0_0/ZAES_AES_Full_axis8_0_0_stub.v
+//               D:/WS/AES_implementations/VivadoHLS/PynqZ1AES-AXI-stream/PynqZ1AES-AXI-stream.srcs/sources_1/bd/ZAES/ip/ZAES_AES_Full_axis8_0_0/ZAES_AES_Full_axis8_0_0_stub.v
 // Design      : ZAES_AES_Full_axis8_0_0
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7z020clg400-1
@@ -18,9 +18,9 @@ module ZAES_AES_Full_axis8_0_0(s_axi_AES_AWADDR, s_axi_AES_AWVALID,
   s_axi_AES_AWREADY, s_axi_AES_WDATA, s_axi_AES_WSTRB, s_axi_AES_WVALID, s_axi_AES_WREADY, 
   s_axi_AES_BRESP, s_axi_AES_BVALID, s_axi_AES_BREADY, s_axi_AES_ARADDR, s_axi_AES_ARVALID, 
   s_axi_AES_ARREADY, s_axi_AES_RDATA, s_axi_AES_RRESP, s_axi_AES_RVALID, s_axi_AES_RREADY, 
-  ap_clk, ap_rst_n, interrupt, data_out_TVALID, data_out_TREADY, data_out_TDATA, 
-  data_in_TVALID, data_in_TREADY, data_in_TDATA)
-/* synthesis syn_black_box black_box_pad_pin="s_axi_AES_AWADDR[4:0],s_axi_AES_AWVALID,s_axi_AES_AWREADY,s_axi_AES_WDATA[31:0],s_axi_AES_WSTRB[3:0],s_axi_AES_WVALID,s_axi_AES_WREADY,s_axi_AES_BRESP[1:0],s_axi_AES_BVALID,s_axi_AES_BREADY,s_axi_AES_ARADDR[4:0],s_axi_AES_ARVALID,s_axi_AES_ARREADY,s_axi_AES_RDATA[31:0],s_axi_AES_RRESP[1:0],s_axi_AES_RVALID,s_axi_AES_RREADY,ap_clk,ap_rst_n,interrupt,data_out_TVALID,data_out_TREADY,data_out_TDATA[7:0],data_in_TVALID,data_in_TREADY,data_in_TDATA[7:0]" */;
+  ap_clk, ap_rst_n, interrupt, stream_out_TVALID, stream_out_TREADY, stream_out_TDATA, 
+  stream_out_TLAST, stream_in_TVALID, stream_in_TREADY, stream_in_TDATA, stream_in_TLAST)
+/* synthesis syn_black_box black_box_pad_pin="s_axi_AES_AWADDR[4:0],s_axi_AES_AWVALID,s_axi_AES_AWREADY,s_axi_AES_WDATA[31:0],s_axi_AES_WSTRB[3:0],s_axi_AES_WVALID,s_axi_AES_WREADY,s_axi_AES_BRESP[1:0],s_axi_AES_BVALID,s_axi_AES_BREADY,s_axi_AES_ARADDR[4:0],s_axi_AES_ARVALID,s_axi_AES_ARREADY,s_axi_AES_RDATA[31:0],s_axi_AES_RRESP[1:0],s_axi_AES_RVALID,s_axi_AES_RREADY,ap_clk,ap_rst_n,interrupt,stream_out_TVALID,stream_out_TREADY,stream_out_TDATA[7:0],stream_out_TLAST[0:0],stream_in_TVALID,stream_in_TREADY,stream_in_TDATA[7:0],stream_in_TLAST[0:0]" */;
   input [4:0]s_axi_AES_AWADDR;
   input s_axi_AES_AWVALID;
   output s_axi_AES_AWREADY;
@@ -41,10 +41,12 @@ module ZAES_AES_Full_axis8_0_0(s_axi_AES_AWADDR, s_axi_AES_AWVALID,
   input ap_clk;
   input ap_rst_n;
   output interrupt;
-  output data_out_TVALID;
-  input data_out_TREADY;
-  output [7:0]data_out_TDATA;
-  input data_in_TVALID;
-  output data_in_TREADY;
-  input [7:0]data_in_TDATA;
+  output stream_out_TVALID;
+  input stream_out_TREADY;
+  output [7:0]stream_out_TDATA;
+  output [0:0]stream_out_TLAST;
+  input stream_in_TVALID;
+  output stream_in_TREADY;
+  input [7:0]stream_in_TDATA;
+  input [0:0]stream_in_TLAST;
 endmodule

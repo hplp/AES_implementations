@@ -340,19 +340,34 @@ void AES_Full(bool cipher_or_i_cipher, unsigned char Nr, unsigned char data_in[s
 }
 
 //// AES Full 8-bit AXI4 stream
-void AES_Full_axis8(bool cipher_or_i_cipher, unsigned char Nr, unsigned char data_in[stt_lng], unsigned char data_out[stt_lng]) {
+void AES_Full_axis8(bool cipher_or_i_cipher, unsigned char Nr, aes_byte stream_in[stt_lng], aes_byte stream_out[stt_lng]) {
 #pragma HLS inline region // will inline the functions unless inlining is off
 
 #pragma HLS INTERFACE s_axilite port=cipher_or_i_cipher bundle=AES
 #pragma HLS INTERFACE s_axilite port=Nr                 bundle=AES
-#pragma HLS INTERFACE axis register both port=data_in
-#pragma HLS INTERFACE axis register both port=data_out
+#pragma HLS INTERFACE axis register both port=stream_in
+#pragma HLS INTERFACE axis register both port=stream_out
 #pragma HLS INTERFACe s_axilite port=return             bundle=AES
 
 #pragma HLS pipeline II=16 // reduces II
+
+	unsigned char data_in[stt_lng];
+	unsigned char data_out[stt_lng];
+
+	for (unsigned char i = 0; i < stt_lng; i++) {
+		data_in[i] = stream_in[i].text_byte;
+	}
 
 	if (cipher_or_i_cipher)
 		AES_Encrypt(Nr, data_in, data_out);
 	else
 		AES_Decrypt(Nr, data_in, data_out);
+
+	for (unsigned char i = 0; i < stt_lng; i++) {
+		stream_out[i].text_byte = data_out[i];
+		if (i != (stt_lng - 1))
+			stream_out[i].TLAST = false;
+		else
+			stream_out[i].TLAST = true;
+	}
 }

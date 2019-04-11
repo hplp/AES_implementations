@@ -73,7 +73,7 @@ int main() {
 
 	bool all_tests_pass = true;
 
-	for (unsigned short test = 0; test < 8; test++) {
+	for (unsigned short test = 0; test < 512; test++) {
 
 		// These variables allow to change the AES length, they have to be smaller than their equivalent max
 		// Nk = 4, 6 or 8 for AES 128, 192 or 256 respectively
@@ -96,16 +96,18 @@ int main() {
 
 		printf("Sending data to AES core\n");
 		XAxiDma_SimpleTransfer(&axiDMA, (u32) plaintext, (u32) stt_lng * sizeof(unsigned char), XAXIDMA_DMA_TO_DEVICE);
-		sleep(1);
+		//sleep(1);
 
 		printf("Receive data from AES core\n");
 		XAxiDma_SimpleTransfer(&axiDMA, (u32) m_dma_buffer_RX, (u32) stt_lng * sizeof(unsigned char), XAXIDMA_DEVICE_TO_DMA);
-		sleep(1);
-		//while (XAxiDma_Busy(&axiDMA, XAXIDMA_DEVICE_TO_DMA)); // no T_LAST signal
+		//sleep(1);
+		while (XAxiDma_Busy(&axiDMA, XAXIDMA_DEVICE_TO_DMA))
+			; // no T_LAST signal
 
 		Xil_DCacheInvalidateRange((u32) m_dma_buffer_RX, (u32) stt_lng * sizeof(unsigned char));
 
-		//while (!XAes_full_axis8_IsDone(&Aes_full_axis8)); // no T_LAST signal
+		while (!XAes_full_axis8_IsDone(&Aes_full_axis8))
+			; // no T_LAST signal
 		printf("Encrypt complete\n");
 
 		printf("ciphertext = ");
@@ -125,16 +127,18 @@ int main() {
 
 		printf("Sending data to AES core\n");
 		XAxiDma_SimpleTransfer(&axiDMA, (u32) ciphertext, (u32) stt_lng * sizeof(unsigned char), XAXIDMA_DMA_TO_DEVICE);
-		sleep(1);
+		//sleep(1);
 
 		printf("Receive data from AES core\n");
 		XAxiDma_SimpleTransfer(&axiDMA, (u32) m_dma_buffer_RX, (u32) stt_lng * sizeof(unsigned char), XAXIDMA_DEVICE_TO_DMA);
-		sleep(1);
-		//while (XAxiDma_Busy(&axiDMA, XAXIDMA_DEVICE_TO_DMA)); // no T_LAST signal
+		//sleep(1);
+		while (XAxiDma_Busy(&axiDMA, XAXIDMA_DEVICE_TO_DMA))
+			; // no T_LAST signal
 
 		Xil_DCacheInvalidateRange((u32) m_dma_buffer_RX, (u32) stt_lng * sizeof(unsigned char));
 
-		//while (!XAes_full_axis8_IsDone(&Aes_full_axis8)); // no T_LAST signal
+		while (!XAes_full_axis8_IsDone(&Aes_full_axis8))
+			; // no T_LAST signal
 		printf("Decrypt complete\n");
 
 		printf("decrypted_plaintext = ");
