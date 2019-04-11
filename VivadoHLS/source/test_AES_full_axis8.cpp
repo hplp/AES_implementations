@@ -1,6 +1,6 @@
 #include "AESfunctions.h"
 
-void AES_Full(bool cipher_or_i_cipher, unsigned char Nr, unsigned char data_in[stt_lng], unsigned char data_out[stt_lng]);
+void AES_Full_axis8(bool cipher_or_i_cipher, unsigned char Nr, unsigned char data_in[stt_lng], unsigned char data_out[stt_lng]);
 
 //void KeyExpansion(unsigned char* inputKey, unsigned short Nk, unsigned char* expandedKey);
 
@@ -53,7 +53,7 @@ int main() {
 //		cout << endl << endl;
 
 		// encrypt
-		AES_Full(true, (unsigned char) Nr, plaintext, ciphertext);
+		AES_Full_axis8(true, (unsigned char) Nr, plaintext, ciphertext);
 		cout << "ciphertext = ";
 		for (unsigned short i = 0; i < stt_lng; i++) {
 			cout << dec << (unsigned short) ciphertext[i] << " ";
@@ -65,7 +65,7 @@ int main() {
 		cout << endl << endl;
 
 		// decrypt
-		AES_Full(false, (unsigned char) Nr, ciphertext, decrypted_plaintext);
+		AES_Full_axis8(false, (unsigned char) Nr, ciphertext, decrypted_plaintext);
 		cout << "decrypted_plaintext = ";
 		for (unsigned short i = 0; i < stt_lng; i++) {
 			cout << decrypted_plaintext[i] << " ";

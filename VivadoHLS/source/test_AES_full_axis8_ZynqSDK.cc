@@ -1,11 +1,12 @@
 #include <stdio.h>
+#include <unistd.h>
 #include <xparameters.h>
-#include "xaes_full.h"
+#include "xaes_full_axis8.h"
 #include "xaxidma.h"
 
 // Aes_fill and axiDMA pointers and handlers
-XAes_full Aes_full;
-XAes_full_Config *Aes_full_cfg;
+XAes_full_axis8 Aes_full_axis8;
+XAes_full_axis8_Config *Aes_full_axis8_cfg;
 XAxiDma axiDMA;
 XAxiDma_Config *axiDMA_cfg;
 
@@ -28,15 +29,15 @@ const unsigned short ExtdCipherKeyLenghth_max = 240; // = (Nr_max + 1) * stt_lng
 // variable array for plaintext
 unsigned char plaintext[stt_lng] = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P' };
 // variable array for ciphertext
-unsigned char ciphertext[stt_lng] = { 111, 31, 36, 98, 56, 201, 250, 150, 163, 108, 78, 47, 89, 80, 133, 6 };
+unsigned char ciphertext[stt_lng]; // = { 111, 31, 36, 98, 56, 201, 250, 150, 163, 108, 78, 47, 89, 80, 133, 6 };
 // variable array for decrypted plaintext
 unsigned char decrypted_plaintext[stt_lng];
 
 void initPeripherals() {
 	printf("initializing AES_Full\n");
-	Aes_full_cfg = XAes_full_LookupConfig(XPAR_AES_FULL_0_DEVICE_ID);
-	if (Aes_full_cfg) {
-		int status = XAes_full_CfgInitialize(&Aes_full, Aes_full_cfg);
+	Aes_full_axis8_cfg = XAes_full_axis8_LookupConfig(XPAR_AES_FULL_AXIS8_0_DEVICE_ID);
+	if (Aes_full_axis8_cfg) {
+		int status = XAes_full_axis8_CfgInitialize(&Aes_full_axis8, Aes_full_axis8_cfg);
 		if (status != XST_SUCCESS)
 			printf("Error initializing AES_Full core\n");
 	}
@@ -56,7 +57,7 @@ void initPeripherals() {
 
 int main() {
 	// pointers to DMA TX/RX addresses
-	//unsigned char *m_dma_buffer_TX = (unsigned char*) TX_BUFFER_BASE;
+	unsigned char *m_dma_buffer_TX = (unsigned char*) TX_BUFFER_BASE;
 	unsigned char *m_dma_buffer_RX = (unsigned char*) RX_BUFFER_BASE;
 
 	initPeripherals();
@@ -72,7 +73,7 @@ int main() {
 
 	bool all_tests_pass = true;
 
-	for (unsigned short test = 0; test < 512; test++) {
+	for (unsigned short test = 0; test < 8; test++) {
 
 		// These variables allow to change the AES length, they have to be smaller than their equivalent max
 		// Nk = 4, 6 or 8 for AES 128, 192 or 256 respectively
@@ -86,25 +87,25 @@ int main() {
 		printf("AES with Nb = %d columns, Nk = %d (32-bit) words i.e. CipherKeyLenghth = %d  bytes (or %d bits), Nr = %d rounds \n\r", Nb, Nk, CipherKeyLenghth, CipherKeyLenghth * 8, Nr);
 
 		/** Encrypt **/
-		XAes_full_Set_cipher_or_i_cipher(&Aes_full, 1);
-		XAes_full_Set_Nr(&Aes_full, Nr);
-		XAes_full_Start(&Aes_full);
+		XAes_full_axis8_Set_cipher_or_i_cipher(&Aes_full_axis8, 1);
+		XAes_full_axis8_Set_Nr(&Aes_full_axis8, Nr);
+		XAes_full_axis8_Start(&Aes_full_axis8);
 
 		Xil_DCacheFlushRange((u32) plaintext, (u32) stt_lng * sizeof(unsigned char));
 		Xil_DCacheFlushRange((u32) m_dma_buffer_RX, (u32) stt_lng * sizeof(unsigned char));
 
 		printf("Sending data to AES core\n");
 		XAxiDma_SimpleTransfer(&axiDMA, (u32) plaintext, (u32) stt_lng * sizeof(unsigned char), XAXIDMA_DMA_TO_DEVICE);
+		sleep(1);
 
 		printf("Receive data from AES core\n");
 		XAxiDma_SimpleTransfer(&axiDMA, (u32) m_dma_buffer_RX, (u32) stt_lng * sizeof(unsigned char), XAXIDMA_DEVICE_TO_DMA);
-		while (XAxiDma_Busy(&axiDMA, XAXIDMA_DEVICE_TO_DMA))
-			;
+		sleep(1);
+		//while (XAxiDma_Busy(&axiDMA, XAXIDMA_DEVICE_TO_DMA)); // no T_LAST signal
 
 		Xil_DCacheInvalidateRange((u32) m_dma_buffer_RX, (u32) stt_lng * sizeof(unsigned char));
 
-		while (!XAes_full_IsDone(&Aes_full))
-			;
+		//while (!XAes_full_axis8_IsDone(&Aes_full_axis8)); // no T_LAST signal
 		printf("Encrypt complete\n");
 
 		printf("ciphertext = ");
@@ -115,25 +116,25 @@ int main() {
 		printf("\n");
 
 		/** Decrypt **/
-		XAes_full_Set_cipher_or_i_cipher(&Aes_full, 0);
-		XAes_full_Set_Nr(&Aes_full, Nr);
-		XAes_full_Start(&Aes_full);
+		XAes_full_axis8_Set_cipher_or_i_cipher(&Aes_full_axis8, 0);
+		XAes_full_axis8_Set_Nr(&Aes_full_axis8, Nr);
+		XAes_full_axis8_Start(&Aes_full_axis8);
 
 		Xil_DCacheFlushRange((u32) ciphertext, (u32) stt_lng * sizeof(unsigned char));
 		Xil_DCacheFlushRange((u32) m_dma_buffer_RX, (u32) stt_lng * sizeof(unsigned char));
 
 		printf("Sending data to AES core\n");
 		XAxiDma_SimpleTransfer(&axiDMA, (u32) ciphertext, (u32) stt_lng * sizeof(unsigned char), XAXIDMA_DMA_TO_DEVICE);
+		sleep(1);
 
 		printf("Receive data from AES core\n");
 		XAxiDma_SimpleTransfer(&axiDMA, (u32) m_dma_buffer_RX, (u32) stt_lng * sizeof(unsigned char), XAXIDMA_DEVICE_TO_DMA);
-		while (XAxiDma_Busy(&axiDMA, XAXIDMA_DEVICE_TO_DMA))
-			;
+		sleep(1);
+		//while (XAxiDma_Busy(&axiDMA, XAXIDMA_DEVICE_TO_DMA)); // no T_LAST signal
 
 		Xil_DCacheInvalidateRange((u32) m_dma_buffer_RX, (u32) stt_lng * sizeof(unsigned char));
 
-		while (!XAes_full_IsDone(&Aes_full))
-			;
+		//while (!XAes_full_axis8_IsDone(&Aes_full_axis8)); // no T_LAST signal
 		printf("Decrypt complete\n");
 
 		printf("decrypted_plaintext = ");
