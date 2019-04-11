@@ -3,7 +3,7 @@
 <!--                                                         -->
 <!-- Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.   -->
 
-<Project Version="7" Minor="39" Path="D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/PynqZ1AES/PynqZ1AES.xpr">
+<Project Version="7" Minor="39" Path="D:/WS/AES_implementations/VivadoHLS/PynqZ1AES/PynqZ1AES.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
     <Option Name="Id" Val="0e330fa077894c67a16f8904d2ef72fb"/>
@@ -72,11 +72,11 @@
         <CompFileExtendedInfo CompFileName="ZAES.bd" FileRelPathName="ip/ZAES_AES_Full_0_0/ZAES_AES_Full_0_0.xci">
           <Proxy FileSetName="ZAES_AES_Full_0_0"/>
         </CompFileExtendedInfo>
-        <CompFileExtendedInfo CompFileName="ZAES.bd" FileRelPathName="ip/ZAES_rst_ps7_0_100M_0/ZAES_rst_ps7_0_100M_0.xci">
-          <Proxy FileSetName="ZAES_rst_ps7_0_100M_0"/>
-        </CompFileExtendedInfo>
         <CompFileExtendedInfo CompFileName="ZAES.bd" FileRelPathName="ip/ZAES_processing_system7_0_0/ZAES_processing_system7_0_0.xci">
           <Proxy FileSetName="ZAES_processing_system7_0_0"/>
+        </CompFileExtendedInfo>
+        <CompFileExtendedInfo CompFileName="ZAES.bd" FileRelPathName="ip/ZAES_rst_ps7_0_100M_0/ZAES_rst_ps7_0_100M_0.xci">
+          <Proxy FileSetName="ZAES_rst_ps7_0_100M_0"/>
         </CompFileExtendedInfo>
       </File>
       <File Path="$PSRCDIR/sources_1/bd/ZAES/hdl/ZAES_wrapper.v">

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;ZynqAES/src/helloworld.c&apos; to &apos;test_AESZynqSDK.c&apos;" description="Rename resource &apos;helloworld.c&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/helloworld.c" name="test_AESZynqSDK.c" stamp="1554936642431" updateReferences="true"/>
+</session>

@@ -1,7 +1,7 @@
 Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-| Date             : Tue Mar 12 16:09:06 2019
+| Date             : Wed Apr 10 18:43:33 2019
 | Host             : HPLP-SM7ED running 64-bit major release  (build 9200)
 | Command          : report_power -file ZAES_wrapper_power_routed.rpt -pb ZAES_wrapper_power_summary_routed.pb -rpx ZAES_wrapper_power_routed.rpx
 | Design           : ZAES_wrapper
@@ -30,14 +30,14 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 1.454        |
+| Total On-Chip Power (W)  | 1.426        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 1.314        |
+| Dynamic (W)              | 1.287        |
 | Device Static (W)        | 0.140        |
 | Effective TJA (C/W)      | 11.5         |
-| Max Ambient (C)          | 68.2         |
-| Junction Temperature (C) | 41.8         |
+| Max Ambient (C)          | 68.6         |
+| Junction Temperature (C) | 41.4         |
 | Confidence Level         | Medium       |
 | Setting File             | ---          |
 | Simulation Activity File | ---          |
@@ -52,19 +52,19 @@ Table of Contents
 +-------------------------+-----------+----------+-----------+-----------------+
 | On-Chip                 | Power (W) | Used     | Available | Utilization (%) |
 +-------------------------+-----------+----------+-----------+-----------------+
-| Clocks                  |     0.014 |        3 |       --- |             --- |
-| Slice Logic             |     0.002 |    12074 |       --- |             --- |
-|   LUT as Logic          |     0.002 |     4222 |     53200 |            7.94 |
-|   Register              |    <0.001 |     6597 |    106400 |            6.20 |
+| Clocks                  |     0.015 |        3 |       --- |             --- |
+| Slice Logic             |     0.003 |    12563 |       --- |             --- |
+|   LUT as Logic          |     0.002 |     4640 |     53200 |            8.72 |
+|   Register              |    <0.001 |     7064 |    106400 |            6.64 |
 |   CARRY4                |    <0.001 |       12 |     13300 |            0.09 |
-|   LUT as Shift Register |    <0.001 |       65 |     17400 |            0.37 |
-|   F7/F8 Muxes           |    <0.001 |       10 |     53200 |            0.02 |
+|   LUT as Shift Register |    <0.001 |       60 |     17400 |            0.34 |
+|   F7/F8 Muxes           |    <0.001 |       30 |     53200 |            0.06 |
 |   Others                |     0.000 |      209 |       --- |             --- |
-| Signals                 |     0.004 |    11858 |       --- |             --- |
-| Block RAM               |     0.037 |       42 |       140 |           30.00 |
+| Signals                 |     0.004 |    12209 |       --- |             --- |
+| Block RAM               |     0.009 |       42 |       140 |           30.00 |
 | PS7                     |     1.256 |        1 |       --- |             --- |
 | Static Power            |     0.140 |          |           |                 |
-| Total                   |     1.454 |          |           |                 |
+| Total                   |     1.426 |          |           |                 |
 +-------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -74,7 +74,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.071 |       0.055 |      0.016 |
+| Vccint    |       1.000 |     0.046 |       0.030 |      0.016 |
 | Vccaux    |       1.800 |     0.014 |       0.000 |      0.014 |
 | Vcco33    |       3.300 |     0.000 |       0.000 |      0.000 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
@@ -83,7 +83,7 @@ Table of Contents
 | Vcco135   |       1.350 |     0.000 |       0.000 |      0.000 |
 | Vcco12    |       1.200 |     0.000 |       0.000 |      0.000 |
 | Vccaux_io |       1.800 |     0.000 |       0.000 |      0.000 |
-| Vccbram   |       1.000 |     0.006 |       0.003 |      0.003 |
+| Vccbram   |       1.000 |     0.004 |       0.001 |      0.003 |
 | MGTAVcc   |       1.000 |     0.000 |       0.000 |      0.000 |
 | MGTAVtt   |       1.200 |     0.000 |       0.000 |      0.000 |
 | MGTVccaux |       1.800 |     0.000 |       0.000 |      0.000 |
@@ -150,10 +150,10 @@ Table of Contents
 +--------------------------+-----------+
 | Name                     | Power (W) |
 +--------------------------+-----------+
-| ZAES_wrapper             |     1.314 |
-|   ZAES_i                 |     1.314 |
-|     AES_Full_0           |     0.053 |
-|       inst               |     0.053 |
+| ZAES_wrapper             |     1.287 |
+|   ZAES_i                 |     1.287 |
+|     AES_Full_0           |     0.026 |
+|       inst               |     0.026 |
 |     processing_system7_0 |     1.256 |
 |       inst               |     1.256 |
 |     ps7_0_axi_periph     |     0.004 |

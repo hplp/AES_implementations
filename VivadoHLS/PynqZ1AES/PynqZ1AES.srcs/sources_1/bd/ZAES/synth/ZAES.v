@@ -1,7 +1,7 @@
 //Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 //--------------------------------------------------------------------------------
 //Tool Version: Vivado v.2018.3 (win64) Build 2405991 Thu Dec  6 23:38:27 MST 2018
-//Date        : Tue Mar 12 16:05:12 2019
+//Date        : Wed Apr 10 18:38:30 2019
 //Host        : HPLP-SM7ED running 64-bit major release  (build 9200)
 //Command     : generate_target ZAES.bd
 //Design      : ZAES
@@ -54,6 +54,7 @@ module ZAES
   (* X_INTERFACE_INFO = "xilinx.com:display_processing_system7:fixedio:1.0 FIXED_IO PS_PORB" *) inout FIXED_IO_ps_porb;
   (* X_INTERFACE_INFO = "xilinx.com:display_processing_system7:fixedio:1.0 FIXED_IO PS_SRSTB" *) inout FIXED_IO_ps_srstb;
 
+  wire AES_Full_0_interrupt;
   wire [14:0]processing_system7_0_DDR_ADDR;
   wire [2:0]processing_system7_0_DDR_BA;
   wire processing_system7_0_DDR_CAS_N;
@@ -137,6 +138,7 @@ module ZAES
   ZAES_AES_Full_0_0 AES_Full_0
        (.ap_clk(processing_system7_0_FCLK_CLK0),
         .ap_rst_n(rst_ps7_0_100M_peripheral_aresetn),
+        .interrupt(AES_Full_0_interrupt),
         .s_axi_AES_ARADDR(ps7_0_axi_periph_M00_AXI_ARADDR[5:0]),
         .s_axi_AES_ARREADY(ps7_0_axi_periph_M00_AXI_ARREADY),
         .s_axi_AES_ARVALID(ps7_0_axi_periph_M00_AXI_ARVALID),
@@ -174,6 +176,7 @@ module ZAES
         .DDR_WEB(DDR_we_n),
         .FCLK_CLK0(processing_system7_0_FCLK_CLK0),
         .FCLK_RESET0_N(processing_system7_0_FCLK_RESET0_N),
+        .IRQ_F2P(AES_Full_0_interrupt),
         .MIO(FIXED_IO_mio[53:0]),
         .M_AXI_GP0_ACLK(processing_system7_0_FCLK_CLK0),
         .M_AXI_GP0_ARADDR(processing_system7_0_M_AXI_GP0_ARADDR),
