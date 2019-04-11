@@ -53,10 +53,14 @@ int main() {
 
 		AES_Full_axis128(true, (unsigned char) Nr, plaintext_words, ciphertext_words);
 
+		printf("TL97_98_99: %d %d %d\n", ciphertext_words[AES_WORDS - 3].TLAST, ciphertext_words[AES_WORDS - 2].TLAST, ciphertext_words[AES_WORDS - 1].TLAST);
+
 		// variable array for decrypted plaintext
 		aes_inout plaintext_words_d[AES_WORDS];
 
 		AES_Full_axis128(false, (unsigned char) Nr, ciphertext_words, plaintext_words_d);
+
+		printf("TL97_98_99: %d %d %d\n", plaintext_words_d[AES_WORDS - 3].TLAST, plaintext_words_d[AES_WORDS - 2].TLAST, plaintext_words_d[AES_WORDS - 1].TLAST);
 
 		// brief check if plaintext_words and plaintext_words_d match
 		for (unsigned short i = 0; i < AES_WORDS; i++) {

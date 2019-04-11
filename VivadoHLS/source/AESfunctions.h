@@ -29,6 +29,7 @@ typedef struct {
 	unsigned char data13;
 	unsigned char data14;
 	unsigned char data15;
+	bool TLAST;
 } aes_inout;
 
 #define AES_WORDS 100

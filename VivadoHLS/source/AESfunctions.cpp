@@ -323,8 +323,8 @@ void AES_Full_axis128(bool cipher_or_i_cipher, unsigned char Nr, aes_inout aes_i
 
 #pragma HLS INTERFACE s_axilite port=cipher_or_i_cipher bundle=AES
 #pragma HLS INTERFACE s_axilite port=Nr                 bundle=AES
-#pragma HLS INTERFACE axis register forward port=aes_in
-#pragma HLS INTERFACE axis register reverse port=aes_out
+#pragma HLS INTERFACE axis port=aes_in
+#pragma HLS INTERFACE axis port=aes_out
 #pragma HLS INTERFACe s_axilite port=return             bundle=AES
 
 	L_stream: for (unsigned char i = 0; i < AES_WORDS; i++) {
@@ -371,7 +371,7 @@ void AES_Full_axis128(bool cipher_or_i_cipher, unsigned char Nr, aes_inout aes_i
 		aes_out[i].data13 = data_out[13];
 		aes_out[i].data14 = data_out[14];
 		aes_out[i].data15 = data_out[15];
-
+		aes_out[i].TLAST = (i != (AES_WORDS - 1)) ? false : true;
 	}
 }
 
