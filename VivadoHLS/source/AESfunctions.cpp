@@ -210,10 +210,8 @@ void AES_Encrypt(unsigned char Nr, unsigned char plaintext[stt_lng], unsigned ch
 #pragma HLS inline region // will inline the functions unless inlining is off
 
 #pragma HLS INTERFACE s_axilite port=Nr         bundle=Cipher
-//#pragma HLS INTERFACE s_axilite port=plaintext  bundle=Cipher
-//#pragma HLS INTERFACE s_axilite port=ciphertext bundle=Cipher
-#pragma HLS INTERFACE axis register forward port=plaintext
-#pragma HLS INTERFACE axis register reverse port=ciphertext
+#pragma HLS INTERFACE s_axilite port=plaintext  bundle=Cipher
+#pragma HLS INTERFACE s_axilite port=ciphertext bundle=Cipher
 #pragma HLS INTERFACe s_axilite port=return     bundle=Cipher
 
 #pragma HLS pipeline II=16 // reduces II
@@ -267,10 +265,8 @@ void AES_Decrypt(unsigned char Nr, unsigned char ciphertext[stt_lng], unsigned c
 #pragma HLS inline region // will inline the functions unless inlining is off
 
 #pragma HLS INTERFACE s_axilite port=Nr         bundle=Decipher
-//#pragma HLS INTERFACE s_axilite port=ciphertext bundle=Decipher
-//#pragma HLS INTERFACE s_axilite port=plaintext  bundle=Decipher
-#pragma HLS INTERFACE axis register forward port=ciphertext
-#pragma HLS INTERFACE axis register reverse port=plaintext
+#pragma HLS INTERFACE s_axilite port=ciphertext bundle=Decipher
+#pragma HLS INTERFACE s_axilite port=plaintext  bundle=Decipher
 #pragma HLS INTERFACe s_axilite port=return     bundle=Decipher
 
 #pragma HLS pipeline II=16 // reduces II
