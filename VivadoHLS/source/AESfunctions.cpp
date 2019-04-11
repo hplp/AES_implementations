@@ -374,37 +374,3 @@ void AES_Full_axis128(bool cipher_or_i_cipher, unsigned char Nr, aes_inout aes_i
 		aes_out[i].TLAST = (i != (AES_WORDS - 1)) ? false : true;
 	}
 }
-
-////// AES Full with 128-bit AXI Stream interface
-//void AES_Full_axis128(bool cipher_or_i_cipher, unsigned char Nr, ap_uint<64> aes_in[AES_WORDS], ap_uint<64> aes_out[AES_WORDS]) {
-//
-//#pragma HLS inline region // will inline the functions unless inlining is off
-//
-//#pragma HLS INTERFACE s_axilite port=cipher_or_i_cipher bundle=AES
-//#pragma HLS INTERFACE s_axilite port=Nr                 bundle=AES
-//#pragma HLS INTERFACE axis register forward port=aes_in
-//#pragma HLS INTERFACE axis register reverse port=aes_out
-//#pragma HLS INTERFACe s_axilite port=return             bundle=AES
-//
-//	L_stream: for (unsigned char i = 0; i < AES_WORDS; i++) {
-//#pragma HLS pipeline II=1
-//
-//		//printf("aes_in[%d]=0x%X\n", i, aes_in[i]);
-//		unsigned char* a_ptr = (unsigned char*) &aes_in[i];
-//		for (short ii = 0; ii < 8; ii++) {
-//			//printf("a_ptr[%d] = 0x%x\n", ii, a_ptr[ii]);
-//			//mychar[ii] = a_ptr[ii];
-//		}
-//
-//		unsigned char data_in[stt_lng];
-//		unsigned char data_out[stt_lng];
-//
-//		aes_out[i] = aes_in[i] + 2;
-//
-////		if (cipher_or_i_cipher)
-////			AES_Encrypt(Nr, data_in, data_out);
-////		else
-////			AES_Decrypt(Nr, data_in, data_out);
-//
-//	}
-//}
