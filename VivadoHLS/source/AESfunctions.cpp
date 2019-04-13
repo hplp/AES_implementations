@@ -24,8 +24,7 @@ void SubWord(unsigned char* in4) {
 	in4[3] = s_box[in4[3]];
 }
 
-void KeyExpansion(unsigned char* inputKey, unsigned short Nk,
-		unsigned char* expandedKey) {
+void KeyExpansion(unsigned char* inputKey, unsigned short Nk, unsigned char* expandedKey) {
 	unsigned short Nr = (Nk > Nb) ? Nk + 6 : Nb + 6; // = 10, 12 or 14 rounds
 	// Copy the inputKey at the beginning of expandedKey
 	for (unsigned short i = 0; i < Nk * rows; i++) {
@@ -210,12 +209,10 @@ void AES_Encrypt(unsigned char Nr, unsigned char plaintext[stt_lng], unsigned ch
 
 #pragma HLS inline region // will inline the functions unless inlining is off
 
-#pragma HLS INTERFACE s_axilite port=Nr         bundle=Cipher
-#pragma HLS INTERFACE s_axilite port=plaintext  bundle=Cipher
-#pragma HLS INTERFACE s_axilite port=ciphertext bundle=Cipher
-//#pragma HLS INTERFACE axis register forward port=plaintext
-//#pragma HLS INTERFACE axis register reverse port=ciphertext
-#pragma HLS INTERFACe s_axilite port=return     bundle=Cipher
+//#pragma HLS INTERFACE s_axilite port=Nr         bundle=Cipher
+//#pragma HLS INTERFACE s_axilite port=plaintext  bundle=Cipher
+//#pragma HLS INTERFACE s_axilite port=ciphertext bundle=Cipher
+//#pragma HLS INTERFACe s_axilite port=return     bundle=Cipher
 
 // ensure only one instance; proper unroll needs 15-14-13 instances
 #pragma HLS allocation instances=AddRoundKey limit=1 function
@@ -233,17 +230,23 @@ void AES_Encrypt(unsigned char Nr, unsigned char plaintext[stt_lng], unsigned ch
 		state[i] = plaintext[i];
 	}
 
+	// prior to rounds
 	AddRoundKey(state, Nr, 0);
 
-	L_rounds: for (unsigned char j = 0; j < Nr_max; j++) {
+	// rounds 1 to Nr-1
+	L_rounds: for (unsigned char j = 0; j < Nr_max - 1; j++) {
 		SubBytes(state);
 		ShiftRows(state);
-		if (j != (Nr - 1))
-			MixColumns(state);
+		MixColumns(state);
 		AddRoundKey(state, Nr, j + 1);
-		if (j == (Nr - 1))
+		if (j == (Nr - 2))
 			break; // early exit
 	}
+
+	// last round
+	SubBytes(state);
+	ShiftRows(state);
+	AddRoundKey(state, Nr, Nr);
 
 	// Copy state to ciphertext
 	L_copy_o: for (unsigned char i = 0; i < stt_lng; i++) {
@@ -256,12 +259,10 @@ void AES_Decrypt(unsigned char Nr, unsigned char ciphertext[stt_lng], unsigned c
 
 #pragma HLS inline region // will inline the functions unless inlining is off
 
-#pragma HLS INTERFACE s_axilite port=Nr         bundle=Decipher
-#pragma HLS INTERFACE s_axilite port=ciphertext bundle=Decipher
-#pragma HLS INTERFACE s_axilite port=plaintext  bundle=Decipher
-//#pragma HLS INTERFACE axis register forward port=ciphertext
-//#pragma HLS INTERFACE axis register reverse port=plaintext
-#pragma HLS INTERFACe s_axilite port=return     bundle=Decipher
+//#pragma HLS INTERFACE s_axilite port=Nr         bundle=Decipher
+//#pragma HLS INTERFACE s_axilite port=ciphertext bundle=Decipher
+//#pragma HLS INTERFACE s_axilite port=plaintext  bundle=Decipher
+//#pragma HLS INTERFACe s_axilite port=return     bundle=Decipher
 
 // ensure only one instance; proper unroll needs 15-14-13 instances
 #pragma HLS allocation instances=AddRoundKey   limit=1 function
@@ -281,17 +282,23 @@ void AES_Decrypt(unsigned char Nr, unsigned char ciphertext[stt_lng], unsigned c
 		state[i] = ciphertext[i];
 	}
 
+	// prior to rounds
 	AddRoundKey(state, Nr, Nr);
 
-	L_rounds: for (unsigned char j = 0; j < Nr_max; j++) {
+	// rounds 1 to Nr-1
+	L_rounds: for (unsigned char j = 0; j < Nr_max - 1; j++) {
 		InvShiftRows(state);
 		InvSubBytes(state);
 		AddRoundKey(state, Nr, Nr - j - 1);
-		if (j != (Nr - 1))
-			InvMixColumns(state);
-		else
+		InvMixColumns(state);
+		if (j == (Nr - 2))
 			break;
 	}
+
+	// last round
+	InvShiftRows(state);
+	InvSubBytes(state);
+	AddRoundKey(state, Nr, 0);
 
 	// Copy state to plaintext
 	L_copy_o: for (unsigned char i = 0; i < stt_lng; i++) {
@@ -300,8 +307,7 @@ void AES_Decrypt(unsigned char Nr, unsigned char ciphertext[stt_lng], unsigned c
 }
 
 //// AES Full
-void AES_Full(bool cipher_or_i_cipher, unsigned char Nr,
-		unsigned char data_in[stt_lng], unsigned char data_out[stt_lng]) {
+void AES_Full(bool cipher_or_i_cipher, unsigned char Nr, unsigned char data_in[stt_lng], unsigned char data_out[stt_lng]) {
 
 #pragma HLS inline region // will inline the functions unless inlining is off
 
@@ -309,8 +315,6 @@ void AES_Full(bool cipher_or_i_cipher, unsigned char Nr,
 #pragma HLS INTERFACE s_axilite port=Nr                 bundle=AES
 #pragma HLS INTERFACE s_axilite port=data_in            bundle=AES
 #pragma HLS INTERFACE s_axilite port=data_out           bundle=AES
-//#pragma HLS INTERFACE axis register forward port=data_in
-//#pragma HLS INTERFACE axis register reverse port=data_out
 #pragma HLS INTERFACe s_axilite port=return             bundle=AES
 
 	if (cipher_or_i_cipher)
