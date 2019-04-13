@@ -23,17 +23,13 @@
     <clock name="default" period="10"/>
   </clockList>
   <config>
-                
-    
-    <config_compile blackbox=""/>
-                
-    
-    <schedule model="AES_Full_axis8"/>
-                
-    
-    <config_export description="AES Full with 8-bit AXI4 Stream" display_name="AES_Full_axis8" format="ip_catalog" rtl="verilog" vendor="UVA_HPLP"/>
             
-  
+    <config_compile blackbox=""/>
+            
+    <schedule model="AES_Full_axis8"/>
+            
+    <config_export description="AES Full with 8-bit AXI4 Stream" display_name="AES_Full_axis8" format="ip_catalog" rtl="verilog" vendor="UVA_HPLP"/>
+        
   </config>
   <UIConfigurations>
     <UIAutosynConf boardInfo="Xilinx PYNQ-Z1 (xc7z020clg400-1) " hideTrivialOp="true" isBasedOnBoard="true" isSolutionDirty="false" isStopAskAgain="false" showDetailDesignViewer="false">

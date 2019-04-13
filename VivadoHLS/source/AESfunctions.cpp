@@ -209,12 +209,12 @@ void AES_Encrypt(unsigned char Nr, unsigned char plaintext[stt_lng], unsigned ch
 
 #pragma HLS inline region // will inline the functions unless inlining is off
 
-#pragma HLS INTERFACE s_axilite port=Nr         bundle=Cipher
-#pragma HLS INTERFACE s_axilite port=plaintext  bundle=Cipher
-#pragma HLS INTERFACE s_axilite port=ciphertext bundle=Cipher
-#pragma HLS INTERFACe s_axilite port=return     bundle=Cipher
+//#pragma HLS INTERFACE s_axilite port=Nr         bundle=Cipher
+//#pragma HLS INTERFACE s_axilite port=plaintext  bundle=Cipher
+//#pragma HLS INTERFACE s_axilite port=ciphertext bundle=Cipher
+//#pragma HLS INTERFACe s_axilite port=return     bundle=Cipher
 
-#pragma HLS pipeline II=16 // reduces II
+#pragma HLS pipeline //II=16 // reduces II
 
 // ensure only one instance; proper unroll needs 15-14-13 instances
 #pragma HLS allocation instances=AddRoundKey limit=1 function
@@ -264,12 +264,12 @@ void AES_Decrypt(unsigned char Nr, unsigned char ciphertext[stt_lng], unsigned c
 
 #pragma HLS inline region // will inline the functions unless inlining is off
 
-#pragma HLS INTERFACE s_axilite port=Nr         bundle=Decipher
-#pragma HLS INTERFACE s_axilite port=ciphertext bundle=Decipher
-#pragma HLS INTERFACE s_axilite port=plaintext  bundle=Decipher
-#pragma HLS INTERFACe s_axilite port=return     bundle=Decipher
+//#pragma HLS INTERFACE s_axilite port=Nr         bundle=Decipher
+//#pragma HLS INTERFACE s_axilite port=ciphertext bundle=Decipher
+//#pragma HLS INTERFACE s_axilite port=plaintext  bundle=Decipher
+//#pragma HLS INTERFACe s_axilite port=return     bundle=Decipher
 
-#pragma HLS pipeline II=16 // reduces II
+#pragma HLS pipeline //II=16 // reduces II
 
 // ensure only one instance; proper unroll needs 15-14-13 instances
 #pragma HLS allocation instances=AddRoundKey   limit=1 function
@@ -327,7 +327,7 @@ void AES_Full(bool cipher_or_i_cipher, unsigned char Nr, unsigned char data_in[s
 #pragma HLS INTERFACE s_axilite port=data_out           bundle=AES
 #pragma HLS INTERFACe s_axilite port=return             bundle=AES
 
-#pragma HLS pipeline II=16 // reduces II
+#pragma HLS pipeline //II=16 // reduces II
 
 	if (cipher_or_i_cipher)
 		AES_Encrypt(Nr, data_in, data_out);
@@ -345,7 +345,7 @@ void AES_Full_axis8(bool cipher_or_i_cipher, unsigned char Nr, aes_byte stream_i
 #pragma HLS INTERFACE axis register both port=stream_out
 #pragma HLS INTERFACe s_axilite port=return             bundle=AES
 
-#pragma HLS pipeline II=16 // reduces II
+#pragma HLS pipeline //II=16 // reduces II
 
 	unsigned char data_in[stt_lng];
 	unsigned char data_out[stt_lng];
