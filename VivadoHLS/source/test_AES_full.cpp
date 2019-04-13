@@ -16,22 +16,9 @@ int main() {
 	// create a test input data (plaintext words)
 	aes_inout plaintext_words[AES_WORDS];
 	for (unsigned short i = 0; i < AES_WORDS; i++) {
-		plaintext_words[i].data0 = random_char();
-		plaintext_words[i].data1 = random_char();
-		plaintext_words[i].data2 = random_char();
-		plaintext_words[i].data3 = random_char();
-		plaintext_words[i].data4 = random_char();
-		plaintext_words[i].data5 = random_char();
-		plaintext_words[i].data6 = random_char();
-		plaintext_words[i].data7 = random_char();
-		plaintext_words[i].data8 = random_char();
-		plaintext_words[i].data9 = random_char();
-		plaintext_words[i].data10 = random_char();
-		plaintext_words[i].data11 = random_char();
-		plaintext_words[i].data12 = random_char();
-		plaintext_words[i].data13 = random_char();
-		plaintext_words[i].data14 = random_char();
-		plaintext_words[i].data15 = random_char();
+		for (unsigned short j = 0; j < stt_lng; j++) {
+			plaintext_words[i].data[j] = random_char();
+		}
 		//cout << i << " " << hex << (unsigned short) plaintext_words[i].data15 << " ";
 	} //cout << endl;
 
@@ -64,7 +51,9 @@ int main() {
 
 		// brief check if plaintext_words and plaintext_words_d match
 		for (unsigned short i = 0; i < AES_WORDS; i++) {
-			if (plaintext_words[i].data15 != plaintext_words_d[i].data15)
+			if (plaintext_words[i].data[0] != plaintext_words_d[i].data[0])
+				all_tests_pass = false;
+			if (plaintext_words[i].data[15] != plaintext_words_d[i].data[15])
 				all_tests_pass = false;
 		}
 	}

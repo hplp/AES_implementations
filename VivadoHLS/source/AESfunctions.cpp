@@ -333,44 +333,20 @@ void AES_Full_axis128(bool cipher_or_i_cipher, unsigned char Nr, aes_inout aes_i
 		unsigned char data_in[stt_lng];
 		unsigned char data_out[stt_lng];
 
-		data_in[0] = aes_in[i].data0;
-		data_in[1] = aes_in[i].data1;
-		data_in[2] = aes_in[i].data2;
-		data_in[3] = aes_in[i].data3;
-		data_in[4] = aes_in[i].data4;
-		data_in[5] = aes_in[i].data5;
-		data_in[6] = aes_in[i].data6;
-		data_in[7] = aes_in[i].data7;
-		data_in[8] = aes_in[i].data8;
-		data_in[9] = aes_in[i].data9;
-		data_in[10] = aes_in[i].data10;
-		data_in[11] = aes_in[i].data11;
-		data_in[12] = aes_in[i].data12;
-		data_in[13] = aes_in[i].data13;
-		data_in[14] = aes_in[i].data14;
-		data_in[15] = aes_in[i].data15;
+		L_TLi: for (unsigned short j = 0; j < stt_lng; j++) {
+#pragma HLS unroll
+			data_in[j] = aes_in[i].data[j];
+		}
 
 		if (cipher_or_i_cipher)
 			AES_Encrypt(Nr, data_in, data_out);
 		else
 			AES_Decrypt(Nr, data_in, data_out);
 
-		aes_out[i].data0 = data_out[0];
-		aes_out[i].data1 = data_out[1];
-		aes_out[i].data2 = data_out[2];
-		aes_out[i].data3 = data_out[3];
-		aes_out[i].data4 = data_out[4];
-		aes_out[i].data5 = data_out[5];
-		aes_out[i].data6 = data_out[6];
-		aes_out[i].data7 = data_out[7];
-		aes_out[i].data8 = data_out[8];
-		aes_out[i].data9 = data_out[9];
-		aes_out[i].data10 = data_out[10];
-		aes_out[i].data11 = data_out[11];
-		aes_out[i].data12 = data_out[12];
-		aes_out[i].data13 = data_out[13];
-		aes_out[i].data14 = data_out[14];
-		aes_out[i].data15 = data_out[15];
+		L_TLo: for (unsigned short j = 0; j < stt_lng; j++) {
+#pragma HLS unroll
+			aes_out[i].data[j] = data_out[j];
+		}
 		aes_out[i].TLAST = (i != (AES_WORDS - 1)) ? false : true;
 	}
 }
