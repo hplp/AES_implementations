@@ -180,6 +180,7 @@ VivadoHLS/PynqZ1AES-AXI-stream
 VivadoHLS/PynqZ1AES-AXI-stream128/
 VivadoHLS/AES_Full_axis128
 VivadoHLS/AES_Full_axis32
+VivadoHLS/AES_Full_axis8
 
 VivadoHLS/axi4_stream_join/
 VivadoHLS/axi4_stream_join_ip/
