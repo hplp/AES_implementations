@@ -28,7 +28,7 @@
             
     <schedule model="AES_Full_axis8"/>
             
-    <config_export description="AES Full with 8-bit AXI4 Stream" display_name="AES_Full_axis8" format="ip_catalog" rtl="verilog" vendor="UVA_HPLP"/>
+    <config_export description="AES Full with 8-bit AXI4 Stream" display_name="AES_Full_axis8" format="ip_catalog" library="HLS" rtl="verilog" vendor="UVA_HPLP"/>
         
   </config>
   <UIConfigurations>
@@ -64,7 +64,7 @@
     </UIAutoSimConf>
   </UIConfigurations>
   <ExportDesign askAgain="true" evaluate="false" flow="false" flowChoice="syn" formatName="ip_catalog" rtl="verilog" rtlButton="true" rtlCombo="verilog">
-    <Format description="AES Full with 8-bit AXI4 Stream" display_name="AES_Full_axis8" formatName="ip_catalog" vendor="UVA_HPLP"/>
+    <Format description="AES Full with 8-bit AXI4 Stream" display_name="AES_Full_axis8" formatName="ip_catalog" library="HLS" vendor="UVA_HPLP"/>
     <Format formatName="sysgen"/>
     <Format formatName="sysgen_ise"/>
     <Format formatName="syn_dcp"/>

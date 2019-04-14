@@ -1,6 +1,0 @@
-vhdl xil_defaultlib  \
-"../../../bd/ZAES/ip/ZAES_axi_dma_0_2/sim/ZAES_axi_dma_0_2.vhd" \
-"../../../bd/ZAES/ip/ZAES_axi_smc_1/bd_0/ip/ip_1/sim/bd_f8d1_psr_aclk_0.vhd" \
-"../../../bd/ZAES/ip/ZAES_rst_ps7_0_100M_2/sim/ZAES_rst_ps7_0_100M_2.vhd" \
-
-nosort
