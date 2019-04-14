@@ -193,6 +193,7 @@ VivadoHLS/AES_Full_axis128/solution1/solution1_data.json
 VivadoHLS/PynqZ1AESrld/
 
 VivadoHLS/AES_Full_axis8/
+VivadoHLS/AES_Full_axis128F1/
 
 VivadoHLS/axi4_stream_join/
 VivadoHLS/axi4_stream_join_ip/
