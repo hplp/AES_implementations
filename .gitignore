@@ -182,6 +182,11 @@ VivadoHLS/AES_Full_axis128
 VivadoHLS/AES_Full_axis32
 VivadoHLS/AES_Full_axis8
 
+VivadoHLS/AES_Full_F1/
+VivadoHLS/AES_Full_axis128F1/
+VivadoHLS/AES_Full_axis8F1/
+VivadoHLS/PynqZ1AESrldF1/
+
 VivadoHLS/axi4_stream_join/
 VivadoHLS/axi4_stream_join_ip/
 VivadoHLS/axi4_stream_split/
