@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<section name="Workbench">
-	<item value="Auto Detect" key="ZAES_wrapper_hw_platform_0-device"/>
-	<item value="Local" key="ZAES_wrapper_hw_platform_0-target"/>
-	<item value="ZAES_wrapper_hw_platform_0" key="programfpga.hwplatform"/>
-	<item value="" key="ZAES_wrapper_hw_platform_0-bmmFile"/>
-	<item value="false" key="ZAES_wrapper_hw_platform_0-partial_bit"/>
-	<item value="ZAES_wrapper.bit" key="ZAES_wrapper_hw_platform_0-bitFile"/>
-</section>
