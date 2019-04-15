@@ -184,6 +184,8 @@ VivadoHLS/AES_Full_axis128F1/
 VivadoHLS/AES_Full_axis8F1/
 
 VivadoHLS/PynqZ1/
+VivadoHLS/F1Power/
+VivadoHLS/PynqZ1AESrldF1/
 
 # scratch
 VivadoHLS/source/test_AES_full_ap_uint.cpp
