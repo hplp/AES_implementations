@@ -28,11 +28,11 @@
             
     <schedule model="AES_Full_axis128"/>
             
-    <config_export description="AES Full AXI Stream 128" display_name="AES_Full_axis128" format="ip_catalog" rtl="verilog" vendor="hplp"/>
+    <config_export description="AES Full AXI Stream 128" display_name="AES_Full_axis128II16" format="ip_catalog" rtl="verilog" vendor="hplp"/>
         
   </config>
   <UIConfigurations>
-    <UIAutosynConf boardInfo="Xilinx PYNQ-Z1 (xc7z020clg400-1) " hideTrivialOp="true" isBasedOnBoard="true" isSolutionDirty="false" isStopAskAgain="false" showDetailDesignViewer="false">
+    <UIAutosynConf boardInfo="Xilinx PYNQ-Z1 (xc7z020clg400-1) " hideTrivialOp="true" isBasedOnBoard="true" isSolutionDirty="true" isStopAskAgain="false" showDetailDesignViewer="false">
       <Platform>xilinx/zynq/zynq</Platform>
       <Platform>xilinx/zynq/zynq_fpv6</Platform>
       <customLibs/>
@@ -64,14 +64,14 @@
     </UIAutoSimConf>
   </UIConfigurations>
   <ExportDesign askAgain="true" evaluate="false" flow="false" flowChoice="syn" formatName="ip_catalog" rtl="verilog" rtlButton="true" rtlCombo="verilog">
-    <Format description="AES Full AXI Stream 128" display_name="AES_Full_axis128" formatName="ip_catalog" vendor="hplp"/>
+    <Format description="AES Full AXI Stream 128" display_name="AES_Full_axis128II16" formatName="ip_catalog" vendor="hplp"/>
     <Format formatName="sysgen"/>
     <Format formatName="sysgen_ise"/>
     <Format formatName="syn_dcp"/>
     <Format formatName="pcore" use_netlist="none"/>
   </ExportDesign>
   <Simulation>
-    <SimFlow askAgain="true" clangSanitizer="false" compile="false" compileChoice="gcc" disableDeadlockDetect="false" dumpTrace="none" name="cosim" optimizeCompile="true" reduce_diskspace="true" setup="false" toolName="Auto" waveDebug="false">
+    <SimFlow askAgain="true" clangSanitizer="false" compile="false" compileChoice="gcc" disableDeadlockDetect="false" dumpTrace="all" name="cosim" optimizeCompile="true" reduce_diskspace="true" setup="false" toolName="Auto" waveDebug="false">
       <Rtl active="false" name="systemc"/>
       <Rtl active="true" name="verilog"/>
       <Rtl active="false" name="vhdl"/>
