@@ -120,6 +120,7 @@ aes_PyRTL/sim/
 python/devtests.py
 
 # Quartus II / ModelSim / Vivado projects for Verilog
+verilog_Altera_Cookbook/synthesis
 QS128
 QS256
 ModelSim
