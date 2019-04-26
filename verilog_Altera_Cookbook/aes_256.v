@@ -298,3 +298,29 @@ assign key1 = inv_key;
 assign dat_out = last_key[255:128] ^ unkeyd_out;
 
 endmodule
+
+////////////////////////////////////
+// Dummy wrapper over aes_256 and inv_aes_256
+// This part is writen by Sergiu Mosanu
+////////////////////////////////////
+module aes_wrapper (clk,clr,dat_in,dat_out_c,key,inv_key_c,inv_key,dat_out_ic);
+input clk,clr;
+input [127:0] dat_in;
+input [127:0] key;
+output [127:0] dat_out_c;
+output [127:0] inv_key_c;
+
+input [127:0] inv_key;
+output [127:0] dat_out_ic;
+
+    aes_256 aes_dut (
+        .clk(clk),.clr(clr),
+        .dat_in(dat_in),.key(key),
+        .dat_out(dat_out_c),.inv_key(inv_key_c));
+
+    inv_aes_256 inv_aes_dut (
+        .clk(clk),.clr(clr),
+        .dat_in(dat_in),.inv_key(inv_key),
+        .dat_out(dat_out_ic));
+
+endmodule
