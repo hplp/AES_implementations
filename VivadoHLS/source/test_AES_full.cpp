@@ -23,7 +23,7 @@ int main() {
 	} //cout << endl;
 
 	bool all_tests_pass = true;
-	for (unsigned short test = 0; test < 32; test++) {
+	for (unsigned short test = 0; test < 64; test++) {
 
 		// These variables allow to change the AES length
 		// Nk = 4, 6 or 8 for AES 128, 192 or 256 respectively

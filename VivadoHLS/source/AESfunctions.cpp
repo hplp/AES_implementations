@@ -328,7 +328,7 @@ void AES_Full_axis128(bool cipher_or_i_cipher, unsigned char Nr, aes_inout aes_i
 #pragma HLS INTERFACe s_axilite port=return             bundle=AES
 
 	L_stream: for (unsigned char i = 0; i < AES_WORDS; i++) {
-#pragma HLS pipeline II=7
+#pragma HLS pipeline II=1
 
 		unsigned char data_in[stt_lng];
 		unsigned char data_out[stt_lng];

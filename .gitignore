@@ -126,6 +126,8 @@ ModelSim
 VivadoSynthesis128
 VivadoSynthesis192
 VivadoSynthesis256
+synthesis/
+
 
 # VivadoHLS
 vivado_hls.log
