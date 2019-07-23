@@ -23,13 +23,17 @@
     <clock default="false" name="default" period="10"/>
   </clockList>
   <config>
-            
+                
+    
     <config_compile blackbox=""/>
-            
+                
+    
     <schedule model="AES_Full_axis128"/>
-            
+                
+    
     <config_export description="AES Full AXI Stream 128" display_name="AES_Full_axis128II16" format="ip_catalog" rtl="verilog" vendor="hplp"/>
-        
+            
+  
   </config>
   <UIConfigurations>
     <UIAutosynConf boardInfo="Xilinx PYNQ-Z1 (xc7z020clg400-1) " hideTrivialOp="true" isBasedOnBoard="true" isSolutionDirty="false" isStopAskAgain="false" showDetailDesignViewer="false">

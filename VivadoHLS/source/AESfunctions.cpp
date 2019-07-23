@@ -350,3 +350,32 @@ void AES_Full_axis128(bool cipher_or_i_cipher, unsigned char Nr, aes_inout aes_i
 		aes_out[i].TLAST = (i != (AES_WORDS - 1)) ? false : true;
 	}
 }
+
+//// AES Cipher with 128-bit AXI Stream interface
+void AES_Cipher_axis128(aes_inout aes_in[AES_WORDS], aes_inout aes_out[AES_WORDS]) {
+
+#pragma HLS inline region // will inline the functions unless inlining is off
+
+#pragma HLS INTERFACE axis port=aes_in
+#pragma HLS INTERFACE axis port=aes_out
+#pragma HLS INTERFACe s_axilite port=return             bundle=AES
+
+	L_stream: for (unsigned char i = 0; i < AES_WORDS; i++) {
+#pragma HLS pipeline II=2
+
+		unsigned char data_in[stt_lng];
+		unsigned char data_out[stt_lng];
+
+		L_TLi: for (unsigned short j = 0; j < stt_lng; j++) {
+#pragma HLS unroll
+			data_in[j] = aes_in[i].data[j];
+		}
+		AES_Encrypt(14, data_in, data_out);
+
+		L_TLo: for (unsigned short j = 0; j < stt_lng; j++) {
+#pragma HLS unroll
+			aes_out[i].data[j] = data_out[j];
+		}
+		aes_out[i].TLAST = (i != (AES_WORDS - 1)) ? false : true;
+	}
+}

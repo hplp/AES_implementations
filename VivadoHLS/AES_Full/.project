@@ -29,57 +29,57 @@
 		<link>
 			<name>source</name>
 			<type>2</type>
-			<location>D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/AES_Full/.apc/.src</location>
+			<location>D:/WS/AES_implementations/VivadoHLS/AES_Full/.apc/.src</location>
 		</link>
 		<link>
 			<name>testbench</name>
 			<type>2</type>
-			<location>D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/AES_Full/.apc/.tb</location>
+			<location>D:/WS/AES_implementations/VivadoHLS/AES_Full/.apc/.tb</location>
 		</link>
 		<link>
 			<name>solution1/constraints</name>
 			<type>2</type>
-			<location>D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/AES_Full/solution1/.tcls</location>
+			<location>D:/WS/AES_implementations/VivadoHLS/AES_Full/solution1/.tcls</location>
 		</link>
 		<link>
 			<name>source/AESfunctions.cpp</name>
 			<type>1</type>
-			<location>D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/source/AESfunctions.cpp</location>
+			<location>D:/WS/AES_implementations/VivadoHLS/source/AESfunctions.cpp</location>
 		</link>
 		<link>
 			<name>source/AESfunctions.h</name>
 			<type>1</type>
-			<location>D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/source/AESfunctions.h</location>
+			<location>D:/WS/AES_implementations/VivadoHLS/source/AESfunctions.h</location>
 		</link>
 		<link>
 			<name>source/AESkeys.h</name>
 			<type>1</type>
-			<location>D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/source/AESkeys.h</location>
+			<location>D:/WS/AES_implementations/VivadoHLS/source/AESkeys.h</location>
 		</link>
 		<link>
 			<name>source/AEStables.h</name>
 			<type>1</type>
-			<location>D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/source/AEStables.h</location>
+			<location>D:/WS/AES_implementations/VivadoHLS/source/AEStables.h</location>
 		</link>
 		<link>
 			<name>testbench/test_AES_full.cpp</name>
 			<type>1</type>
-			<location>D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/source/test_AES_full.cpp</location>
+			<location>D:/WS/AES_implementations/VivadoHLS/source/test_AES_full.cpp</location>
 		</link>
 		<link>
 			<name>solution1/constraints/.xml.directive</name>
 			<type>1</type>
-			<location>D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/AES_Full/solution1/solution1.directive</location>
+			<location>D:/WS/AES_implementations/VivadoHLS/AES_Full/solution1/solution1.directive</location>
 		</link>
 		<link>
 			<name>solution1/constraints/directives.tcl</name>
 			<type>1</type>
-			<location>D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/AES_Full/solution1/directives.tcl</location>
+			<location>D:/WS/AES_implementations/VivadoHLS/AES_Full/solution1/directives.tcl</location>
 		</link>
 		<link>
 			<name>solution1/constraints/script.tcl</name>
 			<type>1</type>
-			<location>D:/OneDrive/UVA/crypto/AES_implementations/VivadoHLS/AES_Full/solution1/script.tcl</location>
+			<location>D:/WS/AES_implementations/VivadoHLS/AES_Full/solution1/script.tcl</location>
 		</link>
 	</linkedResources>
 </projectDescription>
