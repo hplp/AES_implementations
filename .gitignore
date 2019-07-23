@@ -201,3 +201,5 @@ VivadoHLS/AES_Full_axis8F1/
 VivadoHLS/PynqZ1/
 VivadoHLS/F1Power/
 VivadoHLS/PynqZ1AESrldF1/
+
+VivadoHLS/AES_Cipher_axis128/
