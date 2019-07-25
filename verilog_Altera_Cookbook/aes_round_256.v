@@ -50,21 +50,21 @@ wire [255:0] key_out_i;
 reg [127:0] shft_r;
 
 // evolve key
-evolve_key_256 ek (.clk(clk),.key_in(key_in),
+evolve_key_256 ek (.clk(clk),.clr(clr),.key_in(key_in),
 				.rconst(rconst),
 				.key_out(key_out_i));
 defparam ek .KEY_EVOLVE_TYPE = KEY_EVOLVE_TYPE;
 	
 // first two LUT levels of work
-sub_bytes sb (.clk(clk),.in(dat_in),.out(sub));
-shift_rows sr (.in(sub),.out(shft));
+sub_bytes sb (.clk(clk),.clr(clr),.in(dat_in),.out(sub));
+shift_rows sr (.clk(clk),.clr(clr),.in(sub),.out(shft));
 
 // mid layer registers would go here, the keying
 // is awkward
 always @(shft) shft_r = shft;
 
 // second 2 LUT levels of work
-mix_columns mx (.in(shft_r),.out(mix));
+mix_columns mx (.clk(clk),.clr(clr),.in(shft_r),.out(mix));
 assign dat_out_i = (skip_mix_col ? shft : mix) ^ key_out_i[255:128];
 
 // conditional output register
@@ -113,7 +113,7 @@ wire [127:0] keyd_dat,dat_out_i,mixed,middle,shft;
 wire [255:0] key_out_i;
 
 // inverse evolve key (for the next round)
-inv_evolve_key_256 ek (.clk(clk),.key_in(key_in),
+inv_evolve_key_256 ek (.clk(clk),.clr(clr),.key_in(key_in),
 				.rconst(rconst),.key_out(key_out_i));
 defparam ek .KEY_EVOLVE_TYPE = KEY_EVOLVE_TYPE;
 
@@ -121,12 +121,12 @@ defparam ek .KEY_EVOLVE_TYPE = KEY_EVOLVE_TYPE;
 assign keyd_dat = dat_in ^ key_in[255:128];
 
 // optional skip of the mix columns step
-inv_mix_columns mx (.in(keyd_dat),.out(mixed));
+inv_mix_columns mx (.clk(clk),.clr(clr),.in(keyd_dat),.out(mixed));
 assign middle = (skip_mix_col ? keyd_dat : mixed);
 
 // second 2 levels of work
-inv_shift_rows sr (.in(middle),.out(shft));
-inv_sub_bytes sb (.clk(clk),.in(shft),.out(dat_out_i));
+inv_shift_rows sr (.clk(clk),.clr(clr),.in(middle),.out(shft));
+inv_sub_bytes sb (.clk(clk),.clr(clr),.in(shft),.out(dat_out_i));
 
 // conditional output register
 generate

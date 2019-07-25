@@ -25,7 +25,8 @@
 //////////////////////////////////////////////
 // eight input (256 word) ROM helper fn
 //////////////////////////////////////////////
-module eight_input_rom (in,out);
+module eight_input_rom (clk,clr,in,out);
+input clk,clr;
 input [7:0] in;
 output out;
 wire out /* synthesis keep */;
@@ -49,17 +50,17 @@ endmodule
 //////////////////////////////////////////////
 // Single Rijndael SBOX
 //////////////////////////////////////////////
-module sbox (clk,in,out);
-input clk;
+module sbox (clk,clr,in,out);
+input clk,clr;
 input [7:0] in;
 output [7:0] out;
 
-parameter METHOD = 0;
+parameter METHOD = 1;
 
 generate
   if (METHOD == 0) begin
     (*rom_style = "block" *) reg [7:0] o;
-    always @(negedge clk)
+    always @(in)// (posedge clk) or (negedge clk) for BRAM to work in Vivado
     begin
       case(in)
         8'h00: o <= 8'h63;    8'h01: o <= 8'h7c;    8'h02: o <= 8'h77;    8'h03: o <= 8'h7b;
@@ -131,21 +132,21 @@ generate
     assign out = o;
   end
   else if (METHOD == 1) begin
-      eight_input_rom r0 (.in(in),.out(out[0]));
+      eight_input_rom r0 (.clk(clk),.clr(clr),.in(in),.out(out[0]));
         defparam r0 .mask = 256'h4f1ead396f247a0410bdb210c006eab568ab4bfa8acb7a13b14ede67096c6eed;
-      eight_input_rom r1 (.in(in),.out(out[1]));
+      eight_input_rom r1 (.clk(clk),.clr(clr),.in(in),.out(out[1]));
         defparam r1 .mask = 256'hc870974094ead8a96a450b2ef33486b4e61a4c5e97816f7a7bae007d4c53fc7d;
-      eight_input_rom r2 (.in(in),.out(out[2]));
+      eight_input_rom r2 (.clk(clk),.clr(clr),.in(in),.out(out[2]));
         defparam r2 .mask = 256'hac39b6c0d6ce2efc577d64e03b0c3ffb23a869a2a428c424a16387fb3b48b4c6;
-      eight_input_rom r3 (.in(in),.out(out[3]));
+      eight_input_rom r3 (.clk(clk),.clr(clr),.in(in),.out(out[3]));
         defparam r3 .mask = 256'h4e9ddb76c892fb1be9da849cf6ac6c1b2568ea2effa8527d109020a2193d586a;
-      eight_input_rom r4 (.in(in),.out(out[4]));
+      eight_input_rom r4 (.clk(clk),.clr(clr),.in(in),.out(out[4]));
         defparam r4 .mask = 256'hf210a3aece472e532624b286bc48ecb4f7f17a494ce30f58c2b0f97752b8b11e;
-      eight_input_rom r5 (.in(in),.out(out[5]));
+      eight_input_rom r5 (.clk(clk),.clr(clr),.in(in),.out(out[5]));
         defparam r5 .mask = 256'h54b248130b4f256f7d8dcc4706319e086bc2aa4e0d787aa4f8045f7b6d98dd7f;
-      eight_input_rom r6 (.in(in),.out(out[6]));
+      eight_input_rom r6 (.clk(clk),.clr(clr),.in(in),.out(out[6]));
         defparam r6 .mask = 256'h21e0b833255917823f6bcb91b30db559e4851b3bf3ab2560980a3cc2c2fdb4ff;
-      eight_input_rom r7 (.in(in),.out(out[7]));
+      eight_input_rom r7 (.clk(clk),.clr(clr),.in(in),.out(out[7]));
         defparam r7 .mask = 256'h52379de7b844e3e14cb3770196ca0329e7bac28f866aac825caa2ec7bf977090;
   end
 endgenerate
@@ -154,18 +155,19 @@ endmodule
 //////////////////////////////////////////////
 // Single Rijndael Inverse SBOX
 //////////////////////////////////////////////
-module inv_sbox (clk,in,out);
-input clk;
+module inv_sbox (clk,clr,in,out);
+input clk,clr;
 input [7:0] in;
 output [7:0] out;
 wire [7:0] out;
 
-parameter METHOD = 0;
+parameter METHOD = 1;
 
 generate
   if (METHOD == 0) begin
     (*rom_style = "block" *) reg [7:0] o;
-    always @(negedge clk) begin
+    always @(in)// (posedge clk) or (negedge clk) for BRAM to work in Vivado
+    begin
       case (in)
         8'h00: o <= 8'h52;    8'h01: o <= 8'h09;    8'h02: o <= 8'h6a;    8'h03: o <= 8'hd5;
         8'h04: o <= 8'h30;    8'h05: o <= 8'h36;    8'h06: o <= 8'ha5;    8'h07: o <= 8'h38;
@@ -236,21 +238,21 @@ generate
     assign out = o;
   end
   else if (METHOD == 1) begin
-      eight_input_rom r0 (.in(in),.out(out[0]));
+      eight_input_rom r0 (.clk(clk),.clr(clr),.in(in),.out(out[0]));
         defparam r0 .mask = 256'hbb23f64cbbbe99eb224883fb66f0853ebf6869447a703000fa244cc2c4f6f54a;
-      eight_input_rom r1 (.in(in),.out(out[1]));
+      eight_input_rom r1 (.clk(clk),.clr(clr),.in(in),.out(out[1]));
         defparam r1 .mask = 256'h08fb36349c4492694b3edf05c519cfb1eafca1c41d80c095278af97aa6faed25;
-      eight_input_rom r2 (.in(in),.out(out[2]));
+      eight_input_rom r2 (.clk(clk),.clr(clr),.in(in),.out(out[2]));
         defparam r2 .mask = 256'hd4ed0858cba4d063a8174b51f4f76d70066ecb30ff317f9c914a87953be14968;
-      eight_input_rom r3 (.in(in),.out(out[3]));
+      eight_input_rom r3 (.clk(clk),.clr(clr),.in(in),.out(out[3]));
         defparam r3 .mask = 256'hc21a4f3ceddcc8177b4df9b4da220cd1c67e14b661f51c623a33ab82e2758986;
-      eight_input_rom r4 (.in(in),.out(out[4]));
+      eight_input_rom r4 (.clk(clk),.clr(clr),.in(in),.out(out[4]));
         defparam r4 .mask = 256'h94796cc45c368f8bdb67e21e7645b347242535634bdad5c743a0248f2155e9b9;
-      eight_input_rom r5 (.in(in),.out(out[5]));
+      eight_input_rom r5 (.clk(clk),.clr(clr),.in(in),.out(out[5]));
         defparam r5 .mask = 256'habba8ef7872d518c98c5572aaf7ef2a1862233241073622f95de21da4167a5f4;
-      eight_input_rom r6 (.in(in),.out(out[6]));
+      eight_input_rom r6 (.clk(clk),.clr(clr),.in(in),.out(out[6]));
         defparam r6 .mask = 256'h9b68a34aa647c842fe7b054beb14def8811147420dbf3d2f5b28f323fc43e20d;
-      eight_input_rom r7 (.in(in),.out(out[7]));
+      eight_input_rom r7 (.clk(clk),.clr(clr),.in(in),.out(out[7]));
         defparam r7 .mask = 256'h015057d3fa286156af3152c24bb37fc247193377f0f0cb5664a46534f2dafd48;
   end
 endgenerate
@@ -259,8 +261,8 @@ endmodule
 ////////////////////////////////////////////////////
 // sub_bytes implemented as 4 by 4 array of SBOXes
 ////////////////////////////////////////////////////
-module sub_bytes (clk,in,out);
-input clk;
+module sub_bytes (clk,clr,in,out);
+input clk,clr;
 input [16*8-1 : 0] in;
 output [16*8-1 : 0] out;
 wire [16*8-1 : 0] out;
@@ -269,7 +271,7 @@ genvar i;
 generate
     for (i=0; i<16; i=i+1)
     begin : sb
-        sbox s (.clk(clk), .in(in[8*i+7:8*i]), .out(out[8*i+7:8*i]));
+        sbox s (.clk(clk),.clr(clr), .in(in[8*i+7:8*i]), .out(out[8*i+7:8*i]));
     end
 endgenerate
 endmodule
@@ -277,8 +279,8 @@ endmodule
 ////////////////////////////////////////////////////
 // inv_sub_bytes implemented as 4x4 inv_SBOXes
 ////////////////////////////////////////////////////
-module inv_sub_bytes (clk,in,out);
-input clk;
+module inv_sub_bytes (clk,clr,in,out);
+input clk,clr;
 input [16*8-1 : 0] in;
 output [16*8-1 : 0] out;
 wire [16*8-1 : 0] out;
@@ -287,8 +289,7 @@ genvar i;
 generate
     for (i=0; i<16; i=i+1)
     begin : sb
-        inv_sbox s (.clk(clk), .in(in[8*i+7:8*i]), .out(out[8*i+7:8*i]));
+        inv_sbox s (.clk(clk),.clr(clr), .in(in[8*i+7:8*i]), .out(out[8*i+7:8*i]));
     end
 endgenerate
 endmodule
-

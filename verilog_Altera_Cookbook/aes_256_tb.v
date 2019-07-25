@@ -50,10 +50,10 @@ end
 ///////////////////////////////////////////////////
 // Execute the initial round using building blocks
 ///////////////////////////////////////////////////
-sub_bytes sb1 (.in(plain ^ key[255:128]),.out(sub1));
-shift_rows sr1 (.in(sub1),.out(shftr1));
-mix_columns mx1 (.in(shftr1),.out(mix1));
-evolve_key_256 ek1 (.key_in(key),.rconst(8'h1),.key_out(key1));
+sub_bytes sb1 (.clk(clk),.clr(clr),.in(plain ^ key[255:128]),.out(sub1));
+shift_rows sr1 (.clk(clk),.clr(clr),.in(sub1),.out(shftr1));
+mix_columns mx1 (.clk(clk),.clr(clr),.in(shftr1),.out(mix1));
+evolve_key_256 ek1 (.clk(clk),.clr(clr),.key_in(key),.rconst(8'h1),.key_out(key1));
 	defparam ek1 .KEY_EVOLVE_TYPE = 0;
 assign start2 = key1[255:128] ^ mix1;
 

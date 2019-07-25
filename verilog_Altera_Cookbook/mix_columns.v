@@ -29,8 +29,8 @@
 ////////////////////////////////////////////////////
 // One column mixing operation
 ////////////////////////////////////////////////////
-module mix_one_column (in,out);
-
+module mix_one_column (clk,clr,in,out);
+input clk,clr;
 input [4*8-1:0] in;
 output [4*8-1:0] out;
 wire [4*8-1:0] out;
@@ -66,7 +66,8 @@ endmodule
 ////////////////////////////////////////////////////
 // mix_columns implemented as 4 single col mixers
 ////////////////////////////////////////////////////
-module mix_columns (in,out);
+module mix_columns (clk,clr,in,out);
+input clk,clr;
 input [16*8-1 : 0] in;
 output [16*8-1 : 0] out;
 wire [16*8-1 : 0] out;
@@ -75,8 +76,7 @@ genvar i;
 generate
     for (i=0; i<4; i=i+1)
     begin : mx
-       mix_one_column m (.in(in[32*i+31:32*i]),
-						.out(out[32*i+31:32*i]));
+       mix_one_column m (.clk(clk),.clr(clr),.in(in[32*i+31:32*i]),.out(out[32*i+31:32*i]));
     end
 endgenerate
 endmodule
@@ -84,8 +84,8 @@ endmodule
 ////////////////////////////////////////////////////
 // Inverse One column mixing operation
 ////////////////////////////////////////////////////
-module inv_mix_one_column (in,out);
-
+module inv_mix_one_column (clk,clr,in,out);
+input clk,clr;
 input [4*8-1:0] in;
 output [4*8-1:0] out;
 wire [4*8-1:0] out;
@@ -177,7 +177,8 @@ endmodule
 ////////////////////////////////////////////////////
 // inv_mix_columns implemented as 4 single col mixers
 ////////////////////////////////////////////////////
-module inv_mix_columns (in,out);
+module inv_mix_columns (clk,clr,in,out);
+input clk,clr;
 input [16*8-1 : 0] in;
 output [16*8-1 : 0] out;
 wire [16*8-1 : 0] out;
@@ -186,8 +187,7 @@ genvar i;
 generate
     for (i=0; i<4; i=i+1)
     begin : mx
-       inv_mix_one_column m (.in(in[32*i+31:32*i]),
-						.out(out[32*i+31:32*i]));
+       inv_mix_one_column m (.clk(clk),.clr(clr),.in(in[32*i+31:32*i]),.out(out[32*i+31:32*i]));
     end
 endgenerate
 endmodule
@@ -197,13 +197,14 @@ endmodule
 // Quick sanity checker testbench 
 ////////////////////////////////////////////////////
 module mix_col_test ();
+reg clk,clr;
 reg [31:0] dat;
 wire [31:0] mix;
 wire [31:0] inv;
 reg fail = 0;
 
-mix_one_column mc (.in(dat),.out(mix));
-inv_mix_one_column imc (.in(mix),.out(inv));
+mix_one_column mc (.clk(clk),.clr(clr),.in(dat),.out(mix));
+inv_mix_one_column imc (.clk(clk),.clr(clr),.in(mix),.out(inv));
 
 initial begin 
 	dat = 0;
