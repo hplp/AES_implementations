@@ -59,7 +59,7 @@ parameter METHOD = 0;
 generate
   if (METHOD == 0) begin
     (*rom_style = "block" *) reg [7:0] o;
-    always @(posedge clk)
+    always @(negedge clk)
     begin
       case(in)
         8'h00: o <= 8'h63;    8'h01: o <= 8'h7c;    8'h02: o <= 8'h77;    8'h03: o <= 8'h7b;
@@ -165,7 +165,7 @@ parameter METHOD = 0;
 generate
   if (METHOD == 0) begin
     (*rom_style = "block" *) reg [7:0] o;
-    always @(posedge clk) begin
+    always @(negedge clk) begin
       case (in)
         8'h00: o <= 8'h52;    8'h01: o <= 8'h09;    8'h02: o <= 8'h6a;    8'h03: o <= 8'hd5;
         8'h04: o <= 8'h30;    8'h05: o <= 8'h36;    8'h06: o <= 8'ha5;    8'h07: o <= 8'h38;

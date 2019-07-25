@@ -47,7 +47,7 @@ initial begin
 end
 
 // initial round building blocks
-sub_bytes sb1 (.in(plain ^ key),.out(sub1));
+sub_bytes sb1 (.clk(clk),.in(plain ^ key),.out(sub1));
 shift_rows sr1 (.in(sub1),.out(shftr1));
 mix_columns mx1 (.in(shftr1),.out(mix1));
 evolve_key_128 ek1 (.key_in(key),.rconst(8'h1),.key_out(key1));

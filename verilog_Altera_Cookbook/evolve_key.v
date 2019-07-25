@@ -252,6 +252,7 @@ endmodule
 //    verify the inverse property of the key evolves
 ////////////////////////////////////////////////////
 module evolve_test ();
+reg clk;
 reg [255:0] key;
 wire [127:0] fd;
 wire [127:0] bk;
@@ -275,6 +276,7 @@ inv_evolve_key_256 i2 (.key_in(fd2),.rconst(rconst),.key_out(bk2));
 	defparam i2 .KEY_EVOLVE_TYPE = 1;
 
 initial begin 
+	clk = 0;
 	key = 0;
 	fail = 0;
 	rconst = 0;
@@ -284,6 +286,7 @@ initial begin
 end
 
 always begin
+    #25 clk = ~clk;
 	#50 key = {$random,$random,$random,$random,$random,$random,$random,$random};
 		rconst = $random;
 	#50 if (bk != key[127:0]) begin
