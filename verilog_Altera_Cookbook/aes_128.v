@@ -214,7 +214,7 @@ endmodule
 // Dummy wrapper over aes_128 and inv_aes_128
 // This part is writen by Sergiu Mosanu
 ////////////////////////////////////
-module aes_wrapper (clk,clr,dat_in,dat_out_c,key,inv_key_c,inv_key,dat_out_ic);
+module aes_wrapper (clk,clr,dat_in,key,dat_out_c,inv_key_c,inv_key,dat_out_ic);
 input clk,clr;
 input [127:0] dat_in;
 input [127:0] key;
@@ -224,14 +224,14 @@ output [127:0] inv_key_c;
 input [127:0] inv_key;
 output [127:0] dat_out_ic;
 
-    aes_128 aes_dut (
-        .clk(clk),.clr(clr),
+    aes_128 rp (.clk(clk),.clr(clr),
         .dat_in(dat_in),.key(key),
         .dat_out(dat_out_c),.inv_key(inv_key_c));
+        defparam rp .LATENCY = 10;
 
-    inv_aes_128 inv_aes_dut (
-        .clk(clk),.clr(clr),
+    inv_aes_128 irp (.clk(clk),.clr(clr),
         .dat_in(dat_in),.inv_key(inv_key),
         .dat_out(dat_out_ic));
+        defparam irp .LATENCY = 10;
 
 endmodule

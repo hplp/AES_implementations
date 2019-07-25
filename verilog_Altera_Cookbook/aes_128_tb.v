@@ -50,8 +50,7 @@ end
 sub_bytes sb1 (.in(plain ^ key),.out(sub1));
 shift_rows sr1 (.in(sub1),.out(shftr1));
 mix_columns mx1 (.in(shftr1),.out(mix1));
-evolve_key_128 ek1 (.key_in(key),.rconst(8'h1),
-			.key_out(key1));
+evolve_key_128 ek1 (.key_in(key),.rconst(8'h1),.key_out(key1));
 assign start2 = key1 ^ mix1;
 
 // 2nd round in composite layer
@@ -153,10 +152,9 @@ initial begin
 		#100 clk = ~clk;
 	end
 
-	
 	$display ("PASS");
 	$stop();
-	
+
 end
 
 endmodule

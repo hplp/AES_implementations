@@ -45,11 +45,11 @@ wire [127:0] dat_out_i,key_out_i,sub,shft,mix;
 reg [127:0] shft_r;
 
 // evolve key
-evolve_key_128 ek (.key_in(key_in),
+evolve_key_128 ek (.clk(clk),.key_in(key_in),
 				.rconst(rconst),.key_out(key_out_i));
 	
 // first two LUT levels of work
-sub_bytes sb (.in(dat_in),.out(sub));
+sub_bytes sb (.clk(clk), .in(dat_in),.out(sub));
 shift_rows sr (.in(sub),.out(shft));
 
 // mid layer registers would go here, the keying
@@ -101,7 +101,7 @@ reg [127:0] dat_out,key_out;
 wire [127:0] keyd_dat,dat_out_i,key_out_i,mixed,middle,shft;
 
 // inverse evolve key (for the next round)
-inv_evolve_key_128 ek (.key_in(key_in),
+inv_evolve_key_128 ek (.clk(clk),.key_in(key_in),
 				.rconst(rconst),.key_out(key_out_i));
 
 // key the input data
@@ -113,7 +113,7 @@ assign middle = (skip_mix_col ? keyd_dat : mixed);
 
 // second 2 levels of work
 inv_shift_rows sr (.in(middle),.out(shft));
-inv_sub_bytes sb (.in(shft),.out(dat_out_i));
+inv_sub_bytes sb (.clk(clk), .in(shft),.out(dat_out_i));
 
 // conditional output register
 generate

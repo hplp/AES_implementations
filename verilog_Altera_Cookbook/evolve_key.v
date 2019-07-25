@@ -35,14 +35,15 @@ endmodule
 //////////////////////////////////////////////
 // Key sub word - borrowing sbox from sub_bytes
 //////////////////////////////////////////////
-module sub_word (in,out);
+module sub_word (clk,in,out);
+input clk;
 input [31:0] in;
 output [31:0] out;
 wire [31:0] out;
-sbox s0 (.in(in[7:0]),.out(out[7:0]));
-sbox s1 (.in(in[15:8]),.out(out[15:8]));
-sbox s2 (.in(in[23:16]),.out(out[23:16]));
-sbox s3 (.in(in[31:24]),.out(out[31:24]));
+sbox s0 (.clk(clk),.in(in[7:0]),.out(out[7:0]));
+sbox s1 (.clk(clk),.in(in[15:8]),.out(out[15:8]));
+sbox s2 (.clk(clk),.in(in[23:16]),.out(out[23:16]));
+sbox s3 (.clk(clk),.in(in[31:24]),.out(out[31:24]));
 endmodule
 
 //////////////////////////////////////////////
@@ -74,8 +75,9 @@ endmodule
 //////////////////////////////////////////////
 // Key evolution step for 128 bit key
 //////////////////////////////////////////////
-module evolve_key_128 (key_in,rconst,key_out);
+module evolve_key_128 (clk,key_in,rconst,key_out);
 
+input clk;
 input [127:0] key_in;
 input [7:0] rconst;		// the low order 24 bits are all 0						
 
@@ -86,7 +88,7 @@ wire [31:0] rot_key;
 wire [31:0] subrot_key;
 
 rot_word rw (.in (key_in[31:0]), .out(rot_key));
-sub_word sw (.in (rot_key), .out(subrot_key));
+sub_word sw (.clk(clk), .in (rot_key), .out(subrot_key));
 
 // make it clear that the desired implementation is 
 // a flat XOR LUT bank, not a string of 2-XORs with
@@ -105,10 +107,11 @@ endmodule
 //////////////////////////////////////////////
 // Key evolution step for 256 bit key
 //////////////////////////////////////////////
-module evolve_key_256 (key_in,rconst,key_out);
+module evolve_key_256 (clk,key_in,rconst,key_out);
 
 parameter KEY_EVOLVE_TYPE = 0;
 
+input clk;
 input [255:0] key_in;
 input [7:0] rconst;		// the low order 24 bits are all 0						
 
@@ -127,7 +130,7 @@ assign {kin_u,kin_l} = key_in;
 		// full evolution
 
 		rot_word rw (.in (key_in[31:0]), .out(rot_key));
-		sub_word sw (.in (rot_key), .out(subrot_key));
+		sub_word sw (.clk(clk), .in (rot_key), .out(subrot_key));
 
 		// make it clear that the desired implementation is 
 		// a flat XOR LUT bank, not a string of 2-XORs with
@@ -145,7 +148,7 @@ assign {kin_u,kin_l} = key_in;
 		
 		// Quickie evolution 
 
-		sub_word sw (.in (key_in[31:0]), .out(subrot_key));
+		sub_word sw (.clk(clk), .in (key_in[31:0]), .out(subrot_key));
 	
 		// make it clear that the desired implementation is 
 		// a flat XOR LUT bank, not a string of 2-XORs with
@@ -173,8 +176,8 @@ endmodule
 //		the mention that it is possible and 
 //		necessary for rekey during decrypt.
 //////////////////////////////////////////////
-module inv_evolve_key_128 (key_in,rconst,key_out);
-
+module inv_evolve_key_128 (clk,key_in,rconst,key_out);
+input clk;
 input [127:0] key_in;
 input [7:0] rconst;		// the low order 24 bits are all 0						
 
@@ -196,7 +199,7 @@ assign x = a ^ b;
 wire [31:0] rot_key;
 wire [31:0] subrot_key;
 rot_word rw (.in (z), .out(rot_key));
-sub_word sw (.in (rot_key), .out(subrot_key));
+sub_word sw (.clk(clk), .in (rot_key), .out(subrot_key));
 assign w = a ^ subrot_key ^ {rconst,24'b0};
 
 endmodule
@@ -204,10 +207,11 @@ endmodule
 //////////////////////////////////////////////
 // Inverse key evolution step for 256 bit key
 //////////////////////////////////////////////
-module inv_evolve_key_256 (key_in,rconst,key_out);
+module inv_evolve_key_256 (clk,key_in,rconst,key_out);
 
 parameter KEY_EVOLVE_TYPE = 0;
 
+input clk;
 input [255:0] key_in;
 input [7:0] rconst;		// the low order 24 bits are all 0						
 
@@ -232,11 +236,11 @@ wire [31:0] subrot_key;
 generate
 	if (KEY_EVOLVE_TYPE == 0) begin
 		rot_word rw (.in (key_in[159:128]), .out(rot_key));
-		sub_word sw (.in (rot_key), .out(subrot_key));
+		sub_word sw (.clk(clk), .in (rot_key), .out(subrot_key));
 		assign w = a ^ subrot_key ^ {rconst,24'b0};
 	end
 	else begin
-		sub_word sw (.in (key_in[159:128]), .out(subrot_key));
+		sub_word sw (.clk(clk), .in (key_in[159:128]), .out(subrot_key));
 		assign w = a ^ subrot_key;
 	end
 endgenerate
