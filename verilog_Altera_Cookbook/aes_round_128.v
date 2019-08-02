@@ -149,13 +149,13 @@ output [127:0] dat_out_ic,key_out_ic;
 
     aes_round_128 rp (.clk(clk),.clr(clr),
         .dat_in(dat_in),.key_in(key_in),
-		.rconst(8'h01), .skip_mix_col(1'b0),
+		.rconst(rconst), .skip_mix_col(skip_mix_col),
         .dat_out(dat_out_c),.key_out(key_out_c));
         defparam rp .LATENCY = 1;
 
     inv_aes_round_128 irp (.clk(clk),.clr(clr),
         .dat_in(dat_in),.key_in(key_in),
-		.rconst(8'h36), .skip_mix_col(1'b0),
+		.rconst(rconst), .skip_mix_col(skip_mix_col),
         .dat_out(dat_out_ic),.key_out(key_out_ic));
 		defparam irp .LATENCY = 1;
 
