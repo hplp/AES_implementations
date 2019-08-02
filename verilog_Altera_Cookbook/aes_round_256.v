@@ -146,3 +146,30 @@ else begin
 end
 endgenerate
 endmodule
+
+
+////////////////////////////////////
+// Dummy wrapper over aes_round_256 and inv_aes_round_256
+// This part is writen by Sergiu Mosanu
+////////////////////////////////////
+module aes_round_256_wrapper (clk,clr,dat_in,dat_out_c,dat_out_ic,rconst,skip_mix_col,key_in,key_out_c,key_out_ic);
+input clk,clr;
+input [127:0] dat_in,key_in;
+input [7:0] rconst; // lower 24 bits are 0
+input skip_mix_col; // for the final round
+output [127:0] dat_out_c,key_out_c;
+output [127:0] dat_out_ic,key_out_ic;
+
+    aes_round_256 rp (.clk(clk),.clr(clr),
+        .dat_in(dat_in),.key_in(key_in),
+		.rconst(8'h01), .skip_mix_col(1'b0),
+        .dat_out(dat_out_c),.key_out(key_out_c));
+        defparam rp .LATENCY = 1;
+
+    inv_aes_round_256 irp (.clk(clk),.clr(clr),
+        .dat_in(dat_in),.key_in(key_in),
+		.rconst(8'h36), .skip_mix_col(1'b0),
+        .dat_out(dat_out_ic),.key_out(key_out_ic));
+        defparam irp .LATENCY = 1;
+
+endmodule
