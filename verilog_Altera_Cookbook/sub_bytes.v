@@ -55,11 +55,12 @@ input clk,clr;
 input [7:0] in;
 output [7:0] out;
 
-parameter METHOD = 1;
+parameter METHOD = 0;
 
 generate
   if (METHOD == 0) begin
-    (*rom_style = "block" *) reg [7:0] o;
+    //(*rom_style = "block" *)
+    reg [7:0] o;
     always @(in)// (posedge clk) or (negedge clk) for BRAM to work in Vivado
     begin
       case(in)
@@ -161,11 +162,12 @@ input [7:0] in;
 output [7:0] out;
 wire [7:0] out;
 
-parameter METHOD = 1;
+parameter METHOD = 0;
 
 generate
   if (METHOD == 0) begin
-    (*rom_style = "block" *) reg [7:0] o;
+    //(*rom_style = "block" *)
+    reg [7:0] o;
     always @(in)// (posedge clk) or (negedge clk) for BRAM to work in Vivado
     begin
       case (in)
