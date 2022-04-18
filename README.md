@@ -44,3 +44,25 @@ University of Virginia ECE Wiki FPGA tutorials
 - http://venividiwiki.ee.virginia.edu/mediawiki/index.php/Xilinx
 - http://venividiwiki.ee.virginia.edu/mediawiki/index.php/Altera
 - http://venividiwiki.ee.virginia.edu/mediawiki/index.php/ToolsXilinxLabsRTLHLSAES
+
+## Citation
+
+This work resulted in the folowwing publications:
+
+```
+@article{guo2022agile,
+  title={Agile-AES: Implementation of configurable AES primitive with agile design approach},
+  author={Guo, Xinfei and El-Hadedy, Mohamed and Mosanu, Sergiu and Wei, Xiangdong and Skadron, Kevin and Stan, Mircea R},
+  journal={Integration},
+  year={2022},
+  publisher={Elsevier}
+}
+@inproceedings{mosanu2019flexi,
+  title={Flexi-AES: A Highly-Parameterizable Cipher for a Wide Range of Design Constraints},
+  author={Mosanu, Sergiu and Guo, Xinfei and El-Hadedy, Mohamed and Anghel, Lorena and Stan, Mircea},
+  booktitle={2019 IEEE 27th Annual International Symposium on Field-Programmable Custom Computing Machines (FCCM)},
+  pages={338--338},
+  year={2019},
+  organization={IEEE}
+}
+```
